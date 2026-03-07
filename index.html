@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>ジュエリー工房ベーネベーネ｜Yahoo店 トップ（上品マガジン風サンプル）</title>
+<link href="https://www.rakuten.ne.jp/gold/bene/date.css" rel="stylesheet"/>
+<meta content="ベーネベーネ Yahoo店のトップ掲載項目を、余白多め・マガジン風に再構成したサンプルページ（HTML+CSS分離）。" name="description"/>
+<meta content="assets/slide1.png" property="og:image"/>
+<!-- Fonts: Noto Serif JP + Noto Sans JP -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&amp;family=Noto+Serif+JP:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet">
+<script>
+/* Display config (edit numbers as needed) */
+window.BENE_UI = {
+  // Mobile visible "rows" (can be 3 / 4 / 5 or 4.5 etc.)
+  newsMobileRows: 4.5,
+  youtubeMobileRows: 3.5
+  // PICK UP is horizontal; "rows" doesn't apply. (controls are per-click = 1 item, swipe/drag supported)
+};
+</script>
+</link></head>
+<body>
+<header class="header" id="top">
+<div class="wrap headerRow">
+<a aria-label="トップへ" class="logo" href="#top">
+<img alt="Bene Bene" class="logoImg" src="https://shop.bene-bene.com/bene_img/m_g_bene_logo.png"/>
+</a>
+<div aria-label="検索" class="searchWrap" role="search">
+<input aria-label="検索" id="q" placeholder="キーワード検索（例：パライバ / ピンクダイヤ / ローズカット）" type="search"/>
+</div>
+<div aria-label="ヘッダー右側" class="headerActions">
+<div aria-label="クイック" class="headerQuick">
+<button aria-label="検索" class="icoBtn icoBtn--search" id="searchFocusBtn" title="検索" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 105.02 13.06l3.21 3.22a1 1 0 001.42-1.42l-3.22-3.21A7.5 7.5 0 0010.5 3zm0 2a5.5 5.5 0 110 11 5.5 5.5 0 010-11z"></path></svg>
+</button>
+<a aria-label="MAILMAGAZINE" class="icoBtn" href="#mailmagazine" title="MAILMAGAZINE">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 7h16v10H4z"></path><path d="M4 8l8 6 8-6"></path></svg>
+</a>
+<a aria-label="カート" class="icoBtn" href="https://order.shopping.yahoo.co.jp/cgi-bin/cart-form" rel="noopener" target="_blank" title="カート">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 18a2 2 0 104 0H7zm9 0a2 2 0 104 0h-4z"></path><path d="M3 4h2l2.2 10.5a2 2 0 002 1.5h8.7a2 2 0 002-1.6L22 7H6.2"></path></svg>
+</a>
+
+<button aria-controls="gnav" aria-expanded="false" aria-label="メニュー" class="hamburger" id="menuBtn" type="button" onclick="window.__toggleDrawer && window.__toggleDrawer()">≡</button></div>
+<div aria-label="電話案内" class="headerPhone">
+<div class="phoneMeta">電話でのお問合せは <span class="hours">営業日 10:00-18:00</span></div>
+<div class="phonePlain">0120-457-678</div>
+</div>
+</div>
+</div>
+</header>
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+<div class="wrap heroGrid equalHeight">
+<div aria-label="メインビジュアル" class="slider heroRatio">
+<button aria-label="前へ" class="navBtn prev" type="button"><svg aria-hidden="true" class="chev" viewbox="0 0 24 24"><path d="M15.5 4.5L8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path></svg></button>
+<div class="slides">
+<a class="slide is-active" href="#new">
+<img alt="新作ジュエリー" loading="eager" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260224newitem.jpg"/>
+</a>
+<a class="slide" href="#resale">
+<img alt="再販アイテム" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260218resale.jpg"/>
+</a>
+<a class="slide" href="#tokusen">
+<img alt="特選ジュエリー" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260216tokusen.jpg"/>
+</a>
+<a class="slide" href="#marche">
+<img alt="マルシェ・イベント" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260206marche.jpg"/>
+</a>
+<a class="slide" href="#loose">
+<img alt="ルースコレクション" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260205loose.jpg"/>
+</a>
+</div>
+<div aria-label="スライダー" class="dots" role="tablist">
+<button aria-label="1" class="dot is-active" type="button"></button>
+<button aria-label="2" class="dot" type="button"></button>
+<button aria-label="3" class="dot" type="button"></button>
+</div>
+<button aria-label="次へ" class="navBtn next" type="button"><svg aria-hidden="true" class="chev" viewbox="0 0 24 24"><path d="M8.5 4.5L16 12l-7.5 7.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path></svg></button>
+</div>
+<aside class="heroSide">
+<div class="noticeCard">
+<p class="kicker">NEWS</p>
+<div class="newsCarousel">
+<button aria-label="上へ" class="newsBtn up" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M18 15l-6-6-6 6"></path></svg></button>
+<div aria-label="ニュース一覧" class="newsList" role="list">
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-20">2026.02.20</time>
+<span>ホワイトデー特集：今なら間に合うラインナップ</span>
+</a>
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-18">2026.02.18</time>
+<span>限定再販：完売していた人気作が再登場</span>
+</a>
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-16">2026.02.16</time>
+<span>特選ルース：一点もの更新のお知らせ</span>
+</a>
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-14">2026.02.14</time>
+<span>誕生石（3月）：アクアマリン特集公開</span>
+</a>
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-12">2026.02.12</time>
+<span>重ね着け提案：リングの合わせ方ガイド</span>
+</a>
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-10">2026.02.10</time>
+<span>ご利用ガイド：配送・お支払いを更新</span>
+</a>
+</div>
+<button aria-label="下へ" class="newsBtn down" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button>
+</div>
+<div class="pillRow">
+<span class="pill">工房仕立て</span>
+<span class="pill">一点もの</span>
+<span class="pill">希少石</span>
+</div>
+</div>
+<div class="promoCard delivery">
+<p class="kicker">弊社発送予定日</p>
+<p class="deliveryDate">🚚 <span class="date"></span>予定</p>
+<p class="deliveryNote">
+    ※ ご注文後にお作りするため、発送日は前後する場合がございます。<br/>
+    ※ 一部商品は発送予定日が異なります。<br/>
+<span class="contactNote">お急ぎの場合は、お気軽にお問い合わせください。</span>
+</p>
+</div>
+</aside>
+</div>
+</section>
+<!-- QUICK BANDS -->
+<!-- YOUTUBE -->
+<section class="section ytSection" data-reveal="">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">YouTube</h2>
+<a class="more" href="https://www.youtube.com/" rel="noopener" target="_blank">チャンネルを見る</a>
+</div>
+<div class="ytNowPlaying top">
+<span class="label">再生中</span>
+<span id="ytTitle">動画タイトルが表示されます</span>
+</div>
+<div class="ytGrid">
+<div class="ytPlayer">
+<!-- ▼ ここを実動画に：VIDEO_ID をYouTubeのIDに差し替え -->
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" id="ytPlayer" src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="YouTube video player"></iframe>
+</div>
+<div class="ytCarousel">
+<div aria-label="動画リスト（サンプル）" class="ytList">
+<a class="ytItem" data-video-id="VIDEO_ID_1" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 1" src="assets/p1.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 1</strong><small>2026.02.11</small></span>
+</a>
+<a class="ytItem" data-video-id="VIDEO_ID_2" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 2" src="assets/p2.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 2</strong><small>2026.02.12</small></span>
+</a>
+<a class="ytItem" data-video-id="VIDEO_ID_3" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 3" src="assets/p3.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 3</strong><small>2026.02.13</small></span>
+</a>
+<a class="ytItem" data-video-id="VIDEO_ID_4" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 4" src="assets/p4.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 4</strong><small>2026.02.14</small></span>
+</a>
+<a class="ytItem" data-video-id="VIDEO_ID_5" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 5" src="assets/p5.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 5</strong><small>2026.02.15</small></span>
+</a>
+<a class="ytItem" data-video-id="VIDEO_ID_6" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 6" src="assets/p6.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 6</strong><small>2026.02.16</small></span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="band" data-reveal="">
+<div class="wrap bandGrid">
+<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001720" rel="noopener" target="_blank"><img alt="特選ルースジュエリー" src="assets/feat1.png"/></a>
+<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/b8b7c1aaa5.html" rel="noopener" target="_blank"><img alt="厳選ルース" src="assets/feat2.png"/></a>
+<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001693" rel="noopener" target="_blank"><img alt="簡単カスタムジュエリー" src="assets/feat3.png"/></a>
+<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001526" rel="noopener" target="_blank"><img alt="安心サービス" src="assets/feat4.png"/></a>
+</div>
+</section>
+<!-- CATEGORIES -->
+<section class="section" data-reveal="" id="cats">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">カテゴリから探す</h2>
+<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/" rel="noopener" target="_blank">ストアトップへ</a>
+</div>
+<div class="iconGrid">
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5eaa5f3a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/ring.png"/></span><span>リング</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/52a4a3fd5a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/pinky.png"/></span><span>ピンキーリング</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5daa5f3a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/pendant.png"/></span><span>ペンダント</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5d4a5a2a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/pierce.png"/></span><span>ピアス</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5d6a5eca5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/bracelet.png"/></span><span>ブレスレット</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/b8b7c1aaa5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/loose.png"/></span><span>厳選ルース</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/5521aaa17ac.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/chain.png"/></span><span>チェーン・金具</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a4aabceac6.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/care.png"/></span><span>お手入れ</span></a>
+</div>
+</div>
+</section>
+<!-- PICKUP -->
+<section class="section soft" data-reveal="" id="pickup1">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2 sectionTitle">PICK UP アイテム1</h2>
+<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/" rel="noopener" target="_blank">一覧へ</a>
+</div>
+<div class="carousel">
+<button aria-label="前へ" class="carBtn prev" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<div aria-label="PICK UP" class="rowScroll">
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tr-443-saq-rsd.html" rel="noopener" target="_blank">
+<span class="rankNo">01</span>
+<img alt="サンタマリアカラーアクアマリン ローズカットダイヤ リング" loading="lazy" src="assets/p1.jpg"/>
+<p>サンタマリアAQ リング<br/><span class="yen">¥94,512</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-1244-saq-rsd.html" rel="noopener" target="_blank">
+<span class="rankNo">02</span>
+<img alt="サンタマリアカラーアクアマリン ローズカットダイヤ ペンダントトップ" loading="lazy" src="assets/p2.jpg"/>
+<p>サンタマリアAQ ペンダント<br/><span class="yen">¥45,320</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tra2610009.html" rel="noopener" target="_blank">
+<span class="rankNo">03</span>
+<img alt="ブラジル産パライバトルマリン ダイヤモンド リング" loading="lazy" src="assets/p3.jpg"/>
+<p>限定1本 パライバリング<br/><span class="yen">¥1,650,000</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-478-scl-rsd-d.html" rel="noopener" target="_blank">
+<span class="rankNo">04</span>
+<img alt="スカポライト ダイヤモンド ペンダントトップ" loading="lazy" src="assets/p6.jpg"/>
+<p>UV蛍光 スカポライト<br/><span class="yen">¥27,632</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tr-931-rlq.html" rel="noopener" target="_blank">
+<span class="rankNo">05</span>
+<img alt="ルチルクオーツ リング" loading="lazy" src="assets/p5.jpg"/>
+<p>8mm ルチルリング<br/><span class="yen">¥68,024</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-785-rlq.html" rel="noopener" target="_blank">
+<span class="rankNo">06</span>
+<img alt="ルチルクオーツ ペンダントトップ" loading="lazy" src="assets/p4.jpg"/>
+<p>8mm ルチルペンダント<br/><span class="yen">¥22,440</span></p>
+</a>
+</div>
+<button aria-label="次へ" class="carBtn next" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+</section>
+<section class="section soft" data-reveal="" id="pickup2">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">PICK UP アイテム2</h2>
+<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/" rel="noopener" target="_blank">一覧へ</a>
+</div>
+<div class="carousel">
+<button aria-label="前へ" class="carBtn prev" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<div aria-label="PICK UP" class="rowScroll">
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tr-443-saq-rsd.html" rel="noopener" target="_blank">
+<span class="rankNo">01</span>
+<img alt="サンタマリアカラーアクアマリン ローズカットダイヤ リング" loading="lazy" src="assets/p1.jpg"/>
+<p>サンタマリアAQ リング<br/><span class="yen">¥94,512</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-1244-saq-rsd.html" rel="noopener" target="_blank">
+<span class="rankNo">02</span>
+<img alt="サンタマリアカラーアクアマリン ローズカットダイヤ ペンダントトップ" loading="lazy" src="assets/p2.jpg"/>
+<p>サンタマリアAQ ペンダント<br/><span class="yen">¥45,320</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tra2610009.html" rel="noopener" target="_blank">
+<span class="rankNo">03</span>
+<img alt="ブラジル産パライバトルマリン ダイヤモンド リング" loading="lazy" src="assets/p3.jpg"/>
+<p>限定1本 パライバリング<br/><span class="yen">¥1,650,000</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-478-scl-rsd-d.html" rel="noopener" target="_blank">
+<span class="rankNo">04</span>
+<img alt="スカポライト ダイヤモンド ペンダントトップ" loading="lazy" src="assets/p6.jpg"/>
+<p>UV蛍光 スカポライト<br/><span class="yen">¥27,632</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tr-931-rlq.html" rel="noopener" target="_blank">
+<span class="rankNo">05</span>
+<img alt="ルチルクオーツ リング" loading="lazy" src="assets/p5.jpg"/>
+<p>8mm ルチルリング<br/><span class="yen">¥68,024</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-785-rlq.html" rel="noopener" target="_blank">
+<span class="rankNo">06</span>
+<img alt="ルチルクオーツ ペンダントトップ" loading="lazy" src="assets/p4.jpg"/>
+<p>8mm ルチルペンダント<br/><span class="yen">¥22,440</span></p>
+</a>
+</div>
+<button aria-label="次へ" class="carBtn next" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+</section>
+<section class="section soft" data-reveal="" id="pickup3">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">PICK UP アイテム3</h2>
+<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/" rel="noopener" target="_blank">一覧へ</a>
+</div>
+<div class="carousel">
+<button aria-label="前へ" class="carBtn prev" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<div aria-label="PICK UP" class="rowScroll">
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tr-443-saq-rsd.html" rel="noopener" target="_blank">
+<span class="rankNo">01</span>
+<img alt="サンタマリアカラーアクアマリン ローズカットダイヤ リング" loading="lazy" src="assets/p1.jpg"/>
+<p>サンタマリアAQ リング<br/><span class="yen">¥94,512</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-1244-saq-rsd.html" rel="noopener" target="_blank">
+<span class="rankNo">02</span>
+<img alt="サンタマリアカラーアクアマリン ローズカットダイヤ ペンダントトップ" loading="lazy" src="assets/p2.jpg"/>
+<p>サンタマリアAQ ペンダント<br/><span class="yen">¥45,320</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tra2610009.html" rel="noopener" target="_blank">
+<span class="rankNo">03</span>
+<img alt="ブラジル産パライバトルマリン ダイヤモンド リング" loading="lazy" src="assets/p3.jpg"/>
+<p>限定1本 パライバリング<br/><span class="yen">¥1,650,000</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-478-scl-rsd-d.html" rel="noopener" target="_blank">
+<span class="rankNo">04</span>
+<img alt="スカポライト ダイヤモンド ペンダントトップ" loading="lazy" src="assets/p6.jpg"/>
+<p>UV蛍光 スカポライト<br/><span class="yen">¥27,632</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tr-931-rlq.html" rel="noopener" target="_blank">
+<span class="rankNo">05</span>
+<img alt="ルチルクオーツ リング" loading="lazy" src="assets/p5.jpg"/>
+<p>8mm ルチルリング<br/><span class="yen">¥68,024</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-785-rlq.html" rel="noopener" target="_blank">
+<span class="rankNo">06</span>
+<img alt="ルチルクオーツ ペンダントトップ" loading="lazy" src="assets/p4.jpg"/>
+<p>8mm ルチルペンダント<br/><span class="yen">¥22,440</span></p>
+</a>
+</div>
+<button aria-label="次へ" class="carBtn next" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+</section>
+<section class="section soft" data-reveal="" id="pickup4">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">PICK UP アイテム4</h2>
+<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/" rel="noopener" target="_blank">一覧へ</a>
+</div>
+<div class="carousel">
+<button aria-label="前へ" class="carBtn prev" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<div aria-label="PICK UP" class="rowScroll">
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tr-443-saq-rsd.html" rel="noopener" target="_blank">
+<span class="rankNo">01</span>
+<img alt="サンタマリアカラーアクアマリン ローズカットダイヤ リング" loading="lazy" src="assets/p1.jpg"/>
+<p>サンタマリアAQ リング<br/><span class="yen">¥94,512</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-1244-saq-rsd.html" rel="noopener" target="_blank">
+<span class="rankNo">02</span>
+<img alt="サンタマリアカラーアクアマリン ローズカットダイヤ ペンダントトップ" loading="lazy" src="assets/p2.jpg"/>
+<p>サンタマリアAQ ペンダント<br/><span class="yen">¥45,320</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tra2610009.html" rel="noopener" target="_blank">
+<span class="rankNo">03</span>
+<img alt="ブラジル産パライバトルマリン ダイヤモンド リング" loading="lazy" src="assets/p3.jpg"/>
+<p>限定1本 パライバリング<br/><span class="yen">¥1,650,000</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-478-scl-rsd-d.html" rel="noopener" target="_blank">
+<span class="rankNo">04</span>
+<img alt="スカポライト ダイヤモンド ペンダントトップ" loading="lazy" src="assets/p6.jpg"/>
+<p>UV蛍光 スカポライト<br/><span class="yen">¥27,632</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tr-931-rlq.html" rel="noopener" target="_blank">
+<span class="rankNo">05</span>
+<img alt="ルチルクオーツ リング" loading="lazy" src="assets/p5.jpg"/>
+<p>8mm ルチルリング<br/><span class="yen">¥68,024</span></p>
+</a>
+<a class="rankCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-785-rlq.html" rel="noopener" target="_blank">
+<span class="rankNo">06</span>
+<img alt="ルチルクオーツ ペンダントトップ" loading="lazy" src="assets/p4.jpg"/>
+<p>8mm ルチルペンダント<br/><span class="yen">¥22,440</span></p>
+</a>
+</div>
+<button aria-label="次へ" class="carBtn next" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+</section>
+<!-- NEW -->
+<section class="section" data-reveal="" id="new">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">新作・先行 / 限定</h2>
+<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/" rel="noopener" target="_blank">もっと見る</a>
+</div>
+<div class="cardGrid">
+<a class="itemCard" href="https://store.shopping.yahoo.co.jp/benebene/tr-443-saq-rsd.html" rel="noopener" target="_blank">
+<div class="img"><img alt="サンタマリアAQ リング" loading="lazy" src="assets/p1.jpg"/></div>
+<p class="name">サンタマリアカラーAQ × ローズカットD リング</p>
+<p class="meta">先行販売 / ¥94,512</p>
+</a>
+<a class="itemCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-1244-saq-rsd.html" rel="noopener" target="_blank">
+<div class="img"><img alt="サンタマリアAQ ペンダント" loading="lazy" src="assets/p2.jpg"/></div>
+<p class="name">サンタマリアカラーAQ × ローズカットD ペンダントトップ</p>
+<p class="meta">先行販売 / ¥45,320</p>
+</a>
+<a class="itemCard" href="https://store.shopping.yahoo.co.jp/benebene/tra2610009.html" rel="noopener" target="_blank">
+<div class="img"><img alt="パライバリング" loading="lazy" src="assets/p3.jpg"/></div>
+<p class="name">限定1本 ブラジル産パライバトルマリン × ダイヤ リング</p>
+<p class="meta">一点もの / ¥1,650,000</p>
+</a>
+<a class="itemCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-478-scl-rsd-d.html" rel="noopener" target="_blank">
+<div class="img"><img alt="スカポライト" loading="lazy" src="assets/p6.jpg"/></div>
+<p class="name">UV蛍光 スカポライト × ダイヤ ペンダントトップ</p>
+<p class="meta">先行販売 / ¥27,632</p>
+</a>
+<a class="itemCard" href="https://store.shopping.yahoo.co.jp/benebene/tr-931-rlq.html" rel="noopener" target="_blank">
+<div class="img"><img alt="ルチルリング" loading="lazy" src="assets/p5.jpg"/></div>
+<p class="name">数量限定 8mm ルチルクオーツ リング</p>
+<p class="meta">限定 / ¥68,024</p>
+</a>
+<a class="itemCard" href="https://store.shopping.yahoo.co.jp/benebene/tp-785-rlq.html" rel="noopener" target="_blank">
+<div class="img"><img alt="ルチルペンダント" loading="lazy" src="assets/p4.jpg"/></div>
+<p class="name">数量限定 8mm ルチルクオーツ ペンダントトップ</p>
+<p class="meta">限定 / ¥22,440</p>
+</a>
+</div>
+</div>
+</section>
+<!-- FEATURES -->
+<section class="section soft" data-reveal="" id="features">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">特集</h2>
+<a class="more" href="https://shopping.geocities.jp/benebene/" rel="noopener" target="_blank">特集一覧</a>
+</div>
+<div class="featGrid">
+<a class="feat" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001603" rel="noopener" target="_blank"><img alt="" src="assets/feat1.png"/><span>ローズカットダイヤ</span></a>
+<a class="feat" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001228" rel="noopener" target="_blank"><img alt="" src="assets/feat2.png"/><span>希少石コレクション</span></a>
+<a class="feat" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001716" rel="noopener" target="_blank"><img alt="" src="assets/feat3.png"/><span>関節リング</span></a>
+<a class="feat" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001429" rel="noopener" target="_blank"><img alt="" src="assets/feat4.png"/><span>ミルグレイン</span></a>
+<a class="feat" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001229" rel="noopener" target="_blank"><img alt="" src="assets/feat5.png"/><span>パライバ</span></a>
+<a class="feat" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001467" rel="noopener" target="_blank"><img alt="" src="assets/feat6.png"/><span>限定再販</span></a>
+</div>
+</div>
+</section>
+<!-- BIRTHSTONE -->
+<section class="section" data-reveal="" id="birthstone">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2 sectionTitle">誕生石</h2>
+<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001654" rel="noopener" target="_blank">3月を見る</a>
+</div>
+<div class="birthGrid">
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001652" rel="noopener" target="_blank"><span>1月</span><strong>ガーネット</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001653" rel="noopener" target="_blank"><span>2月</span><strong>アメシスト</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001654" rel="noopener" target="_blank"><span>3月</span><strong>アクアマリン</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001655" rel="noopener" target="_blank"><span>4月</span><strong>ダイヤ</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001656" rel="noopener" target="_blank"><span>5月</span><strong>エメラルド</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001657" rel="noopener" target="_blank"><span>6月</span><strong>アレキ</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001658" rel="noopener" target="_blank"><span>7月</span><strong>ルビー</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001659" rel="noopener" target="_blank"><span>8月</span><strong>ペリドット</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001660" rel="noopener" target="_blank"><span>9月</span><strong>サファイア</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001661" rel="noopener" target="_blank"><span>10月</span><strong>トルマリン</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001662" rel="noopener" target="_blank"><span>11月</span><strong>トパーズ</strong></a>
+<a class="birth" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001663" rel="noopener" target="_blank"><span>12月</span><strong>タンザナイト</strong></a>
+</div>
+</div>
+</section>
+<!-- PRICE RANGE -->
+<section class="section soft" data-reveal="" id="price">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">価格帯から探す</h2>
+<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/search.html?X=2&amp;n=100#CentSrchFilter1" rel="noopener" target="_blank">条件検索へ</a>
+</div>
+<div class="priceGrid">
+<a class="priceCard" href="https://store.shopping.yahoo.co.jp/benebene/search.html?X=2&amp;n=100&amp;pf=0&amp;pt=9999#CentSrchFilter1" rel="noopener" target="_blank">～￥9,999まで</a>
+<a class="priceCard" href="https://store.shopping.yahoo.co.jp/benebene/search.html?X=2&amp;n=100&amp;pf=10000&amp;pt=19999#CentSrchFilter1" rel="noopener" target="_blank">￥10,000～￥19,999</a>
+<a class="priceCard" href="https://store.shopping.yahoo.co.jp/benebene/search.html?X=2&amp;n=100&amp;pf=20000&amp;pt=39999#CentSrchFilter1" rel="noopener" target="_blank">￥20,000～￥39,999</a>
+<a class="priceCard" href="https://store.shopping.yahoo.co.jp/benebene/search.html?X=2&amp;n=100&amp;pf=40000&amp;pt=69999#CentSrchFilter1" rel="noopener" target="_blank">￥40,000～￥69,999</a>
+<a class="priceCard" href="https://store.shopping.yahoo.co.jp/benebene/search.html?X=2&amp;n=100&amp;pf=70000&amp;pt=99999#CentSrchFilter1" rel="noopener" target="_blank">￥70,000～￥99,999</a>
+<a class="priceCard" href="https://store.shopping.yahoo.co.jp/benebene/search.html?X=2&amp;n=100&amp;pf=100000&amp;pt=149999#CentSrchFilter1" rel="noopener" target="_blank">￥100,000～￥149,999</a>
+<a class="priceCard" href="https://store.shopping.yahoo.co.jp/benebene/search.html?X=2&amp;n=100&amp;pf=150000&amp;pt=199999#CentSrchFilter1" rel="noopener" target="_blank">￥150,000～￥199,999</a>
+<a class="priceCard" href="https://store.shopping.yahoo.co.jp/benebene/search.html?X=2&amp;n=100&amp;pf=200000&amp;pt=299999#CentSrchFilter1" rel="noopener" target="_blank">￥200,000～￥299,999</a>
+<a class="priceCard" href="https://store.shopping.yahoo.co.jp/benebene/search.html?X=2&amp;n=100&amp;pf=300000#CentSrchFilter1" rel="noopener" target="_blank">￥300,000以上</a>
+</div>
+</div>
+</section>
+<!-- SALON -->
+<section class="section soft" data-reveal="" id="salon">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">店舗案内</h2>
+<a class="more" href="https://shopping.geocities.jp/benebene/" rel="noopener" target="_blank">詳細</a>
+</div>
+<div class="twoCols salonGrid">
+<a class="shopLink" href="https://shopping.geocities.jp/benebene/realshop.html" rel="noopener" target="_blank"><div class="box">
+<h3><span aria-hidden="true" class="shopIcon">
+<svg fill="none" height="18" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 10.5V20a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-9.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M2.5 10.5h19L20 4H4l-1.5 6.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M8 21v-7h8v7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M6.3 10.5c0 1.6 1.1 2.9 2.7 2.9s2.7-1.3 2.7-2.9M11.7 10.5c0 1.6 1.1 2.9 2.7 2.9s2.7-1.3 2.7-2.9M17.1 10.5c0 1.6 1.1 2.9 2.7 2.9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</span><span class="shopTitle">GINZA SALON</span></h3>
+<p>東京都中央区銀座3-12-11 第2タチバナ銀座ビル6階<br/>03-5565-0750</p>
+</div></a>
+<a class="shopLink" href="#" rel="noopener" target="_blank"><div class="box">
+<h3><span aria-hidden="true" class="shopIcon">
+<svg fill="none" height="18" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 10.5V20a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-9.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M2.5 10.5h19L20 4H4l-1.5 6.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M8 21v-7h8v7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+<path d="M6.3 10.5c0 1.6 1.1 2.9 2.7 2.9s2.7-1.3 2.7-2.9M11.7 10.5c0 1.6 1.1 2.9 2.7 2.9s2.7-1.3 2.7-2.9M17.1 10.5c0 1.6 1.1 2.9 2.7 2.9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</span><span class="shopTitle">KOFU SHOP &amp; HEAD OFFICE</span></h3>
+<p>山梨県甲府市下鍛冶屋町469-1<br/>0120-457-678</p>
+</div></a>
+</div>
+</div>
+</section>
+<!-- GUIDE -->
+<section class="section" data-reveal="" id="guide">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2 sectionTitle">ご利用ガイド</h2>
+<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/guide.html" rel="noopener" target="_blank">ガイドへ</a>
+</div>
+<div class="guideRow">
+<a class="guide" href="https://store.shopping.yahoo.co.jp/benebene/guide.html" rel="noopener" target="_blank">送料・お届け</a>
+<a class="guide" href="https://store.shopping.yahoo.co.jp/benebene/guide.html" rel="noopener" target="_blank">お支払い</a>
+<a class="guide" href="https://store.shopping.yahoo.co.jp/benebene/qa.html" rel="noopener" target="_blank">Q&amp;A</a>
+<a class="guide" href="https://store.shopping.yahoo.co.jp/benebene/info.html" rel="noopener" target="_blank">会社概要</a>
+</div>
+</div>
+</section>
+<!-- CONTACT / MAILMAGAZINE anchors (placeholders) -->
+<section aria-label="CONTACT" class="anchorSection" id="contact"></section>
+<section aria-label="MAILMAGAZINE" class="anchorSection" id="mailmagazine">
+<section class="anchorSection" id="line">
+<div class="wrap">
+<h2 class="sectionTitle">LINEでお問合せ</h2>
+<p class="muted">LINE公式アカウントのURLを設定してください。</p>
+</div>
+</section>
+</section>
+</main>
+<section class="section soft footerCalendarSection" id="footerInfo">
+  <div class="wrap">
+    <footer class=\"footer\">
+  <div class="footGrid footGridWithCalendar">
+    <div class="footCalendarWrap" aria-label="営業カレンダー">
+      <div class="footCalendarHead">
+        <h2 class="h2">営業カレンダー</h2>
+        <span class="more muted">休日でもお買い物は可能です</span>
+      </div>
+      <div class="footCalendarCard footCalendarPc">
+        <iframe src="calendar/index.html" title="営業カレンダー" loading="lazy"></iframe>
+      </div>
+      <div class="footCalendarCard footCalendarSp">
+        <iframe src="calendar/sp.html" title="営業カレンダー" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <div class="footMain">
+      <strong class="footBrand">ジュエリー工房ベーネベーネ｜Yahoo店</strong>
+      <p class="small">TEL：0120-457-678（営業日 10:00-18:00）</p>
+      <p class="small">アクセント：DIC F66（Web近似 #8A1F4E）。</p>
+      <div class="footLinks">
+        <a href="https://store.shopping.yahoo.co.jp/benebene/info.html" rel="noopener" target="_blank">会社概要</a>
+        <a href="https://store.shopping.yahoo.co.jp/benebene/guide.html" rel="noopener" target="_blank">お買い物ガイド</a>
+        <a href="https://order.shopping.yahoo.co.jp/cgi-bin/cart-form" rel="noopener" target="_blank">カート</a>
+        <a href="https://shopping.yahoo.co.jp/review/store/benebene" rel="noopener" target="_blank">レビュー</a>
+      </div>
+    </div>
+  </div>
+</footer>
+  </div>
+</section>
+<script>
+/* YouTube player switch (click list -> left player autoplay + title) */
+(function(){
+  function buildSrc(id){
+    const base = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id);
+    return base + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+  }
+
+  function initYT(){
+    const iframe = document.getElementById('ytPlayer');
+    const titleEl = document.getElementById('ytTitle');
+    const items = Array.from(document.querySelectorAll('.ytList .ytItem'));
+    if(!iframe || !titleEl || !items.length) return;
+
+    function setActive(el){
+      items.forEach(x => x.classList.remove('isActive'));
+      el.classList.add('isActive');
+    }
+
+    function play(el){
+      const id = el.getAttribute('data-video-id');
+      const t = (el.querySelector('.ytMeta strong')?.textContent || '').trim();
+      if(id && id !== 'VIDEO_ID'){
+        iframe.src = buildSrc(id);
+      }else if(iframe.src){
+        const base = iframe.src.split('?')[0];
+        iframe.src = base + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      }
+      if(t) titleEl.textContent = t;
+      setActive(el);
+    }
+
+    items.forEach(el => el.addEventListener('click', (e)=>{ e.preventDefault(); play(el); }));
+
+    // initial highlight + title from first
+    const first = items[0];
+    const t0 = (first.querySelector('.ytMeta strong')?.textContent || '').trim();
+    if(t0) titleEl.textContent = t0;
+    setActive(first);
+  }
+
+  window.addEventListener('load', initYT);
+})();
+</script>
+<script>
+/* v41 HERO: lock right column height to slider so NEWS scrolls and PICK UP doesn't shift */
+(function(){
+  function lockHeroSide(){
+    const slider = document.querySelector('.slider');
+    const side = document.querySelector('.heroSide');
+    const list = document.querySelector('.newsList');
+    if(!slider || !side) return;
+
+    const isSP = window.matchMedia('(max-width: 980px)').matches;
+    if(isSP){
+      side.style.height = 'auto';
+      // SP: keep news at 5 rows
+      if(list){
+        const items = list.querySelectorAll('.newsItem');
+        if(items.length){
+          const gap = 8;
+          const itemH = items[0].getBoundingClientRect().height || 46;
+          const rows = (window.BENE_UI && window.BENE_UI.newsMobileRows) ? window.BENE_UI.newsMobileRows : 4.5;
+        list.style.maxHeight = ((rows * itemH) + ((rows-1)*gap)) + 'px';
+        }else{
+          list.style.maxHeight = 'none';
+        }
+      }
+      return;
+    }
+
+    const h = Math.round(slider.getBoundingClientRect().height);
+    if(h > 0) side.style.height = h + 'px';
+  }
+
+  window.addEventListener('load', lockHeroSide);
+  window.addEventListener('resize', lockHeroSide);
+  setTimeout(lockHeroSide, 250);
+  setTimeout(lockHeroSide, 900);
+})();
+</script>
+<script>
+/* YouTube list height sync: keep list scrolling without stretching video */
+(function(){
+  function computeMobileMaxHeight(list){
+    const items = Array.from(list.querySelectorAll('.ytItem'));
+    if(!items.length) return 260;
+    const r = items[0].getBoundingClientRect();
+    const gap = 10;
+    const rows = (window.BENE_UI && window.BENE_UI.youtubeMobileRows) ? window.BENE_UI.youtubeMobileRows : 3.5;
+    return Math.round(rows * r.height + (rows-1) * gap);
+  }
+
+  function syncYTListHeight(){
+    const player = document.querySelector('.ytPlayer');
+    const list = document.querySelector('.ytList');
+    if(!player || !list) return;
+
+    const isMobile = window.matchMedia('(max-width: 980px)').matches;
+    if(isMobile){
+      list.style.setProperty('--ytListMax', computeMobileMaxHeight(list) + 'px');
+      return;
+    }
+    const h = Math.round(player.getBoundingClientRect().height);
+    if(h > 0) list.style.setProperty('--ytListMax', h + 'px');
+  }
+
+  window.addEventListener('load', syncYTListHeight);
+  window.addEventListener('resize', syncYTListHeight);
+  setTimeout(syncYTListHeight, 200);
+  setTimeout(syncYTListHeight, 800);
+})();
+</script>
+<script>
+/* HERO slider: auto rotate + buttons */
+(function(){
+  function initHeroSlider(){
+    const root = document.querySelector('.slider');
+    if(!root) return;
+    const slides = Array.from(root.querySelectorAll('.slide'));
+    const prev = root.querySelector('.navBtn.prev');
+    const next = root.querySelector('.navBtn.next');
+    
+    const dotsWrap = root.querySelector('.dots') || (function(){
+      const d = document.createElement('div');
+      d.className = 'dots';
+      d.setAttribute('role','tablist');
+      d.setAttribute('aria-label','スライダー');
+      root.appendChild(d);
+      return d;
+    })();
+
+    function buildDots(){
+      dotsWrap.innerHTML = '';
+      slides.forEach((_,i)=>{
+        const b = document.createElement('button');
+        b.className = 'dot';
+        b.type = 'button';
+        b.setAttribute('aria-label', String(i+1));
+        b.addEventListener('click', ()=>{ show(i); restart(); });
+        dotsWrap.appendChild(b);
+      });
+    }
+    buildDots();
+
+if(!slides.length) return;
+
+    let idx = slides.findIndex(s => s.classList.contains('is-active'));
+    if(idx < 0) idx = 0;
+
+    function show(i){
+      idx = (i + slides.length) % slides.length;
+      slides.forEach((s,n)=>s.classList.toggle('is-active', n===idx));
+      const dots = Array.from(dotsWrap.querySelectorAll('.dot'));
+      dots.forEach((d,n)=>d.classList.toggle('is-active', n===idx));
+    }
+
+    // Buttons
+    if(prev) prev.addEventListener('click', ()=>{ show(idx-1); restart(); });
+    if(next) next.addEventListener('click', ()=>{ show(idx+1); restart(); });
+
+    // Auto rotate
+    const intervalMs = 4500; // change here if needed
+    let timer = null;
+
+    function start(){
+      if(timer) return;
+      timer = setInterval(()=>show(idx+1), intervalMs);
+    }
+    function stop(){
+      if(timer){ clearInterval(timer); timer = null; }
+    }
+    function restart(){ stop(); start(); }
+
+    // Pause on hover/focus
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', start);
+
+    // Swipe on touch
+    let x0 = null;
+    root.addEventListener('touchstart', (e)=>{ x0 = e.touches[0].clientX; }, {passive:true});
+    root.addEventListener('touchend', (e)=>{
+      if(x0===null) return;
+      const x1 = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0].clientX : x0;
+      const dx = x1 - x0;
+      x0 = null;
+      if(Math.abs(dx) < 30) return;
+      if(dx > 0) show(idx-1);
+      else show(idx+1);
+      restart();
+    }, {passive:true});
+
+    start();
+  }
+  window.addEventListener('load', initHeroSlider);
+})();
+</script>
+<!-- Search Modal -->
+<div aria-hidden="true" class="searchModal" id="searchModal">
+<div class="searchModal__overlay" data-close="1"></div>
+<div aria-label="検索" aria-modal="true" class="searchModal__panel" role="dialog">
+<div class="searchModal__head">
+<div class="searchModal__title">検索</div>
+<button aria-label="閉じる" class="searchModal__close" id="searchCloseBtn" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M18.3 5.7a1 1 0 00-1.4 0L12 10.6 7.1 5.7a1 1 0 10-1.4 1.4L10.6 12l-4.9 4.9a1 1 0 101.4 1.4L12 13.4l4.9 4.9a1 1 0 001.4-1.4L13.4 12l4.9-4.9a1 1 0 000-1.4z" fill="currentColor"></path></svg>
+</button>
+</div>
+<form action="https://store.shopping.yahoo.co.jp/benebene/search.html" class="searchModal__form" method="get">
+<div class="searchModal__field">
+<input autocomplete="off" class="searchModal__input" id="searchModalInput" name="p" placeholder="キーワード検索（例：パライバ／ピンクダイヤ／ローズカット）" type="search"/>
+<button aria-label="検索" class="searchModal__submit" type="submit">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 105.02 13.06l3.21 3.22a1 1 0 001.42-1.42l-3.22-3.21A7.5 7.5 0 0010.5 3zm0 2a5.5 5.5 0 110 11 5.5 5.5 0 010-11z" fill="currentColor"></path></svg>
+</button>
+</div>
+<div class="searchModal__quickTitle">ワンクリック検索</div>
+<div class="searchModal__quick" id="searchQuickChips">
+<button class="chip" data-q="新作" type="button">新作</button>
+<button class="chip" data-q="限定" type="button">限定</button>
+<button class="chip" data-q="ルース" type="button">ルース</button>
+<button class="chip" data-q="誕生石" type="button">誕生石</button>
+<button class="chip" data-q="ローズカット" type="button">ローズカット</button>
+<button class="chip" data-q="アクアマリン" type="button">アクアマリン</button>
+<button class="chip" data-q="パライバ" type="button">パライバ</button>
+<button class="chip" data-q="アレキサンドライト" type="button">アレキサンドライト</button>
+</div>
+<div class="searchModal__hint">※チップをクリックすると、そのまま検索します</div>
+</form>
+</div>
+</div>
+<script>
+/* v71: Search modal */
+(function(){
+  const openBtn = document.getElementById('searchOpenBtn');
+  const modal = document.getElementById('searchModal');
+  const closeBtn = document.getElementById('searchCloseBtn');
+  const input = document.getElementById('searchModalInput');
+  if(!openBtn || !modal || !input) return;
+
+  function openModal(){
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.documentElement.classList.add('is-modal-open');
+    setTimeout(()=>input.focus(), 60);
+  }
+  function closeModal(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+    document.documentElement.classList.remove('is-modal-open');
+  }
+
+  openBtn.addEventListener('click', openModal);
+  if(closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (e)=>{
+    const t = e.target;
+    if(t && t.getAttribute && t.getAttribute('data-close')==='1') closeModal();
+  });
+
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+  });
+
+  // Quick chips: set keyword and submit immediately
+  modal.querySelectorAll('.chip[data-q]').forEach(ch=>{
+    ch.addEventListener('click', ()=>{
+      input.value = ch.getAttribute('data-q') || '';
+      if(input.form) input.form.submit();
+    });
+  });
+})();
+</script>
+<script>
+/* v72: Global nav (dropdown + mobile toggle) */
+(function(){
+  const menuBtn = document.getElementById('menuBtn');
+  const gnav = document.getElementById('gnav');
+  if(menuBtn && gnav){
+    menuBtn.addEventListener('click', ()=>{
+      gnav.classList.toggle('is-open');
+      const open = gnav.classList.contains('is-open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  // Submenu toggle (mainly for SP)
+  document.querySelectorAll('.gnav .hasSub > .gnavTop').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const li = btn.closest('.hasSub');
+      if(!li) return;
+      const isOpen = li.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  // Close on outside tap when open (SP)
+  document.addEventListener('click', (e)=>{
+    if(!gnav || !gnav.classList.contains('is-open')) return;
+    const t = e.target;
+    if(t === menuBtn || (t && t.closest && t.closest('#gnav'))) return;
+    gnav.classList.remove('is-open');
+    menuBtn && menuBtn.setAttribute('aria-expanded','false');
+  });
+})();
+</script>
+<script>
+
+/* v79 reveal observer */
+(function(){
+  const els = document.querySelectorAll('[data-reveal]');
+  if(!('IntersectionObserver' in window) || !els.length){
+    els.forEach(el=>el.classList.add('is-in'));
+    return;
+  }
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el=>io.observe(el));
+})();
+
+/* v79 youtube fade */
+(function(){
+  const player = document.querySelector('.ytPlayer');
+  if(!player) return;
+  document.addEventListener('yt:switching', ()=>{
+    player.classList.add('is-switching');
+    setTimeout(()=>player.classList.remove('is-switching'), 280);
+  });
+})();
+
+</script>
+<div aria-label="お問い合わせショートカット" class="floatLeft">
+<a aria-label="お問い合わせ" class="floatBtn iconImg" href="#contact" title="お問い合わせ">
+<img alt="お問い合わせ" src="assets/ico_contact.png"/>
+</a>
+<a aria-label="LINEでお問合せ" class="floatBtn iconImg" href="#line" title="LINEでお問合せ">
+<img alt="LINEでお問合せ" src="assets/ico_line.png"/>
+</a>
+</div>
+
+<script src="script.js"></script>
+<div class="gnavBackdrop" id="gnavBackdrop"></div><nav aria-label="メニュー" class="gnavDrawer" id="gnav">
+<div class="drawerTop">
+  <div class="drawerPhoneMeta">電話でのお問合せは　営業日 10:00-18:00</div>
+  <a class="drawerPhoneNum" href="tel:0120457678" aria-label="電話をかける">0120-457-678</a>
+  <div class="drawerActions">
+    <button class="drawerIco" type="button" id="drawerSearchBtn" aria-label="検索">検索</button>
+    <a class="drawerIco" href="#mailmagazine" id="drawerMailBtn">MAILMAGAZINE</a>
+  </div>
+</div><button class="gnavClose" type="button" aria-label="閉じる" onclick="window.__closeDrawer && window.__closeDrawer()">×</button><div class="gnavInner"><div class="gnavTitle">MENU</div><ul class="gnavList"><li class="gnavItem"><a class="gnavLink" href="#">アイテム</a><ul class="gnavSub"><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5eaa5f3a5.html" rel="noopener" target="_blank">　リング</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/52a4a3fd5a5.html" rel="noopener" target="_blank">　ピンキーリング</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5daa5f3a5.html" rel="noopener" target="_blank">　ペンダント</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5d4a5a2a5.html" rel="noopener" target="_blank">　ピアス･イヤリング</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5d6a5eca5.html" rel="noopener" target="_blank">　ブレスレット</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/b8b7c1aaa5.html" rel="noopener" target="_blank">　ルース・裸石</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/5521aaa17ac.html" rel="noopener" target="_blank">　チェーン・金具</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a4aabceac6.html" rel="noopener" target="_blank">　お手入れｸﾞｯｽﾞ</a></li></ul></li><li class="gnavItem"><a class="gnavLink" href="#new">新作先行</a></li><li class="gnavItem"><a class="gnavLink" href="#tokusen">一点もの</a><ul class="gnavSub"><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/c6c3c1aaa5.html" rel="noopener" target="_blank">　特選ﾙｰｽｼﾞｭｴﾘｰ</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/b8c2c4eaa5.html?strcid=b8c2c4eaa5&amp;n=100&amp;X=99" rel="noopener" target="_blank">　限定マルシェ</a></li></ul></li><li class="gnavItem"><a class="gnavLink" href="#resale">限定再販</a></li><li class="gnavItem"><a class="gnavLink" href="#">宝石で選ぶ</a><ul class="gnavSub"><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a05a452ca5a.html" rel="noopener" target="_blank">　ダイヤモンド</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/aa1baea5592.html" rel="noopener" target="_blank">　カラーストーン</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/b5a9beafc0.html" rel="noopener" target="_blank">　稀少石</a></li></ul></li><li class="gnavItem"><a class="gnavLink" href="#metal">メタル</a></li><li class="gnavItem"><a class="gnavLink" href="#loose">ルース</a></li><li class="gnavItem"><a class="gnavLink" href="#custom">カスタム</a></li></ul></div></nav>
+
+
+
+
+
+<button id="toTopBtn" type="button" aria-label="上に戻る" title="上に戻る" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'});document.documentElement.scrollTop=0;document.body.scrollTop=0;return false;" ontouchend="window.scrollTo({top:0,left:0,behavior:'smooth'});document.documentElement.scrollTop=0;document.body.scrollTop=0;return false;" onpointerup="window.scrollTo({top:0,left:0,behavior:'smooth'});document.documentElement.scrollTop=0;document.body.scrollTop=0;return false;"><span>↑</span></button>
+<style id="v119-topbtn-style">
+html body #toTopBtn{
+  position:fixed !important;
+  right:10px !important;
+  bottom:10px !important;
+  width:56px !important;
+  height:56px !important;
+  min-width:56px !important;
+  min-height:56px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(0,0,0,.14) !important;
+  background:#fff !important;
+  box-shadow:0 10px 30px rgba(0,0,0,.10) !important;
+  padding:0 !important;
+  margin:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  box-sizing:border-box !important;
+  color:#333 !important;
+  z-index:2147483647 !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+  transform:translateY(8px) !important;
+  transition:opacity .18s ease,transform .18s ease,visibility .18s ease !important;
+}
+html body #toTopBtn span{
+  font-size:22px !important;
+  line-height:1 !important;
+}
+html body #toTopBtn.is-show{
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  transform:translateY(0) !important;
+}
+@media (max-width:979px){
+  html body #toTopBtn{ right:10px !important; bottom:10px !important; }
+  #gnav.gnavDrawer{ padding-top:0 !important; }
+  #gnav.gnavDrawer .drawerTop{ padding:6px 14px 6px !important; margin:0 !important; }
+  #gnav.gnavDrawer .gnavInner{ padding:4px 14px 16px !important; margin:0 !important; }
+  #gnav.gnavDrawer .gnavTitle{ margin:0 0 4px !important; }
+}
+</style>
+<script id="v119-topbtn-script">
+(function(){
+  var btn = document.getElementById('toTopBtn');
+  function currentY(){
+    return Math.max(
+      window.pageYOffset || 0,
+      document.documentElement.scrollTop || 0,
+      document.body.scrollTop || 0
+    );
+  }
+  function threshold(){
+    return Math.max(1, Math.round(window.innerHeight * 0.5));
+  }
+  function update(){
+    if(!btn) return;
+    if(currentY() >= threshold()){
+      btn.classList.add('is-show');
+    }else{
+      btn.classList.remove('is-show');
+    }
+  }
+  function goTop(){
+    try{ window.scrollTo({top:0,left:0,behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); }
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+  if(btn){
+    btn.onclick = function(e){
+      if(e){ e.preventDefault(); e.stopPropagation(); }
+      goTop(); document.documentElement.scrollTop = 0; document.body.scrollTop = 0; return false;
+    };
+  }
+  update();
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('resize', update);
+  window.addEventListener('load', update);
+  setInterval(update, 300);
+  // drawer close fallback
+  function bindClose(){
+    var closeBtn = document.querySelector('#gnav .gnavClose');
+    if(closeBtn){
+      closeBtn.onclick = function(e){
+        if(e){ e.preventDefault(); e.stopPropagation(); }
+        var drawer = document.getElementById('gnav');
+        var backdrop = document.getElementById('gnavBackdrop') || document.querySelector('.gnavBackdrop');
+        if(drawer) drawer.classList.remove('is-open');
+        if(backdrop) backdrop.classList.remove('is-open');
+        document.documentElement.classList.remove('noScroll');
+        document.body.classList.remove('noScroll');
+        return false;
+      };
+    }
+  }
+  bindClose();
+  setInterval(bindClose, 500);
+})();
+</script>
+</body>
+</html>

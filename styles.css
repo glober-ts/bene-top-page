@@ -1,0 +1,3104 @@
+:root{
+  --accent:#8A1F4E;            /* DIC F66 Web近似 */
+  --accent-700:#6F173F;
+  --line:#e6e1d8;
+  --bg:#ffffff;
+  --soft:#f6f4f1;
+  --text:#1b1b1b;
+  --muted:#6f6f6f;
+  --shadow:0 14px 34px rgba(0,0,0,.06);
+  --max:1120px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Noto Sans JP",system-ui,-apple-system,Segoe UI,sans-serif;letter-spacing:.01em}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
+
+/* Header */
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);border-bottom:1px solid rgba(230,225,216,.9);backdrop-filter:blur(10px)}
+.headerRow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0}
+.logo{display:flex;align-items:center;gap:10px}
+.logoMark{width:34px;height:34px;border-radius:12px;border:1px solid rgba(230,225,216,1);background:radial-gradient(circle at 30% 30%,#fff,#efe5cf);box-shadow:0 10px 22px rgba(0,0,0,.08)}
+.logoText{font-weight:900;letter-spacing:.06em}
+.searchWrap{flex:1;display:flex;justify-content:center}
+.searchWrap input{width:min(520px,100%);height:38px;border-radius:999px;border:1px solid rgba(230,225,216,1);background:#faf9f7;padding:0 14px;outline:none}
+.searchWrap input:focus{border-color:rgba(138,31,78,.35);box-shadow:0 0 0 4px rgba(138,31,78,.12)}
+.icons{display:flex;gap:10px;align-items:center}
+.icoBtn{width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(230,225,216,1);background:#fff;cursor:pointer}
+.icoBtn:hover{transform:translateY(-1px)}
+.gnav{display:flex;gap:14px;padding:10px 0 14px;flex-wrap:wrap}
+.gnav a{font-size:13px;color:var(--muted);padding:8px 10px;border-radius:999px}
+.gnav a:hover{background:#faf9f7;color:var(--text)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:999px;border:1px solid rgba(230,225,216,1);background:#fff;font-weight:800;font-size:13px}
+.btn.primary{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-700));box-shadow:0 12px 22px rgba(138,31,78,.22)}
+
+/* Hero */
+.hero{padding:18px 0 10px}
+.heroGrid{display:grid;grid-template-columns:1.55fr .75fr;gap:14px;align-items:stretch}
+.slider{position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(230,225,216,1);box-shadow:var(--shadow);background:#fff}
+.slides{display:flex}
+.slide{min-width:100%;display:none}
+.slide.is-active{display:block}
+.slide img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.navBtn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:999px;border:1px solid rgba(230,225,216,1);background:rgba(255,255,255,.88);cursor:pointer}
+.navBtn.prev{left:10px}
+.navBtn.next{right:10px}
+.dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:8px}
+.dot{width:8px;height:8px;border-radius:999px;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.45);cursor:pointer}
+.dot.is-active{background:rgba(138,31,78,.85);border-color:rgba(138,31,78,.2)}
+
+.heroSide{display:grid;gap:14px}
+.noticeCard,.promoCard{border-radius:24px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:var(--shadow);padding:14px}
+.kicker{margin:0 0 10px;font-size:12px;letter-spacing:.12em;color:var(--muted)}
+.miniLink{display:block;padding:10px 10px;border-radius:14px;border:1px solid rgba(230,225,216,1);background:#faf9f7;margin-bottom:10px;color:var(--text)}
+.miniLink:hover{border-color:rgba(138,31,78,.28);background:#fff}
+.pillRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.pill{display:inline-flex;padding:7px 10px;border-radius:999px;font-size:12px;border:1px solid rgba(230,225,216,1);background:#fff;color:var(--muted)}
+.promoThumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 12px}
+.thumb{border-radius:16px;overflow:hidden;border:1px solid rgba(230,225,216,1);background:#fff}
+.thumb img{width:100%;aspect-ratio:1/1;object-fit:cover}
+
+/* Band */
+.band{padding:12px 0 4px}
+.bandGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.bandItem{border-radius:18px;overflow:hidden;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05)}
+.bandItem img{width:100%;aspect-ratio:16/10;object-fit:cover}
+
+/* Sections */
+.section{padding:26px 0}
+.section.soft{background:linear-gradient(180deg,#fbfaf8,#ffffff)}
+.headRow{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px}
+.h2{margin:0;font-size:16px;letter-spacing:.08em}
+.more{font-size:12px;color:var(--muted);padding:8px 10px;border-radius:999px}
+.more:hover{background:#faf9f7;color:var(--text)}
+
+/* Icon grid */
+.iconGrid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}
+.iconCard{border-radius:16px;border:1px solid rgba(230,225,216,1);background:#fff;padding:12px 8px;text-align:center;box-shadow:0 10px 22px rgba(0,0,0,.04)}
+.iconCard:hover{transform:translateY(-1px);border-color:rgba(138,31,78,.28)}
+.ic{display:block;font-size:20px}
+.iconCard span:last-child{display:block;font-size:12px;color:var(--muted);margin-top:6px}
+
+/* Ranking row */
+.rowScroll{display:flex;gap:12px;overflow:auto;padding:6px 2px 10px;scroll-snap-type:x mandatory}
+.rankCard{min-width:170px;scroll-snap-align:start;border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden;position:relative}
+.rankCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.rankNo{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(138,31,78,.92);color:#fff;font-weight:900;font-size:13px}
+.rankCard p{margin:10px 10px 12px;font-size:12px;color:var(--text)}
+
+/* Cards */
+.cardGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.itemCard{border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden}
+.itemCard .img{aspect-ratio:1/1;overflow:hidden}
+.itemCard img{width:100%;height:100%;object-fit:cover}
+.name{margin:10px 10px 2px;font-size:13px;font-weight:900}
+.meta{margin:0 10px 12px;font-size:12px;color:var(--muted)}
+
+/* Features */
+.featGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.feat{border-radius:18px;overflow:hidden;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05)}
+.feat img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.feat span{display:block;padding:10px 12px;font-size:13px;font-weight:900}
+
+/* Birth */
+.birthGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.birth{border-radius:16px;border:1px solid rgba(230,225,216,1);background:#fff;padding:12px 12px;box-shadow:0 10px 22px rgba(0,0,0,.04)}
+.birth span{display:block;font-size:12px;color:var(--muted)}
+.birth strong{display:block;margin-top:6px;font-size:13px}
+.birth:hover{border-color:rgba(138,31,78,.28);transform:translateY(-1px)}
+
+/* Two cols */
+.twoCols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.box{border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;padding:14px;box-shadow:0 10px 22px rgba(0,0,0,.04)}
+.box h3{margin:0 0 8px;font-size:14px}
+.box p{margin:0;color:var(--muted);line-height:1.8;font-size:13px}
+
+/* Guide */
+.guideRow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.guide{border-radius:16px;border:1px solid rgba(230,225,216,1);background:#faf9f7;padding:12px 12px;text-align:center;font-weight:900;font-size:13px}
+.guide:hover{background:#fff;border-color:rgba(138,31,78,.28)}
+
+/* Footer */
+.footer{border-top:1px solid rgba(230,225,216,1);background:#fff;padding:26px 0 40px}
+.footGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;align-items:start}
+.small{margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.8}
+.footLinks{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.footLinks a{color:var(--muted);font-size:12px;padding:8px 10px;border-radius:999px}
+.footLinks a:hover{background:#faf9f7;color:var(--text)}
+
+/* Responsive */
+
+  .bandGrid{grid-template-columns:repeat(2,1fr)}
+  .iconGrid{grid-template-columns:repeat(4,1fr)}
+  .cardGrid{grid-template-columns:repeat(2,1fr)}
+  .featGrid{grid-template-columns:1fr}
+  .birthGrid{grid-template-columns:repeat(2,1fr)}
+  .twoCols{grid-template-columns:1fr}
+  .guideRow{grid-template-columns:repeat(2,1fr)}
+  .footGrid{grid-template-columns:1fr}
+  .footLinks{justify-content:flex-start}
+
+@media (max-width:560px){
+  .searchWrap{display:none}
+}
+
+.yen{display:inline-block;margin-top:4px;font-weight:700;color:var(--accent)}
+
+
+/* NEWS (4 lines visible + vertical scroll) */
+.newsList{
+  border-radius:14px;
+  border:1px solid rgba(230,225,216,1);
+  background:#faf9f7;
+  padding:8px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  
+  overflow-y:auto;
+}
+.newsItem{
+  display:grid;
+  grid-template-columns: 92px 1fr;
+  gap:10px;
+  align-items:center;
+  padding:10px 10px;
+  border-radius:12px;
+  border:1px solid rgba(230,225,216,1);
+  background:#fff;
+}
+.newsItem:hover{border-color: rgba(138,31,78,.28)}
+.newsItem time{
+  font-size:12px;
+  color:var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.newsItem span{
+  font-size:13px;
+  color:var(--text);
+  line-height:1.5;
+}
+.newsList::-webkit-scrollbar{width:10px}
+.newsList::-webkit-scrollbar-thumb{
+  background: rgba(230,225,216,1);
+  border-radius:999px;
+  border:3px solid rgba(250,249,247,1);
+}
+.newsList::-webkit-scrollbar-track{background: rgba(250,249,247,1)}
+
+/* YouTube section */
+.ytSection{padding-top:8px}
+.ytGrid{
+  display:grid;
+  grid-template-columns: 1.35fr .65fr;
+  gap:12px;
+  align-items:stretch;
+}
+.ytPlayer{
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid rgba(230,225,216,1);
+  background:#fff;
+  box-shadow: var(--shadow);
+}
+.ytPlayer iframe{
+  width:100%;
+  height:100%;
+  aspect-ratio: 16 / 9;
+  display:block;
+}
+.ytList{
+  border-radius:24px;
+  border:1px solid rgba(230,225,216,1);
+  background:#fff;
+  box-shadow: var(--shadow);
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.ytItem{
+  display:grid;
+  grid-template-columns: 104px 1fr;
+  gap:10px;
+  align-items:center;
+  padding:10px;
+  border-radius:16px;
+  border:1px solid rgba(230,225,216,1);
+  background:#faf9f7;
+}
+.ytItem:hover{background:#fff; border-color: rgba(138,31,78,.28)}
+.ytThumb{
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid rgba(230,225,216,1);
+  background:#fff;
+}
+.ytThumb img{width:100%; height:100%; object-fit:cover; aspect-ratio: 16 / 9}
+.ytMeta strong{display:block; font-size:13px}
+.ytMeta small{display:block; color:var(--muted); font-size:12px; margin-top:4px; line-height:1.5}
+
+
+
+
+
+.ytItem.active{
+  border-color: rgba(138,31,78,.6);
+  background:#fff;
+}
+
+/* multiple PICK UP sections spacing */
+section[id^="pickup"]{
+  margin-top: 48px;
+}
+
+
+.ytNowPlaying .label{
+  color:#8A1F4E;
+  font-weight:700;
+}
+
+/* PICK UP horizontal swipe (PC & SP) */
+.swipeRow{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:6px;
+}
+.swipeRow > *{
+  min-width:240px;
+  scroll-snap-align:start;
+}
+.swipeRow::-webkit-scrollbar{
+  height:10px;
+}
+.swipeRow::-webkit-scrollbar-thumb{
+  background:rgba(230,225,216,1);
+  border-radius:999px;
+}
+.swipeRow::-webkit-scrollbar-track{
+  background:rgba(250,249,247,1);
+}
+
+
+
+.ytNowPlaying .label{
+  font-weight:800;
+  color:#8A1F4E;
+  letter-spacing:.08em;
+}
+
+
+/* YouTube title (under heading, above video & list) */
+.ytNowPlaying.top{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin:10px 0 14px;
+  padding:8px 14px;
+  border-left:4px solid #8A1F4E;
+  background:linear-gradient(90deg, rgba(138,31,78,.08), transparent);
+  font-family:"Noto Sans JP",system-ui,sans-serif;
+  font-size:14px;
+}
+.ytNowPlaying.top .label{
+  font-weight:900;
+  color:#8A1F4E;
+  letter-spacing:.06em;
+}
+
+
+/* Shop section PC two-column layout */
+.shopSection .shopGrid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap:24px;
+}
+@media (max-width: 768px){
+  .shopSection .shopGrid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Shop icon */
+.shopIcon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  margin-right:8px;
+  border-radius:50%;
+  background:rgba(138,31,78,.12);
+  color:#8A1F4E;
+  font-size:18px;
+}
+
+
+/* Salon (店舗案内) */
+.salonGrid{gap:16px}
+.salonGrid .box{padding:18px 18px}
+.salonGrid .box h3{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:0 0 10px;
+  letter-spacing:.06em;
+}
+.shopIcon{
+  width:34px;
+  height:34px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  border:1px solid rgba(138,31,78,.18);
+  background:rgba(138,31,78,.10);
+  color:#8A1F4E;
+  flex:0 0 auto;
+}
+.shopTitle{font-size:14px;font-weight:900}
+
+
+/* clickable shop cards */
+.shopLink{
+  text-decoration:none;
+  color:inherit;
+}
+.shopLink .box{
+  cursor:pointer;
+}
+.shopLink .box:hover{
+  border-color: rgba(138,31,78,.45);
+  box-shadow:0 16px 36px rgba(0,0,0,.08);
+  transform:translateY(-2px);
+}
+
+
+/* Price range */
+.priceGrid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:12px;
+}
+.priceCard{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 12px;
+  border-radius:16px;
+  border:1px solid rgba(230,225,216,1);
+  background:#fff;
+  font-size:14px;
+  font-weight:800;
+  text-align:center;
+}
+.priceCard:hover{
+  border-color: rgba(138,31,78,.45);
+  background:#faf9f7;
+}
+
+
+@media (max-width:560px){
+  .priceGrid{grid-template-columns:1fr;}
+}
+
+
+/* HERO ratio: 1080x1128 (approx 0.957) */
+.heroRatio .slide img{
+  aspect-ratio: 1080 / 1128;
+  object-fit: contain;
+  background:#f6f4f1;
+}
+
+/* Equal height HERO & NEWS on PC */
+@media (min-width:981px){
+  .equalHeight{
+    align-items:stretch;
+  }
+  .equalHeight .heroSide{
+    display:flex;
+  }
+  .equalHeight .noticeCard{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+  }
+  .equalHeight .newsList{
+    flex:1;
+  }
+}
+
+
+/* Fix: keep NEWS + PICK UP stacked vertically, while matching HERO height (PC) */
+@media (min-width:981px){
+  .equalHeight{align-items:stretch;}
+  .equalHeight .heroSide{
+    display:grid;                 /* vertical stack */
+    grid-template-rows: 1fr auto; /* NEWS stretches, PICK UP stays natural height */
+    gap:14px;
+  }
+  .equalHeight .noticeCard{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+  }
+  .equalHeight .newsList{flex:1; overflow-y:auto;}
+}
+
+
+.swipeRow.dragging, .newsList.dragging{
+  cursor: grabbing;
+}
+
+
+.rowScroll.dragging, .newsList.dragging{
+  cursor: grabbing;
+}
+
+
+.carousel .carBtn{display:none !important}
+
+
+
+/* PICK UP carousel arrows (SVG icons) */
+.carousel{position:relative;}
+.carousel .rowScroll{padding: 4px 44px 10px;}
+.carBtn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(230,225,216,1);
+  background:rgba(255,255,255,.92);
+  box-shadow:0 10px 24px rgba(0,0,0,.08);
+  color:#8A1F4E;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+  padding:0;
+}
+.carBtn svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;display:block}
+.carBtn.prev{left:8px}
+.carBtn.next{right:8px}
+.carousel.isScrollable .carBtn{display:flex}
+.carBtn:disabled{opacity:.35; cursor:default;}
+
+/* NEWS vertical arrows (SVG icons) */
+.newsCarousel{position:relative;}
+.newsCarousel .newsList{padding-top:44px; padding-bottom:44px;}
+.newsBtn{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(230,225,216,1);
+  background:rgba(255,255,255,.92);
+  box-shadow:0 10px 24px rgba(0,0,0,.08);
+  color:#8A1F4E;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+  padding:0;
+  z-index:2;
+}
+.newsBtn svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;display:block}
+.newsBtn.up{top:8px}
+.newsBtn.down{bottom:8px}
+.newsCarousel.isScrollable .newsBtn{display:flex}
+.newsBtn:disabled{opacity:.35; cursor:default;}
+
+
+  .carousel .carBtn{display:none !important}
+  /* NEWS: keep buttons hidden on mobile (swipe/scroll) */
+  .newsCarousel .newsBtn{display:none !important}
+  .newsCarousel .newsList{padding-top:8px; padding-bottom:8px;}
+
+
+/* Ensure PICK UP track scrolls horizontally (no wrap) */
+.rowScroll{
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.rowScroll > *{scroll-snap-align:start}
+
+/* NEWS controls: non-overlapping layout */
+.newsCarousel{
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  gap:10px;
+}
+.newsCarousel .newsList{
+  padding-top:8px !important;
+  padding-bottom:8px !important;
+}
+.newsBtn{
+  position:static !important;
+  transform:none !important;
+  left:auto !important;
+  top:auto !important;
+  bottom:auto !important;
+  margin:0 auto;
+}
+
+/* PICK UP carousel arrows (SVG icons) */
+.carousel{position:relative;}
+.carousel .rowScroll{padding: 4px 44px 10px;}
+.carBtn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(230,225,216,1);
+  background:rgba(255,255,255,.92);
+  box-shadow:0 10px 24px rgba(0,0,0,.08);
+  color:#8A1F4E;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+  padding:0;
+}
+.carBtn svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;display:block}
+.carBtn.prev{left:8px}
+.carBtn.next{right:8px}
+.carousel.isScrollable .carBtn{display:flex}
+.carBtn:disabled{opacity:.35; cursor:default;}
+
+/* NEWS vertical arrows (SVG icons) */
+.newsBtn{
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(230,225,216,1);
+  background:rgba(255,255,255,.92);
+  box-shadow:0 10px 24px rgba(0,0,0,.08);
+  color:#8A1F4E;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  user-select:none;
+  padding:0;
+  z-index:2;
+}
+.newsBtn svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;display:block}
+.newsCarousel.isScrollable .newsBtn{display:flex}
+.newsBtn:disabled{opacity:.35; cursor:default;}
+
+/* Hide arrow UI on touch/small screens; keep on PC even if narrow */
+.newsCarousel .newsBtn{display:none !important}
+  .carousel .rowScroll{padding:4px 0 10px}
+
+@media (max-width:560px){
+  .carousel .carBtn{display:none !important}
+  .newsCarousel .newsBtn{display:none !important}
+  .carousel .rowScroll{padding:4px 0 10px}
+}
+
+
+/* ===== FINAL OVERRIDES (v22) ===== */
+
+/* PICK UP arrows: show on PC widths, hide on SP widths */
+@media (min-width:981px){
+  .carousel.isScrollable .carBtn{display:flex !important}
+}
+@media (max-width:980px){
+  .carousel .carBtn{display:none !important}
+  .carousel .rowScroll{padding:4px 0 10px !important}
+}
+
+/* NEWS arrows: layout without overlap */
+.noticeCard .newsCarousel{
+  display:grid !important;
+  grid-template-rows:auto 1fr auto !important;
+  gap:10px !important;
+}
+.noticeCard .newsCarousel .newsBtn{
+  position:static !important;
+  left:auto !important;
+  top:auto !important;
+  bottom:auto !important;
+  transform:none !important;
+  margin:0 auto !important;
+}
+.noticeCard .newsCarousel .newsList{
+  padding-top:8px !important;
+  padding-bottom:8px !important;
+}
+
+/* Show NEWS arrows only on PC; SP uses finger scroll */
+@media (min-width:981px){
+  .newsCarousel.isScrollable .newsBtn{display:flex !important}
+}
+@media (max-width:980px){
+  .newsCarousel .newsBtn{display:none !important}
+}
+
+
+/* ===== v23 overrides ===== */
+
+/* Ensure PICK UP row scroll works */
+.rowScroll{
+  display:flex;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.rowScroll > *{scroll-snap-align:start}
+
+/* PICK UP arrows: shown on PC when scrollable */
+.carousel{position:relative;}
+.carousel .rowScroll{padding:4px 44px 10px;}
+.carousel .carBtn{display:none;}
+.carousel.isScrollable .carBtn{display:flex;}
+@media (max-width:980px){
+  .carousel .carBtn{display:none !important;}
+  .carousel .rowScroll{padding:4px 0 10px !important;}
+}
+
+/* NEWS arrows: no overlap (buttons in normal flow) */
+.noticeCard .newsCarousel{
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  gap:10px;
+}
+.noticeCard .newsBtn{
+  position:static !important;
+  margin:0 auto;
+}
+.noticeCard .newsList{
+  padding:8px 8px !important;
+}
+.newsCarousel .newsBtn{display:none;}
+.newsCarousel.isScrollable .newsBtn{display:flex;}
+@media (max-width:980px){
+  .newsCarousel .newsBtn{display:none !important;}
+}
+
+
+/* v24 fix: keep carousel arrows above cards (right arrow was hidden) */
+.carousel{position:relative;}
+.carousel .rowScroll{padding:4px 54px 10px !important;} /* a bit more room */
+.carousel .carBtn{
+  z-index: 20 !important;
+  pointer-events: auto;
+}
+.carousel .rowScroll, .carousel .rowScroll *{
+  z-index:auto;
+}
+
+
+/* v25: show PICK UP arrows on PC even when width < 980px (hide only on touch devices) */
+@media (hover:hover) and (pointer:fine){
+  .carousel.isScrollable .carBtn{display:flex !important;}
+  .carousel .rowScroll{padding:4px 54px 10px !important;}
+}
+@media (hover:none), (pointer:coarse){
+  .carousel .carBtn{display:none !important;}
+  .carousel .rowScroll{padding:4px 0 10px !important;}
+}
+
+
+/* v30 sanity: keep New/Feature sizes consistent and responsive */
+.cardGrid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:14px;
+}
+@media (max-width:980px){
+  .cardGrid{grid-template-columns:repeat(2, minmax(0,1fr));}
+}
+@media (max-width:560px){
+  .cardGrid{grid-template-columns:1fr;}
+}
+
+.featGrid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:12px;
+}
+@media (max-width:980px){
+  .featGrid{grid-template-columns:repeat(2, minmax(0,1fr));}
+}
+@media (max-width:560px){
+  .featGrid{grid-template-columns:1fr;}
+}
+
+
+/* v31: Birthstone grid columns (PC 4 cols like original) */
+#birthstone .birthGrid, #birthstone .stoneGrid, #birthstone .birthstoneGrid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:12px;
+}
+@media (max-width:1100px){
+  #birthstone .birthGrid, #birthstone .stoneGrid, #birthstone .birthstoneGrid{
+    grid-template-columns:repeat(3, minmax(0,1fr));
+  }
+}
+@media (max-width:980px){
+  #birthstone .birthGrid, #birthstone .stoneGrid, #birthstone .birthstoneGrid{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+  }
+}
+@media (max-width:560px){
+  #birthstone .birthGrid, #birthstone .stoneGrid, #birthstone .birthstoneGrid{
+    grid-template-columns:1fr;
+  }
+}
+
+
+/* v31: Salon (店舗案内) 2 columns on PC */
+#salon .salonGrid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:16px;
+}
+@media (max-width:980px){
+  #salon .salonGrid{grid-template-columns:1fr;}
+}
+
+
+/* v32: restore HERO/NEWS responsive behavior for DevTools mobile emulation */
+@media (max-width:980px){
+  .heroGrid{
+    grid-template-columns: 1fr !important;
+  }
+  .heroSide{
+    grid-template-columns: 1fr !important;
+  }
+  .slider{
+    border-radius:20px;
+  }
+  .noticeCard,.promoCard{
+    border-radius:20px;
+  }
+  /* Make hero buttons slightly smaller on narrow */
+  .navBtn{width:36px;height:36px;}
+}
+@media (max-width:560px){
+  .heroGrid{gap:12px;}
+  .navBtn{width:34px;height:34px;}
+}
+
+
+/* v33: YouTube section responsive (stack list under video on mobile) */
+@media (max-width:980px){
+  .ytGrid{
+    grid-template-columns: 1fr !important;
+  }
+  .ytList{
+    max-height: none !important;
+  }
+}
+
+
+/* YouTube list active state */
+.ytItem.isActive{
+  outline: 2px solid rgba(138,31,78,.35);
+  background: #faf9f7;
+}
+.ytItem.isActive .ytMeta strong{
+  color:#8A1F4E;
+}
+
+
+/* v35: YouTube list should not expand video height; list scrolls */
+.ytGrid{
+  align-items: stretch;
+}
+.ytPlayer{
+  aspect-ratio: 16 / 9;
+}
+.ytPlayer iframe{
+  width:100%;
+  height:100%;
+}
+.ytCarousel{
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  gap:10px;
+  height:100%;
+  min-height:0;
+}
+.ytCarousel .ytList{
+  overflow-y:auto !important;
+  max-height: none !important;
+  min-height:0;
+}
+.ytCarousel.isScrollable /* Hide YouTube arrows on touch devices; swipe/scroll only */
+@media (hover:none), (pointer:coarse){
+  .ytCarousel }
+@media (max-width:980px){
+  /* stack already handled; keep list under video, allow finger scroll */
+  .ytCarousel }
+
+
+/* v36: Fix YouTube layout when list grows (prevent overlay/centering) */
+.ytGrid{
+  display:grid !important;
+  grid-template-columns: minmax(0, 1fr) 360px !important;
+  gap:16px !important;
+  align-items:start !important;
+  justify-items:stretch !important;
+}
+.ytPlayer{
+  width:100%;
+  border-radius:22px;
+  overflow:hidden;
+}
+.ytCarousel{
+  height:auto !important;
+  align-content:start !important;
+}
+.ytCarousel .ytList{
+  overflow-y:auto !important;
+}
+
+/* If screen is a bit narrower but still PC, reduce list column width */
+@media (max-width:1120px){
+  .ytGrid{grid-template-columns:minmax(0,1fr) 320px !important;}
+}
+@media (max-width:980px){
+  .ytGrid{grid-template-columns:1fr !important;}
+}
+
+
+/* v37: YouTube list fixed height + scroll */
+.ytList{
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* YouTube arrows: show on PC (mouse), hide on touch */
+@media (hover:hover) and (pointer:fine){
+  .ytCarousel.isScrollable }
+@media (hover:none), (pointer:coarse){
+  .ytCarousel }
+@media (max-width:980px){
+  .ytCarousel }
+
+
+/* v38: YouTube list height lock (override previous max-height:none !important) */
+.ytList{
+  max-height: var(--ytListMax, none) !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* v39: Ensure NEWS scroll works */
+.newsList{
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* v39: YouTube list fixed height (match video) and overlay arrows without increasing height */
+.ytCarousel{
+  position:relative !important;
+  height: var(--ytListMax, auto) !important;
+  max-height: var(--ytListMax, none) !important;
+}
+.ytCarousel .ytList{
+  max-height: var(--ytListMax, none) !important;
+  overflow-y:auto !important;
+  }
+
+/* overlay buttons (do not affect layout height) */
+/* Show arrows only on PC mouse; hide on touch/mobile */
+@media (hover:hover) and (pointer:fine){
+  .ytCarousel.isScrollable }
+@media (hover:none), (pointer:coarse){
+  .ytCarousel }
+@media (max-width:980px){
+  .ytCarousel{height:auto !important; max-height:none !important;}
+  .ytCarousel .ytList{
+    max-height: var(--ytListMax, none) !important; /* 5 items from JS */
+    padding-top:8px !important;
+    padding-bottom:8px !important;
+  }
+  .ytCarousel }
+
+
+/* v40: HERO/NEWS stability + NEWS scroll */
+.heroGrid{align-items:start !important;}
+.noticeCard{overflow:hidden !important;}
+.newsList{
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling: touch;
+  max-height: var(--newsMax, none);
+}
+
+
+/* v41: Prevent NEWS growth from pushing PICK UP down (right column fixed height) */
+.heroGrid{
+  align-items:stretch !important;
+}
+.heroSide{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:14px !important;
+  min-height:0 !important;
+}
+.noticeCard{
+  flex: 1 1 auto !important;
+  min-height:0 !important;
+  overflow:hidden !important;
+}
+.noticeCard .newsCarousel{
+  min-height:0 !important;
+}
+.newsList{
+  overflow-y:auto !important;
+  min-height:0 !important;
+}
+
+/* PICK UP block stays its natural height */
+.promoCard{
+  flex: 0 0 auto !important;
+}
+
+
+/* v42: prevent HERO from becoming too tall on PC (cap height) */
+@media (min-width:981px){
+  .slider{
+    aspect-ratio: 1080 / 1128; /* requested banner ratio */
+    max-height: 680px;         /* cap to avoid over-tall hero */
+    height: auto;
+  }
+  .slider .slide, .slider .slide img{
+    height: 100%;
+  }
+  .slider .slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+@media (max-width:980px){
+  .slider{
+    max-height: none;
+  }
+}
+
+
+
+
+.ytList::-webkit-scrollbar, .newsList::-webkit-scrollbar{
+  width: 14px;
+}
+.ytList::-webkit-scrollbar-thumb, .newsList::-webkit-scrollbar-thumb{
+  background: rgba(80,80,80,.65);
+  border-radius: 999px;
+  border: 4px solid rgba(0,0,0,0); /* makes it look like floating thumb */
+  background-clip: padding-box;
+}
+.ytList::-webkit-scrollbar-track, .newsList::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+
+/* v46: unify NEWS & YouTube scrollbar appearance exactly */
+.newsList,
+.ytList{
+  padding: 8px;
+  overflow-y: auto !important;
+  scrollbar-width: auto; /* Firefox */
+  scrollbar-color: rgba(80,80,80,.65) transparent;
+}
+
+.newsList::-webkit-scrollbar,
+.ytList::-webkit-scrollbar{
+  width: 14px;
+}
+
+.newsList::-webkit-scrollbar-thumb,
+.ytList::-webkit-scrollbar-thumb{
+  background: rgba(80,80,80,.65);
+  border-radius: 999px;
+  border: 4px solid transparent;
+  background-clip: padding-box;
+}
+
+.newsList::-webkit-scrollbar-track,
+.ytList::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+/* YouTube arrow overlay spacing (do not affect scrollbar width) */
+.ytCarousel .ytCarousel 
+
+/* v48: YouTube list scroll only (no arrow buttons) */
+.ytList{
+  overflow-y:auto !important;
+  max-height: var(--ytListMax, none) !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* v57: Safe elegant fade (no layout break) */
+.slider .slide{
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+.slider .slide.is-active{
+  opacity: 1;
+}
+
+
+/* v58: HERO crossfade works with existing markup */
+.slider .slides{
+  position: relative !important;
+  display: block !important; /* override flex */
+  overflow: hidden;
+}
+.slider .slide{
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important; /* override display:none */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 900ms ease;
+}
+.slider .slide.is-active{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* v59: Fix HERO visibility (absolute slides need container height) */
+.slider{ overflow:hidden; }
+.slider .slides{
+  height: 100% !important;
+  min-height: 100% !important;
+}
+.slider.heroRatio{ height: auto; } /* keep aspect ratio behavior */
+
+
+/* v63: Keep v59 effect but make it mobile-safe */
+.slider.heroRatio{
+  aspect-ratio: 1080 / 1128;
+}
+@media (max-width: 980px){
+  .slider.heroRatio{
+    aspect-ratio: 4 / 5; /* safe SP ratio */
+  }
+}
+
+
+/* v64: HERO dots compact on SP, arrow icons with transparency */
+.slider{ position: relative; }
+.slider .navBtn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  color: rgba(255,255,255,.92);
+  opacity: .72;
+  cursor: pointer;
+  z-index: 10; /* ensure above slides */
+}
+.slider .navBtn:hover{ opacity: .92; }
+.slider .navBtn:active{ opacity: 1; transform: translateY(-50%) scale(.98); }
+.slider .navBtn.prev{ left: 10px; }
+.slider .navBtn.next{ right: 10px; }
+.slider .navBtn .chev{ width: 20px; height: 20px; }
+
+/* dots: overlay (no extra blank space) */
+.slider .dots{
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 9;
+  padding: 0;
+  margin: 0;
+}
+@media (max-width: 980px){
+  .slider .navBtn{ width: 36px; height: 36px; }
+  .slider .navBtn.prev{ left: 8px; }
+  .slider .navBtn.next{ right: 8px; }
+  .slider .dots{ bottom: 8px; gap: 7px; }
+  .slider .dot{ width: 7px; height: 7px; }
+}
+
+
+/* v65: HERO arrows more visible, black chevrons */
+.slider .navBtn{
+  background: rgba(255,255,255,0.38);
+  border: 1px solid rgba(0,0,0,0.20);
+  opacity: 0.90;
+}
+.slider .navBtn:hover{
+  background: rgba(255,255,255,0.55);
+  opacity: 1;
+}
+.slider .navBtn .chev{
+  color: #000;
+}
+
+
+/* v66: Fix SP HERO blank space (use cover, ratio on container not img) */
+.slider.heroRatio{
+  aspect-ratio: 1080 / 1128;
+}
+@media (max-width: 980px){
+  .slider.heroRatio{
+    aspect-ratio: 1080 / 1128; /* keep same to avoid tall blank area */
+  }
+}
+
+/* override old contain settings */
+.heroRatio .slide img{
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fill area, no letterbox */
+  background: transparent;
+}
+
+/* ensure slide layers fill */
+.slider .slides{ height: 100%; }
+.slider .slide{ height: 100%; }
+
+
+/* v67: Global header logo */
+.headerLogo{
+  display: inline-flex;
+  align-items: center;
+}
+.headerLogo img{
+  height: 28px;
+  width: auto;
+}
+@media (max-width: 980px){
+  .headerLogo img{
+    height: 24px;
+  }
+}
+
+
+/* v68: hide text logo if remains */
+.headerLeft .brandText,
+.headerLeft .textLogo{
+  display: none !important;
+}
+
+
+/* v69: Use image logo in header */
+a.logo{ display:flex; align-items:center; gap:10px; }
+a.logo .logoMark, a.logo .logoText{ display:none !important; }
+a.logo .logoImg{
+  height: 28px;
+  width: auto;
+  display:block;
+}
+@media (max-width: 980px){
+  a.logo .logoImg{ height: 24px; }
+}
+
+/* v71: Hide inline search input; use modal instead (PC/SP共通) */
+.searchWrap{ display:none !important; }
+
+/* v71: search icon SVG size */
+.icoBtn--search svg{ width:18px; height:18px; display:block; }
+
+/* modal */
+.searchModal{ position: fixed; inset: 0; display: none; z-index: 9999; }
+.searchModal.is-open{ display: block; }
+.searchModal__overlay{ position:absolute; inset:0; background: rgba(0,0,0,.35); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
+.searchModal__panel{
+  position: relative;
+  width: min(720px, calc(100vw - 28px));
+  margin: 80px auto 0;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 18px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.18);
+  overflow: hidden;
+}
+@media (max-width: 980px){
+  .searchModal__panel{ margin: 16px auto 0; width: calc(100vw - 24px); border-radius: 16px; }
+}
+.searchModal__head{ display:flex; align-items:center; justify-content:space-between; padding: 14px 14px 10px 18px; }
+.searchModal__title{ font-weight: 700; letter-spacing: .06em; }
+.searchModal__close{
+  width: 38px; height: 38px; border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.65);
+  display:grid; place-items:center; cursor:pointer;
+}
+.searchModal__close svg{ width: 18px; height: 18px; }
+.searchModal__form{ padding: 0 18px 18px; }
+.searchModal__field{
+  display:flex; align-items:center; gap: 10px;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 999px;
+  padding: 10px 10px 10px 14px;
+  background: #fff;
+}
+.searchModal__input{ flex:1; border: 0; outline: none; font-size: 14px; background: transparent; }
+.searchModal__submit{
+  width: 40px; height: 40px; border-radius: 999px;
+  border: 0;
+  background: rgba(136, 36, 84, .10);
+  color: #882454;
+  display:grid; place-items:center; cursor:pointer;
+}
+.searchModal__submit svg{ width: 18px; height: 18px; }
+.searchModal__quickTitle{ margin-top: 14px; font-size: 12px; opacity: .78; }
+.searchModal__quick{ margin-top: 10px; display:flex; flex-wrap: wrap; gap: 10px; }
+.searchModal__quick .chip{
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.10);
+  background: rgba(255,255,255,.75);
+  padding: 8px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.searchModal__quick .chip:hover{ border-color: rgba(136,36,84,.35); }
+.searchModal__hint{ margin-top: 10px; font-size: 11px; opacity: .65; }
+html.is-modal-open, html.is-modal-open body{ overflow: hidden; }
+
+
+/* v72: Global nav structure */
+.gnav{ margin-top: 10px; }
+.gnavList{
+  list-style:none;
+  display:flex;
+  gap: 18px;
+  padding: 10px 0 0;
+  margin: 0;
+  align-items:center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.gnavList::-webkit-scrollbar{ height: 6px; }
+.gnavList::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.12); border-radius: 999px; }
+
+.gnavTop, .gnavLink{
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 10px 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: .02em;
+}
+.gnavTop{ position: relative; }
+.hasSub .gnavTop::after{
+  content: "▾";
+  font-size: 11px;
+  opacity: .55;
+  margin-left: 6px;
+}
+
+.gnavSub{
+  position:absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 240px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 14px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.12);
+  padding: 10px;
+  display:none;
+  z-index: 50;
+}
+.hasSub{ position: relative; }
+.gnavSub ul{ list-style:none; padding:0; margin:0; }
+.gnavSub li{ margin:0; }
+.gnavSub a{
+  display:block;
+  padding: 9px 10px;
+  border-radius: 10px;
+  text-decoration:none;
+  color: inherit;
+}
+.gnavSub a:hover{ background: rgba(136,36,84,.08); }
+.gnavSub li.sep{ height: 1px; margin: 8px 6px; background: rgba(0,0,0,.08); }
+
+/* Desktop hover / focus */
+@media (min-width: 981px){
+  .hasSub:hover > .gnavSub,
+  .hasSub:focus-within > .gnavSub{ display:block; }
+}
+
+/* Mobile: nav is hidden until hamburger; submenus accordion */
+@media (max-width: 980px){
+  .gnav{ display:none; padding-top: 8px; }
+  .gnav.is-open{ display:block; }
+  .gnavList{ flex-direction: column; align-items: stretch; gap: 0; overflow: visible; padding: 0; }
+  .gnavTop, .gnavLink{ width: 100%; text-align: left; padding: 12px 6px; }
+  .gnavSub{
+    position: static;
+    display: none;
+    box-shadow: none;
+    border-radius: 12px;
+    margin: 6px 0 10px;
+  }
+  .hasSub.is-open > .gnavSub{ display:block; }
+  .hasSub .gnavTop::after{ float: right; }
+}
+
+
+/* v73: Fix dropdown visibility + larger caret */
+@media (min-width: 981px){
+  /* allow submenus to overflow outside the horizontal scroll container */
+  .gnavList{ overflow: visible !important; }
+}
+/* ensure dropdown is above sticky header */
+.gnavSub{ z-index: 999 !important; }
+
+/* bigger caret for items with submenu */
+.hasSub .gnavTop::after{
+  font-size: 15px !important;
+  opacity: .72 !important;
+  margin-left: 8px !important;
+  transform: translateY(-1px);
+  display: inline-block;
+}
+
+/* v74: Remove bold from menu (PC/SP) */
+.gnavTop, .gnavLink{ font-weight: 400 !important; }
+
+/* v74: Make PC menu feel richer without bold */
+@media (min-width: 981px){
+  .gnav{ border-top: 1px solid rgba(0,0,0,.06); padding-top: 6px; }
+  .gnavList{ gap: 14px; padding-top: 6px; }
+  .gnavTop, .gnavLink{
+    padding: 10px 10px;
+    border-radius: 999px;
+  }
+  .gnavTop:hover, .gnavLink:hover{
+    background: rgba(136,36,84,.06);
+  }
+  .gnavTop:focus-visible, .gnavLink:focus-visible{
+    outline: 2px solid rgba(136,36,84,.25);
+    outline-offset: 2px;
+  }
+  .gnavTop, .gnavLink{ position: relative; }
+  .gnavTop::before, .gnavLink::before{
+    content:"";
+    position:absolute;
+    left: 12px; right: 12px; bottom: 6px;
+    height: 1px;
+    background: rgba(136,36,84,.28);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .18s ease;
+    border-radius: 999px;
+  }
+  .gnavTop:hover::before, .gnavLink:hover::before{ transform: scaleX(1); }
+}
+
+/* v74: SP submenu indent by 1em */
+@media (max-width: 980px){
+  .gnavSub a{ padding-left: calc(10px + 1em) !important; }
+}
+
+/* v74: Responsive nav labels (PC vs SP) */
+.lblSP{ display:none; }
+@media (max-width: 980px){
+  .lblPC{ display:none; }
+  .lblSP{ display:inline; }
+}
+
+/* v75: unify 1st-level nav typography (PC/SP) */
+.gnavTop,
+.gnavLink,
+.gnavTop span,
+.gnavLink span{
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  letter-spacing: .02em;
+}
+
+/* v76: Align SP 1st-level left edge for items with/without submenu */
+@media (max-width: 980px){
+  .gnavTop, .gnavLink{
+    display:block;
+    width:100%;
+    box-sizing:border-box;
+    padding-left: 6px !important; /* unify left edge */
+    padding-right: 6px !important;
+    margin: 0 !important;
+  }
+  /* prevent browser default button inner padding differences */
+  .gnavTop{
+    -webkit-appearance: none;
+    appearance: none;
+  }
+}
+
+/* v77: Prevent PC dropdown from disappearing when moving cursor slowly */
+@media (min-width: 981px){
+  /* remove the hover gap */
+  .gnavSub{ top: 100% !important; margin-top: 8px; }
+
+  /* create an invisible hover-bridge between top item and dropdown */
+  .hasSub{ position: relative; }
+  .hasSub::after{
+    content:"";
+    position:absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    height: 12px; /* bridge area */
+    background: transparent;
+  }
+
+  /* ensure dropdown stays open when hovering the bridge */
+  .hasSub:hover > .gnavSub,
+  .hasSub:focus-within > .gnavSub{ display:block; }
+}
+
+
+/* v78: Typography (Noto Serif JP + Noto Sans JP) */
+:root{
+  --font-serif: "Noto Serif JP", serif;
+  --font-sans: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+/* base */
+body{ font-family: var(--font-sans); }
+
+/* headings / elegant titles */
+h1, h2, h3, .heroTitle, .sectionTitle, .titleSerif{
+  font-family: var(--font-serif);
+  letter-spacing: .04em;
+}
+
+/* keep nav and dense UI crisp */
+.gnavTop, .gnavLink, .newsList, .pickupCard, .chip, .btn, input, button, textarea, select{
+  font-family: var(--font-sans);
+  letter-spacing: .02em;
+}
+
+/* v79: Hero master (make HERO the star) */
+.hero{ padding-top: 8px; padding-bottom: 26px; }
+.heroGrid{ gap: 22px; }
+.slider.heroRatio{ position: relative; overflow: hidden; border-radius: 22px; }
+.heroOverlay{
+  position:absolute;
+  left: 18px; right: 18px;
+  bottom: 16px;
+  padding: 16px 16px 14px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.00), rgba(255,255,255,.78));
+  backdrop-filter: blur(6px);
+}
+.heroKicker{
+  margin:0 0 6px;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .72;
+}
+.heroTitle{
+  margin:0 0 8px;
+  font-size: clamp(18px, 2.2vw, 26px);
+  line-height: 1.25;
+}
+.heroLead{
+  margin:0;
+  font-size: 13px;
+  line-height: 1.7;
+  opacity: .86;
+}
+
+/* v79: subtle jewelry ornament for section titles */
+.sectionTitle{
+  position: relative;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+}
+.sectionTitle::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom: 6px;
+  width: 54px;
+  height: 1px;
+  background: rgba(136,36,84,.32);
+}
+.sectionTitle::before{
+  content:"";
+  position:absolute;
+  left: 0;
+  bottom: 5px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid rgba(136,36,84,.40);
+  border-radius: 999px;
+  transform: translateY(50%);
+  background: rgba(255,255,255,.75);
+}
+
+/* v79: reveal on scroll (quiet) */
+[data-reveal]{ opacity: 0; transform: translateY(10px); transition: opacity .45s ease, transform .45s ease; }
+[data-reveal].is-in{ opacity: 1; transform: translateY(0); }
+
+/* v79: slider effect (more noticeable but still elegant) */
+.slide img{
+  transform: scale(1.08);
+  filter: blur(1.6px);
+  transition: transform 1.05s ease, filter 1.05s ease, opacity .55s ease;
+  opacity: 0;
+}
+.slide.is-active img{
+  transform: scale(1.0);
+  filter: blur(0px);
+  opacity: 1;
+}
+
+/* keep overlay readable on small screens */
+@media (max-width: 980px){
+  .heroOverlay{ left: 12px; right: 12px; bottom: 12px; padding: 14px 14px 12px; }
+  .heroLead{ display:none; }
+}
+
+/* v79: YouTube switch fade */
+.ytPlayer{ transition: opacity .25s ease; }
+.ytPlayer.is-switching{ opacity: .35; }
+
+/* ===== v80 Final Polish ===== */
+
+/* Font policy */
+body,
+.gnavTop,.gnavLink,
+.newsList,.newsItem,
+.pickupCard,
+.btn,input,select,textarea{
+  font-family: Meiryo, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+h1,h2,h3,.sectionTitle{
+  font-family: "Noto Serif JP", serif;
+  letter-spacing: .05em;
+}
+
+/* Decoration hierarchy */
+.pickupPrimary .sectionTitle::before,
+.pickupPrimary .sectionTitle::after{ opacity:1; }
+
+.pickupSecondary .sectionTitle::before{ display:none; }
+.pickupSecondary .sectionTitle::after{ opacity:.6; }
+
+.sectionLite .sectionTitle::before,
+.sectionLite .sectionTitle::after{ display:none; }
+
+/* Typography refinement */
+.sectionTitle{
+  font-size: clamp(16px,2vw,20px);
+  margin-bottom: 18px;
+}
+
+.newsItem{
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.pickupCard .title{
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+/* ===== v82 Decoration final rules ===== */
+
+/* pickup① : line + dot */
+.pickupPrimary .sectionTitle::before{ display:block; opacity:1; }
+.pickupPrimary .sectionTitle::after{ display:block; opacity:1; height:1px; }
+
+/* pickup②-④ / new / feature : line only */
+.pickupSecondary .sectionTitle::before{ display:none; }
+.pickupSecondary .sectionTitle::after{
+  display:block;
+  opacity:.6;
+  height:1px;
+}
+
+/* price / shop : thin subtle line */
+.sectionLite .sectionTitle::before{ display:none; }
+.sectionLite .sectionTitle::after{
+  display:block;
+  width:40px;
+  height:0.5px;
+  opacity:.35;
+}
+
+
+/* ===== v83 Space tuning (header ↔ hero, sectionLite) ===== */
+
+/* create breathing room between header underline and HERO */
+header, .siteHeader, .header{
+  padding-bottom: 10px;
+}
+
+/* if gnav has a top border/underline, keep distance below */
+.gnav{ margin-bottom: 12px; }
+
+/* HERO should not stick to header */
+.hero{ margin-top: 14px; }
+
+/* sectionLite blocks (price / shop) need more air from previous section */
+.sectionLite{
+  padding-top: 18px;
+  margin-top: 18px;
+}
+
+/* keep the subtle line but add a bit more separation under the title */
+.sectionLite .sectionTitle{
+  margin-bottom: 20px;
+}
+
+/* ===== v84 Header spacing rollback (menu only) ===== */
+
+/* restore tighter spacing under header menu */
+header, .siteHeader, .header{
+  padding-bottom: 0 !important;
+}
+
+/* remove extra gap under global nav menu text */
+.gnav{
+  margin-bottom: 0 !important;
+}
+
+/* ===== v85 YouTube top spacing ===== */
+/* add more breathing room before YouTube section */
+.youtube, .ytSection, section.youtube{
+  margin-top: 26px !important;
+  padding-top: 6px;
+}
+
+/* ===== v87 Delivery promo (replace PICK UP promoCard) ===== */
+.promoCard.delivery{
+  padding: 18px 16px;
+  text-align: left;
+}
+.promoCard.delivery .kicker{
+  margin-bottom: 10px;
+}
+.promoCard.delivery .deliveryDate{
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+.promoCard.delivery .deliveryNote{
+  font-size: 12px;
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
+}
+.promoCard.delivery .contactNote{
+  color:#444;
+}
+
+/* ===== v90 category icon images (greige PNG) ===== */
+.iconCard .ic{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height: 32px;
+}
+.catIconImg{
+  width: 28px;
+  height: 28px;
+  display:block;
+}
+@media (max-width: 520px){
+  .iconCard .ic{ height: 30px; }
+  .catIconImg{ width: 26px; height: 26px; }
+}
+
+/* ===== v92 header phone + CONTACT/MAILMAGAZINE ===== */
+.headerActions{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.headerPhone{
+  text-align:right;
+  line-height:1.25;
+  font-size:11px;
+  color: var(--muted);
+  white-space:nowrap;
+}
+.headerPhone__label{ letter-spacing:.03em; }
+.headerPhone__num{
+  display:inline-block;
+  font-size:14px;
+  font-weight:600;
+  color: var(--text);
+  text-decoration:none;
+  margin-top:3px;
+}
+.headerPhone__num:hover{ text-decoration:underline; }
+.headerPhone__hours{ margin-top:2px; }
+
+.headerBtns{ display:flex; gap:10px; align-items:center; }
+.hdrBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:36px;
+  padding:0 14px;
+  border-radius:999px;
+  border:1px solid rgba(230,225,216,1);
+  background:#fff;
+  color: var(--text);
+  text-decoration:none;
+  font-size:12px;
+  letter-spacing:.06em;
+}
+.hdrBtn:hover{ border-color: rgba(138,31,78,.35); box-shadow: 0 0 0 4px rgba(138,31,78,.10); }
+.hdrBtn.ghost{
+  background: transparent;
+}
+
+/* Mobile menu utility (CONTACT/MAIL + phone) */
+.gnavUtility{ display:none; padding: 10px 6px 14px; border-bottom:1px solid rgba(230,225,216,1); }
+.gnavUtility__row{ display:flex; gap:10px; margin-bottom:12px; }
+.gnavUtility__btn{
+  flex:1;
+  height:38px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  border:1px solid rgba(230,225,216,1);
+  background:#fff;
+  color:var(--text);
+  text-decoration:none;
+  font-size:12px;
+  letter-spacing:.06em;
+}
+.gnavUtility__btn.ghost{ background: transparent; }
+.gnavUtility__phone{ font-size:12px; color: var(--muted); line-height:1.4; }
+.gnavUtility__num{ display:inline-block; margin-top:4px; font-size:16px; font-weight:600; color: var(--text); text-decoration:none; }
+.gnavUtility__num:hover{ text-decoration:underline; }
+.gnavUtility__hours{ margin-top:2px; }
+
+/* Responsive: keep header clean on SP */
+@media (max-width: 980px){
+  .headerActions{ display:none; }
+  .gnavUtility{ display:block; }
+}
+
+/* ===== v93 header phone + icon layout ===== */
+.headerActions{
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-end;
+  gap:18px;
+}
+.headerIcons{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.iconBtn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  color:inherit;
+}
+.iconCircle{
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.18);
+  display:grid;
+  place-items:center;
+  background:#fff;
+}
+.iconCircle svg{
+  width:18px;
+  height:18px;
+  stroke:#8a7f75;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.iconLabel{
+  font-size:12px;
+  letter-spacing:.04em;
+  color:#333;
+}
+.headerPhone{
+  text-align:right;
+  min-width: 210px;
+}
+.phoneMeta{
+  font-size:12px;
+  color:#666;
+  margin-bottom:6px;
+  white-space:nowrap;
+}
+.phoneBtn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  color:#222;
+  padding:8px 10px;
+  border:1px solid rgba(0,0,0,.16);
+  border-radius:999px;
+  background:#fff;
+}
+.phoneBtn .iconCircle{
+  width:30px;
+  height:30px;
+  border-color: rgba(0,0,0,.14);
+}
+.phoneBtn .phoneNum{
+  font-weight:600;
+  letter-spacing:.02em;
+}
+
+/* Hide PC hamburger/menu button if present */
+@media (min-width: 980px){
+  .hamburger, .menuBtn, .spOnly{ display:none !important; }
+}
+
+/* ===== v93 floating buttons ===== */
+.floatLeft{
+  position:fixed;
+  left:14px;
+  bottom:14px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  z-index:50;
+}
+.floatBtn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.14);
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  text-decoration:none;
+  color:#222;
+  font-size:13px;
+}
+.iconCircle.sm{
+  width:30px;
+  height:30px;
+}
+.toTop{
+  position:fixed;
+  right:14px;
+  bottom:14px;
+  border:0;
+  background:transparent;
+  padding:0;
+  z-index:50;
+  opacity:0;
+  pointer-events:none;
+  transform: translateY(10px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.toTop.is-show{
+  opacity:1;
+  pointer-events:auto;
+  transform: translateY(0);
+}
+.toTop .iconCircle.sm{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.14);
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  color:#333;
+  font-weight:700;
+}
+
+/* Mobile: keep header compact; phone block moves into menu (existing menu already OK) */
+@media (max-width: 979px){
+  .headerPhone{ display:none; } /* phone shown in menu instead */
+  .headerIcons .iconLabel{ display:none; } /* icons only */
+  .headerActions{ align-items:center; }
+}
+
+/* ===== v97 header fix (stable) ===== */
+.headerRow{ display:flex; align-items:center; gap:18px; padding:14px 0; }
+.logoImg{ height:36px; width:auto; display:block; }
+.searchWrap{ flex:1; }
+.headerActions{ display:flex; align-items:center; gap:18px; justify-content:flex-end; }
+.headerQuick{ display:flex; align-items:center; gap:10px; }
+.icoBtn{
+  width:36px; height:36px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.14);
+  background:#fff;
+  display:grid;
+  place-items:center;
+  color:#6f655d;
+  cursor:pointer;
+  text-decoration:none;
+}
+.icoBtn svg{
+  width:18px; height:18px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.hamburger{
+  width:36px; height:36px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.14);
+  background:#fff;
+  display:grid;
+  place-items:center;
+  font-size:18px;
+  line-height:1;
+  cursor:pointer;
+  color:#6f655d;
+}
+.headerPhone{ text-align:right; white-space:nowrap; }
+.phoneMeta{ font-size:12px; color:#666; }
+.phonePlain{ font-size:14px; font-weight:600; letter-spacing:.02em; color:#222; margin-top:4px; }
+
+/* Desktop: hamburger hidden, gnav always visible */
+@media (min-width:980px){
+  .hamburger{ display:none; }
+  #gnav{ display:block !important; }
+}
+
+/* Mobile: gnav is drawer */
+@media (max-width:979px){
+  .headerPhone{ display:none; }
+  #gnav{
+    position:fixed;
+    top:0; right:0;
+    width:min(86vw, 360px);
+    height:100vh;
+    background:#fff;
+    border-left:1px solid rgba(0,0,0,.10);
+    transform: translateX(102%);
+    opacity:0;
+    pointer-events:none;
+    transition: transform .2s ease, opacity .2s ease;
+    z-index:60;
+    overflow:auto;
+    padding-top:78px;
+  }
+  #gnav.is-open{
+    transform: translateX(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+  .noScroll{ overflow:hidden; }
+  .gnavList{ padding:14px 16px 24px; }
+}
+
+/* v97: make toTop bigger */
+.toTop .iconCircle.sm{ width:56px; height:56px; font-size:20px; }
+
+/* ===== v98: hamburger to far right on mobile ===== */
+.headerQuick{ display:flex; align-items:center; }
+@media (max-width:979px){
+  .hamburger{ order: 99; }
+  .headerQuick{ gap:10px; }
+}
+
+/* ===== v98: floating icon images ===== */
+.floatBtn.iconImg{
+  width:56px; height:56px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.10);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+.floatBtn.iconImg img{
+  width:70%;
+  height:70%;
+  object-fit:contain;
+  display:block;
+}
+
+/* Mobile size tuning */
+@media (max-width:480px){
+  .floatLeft{ left:10px; bottom:10px; gap:10px; }
+  .floatBtn.iconImg{ width:50px; height:50px; }
+  .floatBtn.iconImg img{ width:74%; height:74%; }
+}
+
+/* ===== v99: floating icons no extra whitespace ===== */
+.floatBtn.iconImg{
+  width:64px; height:64px;
+  border:none;
+  background:transparent;
+  box-shadow:none;
+}
+.floatBtn.iconImg img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+@media (max-width:480px){
+  .floatBtn.iconImg{ width:54px; height:54px; }
+}
+
+/* ===== v99: hamburger fixed rightmost on mobile ===== */
+@media (max-width:979px){
+  .headerActions{ width:100%; justify-content:flex-end; }
+  .headerQuick{ margin-left:auto; }
+  #menuBtn{ order:99; }
+}
+
+/* ===== v99: mobile drawer menu ===== */
+.gnavBackdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.18);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+  z-index:80;
+}
+.gnavDrawer{
+  position:fixed;
+  top:0; right:0;
+  width:min(86vw, 360px);
+  height:100vh;
+  background:#fff;
+  border-left:1px solid rgba(0,0,0,.10);
+  transform:translateX(102%);
+  transition:transform .22s ease;
+  z-index:90;
+  overflow:auto;
+}
+.gnavDrawer.is-open{ transform:translateX(0); }
+.gnavBackdrop.is-open{ opacity:1; pointer-events:auto; }
+
+.gnavClose{
+  position:absolute;
+  top:14px; right:14px;
+  width:38px; height:38px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.12);
+  background:#fff;
+  font-size:22px;
+  line-height:1;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.gnavInner{ padding:64px 16px 24px; }
+.gnavTitle{ font-size:12px; letter-spacing:.16em; color:#777; margin:0 0 10px; }
+.gnavList{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }
+.gnavLink{
+  display:block;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.08);
+  text-decoration:none;
+  color:#222;
+  background:#fff;
+}
+.gnavSub{ list-style:none; padding:8px 0 0; margin:0; display:grid; gap:6px; }
+.gnavSublink{
+  display:block;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.06);
+  text-decoration:none;
+  color:#444;
+  background:#faf8f6;
+  font-size:14px;
+}
+@media (min-width:980px){
+  .gnavBackdrop, .gnavDrawer{ display:none !important; }
+}
+
+/* ===== v100: ensure hamburger clickable ===== */
+#menuBtn{ position:relative; z-index:120; pointer-events:auto; }
+.header, .headerRow, .headerActions, .headerQuick{ overflow:visible; }
+
+/* ===== v100: search modal ===== */
+.modal{ position:fixed; inset:0; z-index:200; display:none; }
+.modal.is-open{ display:block; }
+.modalBackdrop{ position:absolute; inset:0; background:rgba(0,0,0,.18); }
+.modalPanel{
+  position:absolute;
+  left:50%; top:12vh;
+  transform:translateX(-50%);
+  width:min(92vw, 560px);
+  border-radius:18px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.10);
+  box-shadow:0 20px 60px rgba(0,0,0,.16);
+  padding:18px 18px 16px;
+}
+.modalClose{
+  position:absolute;
+  top:10px; right:10px;
+  width:38px; height:38px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.12);
+  background:#fff;
+  font-size:22px;
+  line-height:1;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.modalHead{ font-size:14px; letter-spacing:.12em; color:#6f655d; margin:0 0 12px; }
+.modalForm{ display:flex; gap:10px; }
+.modalInput{
+  flex:1;
+  height:44px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.14);
+  padding:0 12px;
+  outline:none;
+}
+.modalInput:focus{ border-color: rgba(102,102,102,.55); }
+.modalSubmit{
+  height:44px;
+  padding:0 14px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.12);
+  background:#fff;
+  cursor:pointer;
+}
+.modalQuick{ margin-top:14px; }
+.modalSub{ font-size:12px; color:#777; margin-bottom:10px; }
+.quickChips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{
+  display:inline-flex;
+  align-items:center;
+  height:34px;
+  padding:0 12px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.10);
+  background:#faf8f6;
+  text-decoration:none;
+  color:#222;
+  font-size:13px;
+}
+@media (max-width:480px){
+  .modalPanel{ top:10vh; padding:16px 14px 14px; }
+  .modalForm{ flex-direction:column; }
+  .modalSubmit{ width:100%; }
+}
+
+/* ===== v101: modal clickability + close ===== */
+#searchModal .modalBackdrop{ z-index:0; pointer-events:auto; }
+#searchModal .modalPanel{ z-index:1; pointer-events:auto; }
+#searchModal .modalClose{ pointer-events:auto; }
+
+/* ===== v101: robust drawer (override old #gnav rules) ===== */
+@media (max-width:979px){
+  #gnav.gnavDrawer{
+    opacity:1 !important;
+    pointer-events:auto !important;
+    background:#fff !important;
+  }
+  #gnav.gnavDrawer.is-open{ pointer-events:auto !important; }
+  html.noScroll, body.noScroll{
+    overflow:hidden !important;
+    height:100%;
+    touch-action:none;
+  }
+  #gnav.gnavDrawer{
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+}
+
+/* Drawer top area */
+.drawerTop{
+  padding:16px 16px 10px;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  background:#fff;
+}
+.drawerPhoneMeta{ font-size:12px; color:#666; }
+.drawerPhoneNum{ font-size:16px; font-weight:700; color:#222; margin-top:6px; }
+.drawerActions{ display:flex; gap:10px; margin-top:10px; }
+.drawerIco{
+  flex:1;
+  height:40px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.10);
+  background:#faf8f6;
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  color:#222;
+  font-size:13px;
+}
+.drawerIco:active{ transform: translateY(1px); }
+
+/* ===== v102: harden layering/click ===== */
+.gnavBackdrop{ z-index:180 !important; }
+.gnavDrawer{ z-index:190 !important; }
+.modal{ z-index:220 !important; }
+#searchModal .modalBackdrop{ z-index:0 !important; pointer-events:auto !important; }
+#searchModal .modalPanel{ z-index:1 !important; pointer-events:auto !important; }
+#searchModal .modalClose{ z-index:2 !important; pointer-events:auto !important; }
+#searchModal a.chip{ position:relative; z-index:3; pointer-events:auto; }
+
+/* ===== v104: drawer top actions clickable ===== */
+.gnavDrawer{ z-index:190 !important; }
+.gnavBackdrop{ z-index:180 !important; }
+.drawerTop{ position:sticky; top:0; z-index:3; }
+.gnavClose{ z-index:4; }
+.drawerActions, .drawerIco{ pointer-events:auto; }
+.drawerPhoneNum{
+  display:inline-block;
+  text-decoration:none;
+  color:#222;
+}
+
+/* ===== v105: drawer top should scroll away (no sticky) ===== */
+@media (max-width:979px){
+  .drawerTop{ position:static !important; top:auto !important; }
+}
+
+/* ===== v106: mobile drawer close button always clickable ===== */
+@media (max-width:979px){
+  #gnav .gnavClose{
+    position:sticky;
+    top:0;
+    z-index:10;
+    pointer-events:auto;
+  }
+}
+
+/* ===== v106: keep logo aspect ratio on mobile ===== */
+@media (max-width:979px){
+  .brand img, .logo img, .siteLogo img, header img[alt*="Bene"]{
+    height:34px !important;
+    width:auto !important;
+    max-width:60vw;
+    object-fit:contain;
+  }
+}
+
+/* ===== v107: mobile drawer close button position + clickability ===== */
+@media (max-width:979px){
+  #gnav.gnavDrawer{ position:fixed; }
+  #gnav.gnavDrawer .gnavClose{
+    position:absolute !important;
+    top:10px !important;
+    right:10px !important;
+    left:auto !important;
+    z-index:50 !important;
+    width:38px;
+    height:38px;
+    border-radius:999px;
+    display:grid;
+    place-items:center;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.12);
+    box-shadow:0 10px 24px rgba(0,0,0,.08);
+    pointer-events:auto !important;
+  }
+  /* give drawer content top padding so close button doesn't overlap */
+  #gnav.gnavDrawer .drawerTop{ padding-top:56px !important; }
+}
+
+/* ===== v108: prevent horizontal scroll on mobile + header icon alignment ===== */
+html, body { overflow-x:hidden; }
+@media (max-width:979px){
+  .wrap{ max-width:100%; }
+  header, .header, .siteHeader{ max-width:100vw; }
+  .hdrRight, .headerRight, .topActions, .headerActions{
+    right:0 !important;
+    margin-right:0 !important;
+    padding-right:12px !important;
+    box-sizing:border-box;
+  }
+  #menuBtn{ margin-right:0 !important; }
+  /* prevent any accidental wide elements */
+  .hero, .section, .sectionLite, .card, .panel, .grid, .heroGrid{ max-width:100%; }
+}
+
+/* ===== v108: floating contact buttons always visible ===== */
+.floatActions, .floatContact, .floatButtons{
+  position:fixed !important;
+  left:12px;
+  bottom:86px;
+  z-index:300 !important;
+  display:flex !important;
+  flex-direction:column;
+  gap:10px;
+  pointer-events:auto;
+}
+@media (max-width:979px){
+  .floatActions, .floatContact, .floatButtons{ left:10px; bottom:84px; }
+}
+
+/* keep to-top inside viewport */
+.toTop, .floatTop, #toTopBtn{ right:12px !important; }
+@media (max-width:979px){ .toTop, .floatTop, #toTopBtn{ right:10px !important; } }
+
+/* ===== v109: keep hamburger & toTop visible on mobile (logo shrink + header flex) ===== */
+@media (max-width:979px){
+  .siteHeader .wrap,
+  header .wrap,
+  .headerInner,
+  .hdrBar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  /* logo area */
+  .brand, .siteLogo, .logo{
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .brand a, .siteLogo a, .logo a{ display:flex; align-items:center; gap:8px; min-width:0; }
+  .brand img, .siteLogo img, .logo img{
+    height:32px !important;
+    width:auto !important;
+    max-width:42vw !important; /* leave space for icons */
+    object-fit:contain;
+  }
+  /* right actions (including hamburger) */
+  .hdrRight, .headerRight, .topActions, .headerActions{
+    flex:0 0 auto;
+    display:flex !important;
+    align-items:center;
+    gap:8px;
+    padding-right:10px !important;
+  }
+  #menuBtn{ display:inline-grid !important; }
+  /* ensure icons never wrap offscreen */
+  .hdrRight > *, .headerRight > *, .topActions > *, .headerActions > *{ flex:0 0 auto; }
+}
+
+/* v109: toTop always on top and inside viewport */
+.toTop, .floatTop, #toTopBtn{
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  z-index:350 !important;
+}
+
+/* ===== v110: toTop shows after 50% scroll (not always) ===== */
+.toTop, .floatTop, #toTopBtn{
+  opacity:0;
+  transform:translateY(8px);
+  pointer-events:none;
+  transition:opacity .18s ease, transform .18s ease;
+}
+.toTop.is-show, .floatTop.is-show, #toTopBtn.is-show{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+/* ===== v110: reduce mobile drawer top whitespace ===== */
+@media (max-width:979px){
+  #gnav.gnavDrawer .drawerTop{ padding-top:14px !important; }
+  #gnav.gnavDrawer .drawerTop .drawerPhone{ margin-top:6px !important; }
+  #gnav.gnavDrawer .drawerTop .drawerBtns{ margin-top:10px !important; }
+}
+
+/* ===== v111: stronger mobile drawer fixes ===== */
+@media (max-width:979px){
+  #gnav.gnavDrawer .gnavClose{
+    position:absolute !important;
+    top:10px !important;
+    right:10px !important;
+    left:auto !important;
+    z-index:500 !important;
+    pointer-events:auto !important;
+  }
+  /* reduce whitespace before MENU list */
+  #gnav.gnavDrawer .drawerTop{
+    padding:14px 16px 10px !important;
+    margin:0 !important;
+  }
+  #gnav.gnavDrawer .gnavInner{
+    padding:14px 16px 24px !important;
+  }
+}
+
+/* ===== v111: toTop explicit state ===== */
+#toTopBtn{
+  right:10px !important;
+  bottom:10px !important;
+  z-index:500 !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+#toTopBtn.is-show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+  pointer-events:auto !important;
+}
+
+/* ===== v112: drawer top spacing + close button ===== */
+@media (max-width:979px){
+  #gnav.gnavDrawer .drawerTop{
+    padding:12px 16px 8px !important;
+    margin:0 !important;
+  }
+  #gnav.gnavDrawer .gnavInner{
+    padding:8px 16px 20px !important;
+  }
+  #gnav.gnavDrawer .gnavTitle{
+    margin:0 0 8px !important;
+  }
+  #gnav.gnavDrawer .gnavClose{
+    position:absolute !important;
+    top:8px !important;
+    right:8px !important;
+    left:auto !important;
+    z-index:999 !important;
+    width:38px !important;
+    height:38px !important;
+    border-radius:999px !important;
+    border:1px solid rgba(0,0,0,.12) !important;
+    background:#fff !important;
+    display:grid !important;
+    place-items:center !important;
+    pointer-events:auto !important;
+  }
+}
+
+/* ===== v112: toTop visible only after 50% scroll ===== */
+#toTopBtn{
+  position:fixed !important;
+  right:10px !important;
+  bottom:10px !important;
+  z-index:500 !important;
+  display:grid !important;
+  place-items:center !important;
+  opacity:0 !important;
+  transform:translateY(8px) !important;
+  pointer-events:none !important;
+  transition:opacity .18s ease, transform .18s ease !important;
+}
+#toTopBtn.is-show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+  pointer-events:auto !important;
+}
+
+/* ===== v113: actually fix drawer top whitespace ===== */
+@media (max-width:979px){
+  #gnav.gnavDrawer{
+    padding-top:0 !important;   /* old 78px override */
+    top:0 !important;
+  }
+  #gnav.gnavDrawer .drawerTop{
+    padding:8px 14px 8px !important;
+    margin:0 !important;
+  }
+  #gnav.gnavDrawer .gnavInner{
+    padding:6px 14px 18px !important;
+    margin:0 !important;
+  }
+  #gnav.gnavDrawer .gnavTitle{
+    margin:0 0 6px !important;
+  }
+  #gnav.gnavDrawer .gnavClose{
+    top:6px !important;
+    right:6px !important;
+  }
+}
+
+/* ===== v113: toTop truly controlled by class only ===== */
+#toTopBtn,
+.toTop,
+.floatTop{
+  position:fixed !important;
+  right:10px !important;
+  bottom:10px !important;
+  z-index:999 !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  transform:translateY(8px) !important;
+  pointer-events:none !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+#toTopBtn.is-show,
+.toTop.is-show,
+.floatTop.is-show{
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:translateY(0) !important;
+  pointer-events:auto !important;
+}
+
+/* ===== v114: guaranteed toTop button ===== */
+#toTopBtn{
+  position:fixed !important;
+  right:10px !important;
+  bottom:10px !important;
+  width:auto !important;
+  height:auto !important;
+  z-index:9999 !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  transform:translateY(8px) !important;
+  pointer-events:none !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:transparent !important;
+  border:0 !important;
+  padding:0 !important;
+}
+#toTopBtn .iconCircle.sm{
+  width:56px !important;
+  height:56px !important;
+  border-radius:999px !important;
+  background:#fff !important;
+  border:1px solid rgba(0,0,0,.14) !important;
+  box-shadow:0 10px 30px rgba(0,0,0,.08) !important;
+  display:grid !important;
+  place-items:center !important;
+  font-size:20px !important;
+  color:#333 !important;
+}
+#toTopBtn.is-show{
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:translateY(0) !important;
+  pointer-events:auto !important;
+}
+
+/* ===== v115: hard reset toTop ===== */
+#toTopBtn{
+  position:fixed !important;
+  right:10px !important;
+  bottom:10px !important;
+  z-index:2147483000 !important;
+  width:auto !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+  transform:translateY(8px) !important;
+  transition:opacity .18s ease, transform .18s ease, visibility .18s ease !important;
+}
+#toTopBtn .iconCircle.sm{
+  width:56px !important;
+  height:56px !important;
+  border-radius:999px !important;
+  display:grid !important;
+  place-items:center !important;
+  background:#fff !important;
+  border:1px solid rgba(0,0,0,.14) !important;
+  box-shadow:0 10px 30px rgba(0,0,0,.10) !important;
+  color:#333 !important;
+  font-size:20px !important;
+}
+#toTopBtn.is-show{
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  transform:translateY(0) !important;
+}
+
+/* ===== v121 calendar ===== */
+#calendar .headRow{align-items:end}
+#calendar .more.muted{color:#777}
+.calendarCard{
+  background:#fff;
+  border:1px solid var(--line, rgba(0,0,0,.10));
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.04);
+}
+.calendarCard iframe{
+  display:block;
+  width:100%;
+  border:0;
+  background:#fff;
+}
+.calendarPc iframe{height:340px}
+.calendarSp{display:none}
+.calendarAccordion{
+  border:1px solid var(--line, rgba(0,0,0,.10));
+  border-radius:18px;
+  background:#fff;
+  overflow:hidden;
+}
+.calendarAccordion summary{
+  list-style:none;
+  cursor:pointer;
+  padding:14px 16px;
+  font-weight:700;
+}
+.calendarAccordion summary::-webkit-details-marker{display:none}
+.calendarAccordion summary::after{
+  content:"▾";
+  float:right;
+  color:#777;
+}
+.calendarAccordion[open] summary::after{content:"▴"}
+.calendarAccordion .calendarCard{
+  border:0;
+  border-top:1px solid var(--line, rgba(0,0,0,.10));
+  border-radius:0;
+  box-shadow:none;
+}
+.calendarSp iframe{height:360px}
+
+@media (max-width:979px){
+  .calendarPc{display:none}
+  .calendarSp{display:block}
+}
+
+/* ===== v122 calendar layout refinement ===== */
+#calendar .wrap{
+  display:block;
+}
+.calendarShell{
+  background:#fff;
+  border:1px solid var(--line, rgba(0,0,0,.10));
+  border-radius:22px;
+  padding:18px 18px 16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.04);
+}
+.calendarHead{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:14px;
+}
+.calendarHead .h2{
+  margin:0;
+}
+.calendarHead .more.muted{
+  color:#777;
+  font-size:12px;
+  white-space:nowrap;
+}
+.calendarBody{
+  display:grid;
+  grid-template-columns:1fr minmax(320px, 360px);
+  align-items:end;
+  gap:18px;
+}
+.calendarLeadNote{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:8px 4px 8px 2px;
+}
+.calendarMiniLead{
+  margin:0 0 8px;
+  font-size:13px;
+  color:#666;
+  line-height:1.8;
+}
+.calendarMiniNote{
+  margin:0;
+  font-size:12px;
+  color:#888;
+  line-height:1.8;
+}
+.calendarCard{
+  background:#fff;
+  border:1px solid var(--line, rgba(0,0,0,.08));
+  border-radius:18px;
+  overflow:hidden;
+}
+.calendarCard iframe{
+  display:block;
+  width:100%;
+  border:0;
+  background:#fff;
+}
+.calendarPc iframe{
+  height:310px;
+}
+.calendarSp{
+  display:none;
+}
+@media (max-width:979px){
+  .calendarShell{
+    padding:16px 14px 14px;
+  }
+  .calendarHead{
+    display:block;
+    margin-bottom:12px;
+  }
+  .calendarHead .more.muted{
+    display:block;
+    margin-top:4px;
+    white-space:normal;
+  }
+  .calendarBody{
+    display:block;
+  }
+  .calendarLeadNote{
+    display:none;
+  }
+  .calendarPc{
+    display:none;
+  }
+  .calendarSp{
+    display:block;
+  }
+  .calendarSp iframe{
+    height:340px;
+  }
+}
+
+/* ===== v123 calendar cleanup ===== */
+.calendarShell{
+  background:#fff;
+  border:1px solid var(--line, rgba(0,0,0,.10));
+  border-radius:22px;
+  padding:18px 18px 16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.04);
+}
+.calendarHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:14px;
+}
+.calendarHead .h2{ margin:0; }
+.calendarHead .more.muted{
+  color:#777;
+  font-size:12px;
+  white-space:nowrap;
+}
+.calendarBody.calendarPc{
+  display:flex;
+  justify-content:flex-end;
+}
+.calendarPcMain{
+  width:min(360px, 100%);
+}
+.calendarPcMain iframe{
+  display:block;
+  width:100%;
+  height:310px;
+  border:0;
+  background:#fff;
+}
+.calendarBody.calendarSp{
+  display:none;
+}
+@media (max-width:979px){
+  #calendar{
+    padding-top:36px;
+  }
+  .calendarShell{
+    background:transparent !important;
+    border:0 !important;
+    border-radius:0 !important;
+    padding:0 !important;
+    box-shadow:none !important;
+  }
+  .calendarHead{
+    display:block;
+    margin-bottom:10px;
+  }
+  .calendarHead .more.muted{
+    display:block;
+    margin-top:4px;
+    white-space:normal;
+  }
+  .calendarBody.calendarPc{
+    display:none !important;
+  }
+  .calendarBody.calendarSp{
+    display:block !important;
+  }
+  .calendarBody.calendarSp iframe{
+    display:block;
+    width:100%;
+    height:340px;
+    border:0;
+    background:#fff;
+  }
+}
+
+/* ===== v124 footer calendar placement ===== */
+.footGridWithCalendar{
+  grid-template-columns:minmax(0,1fr) 380px;
+  gap:28px;
+  align-items:end;
+}
+.footMain{
+  display:flex;
+  flex-direction:column;
+  justify-content:end;
+  min-height:100%;
+}
+.footMain .footLinks{
+  justify-content:flex-start;
+  margin-top:18px;
+}
+.footCalendarWrap{
+  align-self:end;
+}
+.footCalendarHead{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:10px;
+}
+.footCalendarHead .h2{
+  margin:0;
+  font-size:14px;
+}
+.footCalendarHead .more.muted{
+  color:#777;
+  font-size:12px;
+  white-space:nowrap;
+}
+.footCalendarCard{
+  background:#fff;
+  border:1px solid var(--line, rgba(0,0,0,.10));
+  border-radius:18px;
+  overflow:hidden;
+}
+.footCalendarCard iframe{
+  display:block;
+  width:100%;
+  border:0;
+  background:#fff;
+}
+.footCalendarPc iframe{
+  height:310px;
+}
+.footCalendarSp{
+  display:none;
+}
+
+@media (max-width:979px){
+  .footGridWithCalendar{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  .footCalendarWrap{
+    order:2;
+  }
+  .footMain{
+    order:1;
+  }
+  .footCalendarHead{
+    margin-bottom:8px;
+  }
+  .footCalendarHead .more.muted{
+    white-space:normal;
+  }
+  .footCalendarPc{
+    display:none;
+  }
+  .footCalendarSp{
+    display:block;
+  }
+  .footCalendarCard{
+    border:0;
+    border-radius:0;
+    background:transparent;
+  }
+  .footCalendarSp iframe{
+    height:340px;
+  }
+}
+
+/* ===== v125 section separation ===== */
+.footerCalendarSection{
+  padding-top:48px;
+}
+.footerCalendarSection .wrap{
+  max-width:1080px;
+}
+#line{
+  padding-bottom:28px;
+}
+
+/* ===== v125 footer + calendar refinement ===== */
+.footerCalendarSection .footer{
+  border-top:0;
+  background:transparent;
+  padding:0;
+}
+.footGridWithCalendar{
+  display:grid;
+  grid-template-columns: 430px minmax(0,1fr);
+  gap:44px;
+  align-items:start;
+}
+.footCalendarWrap{
+  align-self:start;
+}
+.footCalendarHead{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:12px;
+}
+.footCalendarHead .h2{
+  margin:0;
+  font-size:15px;
+}
+.footCalendarHead .more.muted{
+  color:#777;
+  font-size:12px;
+  white-space:nowrap;
+}
+.footCalendarCard{
+  background:#fff;
+  border:1px solid var(--line, rgba(0,0,0,.10));
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,.04);
+}
+.footCalendarPc iframe{
+  display:block;
+  width:100%;
+  height:326px;
+  border:0;
+  background:#fff;
+}
+.footCalendarSp{
+  display:none;
+}
+
+.footMain{
+  padding-top:92px;
+}
+.footBrand{
+  display:block;
+  font-size:17px;
+  line-height:1.5;
+  margin:0 0 12px;
+}
+.footerCalendarSection .small{
+  margin:0 0 10px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.9;
+}
+.footLinks{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-start;
+  margin-top:18px;
+}
+.footLinks a{
+  color:var(--muted);
+  font-size:12px;
+  padding:8px 10px;
+  border-radius:999px;
+}
+.footLinks a:hover{
+  background:#faf9f7;
+  color:var(--text);
+}
+
+@media (max-width:979px){
+  .footerCalendarSection{
+    padding-top:36px;
+  }
+  .footGridWithCalendar{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+  .footCalendarWrap{
+    order:1;
+  }
+  .footMain{
+    order:2;
+    padding-top:0;
+  }
+  .footCalendarHead{
+    margin-bottom:8px;
+  }
+  .footCalendarHead .more.muted{
+    white-space:normal;
+  }
+  .footCalendarPc{
+    display:none;
+  }
+  .footCalendarSp{
+    display:block;
+  }
+  .footCalendarSp iframe{
+    display:block;
+    width:100%;
+    height:338px;
+    border:0;
+    background:#fff;
+  }
+  .footCalendarCard{
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    background:transparent;
+  }
+  .footBrand{
+    font-size:16px;
+    margin-bottom:10px;
+  }
+  .footLinks{
+    gap:8px;
+    margin-top:14px;
+  }
+}
