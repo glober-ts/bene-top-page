@@ -3110,6 +3110,7 @@ html, body { overflow-x:hidden; }
 .hero > .wrap{
   max-width:100%;
   padding-inline:clamp(18px, 4.2vw, 72px);
+  position:relative;
 }
 .heroRail{
   display:flex;
@@ -3123,6 +3124,7 @@ html, body { overflow-x:hidden; }
 .heroRail::-webkit-scrollbar-thumb{background:rgba(138,31,78,.35);border-radius:999px}
 .heroRail::-webkit-scrollbar-track{background:rgba(248,246,243,.9)}
 .heroCard{
+  display:block;
   flex:0 0 clamp(380px, 29.5vw, 560px);
   border-radius:22px;
   overflow:hidden;
@@ -3130,12 +3132,65 @@ html, body { overflow-x:hidden; }
   box-shadow:var(--shadow);
   background:#fff;
   scroll-snap-align:start;
+  transition:transform .24s ease, box-shadow .24s ease;
+}
+@media (hover:hover){
+  .heroCard:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 32px rgba(0,0,0,.14);
+  }
 }
 .heroCard img{
   display:block;
   width:100%;
   aspect-ratio: 5 / 6;
   object-fit:cover;
+}
+.heroScrollHint{
+  margin:8px 0 0;
+  text-align:center;
+  font-size:12px;
+  letter-spacing:.08em;
+  color:var(--ink, #2e2a27);
+  opacity:.6;
+}
+.heroNav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(138,31,78,.28);
+  background:rgba(255,255,255,.92);
+  color:#8a1f4e;
+  font-size:20px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 18px rgba(0,0,0,.12);
+  z-index:2;
+}
+.heroNavPrev{left:clamp(4px, 1vw, 12px)}
+.heroNavNext{right:clamp(4px, 1vw, 12px)}
+.heroDots{
+  margin-top:8px;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+}
+.heroDot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  border:1px solid rgba(138,31,78,.45);
+  background:rgba(138,31,78,.18);
+  padding:0;
+}
+.heroDot.is-active{
+  background:rgba(138,31,78,.85);
+  border-color:rgba(138,31,78,.85);
 }
 
 .heroInfoSection{padding-top:8px}
@@ -3173,6 +3228,11 @@ html, body { overflow-x:hidden; }
   }
   .heroCard{
     flex:0 0 min(88%, 420px);
+  }
+  .heroNav{
+    width:34px;
+    height:34px;
+    font-size:16px;
   }
   .heroInfoGrid{grid-template-columns:1fr;gap:12px}
   .heroCalendarPc{display:none}
