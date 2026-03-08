@@ -54,39 +54,37 @@ window.BENE_UI = {
 </header>
 <main id="top">
 <!-- HERO -->
-<section class="hero">
-<div class="wrap heroGrid equalHeight">
-<div aria-label="メインビジュアル" class="slider heroRatio">
-<button aria-label="前へ" class="navBtn prev" type="button"><svg aria-hidden="true" class="chev" viewbox="0 0 24 24"><path d="M15.5 4.5L8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path></svg></button>
-<div class="slides">
-<a class="slide is-active" href="#new">
+<section class="hero heroAlt">
+<div class="wrap">
+<div aria-label="メインビジュアル" class="heroAltTrack" role="list">
+<a class="heroAltCard" href="#new" role="listitem">
 <img alt="新作ジュエリー" loading="eager" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260224newitem.jpg"/>
+<span class="heroAltLabel">NEW ITEM</span>
 </a>
-<a class="slide" href="#resale">
+<a class="heroAltCard" href="#resale" role="listitem">
 <img alt="再販アイテム" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260218resale.jpg"/>
+<span class="heroAltLabel">RESTOCK</span>
 </a>
-<a class="slide" href="#tokusen">
+<a class="heroAltCard" href="#tokusen" role="listitem">
 <img alt="特選ジュエリー" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260216tokusen.jpg"/>
+<span class="heroAltLabel">LIMITED SELECT</span>
 </a>
-<a class="slide" href="#marche">
+<a class="heroAltCard" href="#marche" role="listitem">
 <img alt="マルシェ・イベント" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260206marche.jpg"/>
+<span class="heroAltLabel">EVENT</span>
 </a>
-<a class="slide" href="#loose">
+<a class="heroAltCard" href="#loose" role="listitem">
 <img alt="ルースコレクション" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260205loose.jpg"/>
+<span class="heroAltLabel">LOOSE STONE</span>
 </a>
 </div>
-<div aria-label="スライダー" class="dots" role="tablist">
-<button aria-label="1" class="dot is-active" type="button"></button>
-<button aria-label="2" class="dot" type="button"></button>
-<button aria-label="3" class="dot" type="button"></button>
 </div>
-<button aria-label="次へ" class="navBtn next" type="button"><svg aria-hidden="true" class="chev" viewbox="0 0 24 24"><path d="M8.5 4.5L16 12l-7.5 7.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path></svg></button>
-</div>
-<aside class="heroSide">
-<div class="noticeCard">
+</section>
+
+<section class="heroInfo" aria-label="ヒーロー下インフォメーション">
+<div class="wrap heroInfoGrid">
+<div class="heroInfoBlock" aria-label="NEWS">
 <p class="kicker">NEWS</p>
-<div class="newsCarousel">
-<button aria-label="上へ" class="newsBtn up" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M18 15l-6-6-6 6"></path></svg></button>
 <div aria-label="ニュース一覧" class="newsList" role="list">
 <a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
 <time datetime="2026-02-20">2026.02.20</time>
@@ -100,37 +98,26 @@ window.BENE_UI = {
 <time datetime="2026-02-16">2026.02.16</time>
 <span>特選ルース：一点もの更新のお知らせ</span>
 </a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
-<time datetime="2026-02-14">2026.02.14</time>
-<span>誕生石（3月）：アクアマリン特集公開</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
-<time datetime="2026-02-12">2026.02.12</time>
-<span>重ね着け提案：リングの合わせ方ガイド</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
-<time datetime="2026-02-10">2026.02.10</time>
-<span>ご利用ガイド：配送・お支払いを更新</span>
-</a>
-</div>
-<button aria-label="下へ" class="newsBtn down" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button>
-</div>
-<div class="pillRow">
-<span class="pill">工房仕立て</span>
-<span class="pill">一点もの</span>
-<span class="pill">希少石</span>
 </div>
 </div>
-<div class="promoCard delivery">
+<div class="heroInfoBlock delivery" aria-label="発送予定日">
 <p class="kicker">弊社発送予定日</p>
 <p class="deliveryDate">🚚 <span class="date"></span>予定</p>
 <p class="deliveryNote">
-    ※ ご注文後にお作りするため、発送日は前後する場合がございます。<br/>
-    ※ 一部商品は発送予定日が異なります。<br/>
-<span class="contactNote">お急ぎの場合は、お気軽にお問い合わせください。</span>
+  ※ ご注文後にお作りするため、発送日は前後する場合がございます。<br/>
+  ※ 一部商品は発送予定日が異なります。<br/>
+  <span class="contactNote">お急ぎの場合は、お気軽にお問い合わせください。</span>
 </p>
 </div>
-</aside>
+<div class="heroInfoBlock heroCalendar" aria-label="営業カレンダー">
+<p class="kicker">営業カレンダー</p>
+<div class="heroCalendarCard heroCalendarPc">
+<iframe src="calendar/index.html" title="営業カレンダー" loading="lazy"></iframe>
+</div>
+<div class="heroCalendarCard heroCalendarSp">
+<iframe src="calendar/sp.html" title="営業カレンダー" loading="lazy"></iframe>
+</div>
+</div>
 </div>
 </section>
 <!-- QUICK BANDS -->
