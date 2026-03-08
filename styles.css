@@ -3102,3 +3102,74 @@ html, body { overflow-x:hidden; }
     margin-top:14px;
   }
 }
+
+/* ===== v126 hero rail + info blocks ===== */
+.hero{
+  padding:14px 0 8px;
+}
+.heroRail{
+  display:flex;
+  gap:16px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding:4px 2px 10px;
+  -webkit-overflow-scrolling:touch;
+}
+.heroRail::-webkit-scrollbar{height:8px}
+.heroRail::-webkit-scrollbar-thumb{background:rgba(138,31,78,.35);border-radius:999px}
+.heroRail::-webkit-scrollbar-track{background:rgba(248,246,243,.9)}
+.heroCard{
+  flex:0 0 clamp(280px, 35vw, 420px);
+  border-radius:22px;
+  overflow:hidden;
+  border:1px solid rgba(230,225,216,1);
+  box-shadow:var(--shadow);
+  background:#fff;
+  scroll-snap-align:start;
+}
+.heroCard img{
+  display:block;
+  width:100%;
+  aspect-ratio: 5 / 6;
+  object-fit:cover;
+}
+
+.heroInfoSection{padding-top:8px}
+.heroInfoGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  align-items:start;
+}
+.heroCalendarWrap{
+  border-radius:24px;
+  border:1px solid rgba(230,225,216,1);
+  background:#fff;
+  box-shadow:var(--shadow);
+  padding:14px;
+}
+.heroCalendarHead{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:10px}
+.heroCalendarHead .h2{margin:0;font-size:16px}
+.heroCalendarHead .more{font-size:12px}
+.heroCalendarCard{border:1px solid var(--line, rgba(0,0,0,.10));border-radius:16px;overflow:hidden;background:#fff}
+.heroCalendarCard iframe{display:block;width:100%;border:0;background:#fff}
+.heroCalendarPc iframe{height:296px}
+.heroCalendarSp{display:none}
+
+.footGridWithCalendar{grid-template-columns:minmax(0,1fr)}
+.footMain{padding-top:0}
+
+@media (max-width:979px){
+  .heroRail{
+    gap:10px;
+    padding-bottom:6px;
+  }
+  .heroCard{
+    flex:0 0 84%;
+  }
+  .heroInfoGrid{grid-template-columns:1fr;gap:12px}
+  .heroCalendarPc{display:none}
+  .heroCalendarSp{display:block}
+  .heroCalendarCard{border:0;border-radius:0}
+  .heroCalendarSp iframe{height:336px}
+}

@@ -55,34 +55,29 @@ window.BENE_UI = {
 <main id="top">
 <!-- HERO -->
 <section class="hero">
-<div class="wrap heroGrid equalHeight">
-<div aria-label="メインビジュアル" class="slider heroRatio">
-<button aria-label="前へ" class="navBtn prev" type="button"><svg aria-hidden="true" class="chev" viewbox="0 0 24 24"><path d="M15.5 4.5L8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path></svg></button>
-<div class="slides">
-<a class="slide is-active" href="#new">
+<div class="wrap">
+<div aria-label="メインビジュアル" class="heroRail" role="region">
+<a class="heroCard" href="#new">
 <img alt="新作ジュエリー" loading="eager" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260224newitem.jpg"/>
 </a>
-<a class="slide" href="#resale">
+<a class="heroCard" href="#resale">
 <img alt="再販アイテム" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260218resale.jpg"/>
 </a>
-<a class="slide" href="#tokusen">
+<a class="heroCard" href="#tokusen">
 <img alt="特選ジュエリー" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260216tokusen.jpg"/>
 </a>
-<a class="slide" href="#marche">
+<a class="heroCard" href="#marche">
 <img alt="マルシェ・イベント" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260206marche.jpg"/>
 </a>
-<a class="slide" href="#loose">
+<a class="heroCard" href="#loose">
 <img alt="ルースコレクション" loading="lazy" src="https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/sb_260205loose.jpg"/>
 </a>
 </div>
-<div aria-label="スライダー" class="dots" role="tablist">
-<button aria-label="1" class="dot is-active" type="button"></button>
-<button aria-label="2" class="dot" type="button"></button>
-<button aria-label="3" class="dot" type="button"></button>
 </div>
-<button aria-label="次へ" class="navBtn next" type="button"><svg aria-hidden="true" class="chev" viewbox="0 0 24 24"><path d="M8.5 4.5L16 12l-7.5 7.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6"></path></svg></button>
-</div>
-<aside class="heroSide">
+</section>
+
+<section class="section heroInfoSection" data-reveal="">
+<div class="wrap heroInfoGrid">
 <div class="noticeCard">
 <p class="kicker">NEWS</p>
 <div class="newsCarousel">
@@ -125,12 +120,23 @@ window.BENE_UI = {
 <p class="kicker">弊社発送予定日</p>
 <p class="deliveryDate">🚚 <span class="date"></span>予定</p>
 <p class="deliveryNote">
-    ※ ご注文後にお作りするため、発送日は前後する場合がございます。<br/>
-    ※ 一部商品は発送予定日が異なります。<br/>
+※ ご注文後にお作りするため、発送日は前後する場合がございます。<br/>
+※ 一部商品は発送予定日が異なります。<br/>
 <span class="contactNote">お急ぎの場合は、お気軽にお問い合わせください。</span>
 </p>
 </div>
-</aside>
+<div class="heroCalendarWrap" aria-label="営業カレンダー">
+<div class="heroCalendarHead">
+<h2 class="h2">営業カレンダー</h2>
+<span class="more muted">休日でもお買い物は可能です</span>
+</div>
+<div class="heroCalendarCard heroCalendarPc">
+<iframe src="calendar/index.html" title="営業カレンダー" loading="lazy"></iframe>
+</div>
+<div class="heroCalendarCard heroCalendarSp">
+<iframe src="calendar/sp.html" title="営業カレンダー" loading="lazy"></iframe>
+</div>
+</div>
 </div>
 </section>
 <!-- QUICK BANDS -->
@@ -547,21 +553,8 @@ window.BENE_UI = {
 </main>
 <section class="section soft footerCalendarSection" id="footerInfo">
   <div class="wrap">
-    <footer class=\"footer\">
+    <footer class="footer">
   <div class="footGrid footGridWithCalendar">
-    <div class="footCalendarWrap" aria-label="営業カレンダー">
-      <div class="footCalendarHead">
-        <h2 class="h2">営業カレンダー</h2>
-        <span class="more muted">休日でもお買い物は可能です</span>
-      </div>
-      <div class="footCalendarCard footCalendarPc">
-        <iframe src="calendar/index.html" title="営業カレンダー" loading="lazy"></iframe>
-      </div>
-      <div class="footCalendarCard footCalendarSp">
-        <iframe src="calendar/sp.html" title="営業カレンダー" loading="lazy"></iframe>
-      </div>
-    </div>
-
     <div class="footMain">
       <strong class="footBrand">ジュエリー工房ベーネベーネ｜Yahoo店</strong>
       <p class="small">TEL：0120-457-678（営業日 10:00-18:00）</p>
