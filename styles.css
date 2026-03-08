@@ -62,6 +62,134 @@ img{display:block;max-width:100%}
 .thumb{border-radius:16px;overflow:hidden;border:1px solid rgba(230,225,216,1);background:#fff}
 .thumb img{width:100%;aspect-ratio:1/1;object-fit:cover}
 
+/* HERO ALT proposal (no JS, horizontal multi-card visual) */
+.heroAlt--preview{
+  border-top:1px solid rgba(138,31,78,.18);
+  border-bottom:1px solid rgba(138,31,78,.12);
+  background:linear-gradient(180deg,#fff 0%,#fdfaf7 100%);
+}
+.heroAlt{
+  padding:20px 0 18px;
+}
+.heroAltHead{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px 16px;
+  align-items:end;
+  margin-bottom:18px;
+}
+.heroAltLead{
+  margin:0;
+  font-size:11px;
+  letter-spacing:.22em;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+.heroAltTitle{
+  margin:0;
+  font-family:"Noto Serif JP", serif;
+  font-size:24px;
+  letter-spacing:.04em;
+  font-weight:500;
+  line-height:1.35;
+}
+.heroAltNote{
+  margin:2px 0 0;
+  font-size:12px;
+  color:var(--muted);
+}
+.heroAltHint{
+  grid-column:2;
+  grid-row:1 / span 2;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:12px;
+  letter-spacing:.1em;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.heroAltArrow{
+  color:var(--accent);
+  font-weight:600;
+}
+
+.heroAltRail{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(340px, 39vw);
+  gap:26px;
+  overflow-x:auto;
+  padding:0 26px 10px 0;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+}
+.heroAltRail::-webkit-scrollbar{height:10px}
+.heroAltRail::-webkit-scrollbar-track{background:#f8f6f3}
+.heroAltRail::-webkit-scrollbar-thumb{background:#d9d2c8}
+
+.heroAltCard{
+  position:relative;
+  min-height:300px;
+  display:block;
+  scroll-snap-align:start;
+  border:1px solid rgba(230,225,216,.95);
+  background:#fff;
+  overflow:hidden;
+}
+.heroAltCard::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(8,8,8,0) 52%, rgba(8,8,8,.34) 100%);
+  pointer-events:none;
+}
+.heroAltCard img{
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:cover;
+}
+.heroAltLabel{
+  position:absolute;
+  left:20px;
+  bottom:16px;
+  z-index:1;
+  font-size:11px;
+  letter-spacing:.2em;
+  color:#fff;
+  text-transform:uppercase;
+}
+
+@media (max-width:980px){
+  .heroAlt{padding:18px 0 14px}
+  .heroAltHead{
+    grid-template-columns:1fr;
+    gap:6px;
+    margin-bottom:12px;
+  }
+  .heroAltTitle{
+    font-size:20px;
+    line-height:1.4;
+  }
+  .heroAltNote{
+    margin-top:0;
+    font-size:11px;
+  }
+  .heroAltHint{
+    grid-column:auto;
+    grid-row:auto;
+    justify-self:start;
+  }
+  .heroAltRail{
+    grid-auto-columns:86%;
+    gap:16px;
+    padding-right:14%;
+  }
+  .heroAltCard img{
+    aspect-ratio:4/5;
+  }
+}
+
 /* Band */
 .band{padding:12px 0 4px}
 .bandGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
