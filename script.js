@@ -746,6 +746,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   let stoppedByUser = false;
   let currentIndex = 0;
   let cardStep = 0;
+  let railOffset = 0;
 
   let isMouseDragging = false;
   let dragStartX = 0;
@@ -776,7 +777,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   };
 
   const getVisualIndex = () => currentIndex + 1;
-  const getTranslateForVisualIndex = (visualIndex) => -(cardStep * visualIndex);
+  const getTranslateForVisualIndex = (visualIndex) => -(cardStep * visualIndex) + railOffset;
 
   const normalizeIndex = (index) => {
     if(index < 0) return cards.length - 1;
@@ -792,6 +793,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
       const b = slides[2].offsetLeft;
       if(b > a) cardStep = b - a;
     }
+
+    railOffset = 0;
+    if(window.matchMedia('(max-width: 979px)').matches && firstRealCard){
+      railOffset = (rail.clientWidth - firstRealCard.getBoundingClientRect().width) / 2;
+    }
+
     setTransition(false);
     applyTranslate(getTranslateForVisualIndex(getVisualIndex()));
     requestAnimationFrame(() => setTransition(true));
