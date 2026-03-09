@@ -3119,7 +3119,8 @@ html, body { overflow-x:hidden; }
 }
 .heroTrack{
   display:flex;
-  gap:clamp(14px, 1.5vw, 28px);
+  --hero-card-gap:clamp(14px, 1.5vw, 28px);
+  gap:var(--hero-card-gap);
   will-change:transform;
   transform:translate3d(0,0,0);
   transition:transform .55s cubic-bezier(.22,.61,.36,1);
@@ -3216,6 +3217,9 @@ html, body { overflow-x:hidden; }
 @media (min-width:980px){
   .hero > .wrap{
     padding-inline:clamp(12px, 2vw, 36px);
+  }
+  .heroCard{
+    flex:0 0 calc((100% - (var(--hero-card-gap) * 2)) / 3);
   }
   .heroScrollHint{display:none}
 }
