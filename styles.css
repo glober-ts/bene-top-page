@@ -3113,23 +3113,24 @@ html, body { overflow-x:hidden; }
   position:relative;
 }
 .heroRail{
+  overflow:hidden;
+  padding:4px 0 10px;
+  position:relative;
+}
+.heroTrack{
   display:flex;
   gap:clamp(14px, 1.5vw, 28px);
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scroll-behavior:smooth;
-  overscroll-behavior-x:contain;
-  will-change:scroll-position;
-  padding:4px 0 10px;
-  -webkit-overflow-scrolling:touch;
+  will-change:transform;
+  transform:translate3d(0,0,0);
+  transition:transform .55s cubic-bezier(.22,.61,.36,1);
+}
+.heroTrack.is-animated{
+  transition:transform .55s cubic-bezier(.22,.61,.36,1);
 }
 .heroDragNoSelect,
 .heroDragNoSelect *{
   user-select:none;
 }
-.heroRail::-webkit-scrollbar{height:8px}
-.heroRail::-webkit-scrollbar-thumb{background:rgba(138,31,78,.35);border-radius:999px}
-.heroRail::-webkit-scrollbar-track{background:rgba(248,246,243,.9)}
 .heroCard{
   display:block;
   flex:0 0 clamp(380px, 29.5vw, 560px);
@@ -3231,8 +3232,10 @@ html, body { overflow-x:hidden; }
     padding-inline:14px;
   }
   .heroRail{
-    gap:10px;
     padding-bottom:6px;
+  }
+  .heroTrack{
+    gap:10px;
   }
   .heroCard{
     flex:0 0 min(88%, 420px);
@@ -3255,7 +3258,8 @@ html, body { overflow-x:hidden; }
   }
   .heroRail.is-dragging{
     cursor:grabbing;
-    scroll-behavior:auto;
-    scroll-snap-type:none;
+  }
+  .heroRail.is-dragging .heroTrack{
+    transition:none;
   }
 }
