@@ -3143,8 +3143,9 @@ html, body { overflow-x:hidden; }
 .heroCard img{
   display:block;
   width:100%;
-  aspect-ratio: 5 / 6;
-  object-fit:cover;
+  height:auto;
+  aspect-ratio:auto;
+  object-fit:contain;
 }
 .heroScrollHint{
   margin:8px 0 0;
