@@ -89,152 +89,14 @@ window.BENE_UI = {
 </picture>
 </a>
 </div>
-</div>
 <button aria-label="ヒーローを左へ" class="heroNav heroNavPrev" type="button">←</button>
 <button aria-label="ヒーローを右へ" class="heroNav heroNavNext" type="button">→</button>
+</div>
 <p class="heroScrollHint" aria-hidden="true">← swipe →</p>
 <div aria-label="ヒーロースライド位置" class="heroDots" role="tablist"></div>
 </div>
 </section>
 
-<section class="section heroInfoSection" data-reveal="">
-<div class="wrap heroInfoGrid">
-<div class="noticeCard">
-<p class="kicker">NEWS</p>
-<div class="newsCarousel">
-<button aria-label="上へ" class="newsBtn up" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M18 15l-6-6-6 6"></path></svg></button>
-<div aria-label="ニュース一覧" class="newsList" role="list">
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
-<time datetime="2026-02-20">2026.02.20</time>
-<span>ホワイトデー特集：今なら間に合うラインナップ</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
-<time datetime="2026-02-18">2026.02.18</time>
-<span>限定再販：完売していた人気作が再登場</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
-<time datetime="2026-02-16">2026.02.16</time>
-<span>特選ルース：一点もの更新のお知らせ</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
-<time datetime="2026-02-14">2026.02.14</time>
-<span>誕生石（3月）：アクアマリン特集公開</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
-<time datetime="2026-02-12">2026.02.12</time>
-<span>重ね着け提案：リングの合わせ方ガイド</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
-<time datetime="2026-02-10">2026.02.10</time>
-<span>ご利用ガイド：配送・お支払いを更新</span>
-</a>
-</div>
-<button aria-label="下へ" class="newsBtn down" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button>
-</div>
-<div class="pillRow">
-<span class="pill">工房仕立て</span>
-<span class="pill">一点もの</span>
-<span class="pill">希少石</span>
-</div>
-</div>
-<div class="promoCard delivery">
-<p class="kicker">弊社発送予定日</p>
-<p class="deliveryDate">🚚 <span class="date"></span>予定</p>
-<p class="deliveryNote">
-※ ご注文後にお作りするため、発送日は前後する場合がございます。<br/>
-※ 一部商品は発送予定日が異なります。<br/>
-<span class="contactNote">お急ぎの場合は、お気軽にお問い合わせください。</span>
-</p>
-</div>
-<div class="heroCalendarWrap" aria-label="営業カレンダー">
-<div class="heroCalendarHead">
-<h2 class="h2">営業カレンダー</h2>
-<span class="more muted">休日でもお買い物は可能です</span>
-</div>
-<div class="heroCalendarCard heroCalendarPc">
-<iframe src="calendar/index.html" title="営業カレンダー" loading="lazy"></iframe>
-</div>
-<div class="heroCalendarCard heroCalendarSp">
-<iframe src="calendar/sp.html" title="営業カレンダー" loading="lazy"></iframe>
-</div>
-</div>
-</div>
-</section>
-<!-- QUICK BANDS -->
-<!-- YOUTUBE -->
-<section class="section ytSection" data-reveal="">
-<div class="wrap">
-<div class="headRow">
-<h2 class="h2">YouTube</h2>
-<a class="more" href="https://www.youtube.com/" rel="noopener" target="_blank">チャンネルを見る</a>
-</div>
-<div class="ytNowPlaying top">
-<span class="label">再生中</span>
-<span id="ytTitle">動画タイトルが表示されます</span>
-</div>
-<div class="ytGrid">
-<div class="ytPlayer">
-<!-- ▼ ここを実動画に：VIDEO_ID をYouTubeのIDに差し替え -->
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" id="ytPlayer" src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="YouTube video player"></iframe>
-</div>
-<div class="ytCarousel">
-<div aria-label="動画リスト（サンプル）" class="ytList">
-<a class="ytItem" data-video-id="VIDEO_ID_1" href="#">
-<span class="ytThumb"><img alt="YouTube サムネイル 1" src="assets/p1.jpg"/></span>
-<span class="ytMeta"><strong>サンプル動画タイトル 1</strong><small>2026.02.11</small></span>
-</a>
-<a class="ytItem" data-video-id="VIDEO_ID_2" href="#">
-<span class="ytThumb"><img alt="YouTube サムネイル 2" src="assets/p2.jpg"/></span>
-<span class="ytMeta"><strong>サンプル動画タイトル 2</strong><small>2026.02.12</small></span>
-</a>
-<a class="ytItem" data-video-id="VIDEO_ID_3" href="#">
-<span class="ytThumb"><img alt="YouTube サムネイル 3" src="assets/p3.jpg"/></span>
-<span class="ytMeta"><strong>サンプル動画タイトル 3</strong><small>2026.02.13</small></span>
-</a>
-<a class="ytItem" data-video-id="VIDEO_ID_4" href="#">
-<span class="ytThumb"><img alt="YouTube サムネイル 4" src="assets/p4.jpg"/></span>
-<span class="ytMeta"><strong>サンプル動画タイトル 4</strong><small>2026.02.14</small></span>
-</a>
-<a class="ytItem" data-video-id="VIDEO_ID_5" href="#">
-<span class="ytThumb"><img alt="YouTube サムネイル 5" src="assets/p5.jpg"/></span>
-<span class="ytMeta"><strong>サンプル動画タイトル 5</strong><small>2026.02.15</small></span>
-</a>
-<a class="ytItem" data-video-id="VIDEO_ID_6" href="#">
-<span class="ytThumb"><img alt="YouTube サムネイル 6" src="assets/p6.jpg"/></span>
-<span class="ytMeta"><strong>サンプル動画タイトル 6</strong><small>2026.02.16</small></span>
-</a>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="band" data-reveal="">
-<div class="wrap bandGrid">
-<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001720" rel="noopener" target="_blank"><img alt="特選ルースジュエリー" src="assets/feat1.png"/></a>
-<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/b8b7c1aaa5.html" rel="noopener" target="_blank"><img alt="厳選ルース" src="assets/feat2.png"/></a>
-<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001693" rel="noopener" target="_blank"><img alt="簡単カスタムジュエリー" src="assets/feat3.png"/></a>
-<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001526" rel="noopener" target="_blank"><img alt="安心サービス" src="assets/feat4.png"/></a>
-</div>
-</section>
-<!-- CATEGORIES -->
-<section class="section" data-reveal="" id="cats">
-<div class="wrap">
-<div class="headRow">
-<h2 class="h2">カテゴリから探す</h2>
-<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/" rel="noopener" target="_blank">ストアトップへ</a>
-</div>
-<div class="iconGrid">
-<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5eaa5f3a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/ring.png"/></span><span>リング</span></a>
-<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/52a4a3fd5a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/pinky.png"/></span><span>ピンキーリング</span></a>
-<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5daa5f3a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/pendant.png"/></span><span>ペンダント</span></a>
-<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5d4a5a2a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/pierce.png"/></span><span>ピアス</span></a>
-<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5d6a5eca5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/bracelet.png"/></span><span>ブレスレット</span></a>
-<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/b8b7c1aaa5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/loose.png"/></span><span>厳選ルース</span></a>
-<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/5521aaa17ac.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/chain.png"/></span><span>チェーン・金具</span></a>
-<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a4aabceac6.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/care.png"/></span><span>お手入れ</span></a>
-</div>
-</div>
-</section>
 <!-- PICKUP -->
 <section class="section soft" data-reveal="" id="pickup1">
 <div class="wrap">
@@ -413,6 +275,82 @@ window.BENE_UI = {
 </div>
 </section>
 <!-- NEW -->
+
+<section class="section ytSection" data-reveal="">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">YouTube</h2>
+<a class="more" href="https://www.youtube.com/" rel="noopener" target="_blank">チャンネルを見る</a>
+</div>
+<div class="ytNowPlaying top">
+<span class="label">再生中</span>
+<span id="ytTitle">動画タイトルが表示されます</span>
+</div>
+<div class="ytGrid">
+<div class="ytPlayer">
+<!-- ▼ ここを実動画に：VIDEO_ID をYouTubeのIDに差し替え -->
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" id="ytPlayer" src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="YouTube video player"></iframe>
+</div>
+<div class="ytCarousel">
+<div aria-label="動画リスト（サンプル）" class="ytList">
+<a class="ytItem" data-video-id="VIDEO_ID_1" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 1" src="assets/p1.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 1</strong><small>2026.02.11</small></span>
+</a>
+<a class="ytItem" data-video-id="VIDEO_ID_2" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 2" src="assets/p2.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 2</strong><small>2026.02.12</small></span>
+</a>
+<a class="ytItem" data-video-id="VIDEO_ID_3" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 3" src="assets/p3.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 3</strong><small>2026.02.13</small></span>
+</a>
+<a class="ytItem" data-video-id="VIDEO_ID_4" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 4" src="assets/p4.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 4</strong><small>2026.02.14</small></span>
+</a>
+<a class="ytItem" data-video-id="VIDEO_ID_5" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 5" src="assets/p5.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 5</strong><small>2026.02.15</small></span>
+</a>
+<a class="ytItem" data-video-id="VIDEO_ID_6" href="#">
+<span class="ytThumb"><img alt="YouTube サムネイル 6" src="assets/p6.jpg"/></span>
+<span class="ytMeta"><strong>サンプル動画タイトル 6</strong><small>2026.02.16</small></span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" data-reveal="" id="cats">
+<div class="wrap">
+<div class="headRow">
+<h2 class="h2">カテゴリから探す</h2>
+<a class="more" href="https://store.shopping.yahoo.co.jp/benebene/" rel="noopener" target="_blank">ストアトップへ</a>
+</div>
+<div class="iconGrid">
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5eaa5f3a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/ring.png"/></span><span>リング</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/52a4a3fd5a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/pinky.png"/></span><span>ピンキーリング</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5daa5f3a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/pendant.png"/></span><span>ペンダント</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5d4a5a2a5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/pierce.png"/></span><span>ピアス</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a5d6a5eca5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/bracelet.png"/></span><span>ブレスレット</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/b8b7c1aaa5.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/loose.png"/></span><span>厳選ルース</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/5521aaa17ac.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/chain.png"/></span><span>チェーン・金具</span></a>
+<a class="iconCard" href="https://store.shopping.yahoo.co.jp/benebene/a4aabceac6.html" rel="noopener" target="_blank"><span class="ic"><img alt="" aria-hidden="true" class="catIconImg" src="assets/icons/care.png"/></span><span>お手入れ</span></a>
+</div>
+</div>
+</section>
+
+<section class="band" data-reveal="">
+<div class="wrap bandGrid">
+<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001720" rel="noopener" target="_blank"><img alt="特選ルースジュエリー" src="assets/feat1.png"/></a>
+<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/b8b7c1aaa5.html" rel="noopener" target="_blank"><img alt="厳選ルース" src="assets/feat2.png"/></a>
+<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001693" rel="noopener" target="_blank"><img alt="簡単カスタムジュエリー" src="assets/feat3.png"/></a>
+<a class="bandItem" href="https://store.shopping.yahoo.co.jp/benebene/c/0000001526" rel="noopener" target="_blank"><img alt="安心サービス" src="assets/feat4.png"/></a>
+</div>
+</section>
 <section class="section" data-reveal="" id="new">
 <div class="wrap">
 <div class="headRow">
@@ -572,6 +510,72 @@ window.BENE_UI = {
 </section>
 </section>
 </main>
+<section class="section heroInfoSection" data-reveal="">
+<div class="wrap heroInfoGrid">
+<div class="noticeCard">
+<p class="kicker">NEWS</p>
+<div class="newsCarousel">
+<button aria-label="上へ" class="newsBtn up" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M18 15l-6-6-6 6"></path></svg></button>
+<div aria-label="ニュース一覧" class="newsList" role="list">
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-20">2026.02.20</time>
+<span>ホワイトデー特集：今なら間に合うラインナップ</span>
+</a>
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-18">2026.02.18</time>
+<span>限定再販：完売していた人気作が再登場</span>
+</a>
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-16">2026.02.16</time>
+<span>特選ルース：一点もの更新のお知らせ</span>
+</a>
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-14">2026.02.14</time>
+<span>誕生石（3月）：アクアマリン特集公開</span>
+</a>
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-12">2026.02.12</time>
+<span>重ね着け提案：リングの合わせ方ガイド</span>
+</a>
+<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<time datetime="2026-02-10">2026.02.10</time>
+<span>ご利用ガイド：配送・お支払いを更新</span>
+</a>
+</div>
+<button aria-label="下へ" class="newsBtn down" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button>
+</div>
+<div class="pillRow">
+<span class="pill">工房仕立て</span>
+<span class="pill">一点もの</span>
+<span class="pill">希少石</span>
+</div>
+</div>
+<div class="promoCard delivery">
+<p class="kicker">弊社発送予定日</p>
+<p class="deliveryDate">🚚 <span class="date"></span>予定</p>
+<p class="deliveryNote">
+※ ご注文後にお作りするため、発送日は前後する場合がございます。<br/>
+※ 一部商品は発送予定日が異なります。<br/>
+<span class="contactNote">お急ぎの場合は、お気軽にお問い合わせください。</span>
+</p>
+</div>
+<div class="heroCalendarWrap" aria-label="営業カレンダー">
+<div class="heroCalendarHead">
+<h2 class="h2">営業カレンダー</h2>
+<span class="more muted">休日でもお買い物は可能です</span>
+</div>
+<div class="heroCalendarCard heroCalendarPc">
+<iframe src="calendar/index.html" title="営業カレンダー" loading="lazy"></iframe>
+</div>
+<div class="heroCalendarCard heroCalendarSp">
+<iframe src="calendar/sp.html" title="営業カレンダー" loading="lazy"></iframe>
+</div>
+</div>
+</div>
+</section>
+<!-- QUICK BANDS -->
+<!-- YOUTUBE -->
+
 <section class="section soft footerCalendarSection" id="footerInfo">
   <div class="wrap">
     <footer class="footer">
