@@ -3156,7 +3156,7 @@ html, body { overflow-x:hidden; }
   object-fit:contain;
 }
 .heroScrollHint{
-  margin:8px 0 0;
+  margin:12px 0 0;
   text-align:center;
   font-size:12px;
   letter-spacing:.08em;
@@ -3170,8 +3170,8 @@ html, body { overflow-x:hidden; }
   width:40px;
   height:40px;
   border-radius:999px;
-  border:1px solid rgba(138,31,78,.28);
-  background:rgba(255,255,255,.92);
+  border:1px solid rgba(138,31,78,.24);
+  background:rgba(255,255,255,.72);
   color:#8a1f4e;
   font-size:20px;
   line-height:1;
@@ -3179,19 +3179,27 @@ html, body { overflow-x:hidden; }
   align-items:center;
   justify-content:center;
   box-shadow:0 8px 18px rgba(0,0,0,.12);
-  z-index:2;
+  z-index:3;
+  transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease;
 }
-.heroNavPrev{left:clamp(4px, 1vw, 12px)}
-.heroNavNext{right:clamp(4px, 1vw, 12px)}
+@media (hover:hover){
+  .heroNav:hover{
+    transform:translateY(-50%) scale(1.06);
+    background:rgba(255,255,255,.9);
+    box-shadow:0 12px 26px rgba(0,0,0,.18);
+  }
+}
+.heroNavPrev{left:clamp(12px, 2.2vw, 28px)}
+.heroNavNext{right:clamp(12px, 2.2vw, 28px)}
 .heroDots{
-  margin-top:8px;
+  margin-top:14px;
   display:flex;
   justify-content:center;
-  gap:8px;
+  gap:12px;
 }
 .heroDot{
-  width:8px;
-  height:8px;
+  width:12px;
+  height:12px;
   border-radius:999px;
   border:1px solid rgba(138,31,78,.45);
   background:rgba(138,31,78,.18);
@@ -3200,6 +3208,11 @@ html, body { overflow-x:hidden; }
 .heroDot.is-active{
   background:rgba(138,31,78,.85);
   border-color:rgba(138,31,78,.85);
+}
+
+
+@media (min-width:980px){
+  .heroScrollHint{display:none}
 }
 
 .heroInfoSection{padding-top:8px}
@@ -3245,6 +3258,11 @@ html, body { overflow-x:hidden; }
     height:34px;
     font-size:16px;
   }
+  .heroNavPrev{left:8px}
+  .heroNavNext{right:8px}
+  .heroScrollHint{margin-top:10px}
+  .heroDots{margin-top:10px;gap:10px}
+  .heroDot{width:10px;height:10px}
   .heroInfoGrid{grid-template-columns:1fr;gap:12px}
   .heroCalendarPc{display:none}
   .heroCalendarSp{display:block}
