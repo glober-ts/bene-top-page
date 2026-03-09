@@ -739,6 +739,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   let timer = null;
   let stoppedByUser = false;
+  const DRAG_THRESHOLD = 8;
+
+  let isMouseDragging = false;
+  let dragStartX = 0;
+  let dragStartScrollLeft = 0;
+  let dragDistance = 0;
+  let suppressClick = false;
+
+  const isPcDragEnabled = () => window.matchMedia('(min-width: 980px) and (pointer: fine)').matches;
+
+  const endMouseDrag = () => {
+    if(!isMouseDragging) return;
+    isMouseDragging = false;
+    if(dragDistance < DRAG_THRESHOLD) suppressClick = false;
+    rail.classList.remove('is-dragging');
+    document.body.classList.remove('heroDragNoSelect');
+  };
 
 
   const getIndex = () => {
@@ -807,6 +824,41 @@ document.addEventListener('DOMContentLoaded', ()=>{
   rail.addEventListener('wheel', onUserInteract, {passive:true});
   rail.addEventListener('keydown', onUserInteract);
   rail.addEventListener('scroll', () => updateDots(), {passive:true});
+
+  rail.addEventListener('mousedown', (e) => {
+    if(!isPcDragEnabled() || e.button !== 0) return;
+    isMouseDragging = true;
+    suppressClick = false;
+    dragStartX = e.pageX;
+    dragStartScrollLeft = rail.scrollLeft;
+    dragDistance = 0;
+    rail.classList.add('is-dragging');
+    document.body.classList.add('heroDragNoSelect');
+    onUserInteract();
+  });
+
+  rail.addEventListener('mousemove', (e) => {
+    if(!isMouseDragging) return;
+    const deltaX = e.pageX - dragStartX;
+    dragDistance = Math.max(dragDistance, Math.abs(deltaX));
+    if(dragDistance >= DRAG_THRESHOLD){
+      suppressClick = true;
+    }
+    rail.scrollLeft = dragStartScrollLeft - deltaX;
+  });
+
+  rail.addEventListener('mouseup', endMouseDrag);
+  rail.addEventListener('mouseleave', endMouseDrag);
+  window.addEventListener('mouseup', endMouseDrag);
+
+  cards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      if(!suppressClick) return;
+      e.preventDefault();
+      e.stopPropagation();
+      suppressClick = false;
+    });
+  });
 
   function startAutoplay(){
     if(stoppedByUser || timer) return;
