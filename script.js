@@ -749,6 +749,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   let dragTargetScrollLeft = 0;
   let dragRafId = null;
   let cardPositions = [];
+  let autoplayResetTimer = null;
 
   const isPcDragEnabled = () => window.matchMedia('(min-width: 980px) and (pointer: fine)').matches;
 
@@ -799,10 +800,34 @@ document.addEventListener('DOMContentLoaded', ()=>{
     return nearest;
   };
 
-  const scrollToIndex = (index, smooth=true) => {
+  const moveToIndex = (index, smooth=true) => {
     const i = (index + cards.length) % cards.length;
     rail.scrollTo({ left: cardPositions[i], behavior: smooth ? 'smooth' : 'auto' });
     updateDots(i);
+    return i;
+  };
+
+  const clearAutoplayResetTimer = () => {
+    if(!autoplayResetTimer) return;
+    clearTimeout(autoplayResetTimer);
+    autoplayResetTimer = null;
+  };
+
+  const autoplayMoveNext = () => {
+    const idx = getIndex();
+    const next = idx + 1;
+    if(next < cards.length){
+      moveToIndex(next, true);
+      return;
+    }
+
+    // 先頭へ戻るときは一度だけ即時リセットし、次周のスライドを自然に見せる。
+    moveToIndex(0, false);
+    clearAutoplayResetTimer();
+    autoplayResetTimer = setTimeout(() => {
+      autoplayResetTimer = null;
+      updateDots(0);
+    }, 40);
   };
 
   const updateDots = (active = getIndex()) => {
@@ -825,7 +850,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       dot.addEventListener('click', () => {
         stoppedByUser = true;
         stopAutoplay();
-        scrollToIndex(i);
+        moveToIndex(i);
       });
       dotsWrap.appendChild(dot);
     });
@@ -840,7 +865,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let next = idx + dir;
     if(next >= cards.length) next = 0;
     if(next < 0) next = cards.length - 1;
-    scrollToIndex(next);
+    moveToIndex(next);
   };
 
   if(prevBtn) prevBtn.addEventListener('click', () => move(-1, true));
@@ -894,9 +919,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   function startAutoplay(){
     if(stoppedByUser || timer) return;
-    timer = setInterval(() => move(1, false), 5000);
+    timer = setInterval(() => autoplayMoveNext(), 5000);
   }
   function stopAutoplay(){
+    clearAutoplayResetTimer();
     if(!timer) return;
     clearInterval(timer);
     timer = null;
@@ -908,7 +934,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   window.addEventListener('resize', () => {
     updateCardPositions();
     const idx = getIndex();
-    scrollToIndex(idx, false);
+    moveToIndex(idx, false);
   });
 
   window.addEventListener('load', updateCardPositions);
