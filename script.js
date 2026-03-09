@@ -739,6 +739,48 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   let timer = null;
   let stoppedByUser = false;
+  const DRAG_THRESHOLD = 8;
+
+  let isMouseDragging = false;
+  let dragStartX = 0;
+  let dragStartScrollLeft = 0;
+  let dragDistance = 0;
+  let suppressClick = false;
+  let dragTargetScrollLeft = 0;
+  let dragRafId = null;
+
+  const isPcDragEnabled = () => window.matchMedia('(min-width: 980px) and (pointer: fine)').matches;
+
+  const snapToNearestCard = () => {
+    const nearest = getIndex();
+    rail.scrollTo({ left: cards[nearest].offsetLeft, behavior: 'smooth' });
+    updateDots(nearest);
+  };
+
+  const flushDragScroll = () => {
+    dragRafId = null;
+    rail.scrollLeft = dragTargetScrollLeft;
+  };
+
+  const scheduleDragScroll = () => {
+    if(dragRafId) return;
+    dragRafId = requestAnimationFrame(flushDragScroll);
+  };
+
+  const endMouseDrag = () => {
+    if(!isMouseDragging) return;
+    isMouseDragging = false;
+    if(dragRafId){
+      cancelAnimationFrame(dragRafId);
+      dragRafId = null;
+      rail.scrollLeft = dragTargetScrollLeft;
+    }
+    const didDrag = dragDistance >= DRAG_THRESHOLD;
+    if(!didDrag) suppressClick = false;
+    rail.classList.remove('is-dragging');
+    document.body.classList.remove('heroDragNoSelect');
+    snapToNearestCard();
+  };
 
 
   const getIndex = () => {
@@ -807,6 +849,43 @@ document.addEventListener('DOMContentLoaded', ()=>{
   rail.addEventListener('wheel', onUserInteract, {passive:true});
   rail.addEventListener('keydown', onUserInteract);
   rail.addEventListener('scroll', () => updateDots(), {passive:true});
+
+  rail.addEventListener('mousedown', (e) => {
+    if(!isPcDragEnabled() || e.button !== 0) return;
+    isMouseDragging = true;
+    suppressClick = false;
+    dragStartX = e.pageX;
+    dragStartScrollLeft = rail.scrollLeft;
+    dragTargetScrollLeft = dragStartScrollLeft;
+    dragDistance = 0;
+    rail.classList.add('is-dragging');
+    document.body.classList.add('heroDragNoSelect');
+    onUserInteract();
+  });
+
+  rail.addEventListener('mousemove', (e) => {
+    if(!isMouseDragging) return;
+    const deltaX = e.pageX - dragStartX;
+    dragDistance = Math.max(dragDistance, Math.abs(deltaX));
+    if(dragDistance >= DRAG_THRESHOLD){
+      suppressClick = true;
+    }
+    dragTargetScrollLeft = dragStartScrollLeft - deltaX;
+    scheduleDragScroll();
+  });
+
+  rail.addEventListener('mouseup', endMouseDrag);
+  rail.addEventListener('mouseleave', endMouseDrag);
+  window.addEventListener('mouseup', endMouseDrag);
+
+  cards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      if(!suppressClick) return;
+      e.preventDefault();
+      e.stopPropagation();
+      suppressClick = false;
+    });
+  });
 
   function startAutoplay(){
     if(stoppedByUser || timer) return;
