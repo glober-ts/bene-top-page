@@ -725,3 +725,107 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
   window.addEventListener('load', init);
 })();
+
+/* v127: hero rail nav + dots + autoplay */
+(function(){
+  const rail = document.querySelector('.heroRail');
+  if(!rail) return;
+
+  const cards = Array.from(rail.querySelectorAll('.heroCard'));
+  const prevBtn = document.querySelector('.heroNavPrev');
+  const nextBtn = document.querySelector('.heroNavNext');
+  const dotsWrap = document.querySelector('.heroDots');
+  if(!cards.length) return;
+
+  let timer = null;
+  let stoppedByUser = false;
+
+
+  const getIndex = () => {
+    const left = rail.scrollLeft;
+    let nearest = 0;
+    let min = Infinity;
+    cards.forEach((card, i) => {
+      const d = Math.abs(card.offsetLeft - left);
+      if(d < min){ min = d; nearest = i; }
+    });
+    return nearest;
+  };
+
+  const scrollToIndex = (index, smooth=true) => {
+    const i = (index + cards.length) % cards.length;
+    rail.scrollTo({ left: cards[i].offsetLeft, behavior: smooth ? 'smooth' : 'auto' });
+    updateDots(i);
+  };
+
+  const updateDots = (active = getIndex()) => {
+    if(!dotsWrap) return;
+    Array.from(dotsWrap.children).forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === active);
+      dot.setAttribute('aria-selected', i === active ? 'true' : 'false');
+    });
+  };
+
+  if(dotsWrap){
+    dotsWrap.innerHTML = '';
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'heroDot' + (i === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', `スライド ${i + 1}`);
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      dot.addEventListener('click', () => {
+        stoppedByUser = true;
+        stopAutoplay();
+        scrollToIndex(i);
+      });
+      dotsWrap.appendChild(dot);
+    });
+  }
+
+  const move = (dir, byUser=false) => {
+    if(byUser){
+      stoppedByUser = true;
+      stopAutoplay();
+    }
+    const idx = getIndex();
+    let next = idx + dir;
+    if(next >= cards.length) next = 0;
+    if(next < 0) next = cards.length - 1;
+    scrollToIndex(next);
+  };
+
+  if(prevBtn) prevBtn.addEventListener('click', () => move(-1, true));
+  if(nextBtn) nextBtn.addEventListener('click', () => move(1, true));
+
+  const onUserInteract = () => {
+    stoppedByUser = true;
+    stopAutoplay();
+  };
+  rail.addEventListener('pointerdown', onUserInteract, {passive:true});
+  rail.addEventListener('wheel', onUserInteract, {passive:true});
+  rail.addEventListener('keydown', onUserInteract);
+  rail.addEventListener('scroll', () => updateDots(), {passive:true});
+
+  function startAutoplay(){
+    if(stoppedByUser || timer) return;
+    timer = setInterval(() => move(1, false), 5000);
+  }
+  function stopAutoplay(){
+    if(!timer) return;
+    clearInterval(timer);
+    timer = null;
+  }
+
+  rail.addEventListener('mouseenter', stopAutoplay);
+  rail.addEventListener('mouseleave', startAutoplay);
+
+  window.addEventListener('resize', () => {
+    const idx = getIndex();
+    scrollToIndex(idx, false);
+  });
+
+  startAutoplay();
+  updateDots(0);
+})();
