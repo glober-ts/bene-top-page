@@ -726,50 +726,137 @@ document.addEventListener('DOMContentLoaded', ()=>{
   window.addEventListener('load', init);
 })();
 
-/* v127: hero rail nav + dots + autoplay */
+/* v128: hero transform slider nav + dots + autoplay */
 (function(){
   const rail = document.querySelector('.heroRail');
-  if(!rail) return;
+  const track = rail ? rail.querySelector('.heroTrack') : null;
+  if(!rail || !track) return;
 
-  const cards = Array.from(rail.querySelectorAll('.heroCard'));
+  const cards = Array.from(track.querySelectorAll('.heroCard'));
   const prevBtn = document.querySelector('.heroNavPrev');
   const nextBtn = document.querySelector('.heroNavNext');
   const dotsWrap = document.querySelector('.heroDots');
   if(!cards.length) return;
 
+  const DRAG_THRESHOLD = 8;
+  const AUTOPLAY_MS = 5000;
+  const isPcDragEnabled = () => window.matchMedia('(min-width: 980px) and (pointer: fine)').matches;
+
   let timer = null;
   let stoppedByUser = false;
-  const DRAG_THRESHOLD = 8;
+  let currentIndex = 0;
+  let cardStep = 0;
 
   let isMouseDragging = false;
   let dragStartX = 0;
-  let dragStartScrollLeft = 0;
+  let dragStartTranslateX = 0;
+  let currentTranslateX = 0;
   let dragDistance = 0;
   let suppressClick = false;
-  let dragTargetScrollLeft = 0;
   let dragRafId = null;
-  let cardPositions = [];
+  let dragRafTranslateX = 0;
 
-  const isPcDragEnabled = () => window.matchMedia('(min-width: 980px) and (pointer: fine)').matches;
+  let isLoopJumping = false;
+  const cloneStart = cards[0].cloneNode(true);
+  const cloneEnd = cards[cards.length - 1].cloneNode(true);
+  cloneStart.classList.add('is-clone');
+  cloneEnd.classList.add('is-clone');
+  track.insertBefore(cloneEnd, cards[0]);
+  track.appendChild(cloneStart);
 
-  const updateCardPositions = () => {
-    cardPositions = cards.map((card) => card.offsetLeft);
+  const slides = Array.from(track.querySelectorAll('.heroCard'));
+
+  const setTransition = (enabled) => {
+    track.classList.toggle('is-animated', enabled);
   };
 
-  const snapToNearestCard = () => {
-    const nearest = getIndex();
-    rail.scrollTo({ left: cardPositions[nearest], behavior: 'smooth' });
-    updateDots(nearest);
+  const applyTranslate = (x) => {
+    currentTranslateX = x;
+    track.style.transform = `translate3d(${x}px, 0, 0)`;
   };
 
-  const flushDragScroll = () => {
+  const getVisualIndex = () => currentIndex + 1;
+  const getTranslateForVisualIndex = (visualIndex) => -(cardStep * visualIndex);
+
+  const normalizeIndex = (index) => {
+    if(index < 0) return cards.length - 1;
+    if(index >= cards.length) return 0;
+    return index;
+  };
+
+  const updateMetrics = () => {
+    const firstRealCard = slides[1] || slides[0];
+    cardStep = firstRealCard ? firstRealCard.getBoundingClientRect().width : 0;
+    if(slides.length > 2){
+      const a = slides[1].offsetLeft;
+      const b = slides[2].offsetLeft;
+      if(b > a) cardStep = b - a;
+    }
+    setTransition(false);
+    applyTranslate(getTranslateForVisualIndex(getVisualIndex()));
+    requestAnimationFrame(() => setTransition(true));
+  };
+
+  const updateDots = () => {
+    if(!dotsWrap) return;
+    Array.from(dotsWrap.children).forEach((dot, i) => {
+      const active = i === currentIndex;
+      dot.classList.toggle('is-active', active);
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  };
+
+  const moveToIndex = (index, { animate = true } = {}) => {
+    currentIndex = normalizeIndex(index);
+    setTransition(animate && !isMouseDragging);
+    applyTranslate(getTranslateForVisualIndex(getVisualIndex()));
+    updateDots();
+  };
+
+  const moveBy = (dir, byUser = false) => {
+    if(byUser){
+      stoppedByUser = true;
+      stopAutoplay();
+    }
+
+    const target = currentIndex + dir;
+    const isForwardLoop = target >= cards.length;
+    const isBackwardLoop = target < 0;
+
+    if(isForwardLoop){
+      isLoopJumping = true;
+      setTransition(true);
+      applyTranslate(getTranslateForVisualIndex(cards.length + 1));
+      currentIndex = 0;
+      updateDots();
+      return;
+    }
+
+    if(isBackwardLoop){
+      isLoopJumping = true;
+      setTransition(true);
+      applyTranslate(getTranslateForVisualIndex(0));
+      currentIndex = cards.length - 1;
+      updateDots();
+      return;
+    }
+
+    moveToIndex(target, { animate: true });
+  };
+
+  const onUserInteract = () => {
+    stoppedByUser = true;
+    stopAutoplay();
+  };
+
+  const flushDrag = () => {
     dragRafId = null;
-    rail.scrollLeft = dragTargetScrollLeft;
+    applyTranslate(dragRafTranslateX);
   };
 
-  const scheduleDragScroll = () => {
+  const scheduleDrag = () => {
     if(dragRafId) return;
-    dragRafId = requestAnimationFrame(flushDragScroll);
+    dragRafId = requestAnimationFrame(flushDrag);
   };
 
   const endMouseDrag = () => {
@@ -778,39 +865,27 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(dragRafId){
       cancelAnimationFrame(dragRafId);
       dragRafId = null;
-      rail.scrollLeft = dragTargetScrollLeft;
+      applyTranslate(dragRafTranslateX);
     }
+
+    const moved = currentTranslateX - dragStartTranslateX;
     const didDrag = dragDistance >= DRAG_THRESHOLD;
-    if(!didDrag) suppressClick = false;
     rail.classList.remove('is-dragging');
     document.body.classList.remove('heroDragNoSelect');
-    snapToNearestCard();
-  };
 
+    if(!didDrag){
+      suppressClick = false;
+      moveToIndex(currentIndex, { animate: true });
+      return;
+    }
 
-  const getIndex = () => {
-    const left = rail.scrollLeft;
-    let nearest = 0;
-    let min = Infinity;
-    cardPositions.forEach((position, i) => {
-      const d = Math.abs(position - left);
-      if(d < min){ min = d; nearest = i; }
-    });
-    return nearest;
-  };
-
-  const scrollToIndex = (index, smooth=true) => {
-    const i = (index + cards.length) % cards.length;
-    rail.scrollTo({ left: cardPositions[i], behavior: smooth ? 'smooth' : 'auto' });
-    updateDots(i);
-  };
-
-  const updateDots = (active = getIndex()) => {
-    if(!dotsWrap) return;
-    Array.from(dotsWrap.children).forEach((dot, i) => {
-      dot.classList.toggle('is-active', i === active);
-      dot.setAttribute('aria-selected', i === active ? 'true' : 'false');
-    });
+    const direction = moved < 0 ? 1 : -1;
+    const offsetCards = Math.abs(moved) / cardStep;
+    if(offsetCards > 0.24){
+      moveBy(direction, true);
+    } else {
+      moveToIndex(currentIndex, { animate: true });
+    }
   };
 
   if(dotsWrap){
@@ -823,46 +898,29 @@ document.addEventListener('DOMContentLoaded', ()=>{
       dot.setAttribute('role', 'tab');
       dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
       dot.addEventListener('click', () => {
-        stoppedByUser = true;
-        stopAutoplay();
-        scrollToIndex(i);
+        onUserInteract();
+        moveToIndex(i, { animate: true });
       });
       dotsWrap.appendChild(dot);
     });
   }
 
-  const move = (dir, byUser=false) => {
-    if(byUser){
-      stoppedByUser = true;
-      stopAutoplay();
-    }
-    const idx = getIndex();
-    let next = idx + dir;
-    if(next >= cards.length) next = 0;
-    if(next < 0) next = cards.length - 1;
-    scrollToIndex(next);
-  };
+  if(prevBtn) prevBtn.addEventListener('click', () => moveBy(-1, true));
+  if(nextBtn) nextBtn.addEventListener('click', () => moveBy(1, true));
 
-  if(prevBtn) prevBtn.addEventListener('click', () => move(-1, true));
-  if(nextBtn) nextBtn.addEventListener('click', () => move(1, true));
-
-  const onUserInteract = () => {
-    stoppedByUser = true;
-    stopAutoplay();
-  };
-  rail.addEventListener('pointerdown', onUserInteract, {passive:true});
-  rail.addEventListener('wheel', onUserInteract, {passive:true});
+  rail.addEventListener('pointerdown', onUserInteract, { passive: true });
+  rail.addEventListener('wheel', onUserInteract, { passive: true });
   rail.addEventListener('keydown', onUserInteract);
-  rail.addEventListener('scroll', () => updateDots(), {passive:true});
 
   rail.addEventListener('mousedown', (e) => {
     if(!isPcDragEnabled() || e.button !== 0) return;
     isMouseDragging = true;
     suppressClick = false;
-    dragStartX = e.pageX;
-    dragStartScrollLeft = rail.scrollLeft;
-    dragTargetScrollLeft = dragStartScrollLeft;
     dragDistance = 0;
+    dragStartX = e.pageX;
+    dragStartTranslateX = currentTranslateX;
+    dragRafTranslateX = currentTranslateX;
+    setTransition(false);
     rail.classList.add('is-dragging');
     document.body.classList.add('heroDragNoSelect');
     onUserInteract();
@@ -872,11 +930,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(!isMouseDragging) return;
     const deltaX = e.pageX - dragStartX;
     dragDistance = Math.max(dragDistance, Math.abs(deltaX));
-    if(dragDistance >= DRAG_THRESHOLD){
-      suppressClick = true;
-    }
-    dragTargetScrollLeft = dragStartScrollLeft - deltaX;
-    scheduleDragScroll();
+    if(dragDistance >= DRAG_THRESHOLD) suppressClick = true;
+    dragRafTranslateX = dragStartTranslateX + deltaX;
+    scheduleDrag();
   });
 
   rail.addEventListener('mouseup', endMouseDrag);
@@ -892,10 +948,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
+  track.addEventListener('transitionend', () => {
+    if(!isLoopJumping) return;
+    isLoopJumping = false;
+    setTransition(false);
+    applyTranslate(getTranslateForVisualIndex(getVisualIndex()));
+    requestAnimationFrame(() => setTransition(true));
+  });
+
   function startAutoplay(){
     if(stoppedByUser || timer) return;
-    timer = setInterval(() => move(1, false), 5000);
+    timer = setInterval(() => moveBy(1, false), AUTOPLAY_MS);
   }
+
   function stopAutoplay(){
     if(!timer) return;
     clearInterval(timer);
@@ -905,14 +970,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   rail.addEventListener('mouseenter', stopAutoplay);
   rail.addEventListener('mouseleave', startAutoplay);
 
-  window.addEventListener('resize', () => {
-    updateCardPositions();
-    const idx = getIndex();
-    scrollToIndex(idx, false);
-  });
+  window.addEventListener('resize', updateMetrics);
+  window.addEventListener('load', updateMetrics);
 
-  window.addEventListener('load', updateCardPositions);
-  updateCardPositions();
+  updateMetrics();
+  updateDots();
   startAutoplay();
-  updateDots(0);
-})();
+})();;
