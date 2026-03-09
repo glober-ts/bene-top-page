@@ -3133,7 +3133,7 @@ html, body { overflow-x:hidden; }
 }
 .heroCard{
   display:block;
-  flex:0 0 clamp(380px, 29.5vw, 560px);
+  flex:0 0 clamp(360px, 29vw, 520px);
   border-radius:22px;
   overflow:hidden;
   border:1px solid rgba(230,225,216,1);
@@ -3192,18 +3192,20 @@ html, body { overflow-x:hidden; }
 .heroNavPrev{left:clamp(12px, 2.2vw, 28px)}
 .heroNavNext{right:clamp(12px, 2.2vw, 28px)}
 .heroDots{
-  margin-top:14px;
+  margin-top:18px;
+  margin-bottom:8px;
   display:flex;
   justify-content:center;
   gap:12px;
 }
 .heroDot{
-  width:12px;
-  height:12px;
+  width:14px;
+  height:14px;
   border-radius:999px;
   border:1px solid rgba(138,31,78,.45);
   background:rgba(138,31,78,.18);
   padding:0;
+  cursor:pointer;
 }
 .heroDot.is-active{
   background:rgba(138,31,78,.85);
@@ -3212,6 +3214,9 @@ html, body { overflow-x:hidden; }
 
 
 @media (min-width:980px){
+  .hero > .wrap{
+    padding-inline:clamp(12px, 2vw, 36px);
+  }
   .heroScrollHint{display:none}
 }
 
@@ -3262,12 +3267,68 @@ html, body { overflow-x:hidden; }
   .heroNavNext{right:8px}
   .heroScrollHint{margin-top:10px}
   .heroDots{margin-top:10px;gap:10px}
-  .heroDot{width:10px;height:10px}
+  .heroDot{width:13px;height:13px}
   .heroInfoGrid{grid-template-columns:1fr;gap:12px}
   .heroCalendarPc{display:none}
   .heroCalendarSp{display:block}
   .heroCalendarCard{border:0;border-radius:0}
   .heroCalendarSp iframe{height:336px}
+}
+
+/* ===== v129 top ui refinement ===== */
+.heroNavPrev{left:14px}
+.heroNavNext{right:14px}
+
+@media (hover:hover){
+  .heroNav:hover{
+    background:rgba(255,255,255,.94);
+  }
+}
+
+.yen{
+  font-weight:800;
+  letter-spacing:.01em;
+}
+
+.iconGrid{
+  gap:14px;
+}
+.iconCard{
+  display:block;
+  padding:16px 12px;
+}
+
+.guide{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:14px 14px;
+  transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.guide:hover{
+  background:#fff;
+  border-color:rgba(138,31,78,.4);
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+  transform:translateY(-1px);
+}
+
+.footLinks a{
+  padding:10px 14px;
+  border:1px solid rgba(230,225,216,1);
+  background:#fff;
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease;
+}
+.footLinks a:hover{
+  background:#faf9f7;
+  border-color:rgba(138,31,78,.3);
+  color:var(--text);
+}
+
+@media (max-width:979px){
+  .heroScrollHint{
+    display:block;
+  }
 }
 
 @media (min-width:980px) and (pointer:fine){
