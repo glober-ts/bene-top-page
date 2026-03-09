@@ -748,12 +748,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
   let suppressClick = false;
   let dragTargetScrollLeft = 0;
   let dragRafId = null;
+  let cardPositions = [];
 
   const isPcDragEnabled = () => window.matchMedia('(min-width: 980px) and (pointer: fine)').matches;
 
+  const updateCardPositions = () => {
+    cardPositions = cards.map((card) => card.offsetLeft);
+  };
+
   const snapToNearestCard = () => {
     const nearest = getIndex();
-    rail.scrollTo({ left: cards[nearest].offsetLeft, behavior: 'smooth' });
+    rail.scrollTo({ left: cardPositions[nearest], behavior: 'smooth' });
     updateDots(nearest);
   };
 
@@ -787,8 +792,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const left = rail.scrollLeft;
     let nearest = 0;
     let min = Infinity;
-    cards.forEach((card, i) => {
-      const d = Math.abs(card.offsetLeft - left);
+    cardPositions.forEach((position, i) => {
+      const d = Math.abs(position - left);
       if(d < min){ min = d; nearest = i; }
     });
     return nearest;
@@ -796,7 +801,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   const scrollToIndex = (index, smooth=true) => {
     const i = (index + cards.length) % cards.length;
-    rail.scrollTo({ left: cards[i].offsetLeft, behavior: smooth ? 'smooth' : 'auto' });
+    rail.scrollTo({ left: cardPositions[i], behavior: smooth ? 'smooth' : 'auto' });
     updateDots(i);
   };
 
@@ -901,10 +906,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
   rail.addEventListener('mouseleave', startAutoplay);
 
   window.addEventListener('resize', () => {
+    updateCardPositions();
     const idx = getIndex();
     scrollToIndex(idx, false);
   });
 
+  window.addEventListener('load', updateCardPositions);
+  updateCardPositions();
   startAutoplay();
   updateDots(0);
 })();
