@@ -3117,8 +3117,15 @@ html, body { overflow-x:hidden; }
   gap:clamp(14px, 1.5vw, 28px);
   overflow-x:auto;
   scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  overscroll-behavior-x:contain;
+  will-change:scroll-position;
   padding:4px 0 10px;
   -webkit-overflow-scrolling:touch;
+}
+.heroDragNoSelect,
+.heroDragNoSelect *{
+  user-select:none;
 }
 .heroRail::-webkit-scrollbar{height:8px}
 .heroRail::-webkit-scrollbar-thumb{background:rgba(138,31,78,.35);border-radius:999px}
@@ -3240,4 +3247,15 @@ html, body { overflow-x:hidden; }
   .heroCalendarSp{display:block}
   .heroCalendarCard{border:0;border-radius:0}
   .heroCalendarSp iframe{height:336px}
+}
+
+@media (min-width:980px) and (pointer:fine){
+  .heroRail{
+    cursor:grab;
+  }
+  .heroRail.is-dragging{
+    cursor:grabbing;
+    scroll-behavior:auto;
+    scroll-snap-type:none;
+  }
 }
