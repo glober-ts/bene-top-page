@@ -3370,7 +3370,7 @@ html, body { overflow-x:hidden; }
 /* v130: category cards mobile/list consistency */
 .categorySection .iconCard span:last-child,
 .categorySection .priceCard{
-  font-weight:600;
+  font-weight:500;
 }
 
 @media (max-width:767px){
@@ -3705,4 +3705,30 @@ html, body { overflow-x:hidden; }
   text-decoration:underline;
   background:#f3ece7;
   border-color:#cdbfb5;
+}
+
+
+/* v131: typography hierarchy refinement */
+section[id^="pickup"] .h2,
+.ytSection .h2,
+#cats .categorySectionHeading,
+#features .h2,
+#material .categorySectionHeading{
+  font-weight:600;
+}
+
+.iconCard span:last-child,
+.priceCard,
+.birth strong{
+  font-weight:500;
+}
+
+.name,
+.rankCard p{
+  font-weight:400;
+}
+
+.meta,
+.yen{
+  font-weight:600;
 }
