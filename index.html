@@ -53,7 +53,8 @@ window.BENE_UI = {
 </div>
 </header>
 <main id="top">
-<!-- HERO -->
+<!-- ======================== HERO（ファーストビュー） ======================== -->
+<!-- 役割: ブランドの世界観と主要導線を最初に提示するメインビジュアル。 -->
 <section class="hero">
 <div class="wrap">
 <div aria-label="メインビジュアル" class="heroRail" role="region">
@@ -97,7 +98,8 @@ window.BENE_UI = {
 </div>
 </section>
 
-<!-- PICKUP -->
+<!-- ======================== PickUp（横スクロール商品導線） ======================== -->
+<!-- 役割: 離脱前に注目商品を比較しやすく見せるため、カードを横スクロール表示。 -->
 <section class="section soft" data-reveal="" id="pickup1">
 <div class="wrap">
 <div class="headRow">
@@ -274,7 +276,8 @@ window.BENE_UI = {
 </div>
 </div>
 </section>
-<!-- NEW -->
+<!-- ======================== YouTube（動画導線） ======================== -->
+<!-- 役割: 静止画では伝わりにくい魅力を動画で補い、理解と回遊を促進する。 -->
 
 <section class="section ytSection" data-reveal="">
 <div class="wrap">
@@ -323,7 +326,8 @@ window.BENE_UI = {
 </div>
 </section>
 
-<!-- CATEGORIES -->
+<!-- ======================== カテゴリー（目的別ナビ） ======================== -->
+<!-- 役割: 石種/アイテム種別など、探し方に合わせて入口を整理する。 -->
 <section class="section" data-reveal="" id="cats">
 <div class="wrap">
 <div class="headRow">
@@ -510,8 +514,11 @@ window.BENE_UI = {
 </section>
 </section>
 </main>
+<!-- ======================== NEWS / カレンダー運用情報 ======================== -->
+<!-- 役割: 新着情報・発送予定日・営業日をまとめて確認できる情報エリア。 -->
 <section class="section heroInfoSection" data-reveal="">
 <div class="wrap heroInfoGrid">
+<!-- --- NEWS（新着情報）: 更新が増えても縦スクロールでレイアウト崩れを防ぐ --- -->
 <div class="noticeCard">
 <p class="kicker">NEWS</p>
 <div class="newsCarousel">
@@ -559,6 +566,7 @@ window.BENE_UI = {
 <span class="contactNote">お急ぎの場合は、お気軽にお問い合わせください。</span>
 </p>
 </div>
+<!-- --- カレンダー: PC/SPで別HTMLを読み分け、可読性を維持する --- -->
 <div class="heroCalendarWrap" aria-label="営業カレンダー">
 <div class="heroCalendarHead">
 <h2 class="h2">営業カレンダー</h2>
@@ -576,6 +584,8 @@ window.BENE_UI = {
 <!-- QUICK BANDS -->
 <!-- YOUTUBE -->
 
+<!-- ======================== フッター（店舗情報・共通リンク） ======================== -->
+<!-- 役割: 信頼情報と導線リンクを最終到達点として常設する。 -->
 <section class="section soft footerCalendarSection" id="footerInfo">
   <div class="wrap">
     <footer class="footer">
@@ -596,7 +606,7 @@ window.BENE_UI = {
   </div>
 </section>
 <script>
-/* YouTube player switch (click list -> left player autoplay + title) */
+/* YouTube切り替え: 右リストを押すと左プレイヤーを自動再生し、タイトルも同期する */
 (function(){
   function buildSrc(id){
     const base = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id);
@@ -629,7 +639,7 @@ window.BENE_UI = {
 
     items.forEach(el => el.addEventListener('click', (e)=>{ e.preventDefault(); play(el); }));
 
-    // initial highlight + title from first
+    // 初期状態: 1件目を選択中にして、見出しも1件目の文言を表示
     const first = items[0];
     const t0 = (first.querySelector('.ytMeta strong')?.textContent || '').trim();
     if(t0) titleEl.textContent = t0;
