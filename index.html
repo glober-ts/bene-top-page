@@ -14,6 +14,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&amp;family=Noto+Serif+JP:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="styles.css" rel="stylesheet">
 <script>
+/* ========================================
+   表示設定
+   ・NEWS / YouTube のSP表示行数を制御
+   ・UI調整用のグローバル設定値
+======================================== */
 /* Display config (edit numbers as needed) */
 window.BENE_UI = {
   // Mobile visible "rows" (can be 3 / 4 / 5 or 4.5 etc.)
@@ -53,8 +58,12 @@ window.BENE_UI = {
 </div>
 </header>
 <main id="top">
-<!-- ======================== HERO（ファーストビュー） ======================== -->
-<!-- 役割: ブランドの世界観と主要導線を最初に提示するメインビジュアル。 -->
+<!-- ========================================
+  HERO SECTION
+  ・トップメインビジュアル
+  ・PC: 横スライド
+  ・SP: スワイプ操作
+======================================== -->
 <section class="hero">
 <div class="wrap">
 <div aria-label="メインビジュアル" class="heroRail" role="region">
@@ -98,8 +107,11 @@ window.BENE_UI = {
 </div>
 </section>
 
-<!-- ======================== PickUp（横スクロール商品導線） ======================== -->
-<!-- 役割: 離脱前に注目商品を比較しやすく見せるため、カードを横スクロール表示。 -->
+<!-- ========================================
+  PICK UP SECTION
+  ・注目商品の横スクロール一覧
+  ・一覧導線と商品比較を両立
+======================================== -->
 <section class="section soft" data-reveal="" id="pickup1">
 <div class="wrap">
 <div class="headRow">
@@ -276,8 +288,11 @@ window.BENE_UI = {
 </div>
 </div>
 </section>
-<!-- ======================== YouTube（動画導線） ======================== -->
-<!-- 役割: 静止画では伝わりにくい魅力を動画で補い、理解と回遊を促進する。 -->
+<!-- ========================================
+  YOUTUBE SECTION
+  ・動画コンテンツ導線
+  ・右リスト選択で左プレイヤー切り替え
+======================================== -->
 
 <section class="section ytSection" data-reveal="">
 <div class="wrap">
@@ -326,8 +341,11 @@ window.BENE_UI = {
 </div>
 </section>
 
-<!-- ======================== カテゴリー（目的別ナビ） ======================== -->
-<!-- 役割: 石種/アイテム種別など、探し方に合わせて入口を整理する。 -->
+<!-- ========================================
+  カテゴリー SECTION
+  ・目的別ナビゲーション
+  ・カテゴリ別の商品一覧導線
+======================================== -->
 <section class="section" data-reveal="" id="cats">
 <div class="wrap">
 <div class="headRow">
@@ -514,8 +532,11 @@ window.BENE_UI = {
 </section>
 </section>
 </main>
-<!-- ======================== NEWS / カレンダー運用情報 ======================== -->
-<!-- 役割: 新着情報・発送予定日・営業日をまとめて確認できる情報エリア。 -->
+<!-- ========================================
+  NEWS SECTION
+  ・新着情報の一覧表示
+  ・縦スクロールで更新量に対応
+======================================== -->
 <section class="section heroInfoSection" data-reveal="">
 <div class="wrap heroInfoGrid">
 <!-- --- NEWS（新着情報）: 更新が増えても縦スクロールでレイアウト崩れを防ぐ --- -->
@@ -586,8 +607,18 @@ window.BENE_UI = {
 
 <!-- ======================== フッター（店舗情報・共通リンク） ======================== -->
 <!-- 役割: 信頼情報と導線リンクを最終到達点として常設する。 -->
+<!-- ========================================
+  営業カレンダー / フッター情報 SECTION
+  ・発送予定
+  ・営業カレンダー（PC/SP切り替え）
+======================================== -->
 <section class="section soft footerCalendarSection" id="footerInfo">
   <div class="wrap">
+    <!-- ========================================
+      FOOTER SECTION
+      ・会社情報
+      ・主要リンク導線
+    ======================================== -->
     <footer class="footer">
   <div class="footGrid footGridWithCalendar">
     <div class="footMain">
@@ -606,6 +637,11 @@ window.BENE_UI = {
   </div>
 </section>
 <script>
+/* ========================================
+   インライン処理: YouTube切り替え
+   ・右リストクリックで再生動画を差し替え
+   ・タイトル表示とアクティブ状態を同期
+======================================== */
 /* YouTube切り替え: 右リストを押すと左プレイヤーを自動再生し、タイトルも同期する */
 (function(){
   function buildSrc(id){
@@ -650,6 +686,11 @@ window.BENE_UI = {
 })();
 </script>
 <script>
+/* ========================================
+   インライン処理: HERO右カラム高さ同期
+   ・PCでNEWSカラム高さをヒーローに合わせる
+   ・SPは行数設定に応じてNEWS高さを調整
+======================================== */
 /* v41 HERO: lock right column height to slider so NEWS scrolls and PICK UP doesn't shift */
 (function(){
   function lockHeroSide(){
@@ -687,6 +728,11 @@ window.BENE_UI = {
 })();
 </script>
 <script>
+/* ========================================
+   インライン処理: YouTubeリスト高さ同期
+   ・PCはプレイヤー高さに合わせる
+   ・SPは表示行数設定で上限を計算
+======================================== */
 /* YouTube list height sync: keep list scrolling without stretching video */
 (function(){
   function computeMobileMaxHeight(list){
@@ -719,6 +765,10 @@ window.BENE_UI = {
 })();
 </script>
 <script>
+/* ========================================
+   インライン処理: 旧HEROスライダー制御
+   ・自動再生 / 矢印 / ドット / スワイプ
+======================================== */
 /* HERO slider: auto rotate + buttons */
 (function(){
   function initHeroSlider(){
