@@ -726,7 +726,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
   window.addEventListener('load', init);
 })();
 
-/* v128: hero transform slider nav + dots + autoplay */
+/*
+  v128: HEROスライダー制御（transform方式）
+  目的:
+  - 画像枚数が増えても同じ実装で運用できるよう、1本化した制御にする
+  - 「自動再生・矢印・ドット・ドラッグ」を同一状態で管理し、表示ズレを防ぐ
+*/
 (function(){
   const rail = document.querySelector('.heroRail');
   const track = rail ? rail.querySelector('.heroTrack') : null;
@@ -738,8 +743,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const dotsWrap = document.querySelector('.heroDots');
   if(!cards.length) return;
 
+  // 8px未満は「クリックの手ブレ」とみなし、誤スワイプ扱いを避ける
   const DRAG_THRESHOLD = 8;
+  // 5秒: 内容認知とテンポ感のバランスが取りやすい標準的な間隔
   const AUTOPLAY_MS = 5000;
+  // PCのマウス操作だけドラッグを許可（SPはネイティブスクロール挙動を優先）
   const isPcDragEnabled = () => window.matchMedia('(min-width: 980px) and (pointer: fine)').matches;
 
   let timer = null;
@@ -758,6 +766,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   let dragRafTranslateX = 0;
 
   let isLoopJumping = false;
+  // 無限ループ実現のため先頭/末尾のクローンを挿入し、端到達時の見た目を自然にする
   const cloneStart = cards[0].cloneNode(true);
   const cloneEnd = cards[cards.length - 1].cloneNode(true);
   cloneStart.classList.add('is-clone');
@@ -767,6 +776,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   const slides = Array.from(track.querySelectorAll('.heroCard'));
 
+  // アニメーションON/OFF切り替え（ドラッグ中はOFFにして指/マウス追従を優先）
   const setTransition = (enabled) => {
     track.classList.toggle('is-animated', enabled);
   };
@@ -785,6 +795,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     return index;
   };
 
+  // レイアウト再計算: リサイズ時にカード幅・中央寄せオフセットを再取得
   const updateMetrics = () => {
     const firstRealCard = slides[1] || slides[0];
     cardStep = firstRealCard ? firstRealCard.getBoundingClientRect().width : 0;
@@ -795,6 +806,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
     railOffset = 0;
+    // SPは両端余白を均して中央寄せ表示にし、見切れ時も視線が安定するよう調整
     if(window.matchMedia('(max-width: 979px)').matches && firstRealCard){
       railOffset = (rail.clientWidth - firstRealCard.getBoundingClientRect().width) / 2;
     }
@@ -804,6 +816,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     requestAnimationFrame(() => setTransition(true));
   };
 
+  // ドットUI同期: 現在インデックスを視覚/ARIAの両方に反映
   const updateDots = () => {
     if(!dotsWrap) return;
     Array.from(dotsWrap.children).forEach((dot, i) => {
@@ -813,6 +826,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   };
 
+  // 指定インデックスへ移動（矢印/ドット/自動再生の共通入口）
   const moveToIndex = (index, { animate = true } = {}) => {
     currentIndex = normalizeIndex(index);
     setTransition(animate && !isMouseDragging);
@@ -820,6 +834,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     updateDots();
   };
 
+  // 前後移動: ループ境界はクローンへ一度遷移後、transitionendで実体スライドへ戻す
   const moveBy = (dir, byUser = false) => {
     if(byUser){
       stoppedByUser = true;
@@ -851,11 +866,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
     moveToIndex(target, { animate: true });
   };
 
+  // ユーザー操作後は自動再生を停止（勝手に動くストレスを避けるため）
   const onUserInteract = () => {
     stoppedByUser = true;
     stopAutoplay();
   };
 
+  // rAFでtransformを間引き、mousemove連打時の描画負荷を抑える
   const flushDrag = () => {
     dragRafId = null;
     applyTranslate(dragRafTranslateX);
@@ -866,6 +883,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     dragRafId = requestAnimationFrame(flushDrag);
   };
 
+  // ドラッグ終了判定: しきい値超えのみページ送りし、誤操作を抑制
   const endMouseDrag = () => {
     if(!isMouseDragging) return;
     isMouseDragging = false;
@@ -887,6 +905,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
     const direction = moved < 0 ? 1 : -1;
+    // 0.24枚分以上動いた時のみ送る（少しのズレで誤遷移しないよう余裕を持たせる）
     const offsetCards = Math.abs(moved) / cardStep;
     if(offsetCards > 0.24){
       moveBy(direction, true);
@@ -895,6 +914,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   };
 
+  // ドット生成: スライド数に追従し、運用時の手修正を不要にする
   if(dotsWrap){
     dotsWrap.innerHTML = '';
     cards.forEach((_, i) => {
@@ -912,6 +932,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   }
 
+  // 矢印ナビゲーション
   if(prevBtn) prevBtn.addEventListener('click', () => moveBy(-1, true));
   if(nextBtn) nextBtn.addEventListener('click', () => moveBy(1, true));
 
@@ -919,6 +940,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   rail.addEventListener('wheel', onUserInteract, { passive: true });
   rail.addEventListener('keydown', onUserInteract);
 
+  // ドラッグ開始（PCのみ）
   rail.addEventListener('mousedown', (e) => {
     if(!isPcDragEnabled() || e.button !== 0) return;
     isMouseDragging = true;
@@ -933,6 +955,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     onUserInteract();
   });
 
+  // ドラッグ中: transformを更新
   rail.addEventListener('mousemove', (e) => {
     if(!isMouseDragging) return;
     const deltaX = e.pageX - dragStartX;
@@ -946,6 +969,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   rail.addEventListener('mouseleave', endMouseDrag);
   window.addEventListener('mouseup', endMouseDrag);
 
+  // クリック判定: ドラッグ後にリンク遷移してしまう事故クリックを抑止
   cards.forEach((card) => {
     card.addEventListener('click', (e) => {
       if(!suppressClick) return;
@@ -955,6 +979,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   });
 
+  // 無限ループ補正: クローン位置から実体位置へ瞬時に戻し、つなぎ目を隠す
   track.addEventListener('transitionend', () => {
     if(!isLoopJumping) return;
     isLoopJumping = false;
@@ -963,11 +988,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
     requestAnimationFrame(() => setTransition(true));
   });
 
+  // autoplay: ユーザー操作が入るまで一定間隔で次へ送る
   function startAutoplay(){
     if(stoppedByUser || timer) return;
     timer = setInterval(() => moveBy(1, false), AUTOPLAY_MS);
   }
 
+  // autoplay停止: 手動操作・ホバー時に意図せぬ移動を止める
   function stopAutoplay(){
     if(!timer) return;
     clearInterval(timer);
