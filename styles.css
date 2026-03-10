@@ -3521,3 +3521,60 @@ html, body { overflow-x:hidden; }
   text-decoration:underline;
   text-decoration-color:currentColor;
 }
+
+/* ===== v135: menu hover/background consistency + remove submenu outer frame ===== */
+#gnav .menu-link,
+#gnav .gnavLink{
+  border:1px solid #ddd6d0;
+  border-radius:14px;
+  background:#f8f5f2;
+  color:#222;
+  text-decoration:none;
+  transition:color .2s ease, background-color .2s ease, border-color .2s ease;
+}
+#gnav .menu-link:hover,
+#gnav .gnavLink:hover{
+  color:#8A1F4E;
+  text-decoration:underline;
+  background:#f3ece7;
+  border-color:#cdbfb5;
+}
+
+#gnav .submenu{
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  padding:0;
+  list-style:none;
+}
+#gnav .submenu li{
+  margin:0 0 8px;
+  padding:0;
+  list-style:none;
+  border:0;
+  background:transparent;
+}
+#gnav .submenu li:last-child{ margin-bottom:0; }
+#gnav .submenu a{
+  padding:14px 16px;
+  border:1px solid #ddd6d0;
+  border-radius:14px;
+  background:#f8f5f2;
+  color:#222;
+  text-decoration:none;
+  transition:color .2s ease, background-color .2s ease, border-color .2s ease;
+}
+#gnav .submenu a:hover{
+  color:#8A1F4E;
+  text-decoration:underline;
+  background:#f3ece7;
+  border-color:#cdbfb5;
+}
+
+#gnav .menu-item,
+#gnav .menu-item.is-open{
+  border:0;
+  background:transparent;
+  box-shadow:none;
+}
