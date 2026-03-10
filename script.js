@@ -733,6 +733,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
   - 「自動再生・矢印・ドット・ドラッグ」を同一状態で管理し、表示ズレを防ぐ
 */
 (function(){
+  // ----------------------------------------
+  // Hero slider 初期化
+  // ・対象DOMを取得し、以降の処理対象を確定
+  // ・要素不足時は安全に処理を中断
+  // ----------------------------------------
   const rail = document.querySelector('.heroRail');
   const track = rail ? rail.querySelector('.heroTrack') : null;
   if(!rail || !track) return;
@@ -743,9 +748,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const dotsWrap = document.querySelector('.heroDots');
   if(!cards.length) return;
 
-  // 8px未満は「クリックの手ブレ」とみなし、誤スワイプ扱いを避ける
+  // ----------------------------------------
+  // Hero 重要パラメータ
+  // ----------------------------------------
+  // ドラッグ判定距離(px)
+  // 小さいとクリック判定が取りづらくなるため、誤操作回避を優先
   const DRAG_THRESHOLD = 8;
-  // 5秒: 内容認知とテンポ感のバランスが取りやすい標準的な間隔
+  // autoplay間隔(ms)
+  // 5000ms: 内容認知とテンポ感のバランスを取る標準値
   const AUTOPLAY_MS = 5000;
   // PCのマウス操作だけドラッグを許可（SPはネイティブスクロール挙動を優先）
   const isPcDragEnabled = () => window.matchMedia('(min-width: 980px) and (pointer: fine)').matches;
@@ -914,7 +924,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
   };
 
-  // ドット生成: スライド数に追従し、運用時の手修正を不要にする
+  // ----------------------------------------
+  // Dots navigation
+  // ・スライド枚数に応じてドットを自動生成
+  // ・クリックで対象スライドへ移動
+  // ----------------------------------------
   if(dotsWrap){
     dotsWrap.innerHTML = '';
     cards.forEach((_, i) => {
@@ -932,7 +946,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     });
   }
 
-  // 矢印ナビゲーション
+  // ----------------------------------------
+  // Arrow navigation
+  // ・前へ / 次へボタンで1枚単位移動
+  // ・手動操作としてautoplayを停止
+  // ----------------------------------------
   if(prevBtn) prevBtn.addEventListener('click', () => moveBy(-1, true));
   if(nextBtn) nextBtn.addEventListener('click', () => moveBy(1, true));
 
@@ -940,7 +958,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
   rail.addEventListener('wheel', onUserInteract, { passive: true });
   rail.addEventListener('keydown', onUserInteract);
 
-  // ドラッグ開始（PCのみ）
+  // ----------------------------------------
+  // Drag / Swipe（PCドラッグ）
+  // ・mousedownでドラッグ開始
+  // ・mousemoveで追従表示
+  // ・mouseup / mouseleaveで確定
+  // ----------------------------------------
   rail.addEventListener('mousedown', (e) => {
     if(!isPcDragEnabled() || e.button !== 0) return;
     isMouseDragging = true;
@@ -969,7 +992,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
   rail.addEventListener('mouseleave', endMouseDrag);
   window.addEventListener('mouseup', endMouseDrag);
 
-  // クリック判定: ドラッグ後にリンク遷移してしまう事故クリックを抑止
+  // ----------------------------------------
+  // Click判定
+  // ・ドラッグ成立時はクリック遷移を抑止
+  // ・意図しないリンク遷移を防止
+  // ----------------------------------------
   cards.forEach((card) => {
     card.addEventListener('click', (e) => {
       if(!suppressClick) return;
@@ -988,6 +1015,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     requestAnimationFrame(() => setTransition(true));
   });
 
+  // ----------------------------------------
+  // Hero autoplay
+  // ・一定時間ごとに次のカードへ移動
+  // ・ユーザー操作後は停止
+  // ・ホバー中は停止、離脱で再開
+  // ----------------------------------------
   // autoplay: ユーザー操作が入るまで一定間隔で次へ送る
   function startAutoplay(){
     if(stoppedByUser || timer) return;

@@ -36,16 +36,19 @@ img{display:block;max-width:100%}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:999px;border:1px solid rgba(230,225,216,1);background:#fff;font-weight:800;font-size:13px}
 .btn.primary{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-700));box-shadow:0 12px 22px rgba(138,31,78,.22)}
 
-/* ======================== HERO（メインビジュアル） ========================
-   目的: 第一印象を決めるため、余白と角丸を強めて上品な見え方を優先。 */
-.hero{padding:18px 0 10px}
-.heroGrid{display:grid;grid-template-columns:1.55fr .75fr;gap:14px;align-items:stretch}
+/* ========================================
+   HERO SECTION
+   トップメインビジュアルのレイアウト
+   PC: 横スライド / SP: 1枚表示・スワイプ
+======================================== */
+.hero{padding:18px 0 10px} /* 上:ヘッダーとの間隔 / 下:次セクションへのつなぎ余白 */
+.heroGrid{display:grid;grid-template-columns:1.55fr .75fr;gap:14px;align-items:stretch} /* 左(メイン) : 右(補助情報) の比率 */
 .slider{position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(230,225,216,1);box-shadow:var(--shadow);background:#fff}
 .slides{display:flex}
 .slide{min-width:100%;display:none}
 .slide.is-active{display:block}
 .slide img{width:100%;aspect-ratio:16/9;object-fit:cover}
-.navBtn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:999px;border:1px solid rgba(230,225,216,1);background:rgba(255,255,255,.88);cursor:pointer}
+.navBtn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:999px;border:1px solid rgba(230,225,216,1);background:rgba(255,255,255,.88);cursor:pointer} /* 40px: タップしやすさと圧迫感のバランス */
 .navBtn.prev{left:10px}
 .navBtn.next{right:10px}
 .dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:8px}
@@ -84,10 +87,13 @@ img{display:block;max-width:100%}
 .ic{display:block;font-size:20px}
 .iconCard span:last-child{display:block;font-size:12px;color:var(--muted);margin-top:6px}
 
-/* ======================== PickUp（商品横スクロール） ========================
-   目的: 情報量を確保しつつ、縦方向の圧迫を避けるため横スクロールを採用。 */
-.rowScroll{display:flex;gap:12px;overflow:auto;padding:6px 2px 10px;scroll-snap-type:x mandatory}
-.rankCard{min-width:170px;scroll-snap-align:start;border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden;position:relative}
+/* ========================================
+   PICK UP SECTION
+   注目商品カードの横スクロール表示
+   1画面内で比較しやすい導線を構成
+======================================== */
+.rowScroll{display:flex;gap:12px;overflow:auto;padding:6px 2px 10px;scroll-snap-type:x mandatory} /* 12px: カードの分離感を保つ基本間隔 */
+.rankCard{min-width:170px;scroll-snap-align:start;border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden;position:relative} /* 170px: SPでも商品名が潰れにくい最小幅 */
 .rankCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .rankNo{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(138,31,78,.92);color:#fff;font-weight:900;font-size:13px}
 .rankCard p{margin:10px 10px 12px;font-size:12px;color:var(--text)}
@@ -124,8 +130,11 @@ img{display:block;max-width:100%}
 .guide{border-radius:16px;border:1px solid rgba(230,225,216,1);background:#faf9f7;padding:12px 12px;text-align:center;font-weight:900;font-size:13px}
 .guide:hover{background:#fff;border-color:rgba(138,31,78,.28)}
 
-/* ======================== フッター（共通導線） ========================
-   目的: 会社情報・ガイド系リンクを最下部に集約し、迷子を防ぐ。 */
+/* ========================================
+   FOOTER SECTION
+   会社情報と補助リンクの共通導線
+   最下部で問い合わせ・ガイドへ誘導
+======================================== */
 .footer{border-top:1px solid rgba(230,225,216,1);background:#fff;padding:26px 0 40px}
 .footGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;align-items:start}
 .small{margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.8}
@@ -152,8 +161,11 @@ img{display:block;max-width:100%}
 .yen{display:inline-block;margin-top:4px;font-weight:700;color:var(--accent)}
 
 
-/* ======================== NEWS（新着情報） ========================
-   理由: 更新件数が増えてもレイアウトを壊さないよう、縦スクロール前提。 */
+/* ========================================
+   NEWS SECTION
+   新着情報の縦スクロール一覧
+   更新件数が増えても高さを一定に維持
+======================================== */
 .newsList{
   border-radius:14px;
   border:1px solid rgba(230,225,216,1);
@@ -161,7 +173,7 @@ img{display:block;max-width:100%}
   padding:8px;
   display:flex;
   flex-direction:column;
-  gap:8px;
+  gap:8px; /* 各ニュース項目の視認性を保つ縦間隔 */
   
   overflow-y:auto;
 }
@@ -194,12 +206,15 @@ img{display:block;max-width:100%}
 }
 .newsList::-webkit-scrollbar-track{background: rgba(250,249,247,1)}
 
-/* ======================== YouTube（動画導線） ========================
-   理由: 動画リスト側をスクロール可能にし、プレイヤー比率を維持する。 */
+/* ========================================
+   YOUTUBE SECTION
+   動画プレイヤー + 動画リストの2カラム構成
+   リスト側スクロールで情報量と見やすさを両立
+======================================== */
 .ytSection{padding-top:8px}
 .ytGrid{
   display:grid;
-  grid-template-columns: 1.35fr .65fr;
+  grid-template-columns: 1.35fr .65fr; /* 左:プレイヤーを広め、右:一覧を補助幅に設定 */
   gap:12px;
   align-items:stretch;
 }
