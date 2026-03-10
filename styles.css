@@ -3508,3 +3508,16 @@ html, body { overflow-x:hidden; }
 .menu-overlay{ pointer-events:none; }
 .menu-overlay.is-open{ pointer-events:auto; }
 #gnav .menu-link{ box-sizing:border-box; }
+
+/* ===== v134: unify hover style for parent links with/without submenu ===== */
+#gnav .menu-link,
+#gnav .gnavLink{
+  text-decoration:none;
+  transition:color .2s ease, text-decoration-color .2s ease;
+}
+#gnav .menu-link:hover,
+#gnav .gnavLink:hover{
+  color:#8A1F4E;
+  text-decoration:underline;
+  text-decoration-color:currentColor;
+}
