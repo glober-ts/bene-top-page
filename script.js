@@ -1044,3 +1044,71 @@ document.addEventListener('DOMContentLoaded', ()=>{
   updateDots();
   startAutoplay();
 })();;
+
+/* v131: shared drawer submenu toggle for PC/SP without duplicating menu DOM */
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.getElementById('gnav');
+  if(!nav) return;
+
+  const ensureSubmenuItems = () => {
+    const topItems = Array.from(nav.querySelectorAll(':scope .gnavList > .gnavItem'));
+    const itemCategory = topItems.find((li)=>{
+      const txt = (li.querySelector(':scope > .gnavLink')?.textContent || '').trim();
+      return txt.includes('アイテム');
+    });
+    const submenu = itemCategory ? itemCategory.querySelector(':scope > .gnavSub') : null;
+    if(!submenu) return;
+
+    const appendIfMissing = (href, label) => {
+      const exists = Array.from(submenu.querySelectorAll('a')).some((a)=> (a.getAttribute('href') || '').includes(href));
+      if(exists) return;
+      const li = document.createElement('li');
+      li.innerHTML = `<a class="gnavSublink" href="${href}" rel="noopener" target="_blank">　${label}</a>`;
+      submenu.appendChild(li);
+    };
+
+    appendIfMissing('/chain/', 'チェーン・金具');
+    appendIfMissing('/care/', 'お手入れ');
+  };
+
+  ensureSubmenuItems();
+
+  const items = Array.from(nav.querySelectorAll(':scope .gnavList > .gnavItem'));
+  items.forEach((item, index) => {
+    const parentLink = item.querySelector(':scope > .gnavLink');
+    const submenu = item.querySelector(':scope > .gnavSub');
+    if(!parentLink || !submenu) return;
+
+    item.classList.add('menu-item');
+    submenu.classList.add('submenu');
+
+    const wrap = document.createElement('div');
+    wrap.className = 'gnavTopWrap';
+    parentLink.before(wrap);
+    wrap.appendChild(parentLink);
+
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'submenu-toggle';
+    toggle.setAttribute('aria-label', `${parentLink.textContent.trim()}の下階層を開閉`);
+    toggle.setAttribute('aria-expanded', 'false');
+    wrap.appendChild(toggle);
+
+    if(index === 0){
+      item.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    toggle.addEventListener('click', () => {
+      const open = item.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
+  // keep links navigable even when other legacy handlers exist
+  nav.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if(!link) return;
+    e.stopPropagation();
+  }, true);
+});

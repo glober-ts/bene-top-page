@@ -3366,3 +3366,105 @@ html, body { overflow-x:hidden; }
     transition:none;
   }
 }
+
+/* ===== v130: unified hamburger for PC/SP ===== */
+.hamburger{
+  color:#8f7a70;
+}
+.hamburgerBars{
+  width:16px;
+  height:2px;
+  display:block;
+  border-radius:2px;
+  background:currentColor;
+  box-shadow:0 -5px 0 currentColor, 0 5px 0 currentColor;
+}
+
+@media (min-width:980px){
+  .hamburger,
+  #menuBtn{
+    display:grid !important;
+  }
+  .headerQuick{
+    gap:12px;
+  }
+  .gnavBackdrop,
+  .gnavDrawer,
+  #gnav.gnavDrawer{
+    display:block !important;
+  }
+  .gnavBackdrop{
+    background:rgba(22, 16, 12, .28);
+  }
+  .gnavDrawer{
+    width:min(420px, 34vw);
+    border-left:1px solid rgba(191, 148, 125, .28);
+    box-shadow:-28px 0 54px rgba(0,0,0,.18);
+  }
+  .gnavInner{
+    padding:76px 28px 34px;
+  }
+  .gnavTitle{
+    font-size:11px;
+    letter-spacing:.2em;
+    margin-bottom:14px;
+  }
+  .gnavList{
+    gap:12px;
+  }
+  .gnavLink{
+    padding:13px 14px;
+    font-size:15px;
+  }
+  .gnavSublink{
+    padding:10px 14px;
+    font-size:14px;
+    line-height:1.7;
+  }
+}
+
+/* ===== v131: unified drawer submenu behavior for PC/SP ===== */
+#gnav .gnavItem.menu-item > .gnavSub.submenu{
+  display:none;
+}
+#gnav .gnavItem.menu-item.is-open > .gnavSub.submenu{
+  display:grid;
+}
+#gnav .gnavItem.menu-item{
+  position:relative;
+}
+#gnav .gnavTopWrap{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+#gnav .gnavTopWrap > .gnavLink{
+  flex:1;
+}
+#gnav .submenu-toggle{
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.12);
+  background:#fff;
+  color:#8f7a70;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  flex:0 0 auto;
+}
+#gnav .submenu-toggle::before{
+  content:'+';
+  font-size:18px;
+  line-height:1;
+}
+#gnav .menu-item.is-open > .gnavTopWrap .submenu-toggle::before{
+  content:'−';
+}
+
+.menu-overlay{
+  pointer-events:none;
+}
+.menu-overlay.is-open{
+  pointer-events:auto;
+}
