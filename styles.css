@@ -3317,6 +3317,56 @@ html, body { overflow-x:hidden; }
 .iconGrid{
   gap:14px;
 }
+
+.categorySection + .categorySection{
+  padding-top:8px;
+}
+
+.categorySectionHeading{
+  display:inline-flex;
+  align-items:center;
+  padding:10px 18px;
+  border-radius:999px;
+  background:#f6efea;
+  border:1px solid #e9dfd8;
+  color:#7a5a63;
+  font-size:14px;
+  letter-spacing:.08em;
+  line-height:1;
+}
+
+.categoryQuickGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+
+.categoryQuickGrid .priceCard{
+  min-height:56px;
+}
+
+.categoryQuickGrid--four{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+@media (max-width:979px){
+  .categorySection + .categorySection{
+    padding-top:2px;
+  }
+
+  .categoryQuickGrid,
+  .categoryQuickGrid--four{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media (max-width:560px){
+  .categoryQuickGrid,
+  .categoryQuickGrid--four{
+    grid-template-columns:1fr;
+  }
+}
+
 .iconCard{
   display:block;
   padding:16px 12px;
