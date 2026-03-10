@@ -36,7 +36,8 @@ img{display:block;max-width:100%}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:999px;border:1px solid rgba(230,225,216,1);background:#fff;font-weight:800;font-size:13px}
 .btn.primary{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-700));box-shadow:0 12px 22px rgba(138,31,78,.22)}
 
-/* Hero */
+/* ======================== HERO（メインビジュアル） ========================
+   目的: 第一印象を決めるため、余白と角丸を強めて上品な見え方を優先。 */
 .hero{padding:18px 0 10px}
 .heroGrid{display:grid;grid-template-columns:1.55fr .75fr;gap:14px;align-items:stretch}
 .slider{position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(230,225,216,1);box-shadow:var(--shadow);background:#fff}
@@ -83,7 +84,8 @@ img{display:block;max-width:100%}
 .ic{display:block;font-size:20px}
 .iconCard span:last-child{display:block;font-size:12px;color:var(--muted);margin-top:6px}
 
-/* Ranking row */
+/* ======================== PickUp（商品横スクロール） ========================
+   目的: 情報量を確保しつつ、縦方向の圧迫を避けるため横スクロールを採用。 */
 .rowScroll{display:flex;gap:12px;overflow:auto;padding:6px 2px 10px;scroll-snap-type:x mandatory}
 .rankCard{min-width:170px;scroll-snap-align:start;border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden;position:relative}
 .rankCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
@@ -122,7 +124,8 @@ img{display:block;max-width:100%}
 .guide{border-radius:16px;border:1px solid rgba(230,225,216,1);background:#faf9f7;padding:12px 12px;text-align:center;font-weight:900;font-size:13px}
 .guide:hover{background:#fff;border-color:rgba(138,31,78,.28)}
 
-/* Footer */
+/* ======================== フッター（共通導線） ========================
+   目的: 会社情報・ガイド系リンクを最下部に集約し、迷子を防ぐ。 */
 .footer{border-top:1px solid rgba(230,225,216,1);background:#fff;padding:26px 0 40px}
 .footGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;align-items:start}
 .small{margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.8}
@@ -149,7 +152,8 @@ img{display:block;max-width:100%}
 .yen{display:inline-block;margin-top:4px;font-weight:700;color:var(--accent)}
 
 
-/* NEWS (4 lines visible + vertical scroll) */
+/* ======================== NEWS（新着情報） ========================
+   理由: 更新件数が増えてもレイアウトを壊さないよう、縦スクロール前提。 */
 .newsList{
   border-radius:14px;
   border:1px solid rgba(230,225,216,1);
@@ -190,7 +194,8 @@ img{display:block;max-width:100%}
 }
 .newsList::-webkit-scrollbar-track{background: rgba(250,249,247,1)}
 
-/* YouTube section */
+/* ======================== YouTube（動画導線） ========================
+   理由: 動画リスト側をスクロール可能にし、プレイヤー比率を維持する。 */
 .ytSection{padding-top:8px}
 .ytGrid{
   display:grid;
