@@ -3363,7 +3363,29 @@ html, body { overflow-x:hidden; }
 @media (max-width:560px){
   .categoryQuickGrid,
   .categoryQuickGrid--four{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+/* v130: category cards mobile/list consistency */
+.categorySection .iconCard span:last-child,
+.categorySection .priceCard{
+  font-weight:600;
+}
+
+@media (max-width:767px){
+  .categorySection .iconGrid,
+  .categorySection .categoryQuickGrid,
+  .categorySection .categoryQuickGrid--four{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .categorySection .iconCard{
+    min-height:108px;
+  }
+
+  .categorySection .priceCard{
+    min-height:60px;
   }
 }
 
