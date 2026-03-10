@@ -524,7 +524,8 @@ window.BENE_UI = {
 <p class="kicker">NEWS</p>
 <div class="newsCarousel">
 <button aria-label="上へ" class="newsBtn up" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M18 15l-6-6-6 6"></path></svg></button>
-<div aria-label="ニュース一覧" class="newsList" role="list">
+<div class="news-list-wrap">
+<div aria-label="ニュース一覧" class="newsList news-list" role="list">
 <a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
 <time datetime="2026-02-20">2026.02.20</time>
 <span>ホワイトデー特集：今なら間に合うラインナップ</span>
@@ -574,9 +575,10 @@ window.BENE_UI = {
 <span>ご利用ガイド：配送・お支払いを更新</span>
 </a>
 </div>
+</div>
 <button aria-label="下へ" class="newsBtn down" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button>
 </div>
-<div class="pillRow">
+<div class="pillRow news-tags">
 <span class="pill">工房仕立て</span>
 <span class="pill">一点もの</span>
 <span class="pill">希少石</span>
