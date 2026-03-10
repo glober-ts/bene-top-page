@@ -3732,3 +3732,115 @@ section[id^="pickup"] .h2,
 .yen{
   font-weight:600;
 }
+
+/* ===== v131 footer navigation refinement ===== */
+.site-footer{
+  margin-top:64px;
+  padding:40px 20px 56px;
+  border-top:1px solid #ece6e0;
+  background:#fff;
+}
+.footer-inner{
+  max-width:1200px;
+  margin:0 auto;
+}
+.footer-grid{
+  display:grid;
+  gap:28px;
+}
+.footer-block{
+  min-width:0;
+}
+.footer-title{
+  margin:0 0 14px;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.08em;
+  color:#6f5960;
+}
+.footer-links{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.footer-links li + li{
+  margin-top:10px;
+}
+.footer-links a{
+  color:#222;
+  text-decoration:none;
+  font-size:14px;
+  line-height:1.8;
+  transition:color .2s ease, text-decoration-color .2s ease;
+}
+.footer-links a:hover{
+  color:#8a1f4e;
+  text-decoration:underline;
+}
+
+.footer-copyright{
+  margin-top:32px;
+  text-align:center;
+  font-size:12px;
+  line-height:1.7;
+  color:#8a8a8a;
+}
+@media (min-width:768px){
+  .footer-grid{
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:40px;
+  }
+}
+@media (max-width:767px){
+  .site-footer{
+    margin-top:44px;
+    padding:32px 18px 44px;
+  }
+}
+
+/* ===== v132 trust service section ===== */
+.trustSection{
+  padding-top:24px;
+  padding-bottom:12px;
+}
+.trustTitle{
+  margin-bottom:18px;
+}
+.trust-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.trust-item{
+  text-align:center;
+  padding:18px 12px;
+  border:1px solid #e8e3de;
+  border-radius:16px;
+  background:#fff;
+  color:var(--text);
+  text-decoration:none;
+  transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.trust-item img{
+  width:36px;
+  height:auto;
+  margin-bottom:10px;
+}
+.trust-item p{
+  margin:0;
+  font-size:14px;
+  font-weight:500;
+  line-height:1.5;
+}
+@media (hover:hover){
+  .trust-item:hover{
+    border-color:rgba(138,31,78,.28);
+    box-shadow:0 10px 24px rgba(0,0,0,.06);
+    transform:translateY(-1px);
+  }
+}
+@media (min-width:768px){
+  .trust-grid{
+    grid-template-columns:repeat(5,minmax(0,1fr));
+  }
+}
