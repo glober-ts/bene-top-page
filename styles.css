@@ -4031,3 +4031,35 @@ section[id^="pickup"] .h2,
     max-height:360px !important;
   }
 }
+
+/* ===== v135 PC: align NEWS and side column heights ===== */
+.news-info-layout{
+  display:grid;
+  gap:24px;
+}
+
+@media (min-width:1024px){
+  .news-info-layout{
+    grid-template-columns:minmax(0,1.8fr) minmax(320px,1fr);
+    align-items:stretch !important;
+  }
+
+  .news-column{
+    display:flex !important;
+    min-height:100%;
+  }
+
+  .news-card{
+    display:flex !important;
+    flex-direction:column !important;
+    height:100% !important;
+    min-height:0 !important;
+  }
+
+  .side-info-column{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:24px !important;
+    height:100%;
+  }
+}
