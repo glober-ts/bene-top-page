@@ -3247,9 +3247,17 @@ html, body { overflow-x:hidden; }
 .heroInfoSection{padding-top:8px}
 .heroInfoGrid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:1fr;
   gap:14px;
   align-items:start;
+}
+.news-info-layout{
+  display:grid;
+  gap:14px;
+}
+.side-info-column{
+  display:grid;
+  gap:20px;
 }
 .heroCalendarWrap{
   border-radius:24px;
@@ -3258,13 +3266,23 @@ html, body { overflow-x:hidden; }
   box-shadow:var(--shadow);
   padding:14px;
 }
-.heroCalendarHead{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:10px}
-.heroCalendarHead .h2{margin:0;font-size:16px}
-.heroCalendarHead .more{font-size:12px}
 .heroCalendarCard{border:1px solid var(--line, rgba(0,0,0,.10));border-radius:16px;overflow:hidden;background:#fff}
 .heroCalendarCard iframe{display:block;width:100%;border:0;background:#fff}
 .heroCalendarPc iframe{height:296px}
 .heroCalendarSp{display:none}
+
+
+@media (min-width:1024px){
+  .heroInfoGrid.news-info-layout{
+    grid-template-columns:minmax(0,1.8fr) minmax(320px,1fr);
+    align-items:start;
+    gap:24px;
+  }
+  .heroInfoGrid.news-info-layout .side-info-column{
+    gap:24px;
+    align-content:start;
+  }
+}
 
 .footGridWithCalendar{grid-template-columns:minmax(0,1fr)}
 .footMain{padding-top:0}
@@ -3293,6 +3311,8 @@ html, body { overflow-x:hidden; }
   .heroDots{margin-top:10px;gap:10px}
   .heroDot{width:13px;height:13px}
   .heroInfoGrid{grid-template-columns:1fr;gap:12px}
+  .news-info-layout{gap:12px}
+  .side-info-column{gap:12px}
   .heroCalendarPc{display:none}
   .heroCalendarSp{display:block}
   .heroCalendarCard{border:0;border-radius:0}
@@ -3842,5 +3862,62 @@ section[id^="pickup"] .h2,
 @media (min-width:768px){
   .trust-grid{
     grid-template-columns:repeat(5,minmax(0,1fr));
+  }
+}
+
+
+/* ===== v130 news/side alignment refinement ===== */
+.heroInfoSection .news-column.news-card{
+  display:flex;
+  flex-direction:column;
+}
+.heroInfoSection .news-column .newsCarousel{
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  gap:10px;
+  flex:1;
+  min-height:0;
+}
+.heroInfoSection .news-column .newsList{
+  min-height:0;
+  overflow-y:auto;
+  padding-right:4px;
+  -webkit-overflow-scrolling:touch;
+}
+.heroInfoSection .news-column .newsList::-webkit-scrollbar{
+  width:6px;
+}
+.heroInfoSection .news-column .newsList::-webkit-scrollbar-thumb{
+  background:#d6ccc5;
+  border-radius:999px;
+}
+.heroInfoSection .heroCalendarWrap{
+  padding:0;
+  overflow:hidden;
+}
+.heroInfoSection .heroCalendarWrap .heroCalendarCard{
+  border:0;
+  border-radius:0;
+}
+
+@media (min-width:1024px){
+  .heroInfoGrid.news-info-layout{
+    align-items:stretch;
+  }
+  .heroInfoGrid.news-info-layout .news-column,
+  .heroInfoGrid.news-info-layout .side-info-column{
+    min-height:100%;
+  }
+  .heroInfoGrid.news-info-layout .news-column.news-card{
+    height:100%;
+  }
+}
+
+@media (max-width:979px){
+  .heroInfoGrid.news-info-layout{
+    align-items:start;
+  }
+  .heroInfoGrid.news-info-layout .news-column.news-card{
+    height:auto;
   }
 }

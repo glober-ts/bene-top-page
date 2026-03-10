@@ -518,9 +518,9 @@ window.BENE_UI = {
   ・縦スクロールで更新量に対応
 ======================================== -->
 <section class="section heroInfoSection" data-reveal="">
-<div class="wrap heroInfoGrid">
+<div class="wrap heroInfoGrid news-info-layout">
 <!-- --- NEWS（新着情報）: 更新が増えても縦スクロールでレイアウト崩れを防ぐ --- -->
-<div class="noticeCard">
+<div class="noticeCard news-column news-card">
 <p class="kicker">NEWS</p>
 <div class="newsCarousel">
 <button aria-label="上へ" class="newsBtn up" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M18 15l-6-6-6 6"></path></svg></button>
@@ -558,6 +558,7 @@ window.BENE_UI = {
 <span class="pill">希少石</span>
 </div>
 </div>
+<div class="side-info-column">
 <div class="promoCard delivery">
 <p class="kicker">弊社発送予定日</p>
 <p class="deliveryDate">🚚 <span class="date"></span>予定</p>
@@ -569,15 +570,12 @@ window.BENE_UI = {
 </div>
 <!-- --- カレンダー: PC/SPで別HTMLを読み分け、可読性を維持する --- -->
 <div class="heroCalendarWrap" aria-label="営業カレンダー">
-<div class="heroCalendarHead">
-<h2 class="h2">営業カレンダー</h2>
-<span class="more muted">休日でもお買い物は可能です</span>
-</div>
 <div class="heroCalendarCard heroCalendarPc">
 <iframe src="calendar/index.html" title="営業カレンダー" loading="lazy"></iframe>
 </div>
 <div class="heroCalendarCard heroCalendarSp">
 <iframe src="calendar/sp.html" title="営業カレンダー" loading="lazy"></iframe>
+</div>
 </div>
 </div>
 </div>
