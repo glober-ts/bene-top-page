@@ -3886,11 +3886,6 @@ section[id^="pickup"] .h2,
   flex:1;
   min-height:0;
 }
-.heroInfoSection .news-column .news-list-wrap{
-  flex:1;
-  min-height:0;
-  overflow:hidden;
-}
 .heroInfoSection .news-column .newsList,
 .heroInfoSection .news-column .news-list{
   height:100%;
@@ -3948,26 +3943,20 @@ section[id^="pickup"] .h2,
   }
 }
 
-/* ===== v133 force NEWS internal scroll (stable fallback) ===== */
+/* ===== v136 NEWS scroll rule consolidation ===== */
 .heroInfoSection .news-column.news-card{
   display:flex !important;
   flex-direction:column !important;
+  height:100% !important;
   min-height:0 !important;
-}
-.heroInfoSection .news-column .kicker{
-  flex-shrink:0 !important;
-}
-.heroInfoSection .news-column .newsCarousel{
-  display:flex !important;
-  flex-direction:column !important;
-  min-height:0 !important;
+  overflow:hidden !important;
 }
 .heroInfoSection .news-column .news-list-wrap{
   display:flex !important;
   flex-direction:column !important;
-  height:520px !important;
-  min-height:520px !important;
-  max-height:520px !important;
+  height:400px !important;
+  min-height:400px !important;
+  max-height:400px !important;
   overflow:hidden !important;
 }
 .heroInfoSection .news-column .newsList,
@@ -3975,61 +3964,14 @@ section[id^="pickup"] .h2,
   flex:1 1 auto !important;
   height:100% !important;
   max-height:100% !important;
-  overflow-y:auto !important;
-  min-height:0 !important;
-  -webkit-overflow-scrolling:touch;
-}
-.heroInfoSection .news-column .news-tags{
-  margin-top:16px;
-  flex-shrink:0 !important;
-}
-
-@media (max-width:1023px){
-  .heroInfoSection .news-column .news-list-wrap{
-    height:360px !important;
-    min-height:360px !important;
-    max-height:360px !important;
-  }
-}
-
-/* ===== v134 hard override: force NEWS internal scroll ===== */
-.news-card{
-  display:flex !important;
-  flex-direction:column !important;
-  height:auto !important;
-  min-height:0 !important;
-  overflow:hidden !important;
-}
-
-.news-list-wrap{
-  display:block !important;
-  height:520px !important;
-  min-height:0 !important;
-  max-height:520px !important;
-  overflow:hidden !important;
-}
-
-.news-list,
-.newsList{
-  display:block !important;
-  height:100% !important;
-  max-height:100% !important;
   min-height:0 !important;
   overflow-y:auto !important;
   overflow-x:hidden !important;
   -webkit-overflow-scrolling:touch !important;
 }
-
-.news-tags{
+.heroInfoSection .news-column .news-tags{
   margin-top:16px !important;
   flex-shrink:0 !important;
-}
-
-@media (max-width:1023px){
-  .news-list-wrap{
-    height:360px !important;
-    max-height:360px !important;
-  }
 }
 
 /* ===== v135 PC: align NEWS and side column heights ===== */
