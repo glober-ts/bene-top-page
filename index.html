@@ -49,7 +49,7 @@ window.BENE_UI = {
 <svg aria-hidden="true" viewbox="0 0 24 24"><path d="M7 18a2 2 0 104 0H7zm9 0a2 2 0 104 0h-4z"></path><path d="M3 4h2l2.2 10.5a2 2 0 002 1.5h8.7a2 2 0 002-1.6L22 7H6.2"></path></svg>
 </a>
 
-<button aria-controls="gnav" aria-expanded="false" aria-label="メニュー" class="hamburger" id="menuBtn" type="button" onclick="window.__toggleDrawer && window.__toggleDrawer()">≡</button></div>
+<button aria-controls="gnav" aria-expanded="false" aria-label="メニュー" class="hamburger" id="menuBtn" type="button" onclick="window.__toggleDrawer && window.__toggleDrawer()"><span aria-hidden="true" class="hamburgerBars"></span></button></div>
 <div aria-label="電話案内" class="headerPhone">
 <div class="phoneMeta">電話でのお問合せは <span class="hours">営業日 10:00-18:00</span></div>
 <div class="phonePlain">0120-457-678</div>
@@ -1002,15 +1002,64 @@ if(!slides.length) return;
 </div>
 
 <script src="script.js"></script>
-<div class="gnavBackdrop" id="gnavBackdrop"></div><nav aria-label="メニュー" class="gnavDrawer" id="gnav">
+<div class="gnavBackdrop menu-overlay" id="gnavBackdrop"></div><nav aria-label="メニュー" class="gnavDrawer" id="gnav">
 <div class="drawerTop">
   <div class="drawerPhoneMeta">電話でのお問合せは　営業日 10:00-18:00</div>
-  <a class="drawerPhoneNum" href="tel:0120457678" aria-label="電話をかける">0120-457-678</a>
+  <a aria-label="電話をかける" class="drawerPhoneNum" href="tel:0120457678">0120-457-678</a>
   <div class="drawerActions">
-    <button class="drawerIco" type="button" id="drawerSearchBtn" aria-label="検索">検索</button>
-    <a class="drawerIco" href="#mailmagazine" id="drawerMailBtn">MAILMAGAZINE</a>
+    <button aria-label="検索" class="drawerIco" id="drawerSearchBtn" type="button">検索</button>
+    <a aria-label="MAILMAGAZINE" class="drawerIco" href="#mailmagazine">MAILMAGAZINE</a>
   </div>
-</div><button class="gnavClose" type="button" aria-label="閉じる" onclick="window.__closeDrawer && window.__closeDrawer()">×</button><div class="gnavInner"><div class="gnavTitle">MENU</div><ul class="gnavList"><li class="gnavItem"><a class="gnavLink" href="#">アイテム</a><ul class="gnavSub"><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5eaa5f3a5.html" rel="noopener" target="_blank">　リング</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/52a4a3fd5a5.html" rel="noopener" target="_blank">　ピンキーリング</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5daa5f3a5.html" rel="noopener" target="_blank">　ペンダント</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5d4a5a2a5.html" rel="noopener" target="_blank">　ピアス･イヤリング</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5d6a5eca5.html" rel="noopener" target="_blank">　ブレスレット</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/b8b7c1aaa5.html" rel="noopener" target="_blank">　ルース・裸石</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/5521aaa17ac.html" rel="noopener" target="_blank">　チェーン・金具</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a4aabceac6.html" rel="noopener" target="_blank">　お手入れｸﾞｯｽﾞ</a></li></ul></li><li class="gnavItem"><a class="gnavLink" href="#new">新作先行</a></li><li class="gnavItem"><a class="gnavLink" href="#tokusen">一点もの</a><ul class="gnavSub"><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/c6c3c1aaa5.html" rel="noopener" target="_blank">　特選ﾙｰｽｼﾞｭｴﾘｰ</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/b8c2c4eaa5.html?strcid=b8c2c4eaa5&amp;n=100&amp;X=99" rel="noopener" target="_blank">　限定マルシェ</a></li></ul></li><li class="gnavItem"><a class="gnavLink" href="#resale">限定再販</a></li><li class="gnavItem"><a class="gnavLink" href="#">宝石で選ぶ</a><ul class="gnavSub"><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a05a452ca5a.html" rel="noopener" target="_blank">　ダイヤモンド</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/aa1baea5592.html" rel="noopener" target="_blank">　カラーストーン</a></li><li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/b5a9beafc0.html" rel="noopener" target="_blank">　稀少石</a></li></ul></li><li class="gnavItem"><a class="gnavLink" href="#metal">メタル</a></li><li class="gnavItem"><a class="gnavLink" href="#loose">ルース</a></li><li class="gnavItem"><a class="gnavLink" href="#custom">カスタム</a></li></ul></div></nav>
+</div>
+<button aria-label="閉じる" class="gnavClose" onclick="window.__closeDrawer &amp;&amp; window.__closeDrawer()" type="button">×</button>
+<div class="gnavInner">
+  <div class="gnavTitle">MENU</div>
+  <ul class="gnavList">
+    <li class="gnavItem menu-item has-children">
+      <div class="menu-row">
+        <button class="menu-label submenu-toggle" type="button" aria-expanded="false">アイテムで選ぶ</button>
+        <button class="submenu-toggle submenu-icon" type="button" aria-expanded="false" aria-label="アイテムで選ぶを開閉"></button>
+      </div>
+      <ul class="gnavSub submenu">
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5eaa5f3a5.html" rel="noopener" target="_blank">リング</a></li>
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/52a4a3fd5a5.html" rel="noopener" target="_blank">ピンキーリング</a></li>
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5daa5f3a5.html" rel="noopener" target="_blank">ペンダント・ネックレス</a></li>
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5d4a5a2a5.html" rel="noopener" target="_blank">ピアス・イヤリング</a></li>
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a5d6a5eca5.html" rel="noopener" target="_blank">ブレスレット</a></li>
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/b8b7c1aaa5.html" rel="noopener" target="_blank">ルース・裸石</a></li>
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/5521aaa17ac.html" rel="noopener" target="_blank">チェーン・金具</a></li>
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a4aabceac6.html" rel="noopener" target="_blank">お手入れ</a></li>
+      </ul>
+    </li>
+    <li class="gnavItem"><a class="gnavLink" href="#new">新作先行</a></li>
+    <li class="gnavItem menu-item has-children">
+      <div class="menu-row">
+        <button class="menu-label submenu-toggle" type="button" aria-expanded="false">一点もの</button>
+        <button class="submenu-toggle submenu-icon" type="button" aria-expanded="false" aria-label="一点ものを開閉"></button>
+      </div>
+      <ul class="gnavSub submenu">
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/c6c3c1aaa5.html" rel="noopener" target="_blank">特選ルースジュエリー</a></li>
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/b8c2c4eaa5.html?strcid=b8c2c4eaa5&amp;n=100&amp;X=99" rel="noopener" target="_blank">限定マルシェ</a></li>
+      </ul>
+    </li>
+    <li class="gnavItem"><a class="gnavLink" href="#resale">限定再販</a></li>
+    <li class="gnavItem menu-item has-children">
+      <div class="menu-row">
+        <button class="menu-label submenu-toggle" type="button" aria-expanded="false">宝石で選ぶ</button>
+        <button class="submenu-toggle submenu-icon" type="button" aria-expanded="false" aria-label="宝石で選ぶを開閉"></button>
+      </div>
+      <ul class="gnavSub submenu">
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/a05a452ca5a.html" rel="noopener" target="_blank">ダイヤモンド</a></li>
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/aa1baea5592.html" rel="noopener" target="_blank">カラーストーン</a></li>
+        <li><a class="gnavSublink" href="https://store.shopping.yahoo.co.jp/benebene/b5a9beafc0.html" rel="noopener" target="_blank">稀少石</a></li>
+      </ul>
+    </li>
+    <li class="gnavItem"><a class="gnavLink" href="#metal">メタル</a></li>
+    <li class="gnavItem"><a class="gnavLink" href="#loose">ルース</a></li>
+    <li class="gnavItem"><a class="gnavLink" href="#custom">カスタム</a></li>
+  </ul>
+</div>
+</nav>
 
 
 

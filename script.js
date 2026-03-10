@@ -1044,3 +1044,21 @@ document.addEventListener('DOMContentLoaded', ()=>{
   updateDots();
   startAutoplay();
 })();;
+
+/* v132: unified submenu toggle behavior for PC/SP */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('#gnav .menu-item.has-children').forEach((item) => {
+    const toggles = item.querySelectorAll('.submenu-toggle');
+
+    toggles.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const willOpen = !item.classList.contains('is-open');
+        item.classList.toggle('is-open', willOpen);
+        toggles.forEach((toggleBtn) => {
+          toggleBtn.setAttribute('aria-expanded', String(willOpen));
+        });
+      });
+    });
+  });
+});
