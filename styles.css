@@ -3825,6 +3825,13 @@ section[id^="pickup"] .h2,
   width:36px;
   height:auto;
   margin-bottom:10px;
+  filter:sepia(100%) saturate(35%) brightness(90%);
+  transition:filter .2s ease;
+}
+.trust-item svg{
+  stroke:#8A6E60;
+  fill:#8A6E60;
+  transition:filter .2s ease;
 }
 .trust-item p{
   margin:0;
@@ -3837,6 +3844,10 @@ section[id^="pickup"] .h2,
     border-color:rgba(138,31,78,.28);
     box-shadow:0 10px 24px rgba(0,0,0,.06);
     transform:translateY(-1px);
+  }
+  .trust-item:hover svg,
+  .trust-item:hover img{
+    filter:sepia(100%) saturate(50%) brightness(85%);
   }
 }
 @media (min-width:768px){
