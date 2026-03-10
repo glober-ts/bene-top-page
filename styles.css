@@ -3822,7 +3822,7 @@ section[id^="pickup"] .h2,
   transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
 .trust-item img{
-  width:36px;
+  width:40px;
   height:auto;
   margin-bottom:10px;
 }
