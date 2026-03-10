@@ -3578,3 +3578,59 @@ html, body { overflow-x:hidden; }
   background:transparent;
   box-shadow:none;
 }
+
+/* ===== v136: submenu indent + dot + no outer frame ===== */
+#gnav .submenu{
+  display:none;
+  width:100%;
+  margin-top:8px;
+  padding:0;
+  list-style:none;
+  border:0;
+  background:transparent;
+  box-shadow:none;
+  border-radius:0;
+}
+#gnav .menu-item.is-open > .submenu{
+  display:block;
+}
+#gnav .submenu li{
+  margin-bottom:8px;
+  padding:0;
+  border:0;
+  background:transparent;
+  list-style:none;
+}
+#gnav .submenu li:last-child{
+  margin-bottom:0;
+}
+#gnav .submenu a{
+  position:relative;
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+  padding:14px 16px 14px 34px;
+  border:1px solid #ddd6d0;
+  border-radius:14px;
+  background:#f8f5f2;
+  color:#222;
+  text-decoration:none;
+  transition:color .2s ease, background-color .2s ease, border-color .2s ease;
+}
+#gnav .submenu a::before{
+  content:"";
+  position:absolute;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%);
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#8A1F4E;
+}
+#gnav .submenu a:hover{
+  color:#8A1F4E;
+  text-decoration:underline;
+  background:#f3ece7;
+  border-color:#cdbfb5;
+}
