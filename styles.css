@@ -3732,3 +3732,43 @@ section[id^="pickup"] .h2,
 .yen{
   font-weight:600;
 }
+
+/* v131: trust service section tone and icon clarity */
+.guideRow{
+  grid-template-columns:repeat(5,minmax(0,1fr));
+}
+
+.trust-item{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:52px;
+}
+
+.trust-item svg{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+  stroke:#8A6E60;
+  fill:#8A6E60;
+  filter:none;
+}
+
+.trust-item img{
+  filter: sepia(100%) saturate(35%) brightness(90%);
+}
+
+.trust-item:hover svg,
+.trust-item:hover img{
+  filter: sepia(100%) saturate(50%) brightness(85%);
+}
+
+@media (max-width:979px){
+  .guideRow{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .trust-item{
+    justify-content:flex-start;
+  }
+}
