@@ -2874,6 +2874,7 @@ html, body { overflow-x:hidden; }
   overflow:hidden;
   padding:4px 0 10px;
   position:relative;
+  touch-action:pan-y;
 }
 .heroTrack{
   display:flex;
@@ -2913,6 +2914,7 @@ html, body { overflow-x:hidden; }
   height:auto;
   aspect-ratio:auto;
   object-fit:contain;
+  -webkit-user-drag:none;
 }
 .heroScrollHint{
   margin:12px 0 0;
@@ -2971,6 +2973,15 @@ html, body { overflow-x:hidden; }
   border-color:rgba(138,31,78,.85);
 }
 
+.hero-arrow{
+  display:none;
+}
+
+@media (min-width:768px){
+  .hero-arrow{
+    display:flex;
+  }
+}
 
 @media (min-width:980px){
   .hero > .wrap{
