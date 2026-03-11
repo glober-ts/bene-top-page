@@ -16,7 +16,9 @@ a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 18px}
 
-/* Header */
+/* =========================
+   HEADER
+========================= */
 .header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);border-bottom:1px solid rgba(230,225,216,.9);backdrop-filter:blur(10px)}
 .headerRow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0}
 .logo{display:flex;align-items:center;gap:10px}
@@ -66,6 +68,9 @@ img{display:block;max-width:100%}
 .thumb{border-radius:16px;overflow:hidden;border:1px solid rgba(230,225,216,1);background:#fff}
 .thumb img{width:100%;aspect-ratio:1/1;object-fit:cover}
 
+/* =========================
+   HERO
+========================= */
 /* Band */
 .band{padding:12px 0 4px}
 .bandGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
@@ -80,6 +85,9 @@ img{display:block;max-width:100%}
 .more{font-size:12px;color:var(--muted);padding:8px 10px;border-radius:999px}
 .more:hover{background:#faf9f7;color:var(--text)}
 
+/* =========================
+   CATEGORY
+========================= */
 /* Icon grid */
 .iconGrid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px}
 .iconCard{border-radius:16px;border:1px solid rgba(230,225,216,1);background:#fff;padding:12px 8px;text-align:center;box-shadow:0 10px 22px rgba(0,0,0,.04)}
@@ -88,11 +96,8 @@ img{display:block;max-width:100%}
 .iconCard span:last-child{display:block;font-size:12px;color:var(--muted);margin-top:6px}
 
 /* ========================================
-   PICK UP SECTION
-   注目商品カードの横スクロール表示
-   1画面内で比較しやすい導線を構成
-======================================== */
-.rowScroll{display:flex;gap:12px;overflow:auto;padding:6px 2px 10px;scroll-snap-type:x mandatory} /* 12px: カードの分離感を保つ基本間隔 */
+   PICKUP
+========================= */
 .rankCard{min-width:170px;scroll-snap-align:start;border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden;position:relative} /* 170px: SPでも商品名が潰れにくい最小幅 */
 .rankCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .rankNo{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(138,31,78,.92);color:#fff;font-weight:900;font-size:13px}
@@ -130,21 +135,13 @@ img{display:block;max-width:100%}
 .guide{border-radius:16px;border:1px solid rgba(230,225,216,1);background:#faf9f7;padding:12px 12px;text-align:center;font-weight:900;font-size:13px}
 .guide:hover{background:#fff;border-color:rgba(138,31,78,.28)}
 
-/* ========================================
-   FOOTER SECTION
-   会社情報と補助リンクの共通導線
-   最下部で問い合わせ・ガイドへ誘導
-======================================== */
+/* =========================
+   FOOTER
+========================= */
 .footer{border-top:1px solid rgba(230,225,216,1);background:#fff;padding:26px 0 40px}
-/* Responsive */
-
-  .bandGrid{grid-template-columns:repeat(2,1fr)}
-  .iconGrid{grid-template-columns:repeat(4,1fr)}
-  .cardGrid{grid-template-columns:repeat(2,1fr)}
-  .featGrid{grid-template-columns:1fr}
-  .birthGrid{grid-template-columns:repeat(2,1fr)}
-  .twoCols{grid-template-columns:1fr}
-  .guideRow{grid-template-columns:repeat(2,1fr)}
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width:560px){
   .searchWrap{display:none}
@@ -153,11 +150,9 @@ img{display:block;max-width:100%}
 .yen{display:inline-block;margin-top:4px;font-weight:700;color:var(--accent)}
 
 
-/* ========================================
-   NEWS SECTION
-   新着情報の縦スクロール一覧
-   更新件数が増えても高さを一定に維持
-======================================== */
+/* =========================
+   NEWS
+========================= */
 .newsList{
   border-radius:14px;
   border:1px solid rgba(230,225,216,1);
@@ -198,11 +193,9 @@ img{display:block;max-width:100%}
 }
 .newsList::-webkit-scrollbar-track{background: rgba(250,249,247,1)}
 
-/* ========================================
-   YOUTUBE SECTION
-   動画プレイヤー + 動画リストの2カラム構成
-   リスト側スクロールで情報量と見やすさを両立
-======================================== */
+/* =========================
+   YOUTUBE
+========================= */
 .ytSection{padding-top:8px}
 .ytGrid{
   display:grid;
@@ -269,11 +262,6 @@ section[id^="pickup"]{
 }
 
 
-.ytNowPlaying .label{
-  color:#8A1F4E;
-  font-weight:700;
-}
-
 /* PICK UP horizontal swipe (PC & SP) */
 .swipeRow{
   display:flex;
@@ -299,11 +287,7 @@ section[id^="pickup"]{
 
 
 
-.ytNowPlaying .label{
-  font-weight:800;
-  color:#8A1F4E;
-  letter-spacing:.08em;
-}
+.ytNowPlaying .label{font-weight:800;color:#8A1F4E;letter-spacing:.08em;}
 
 
 /* YouTube title (under heading, above video & list) */
@@ -464,11 +448,6 @@ section[id^="pickup"]{
 }
 
 
-.swipeRow.dragging, .newsList.dragging{
-  cursor: grabbing;
-}
-
-
 .rowScroll.dragging, .newsList.dragging{
   cursor: grabbing;
 }
@@ -478,10 +457,12 @@ section[id^="pickup"]{
 .carousel{position:relative;}
 .rowScroll{
   display:flex;
+  gap:12px;
   flex-wrap:nowrap;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
+  padding:6px 2px 10px;
 }
 .rowScroll > *{scroll-snap-align:start}
 .carousel .rowScroll{padding:4px 54px 10px;}
@@ -2812,12 +2793,6 @@ html, body { overflow-x:hidden; }
   line-height:1.5;
   margin:0 0 12px;
 }
-.footerCalendarSection .small{
-  margin:0 0 10px;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.9;
-}
 .footLinks{
   display:flex;
   gap:10px;
@@ -3575,7 +3550,9 @@ section[id^="pickup"] .h2,
   }
 }
 
-/* ===== v132 trust service section ===== */
+/* =========================
+   TRUST
+========================= */
 .trustSection{
   padding-top:24px;
   padding-bottom:12px;
