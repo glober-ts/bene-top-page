@@ -2893,7 +2893,7 @@ html, body { overflow-x:hidden; }
 }
 .heroCard{
   display:block;
-  flex:0 0 clamp(360px, 29vw, 520px);
+  flex:0 0 clamp(320px, 22vw, 420px);
   border-radius:22px;
   overflow:hidden;
   border:1px solid rgba(230,225,216,1);
@@ -2986,9 +2986,6 @@ html, body { overflow-x:hidden; }
 @media (min-width:980px){
   .hero > .wrap{
     padding-inline:clamp(12px, 2vw, 36px);
-  }
-  .heroCard{
-    flex:0 0 calc((100% - (var(--hero-card-gap) * 2)) / 3);
   }
   .heroScrollHint{display:none}
 }
