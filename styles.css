@@ -136,12 +136,6 @@ img{display:block;max-width:100%}
    最下部で問い合わせ・ガイドへ誘導
 ======================================== */
 .footer{border-top:1px solid rgba(230,225,216,1);background:#fff;padding:26px 0 40px}
-.footGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;align-items:start}
-.small{margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.8}
-.footLinks{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-.footLinks a{color:var(--muted);font-size:12px;padding:8px 10px;border-radius:999px}
-.footLinks a:hover{background:#faf9f7;color:var(--text)}
-
 /* Responsive */
 
   .bandGrid{grid-template-columns:repeat(2,1fr)}
@@ -151,8 +145,6 @@ img{display:block;max-width:100%}
   .birthGrid{grid-template-columns:repeat(2,1fr)}
   .twoCols{grid-template-columns:1fr}
   .guideRow{grid-template-columns:repeat(2,1fr)}
-  .footGrid{grid-template-columns:1fr}
-  .footLinks{justify-content:flex-start}
 
 @media (max-width:560px){
   .searchWrap{display:none}
@@ -482,262 +474,33 @@ section[id^="pickup"]{
 }
 
 
-.carousel .carBtn{display:none !important}
-
-
-
-/* PICK UP carousel arrows (SVG icons) */
+/* PICK UP + NEWS controls (consolidated) */
 .carousel{position:relative;}
-.carousel .rowScroll{padding: 4px 44px 10px;}
-.carBtn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:40px;
-  height:40px;
-  border-radius:999px;
-  border:1px solid rgba(230,225,216,1);
-  background:rgba(255,255,255,.92);
-  box-shadow:0 10px 24px rgba(0,0,0,.08);
-  color:#8A1F4E;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  user-select:none;
-  padding:0;
-}
-.carBtn svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;display:block}
-.carBtn.prev{left:8px}
-.carBtn.next{right:8px}
-.carousel.isScrollable .carBtn{display:flex}
-.carBtn:disabled{opacity:.35; cursor:default;}
-
-/* NEWS vertical arrows (SVG icons) */
-.newsCarousel{position:relative;}
-.newsCarousel .newsList{padding-top:44px; padding-bottom:44px;}
-.newsBtn{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  width:40px;
-  height:40px;
-  border-radius:999px;
-  border:1px solid rgba(230,225,216,1);
-  background:rgba(255,255,255,.92);
-  box-shadow:0 10px 24px rgba(0,0,0,.08);
-  color:#8A1F4E;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  user-select:none;
-  padding:0;
-  z-index:2;
-}
-.newsBtn svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;display:block}
-.newsBtn.up{top:8px}
-.newsBtn.down{bottom:8px}
-.newsCarousel.isScrollable .newsBtn{display:flex}
-.newsBtn:disabled{opacity:.35; cursor:default;}
-
-
-  .carousel .carBtn{display:none !important}
-  /* NEWS: keep buttons hidden on mobile (swipe/scroll) */
-  .newsCarousel .newsBtn{display:none !important}
-  .newsCarousel .newsList{padding-top:8px; padding-bottom:8px;}
-
-
-/* Ensure PICK UP track scrolls horizontally (no wrap) */
 .rowScroll{
   display:flex;
   flex-wrap:nowrap;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling:touch;
 }
 .rowScroll > *{scroll-snap-align:start}
-
-/* NEWS controls: non-overlapping layout */
-.newsCarousel{
-  display:grid;
-  grid-template-rows:auto 1fr auto;
-  gap:10px;
-}
-.newsCarousel .newsList{
-  padding-top:8px !important;
-  padding-bottom:8px !important;
-}
-.newsBtn{
-  position:static !important;
-  transform:none !important;
-  left:auto !important;
-  top:auto !important;
-  bottom:auto !important;
-  margin:0 auto;
-}
-
-/* PICK UP carousel arrows (SVG icons) */
-.carousel{position:relative;}
-.carousel .rowScroll{padding: 4px 44px 10px;}
-.carBtn{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:40px;
-  height:40px;
-  border-radius:999px;
-  border:1px solid rgba(230,225,216,1);
-  background:rgba(255,255,255,.92);
-  box-shadow:0 10px 24px rgba(0,0,0,.08);
-  color:#8A1F4E;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  user-select:none;
-  padding:0;
-}
-.carBtn svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;display:block}
-.carBtn.prev{left:8px}
-.carBtn.next{right:8px}
-.carousel.isScrollable .carBtn{display:flex}
-.carBtn:disabled{opacity:.35; cursor:default;}
-
-/* NEWS vertical arrows (SVG icons) */
-.newsBtn{
-  width:40px;
-  height:40px;
-  border-radius:999px;
-  border:1px solid rgba(230,225,216,1);
-  background:rgba(255,255,255,.92);
-  box-shadow:0 10px 24px rgba(0,0,0,.08);
-  color:#8A1F4E;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  user-select:none;
-  padding:0;
-  z-index:2;
-}
-.newsBtn svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;display:block}
-.newsCarousel.isScrollable .newsBtn{display:flex}
-.newsBtn:disabled{opacity:.35; cursor:default;}
-
-/* Hide arrow UI on touch/small screens; keep on PC even if narrow */
-.newsCarousel .newsBtn{display:none !important}
-  .carousel .rowScroll{padding:4px 0 10px}
-
-@media (max-width:560px){
-  .carousel .carBtn{display:none !important}
-  .newsCarousel .newsBtn{display:none !important}
-  .carousel .rowScroll{padding:4px 0 10px}
-}
-
-
-/* ===== FINAL OVERRIDES (v22) ===== */
-
-/* PICK UP arrows: show on PC widths, hide on SP widths */
-@media (min-width:981px){
-  .carousel.isScrollable .carBtn{display:flex !important}
-}
-@media (max-width:980px){
-  .carousel .carBtn{display:none !important}
-  .carousel .rowScroll{padding:4px 0 10px !important}
-}
-
-/* NEWS arrows: layout without overlap */
-.noticeCard .newsCarousel{
-  display:grid !important;
-  grid-template-rows:auto 1fr auto !important;
-  gap:10px !important;
-}
-.noticeCard .newsCarousel .newsBtn{
-  position:static !important;
-  left:auto !important;
-  top:auto !important;
-  bottom:auto !important;
-  transform:none !important;
-  margin:0 auto !important;
-}
-.noticeCard .newsCarousel .newsList{
-  padding-top:8px !important;
-  padding-bottom:8px !important;
-}
-
-/* Show NEWS arrows only on PC; SP uses finger scroll */
-@media (min-width:981px){
-  .newsCarousel.isScrollable .newsBtn{display:flex !important}
-}
-@media (max-width:980px){
-  .newsCarousel .newsBtn{display:none !important}
-}
-
-
-/* ===== v23 overrides ===== */
-
-/* Ensure PICK UP row scroll works */
-.rowScroll{
-  display:flex;
-  flex-wrap:nowrap;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-.rowScroll > *{scroll-snap-align:start}
-
-/* PICK UP arrows: shown on PC when scrollable */
-.carousel{position:relative;}
-.carousel .rowScroll{padding:4px 44px 10px;}
+.carousel .rowScroll{padding:4px 54px 10px;}
 .carousel .carBtn{display:none;}
 .carousel.isScrollable .carBtn{display:flex;}
-@media (max-width:980px){
-  .carousel .carBtn{display:none !important;}
-  .carousel .rowScroll{padding:4px 0 10px !important;}
-}
+.carousel .carBtn{z-index:20;pointer-events:auto;}
+.carousel .rowScroll, .carousel .rowScroll *{z-index:auto;}
 
-/* NEWS arrows: no overlap (buttons in normal flow) */
-.noticeCard .newsCarousel{
-  display:grid;
-  grid-template-rows:auto 1fr auto;
-  gap:10px;
-}
-.noticeCard .newsBtn{
-  position:static !important;
-  margin:0 auto;
-}
-.noticeCard .newsList{
-  padding:8px 8px !important;
-}
+.newsCarousel{display:grid;grid-template-rows:auto 1fr auto;gap:10px;}
+.newsCarousel .newsList{padding-top:8px;padding-bottom:8px;}
+.newsBtn{position:static;margin:0 auto;}
 .newsCarousel .newsBtn{display:none;}
 .newsCarousel.isScrollable .newsBtn{display:flex;}
-@media (max-width:980px){
-  .newsCarousel .newsBtn{display:none !important;}
-}
 
-
-/* v24 fix: keep carousel arrows above cards (right arrow was hidden) */
-.carousel{position:relative;}
-.carousel .rowScroll{padding:4px 54px 10px !important;} /* a bit more room */
-.carousel .carBtn{
-  z-index: 20 !important;
-  pointer-events: auto;
-}
-.carousel .rowScroll, .carousel .rowScroll *{
-  z-index:auto;
-}
-
-
-/* v25: show PICK UP arrows on PC even when width < 980px (hide only on touch devices) */
-@media (hover:hover) and (pointer:fine){
-  .carousel.isScrollable .carBtn{display:flex !important;}
-  .carousel .rowScroll{padding:4px 54px 10px !important;}
-}
 @media (hover:none), (pointer:coarse){
-  .carousel .carBtn{display:none !important;}
-  .carousel .rowScroll{padding:4px 0 10px !important;}
+  .carousel .carBtn,.newsCarousel .newsBtn{display:none;}
+  .carousel .rowScroll{padding:4px 0 10px;}
 }
+
 
 
 /* v30 sanity: keep New/Feature sizes consistent and responsive */
@@ -3380,12 +3143,6 @@ html, body { overflow-x:hidden; }
   }
 }
 
-@media (max-width:560px){
-  .categoryQuickGrid,
-  .categoryQuickGrid--four{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
 
 /* v130: category cards mobile/list consistency */
 .categorySection .iconCard span:last-child,
@@ -3945,33 +3702,33 @@ section[id^="pickup"] .h2,
 
 /* ===== v136 NEWS scroll rule consolidation ===== */
 .heroInfoSection .news-column.news-card{
-  display:flex !important;
-  flex-direction:column !important;
-  height:100% !important;
-  min-height:0 !important;
-  overflow:hidden !important;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+  min-height:0;
+  overflow:hidden;
 }
 .heroInfoSection .news-column .news-list-wrap{
-  display:flex !important;
-  flex-direction:column !important;
-  height:400px !important;
-  min-height:400px !important;
-  max-height:400px !important;
-  overflow:hidden !important;
+  display:flex;
+  flex-direction:column;
+  height:400px;
+  min-height:400px;
+  max-height:400px;
+  overflow:hidden;
 }
 .heroInfoSection .news-column .newsList,
 .heroInfoSection .news-column .news-list{
-  flex:1 1 auto !important;
-  height:100% !important;
-  max-height:100% !important;
-  min-height:0 !important;
-  overflow-y:auto !important;
-  overflow-x:hidden !important;
-  -webkit-overflow-scrolling:touch !important;
+  flex:1 1 auto;
+  height:100%;
+  max-height:100%;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
 }
 .heroInfoSection .news-column .news-tags{
-  margin-top:16px !important;
-  flex-shrink:0 !important;
+  margin-top:16px;
+  flex-shrink:0;
 }
 
 /* ===== v135 PC: align NEWS and side column heights ===== */
@@ -3983,25 +3740,25 @@ section[id^="pickup"] .h2,
 @media (min-width:1024px){
   .news-info-layout{
     grid-template-columns:minmax(0,1.8fr) minmax(320px,1fr);
-    align-items:stretch !important;
+    align-items:stretch;
   }
 
   .news-column{
-    display:flex !important;
+    display:flex;
     min-height:100%;
   }
 
   .news-card{
-    display:flex !important;
-    flex-direction:column !important;
-    height:100% !important;
-    min-height:0 !important;
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    min-height:0;
   }
 
   .side-info-column{
-    display:flex !important;
-    flex-direction:column !important;
-    gap:24px !important;
+    display:flex;
+    flex-direction:column;
+    gap:24px;
     height:100%;
   }
 }
