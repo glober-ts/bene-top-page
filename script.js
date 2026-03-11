@@ -751,14 +751,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
   // ----------------------------------------
   // Hero 重要パラメータ
   // ----------------------------------------
-  // ドラッグ判定距離(px)
-  // 小さいとクリック判定が取りづらくなるため、誤操作回避を優先
-  const DRAG_THRESHOLD = 8;
   // autoplay間隔(ms)
   // 5000ms: 内容認知とテンポ感のバランスを取る標準値
   const AUTOPLAY_MS = 5000;
-  // PCのマウス操作だけドラッグを許可（SPはネイティブスクロール挙動を優先）
-  const isPcDragEnabled = () => window.matchMedia('(min-width: 980px) and (pointer: fine)').matches;
+  // ドラッグしきい値(px)
+  // クリック誤判定を避けるため、開始判定とスライド確定判定を分離
+  const DRAG_START_THRESHOLD = 8;
+  const SLIDE_TRIGGER_PX = 40;
 
   let timer = null;
   let stoppedByUser = false;
@@ -766,7 +765,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
   let cardStep = 0;
   let railOffset = 0;
 
-  let isMouseDragging = false;
+  let isPointerDragging = false;
+  let activePointerId = null;
   let dragStartX = 0;
   let dragStartTranslateX = 0;
   let currentTranslateX = 0;
@@ -785,6 +785,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
   track.appendChild(cloneStart);
 
   const slides = Array.from(track.querySelectorAll('.heroCard'));
+
+
+  slides.forEach((slide) => {
+    slide.setAttribute('draggable', 'false');
+    slide.querySelectorAll('img, a').forEach((el) => {
+      el.setAttribute('draggable', 'false');
+    });
+  });
+
+  rail.addEventListener('dragstart', (e) => {
+    e.preventDefault();
+  });
 
   // アニメーションON/OFF切り替え（ドラッグ中はOFFにして指/マウス追従を優先）
   const setTransition = (enabled) => {
@@ -839,7 +851,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   // 指定インデックスへ移動（矢印/ドット/自動再生の共通入口）
   const moveToIndex = (index, { animate = true } = {}) => {
     currentIndex = normalizeIndex(index);
-    setTransition(animate && !isMouseDragging);
+    setTransition(animate && !isPointerDragging);
     applyTranslate(getTranslateForVisualIndex(getVisualIndex()));
     updateDots();
   };
@@ -882,7 +894,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     stopAutoplay();
   };
 
-  // rAFでtransformを間引き、mousemove連打時の描画負荷を抑える
+  // rAFでtransformを間引き、pointermove連打時の描画負荷を抑える
   const flushDrag = () => {
     dragRafId = null;
     applyTranslate(dragRafTranslateX);
@@ -893,36 +905,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     dragRafId = requestAnimationFrame(flushDrag);
   };
 
-  // ドラッグ終了判定: しきい値超えのみページ送りし、誤操作を抑制
-  const endMouseDrag = () => {
-    if(!isMouseDragging) return;
-    isMouseDragging = false;
-    if(dragRafId){
-      cancelAnimationFrame(dragRafId);
-      dragRafId = null;
-      applyTranslate(dragRafTranslateX);
-    }
-
-    const moved = currentTranslateX - dragStartTranslateX;
-    const didDrag = dragDistance >= DRAG_THRESHOLD;
-    rail.classList.remove('is-dragging');
-    document.body.classList.remove('heroDragNoSelect');
-
-    if(!didDrag){
-      suppressClick = false;
-      moveToIndex(currentIndex, { animate: true });
-      return;
-    }
-
-    const direction = moved < 0 ? 1 : -1;
-    // 0.24枚分以上動いた時のみ送る（少しのズレで誤遷移しないよう余裕を持たせる）
-    const offsetCards = Math.abs(moved) / cardStep;
-    if(offsetCards > 0.24){
-      moveBy(direction, true);
-    } else {
-      moveToIndex(currentIndex, { animate: true });
-    }
-  };
 
   // ----------------------------------------
   // Dots navigation
@@ -954,50 +936,94 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(prevBtn) prevBtn.addEventListener('click', () => moveBy(-1, true));
   if(nextBtn) nextBtn.addEventListener('click', () => moveBy(1, true));
 
-  rail.addEventListener('pointerdown', onUserInteract, { passive: true });
   rail.addEventListener('wheel', onUserInteract, { passive: true });
   rail.addEventListener('keydown', onUserInteract);
 
   // ----------------------------------------
-  // Drag / Swipe（PCドラッグ）
-  // ・mousedownでドラッグ開始
-  // ・mousemoveで追従表示
-  // ・mouseup / mouseleaveで確定
+  // Drag / Swipe（Pointer Events統一）
+  // ・SP: touch pointer でスワイプ
+  // ・PC: mouse pointer でドラッグ
   // ----------------------------------------
-  rail.addEventListener('mousedown', (e) => {
-    if(!isPcDragEnabled() || e.button !== 0) return;
-    isMouseDragging = true;
+  rail.addEventListener('pointerdown', (e) => {
+    if(!e.isPrimary) return;
+    if(e.pointerType === 'mouse' && e.button !== 0) return;
+
+    isPointerDragging = true;
+    activePointerId = e.pointerId;
     suppressClick = false;
     dragDistance = 0;
-    dragStartX = e.pageX;
+    dragStartX = e.clientX;
     dragStartTranslateX = currentTranslateX;
     dragRafTranslateX = currentTranslateX;
     setTransition(false);
     rail.classList.add('is-dragging');
     document.body.classList.add('heroDragNoSelect');
+
+    if(typeof rail.setPointerCapture === 'function'){
+      try { rail.setPointerCapture(e.pointerId); } catch(_e) {}
+    }
     onUserInteract();
   });
 
-  // ドラッグ中: transformを更新
-  rail.addEventListener('mousemove', (e) => {
-    if(!isMouseDragging) return;
-    const deltaX = e.pageX - dragStartX;
+  rail.addEventListener('pointermove', (e) => {
+    if(!isPointerDragging || e.pointerId !== activePointerId) return;
+    const deltaX = e.clientX - dragStartX;
     dragDistance = Math.max(dragDistance, Math.abs(deltaX));
-    if(dragDistance >= DRAG_THRESHOLD) suppressClick = true;
+    if(dragDistance >= DRAG_START_THRESHOLD){
+      suppressClick = true;
+      e.preventDefault();
+    }
     dragRafTranslateX = dragStartTranslateX + deltaX;
     scheduleDrag();
   });
 
-  rail.addEventListener('mouseup', endMouseDrag);
-  rail.addEventListener('mouseleave', endMouseDrag);
-  window.addEventListener('mouseup', endMouseDrag);
+  const endPointerDrag = (e) => {
+    if(!isPointerDragging) return;
+    if(e && activePointerId !== null && e.pointerId !== undefined && e.pointerId !== activePointerId) return;
+
+    if(dragRafId){
+      cancelAnimationFrame(dragRafId);
+      dragRafId = null;
+      applyTranslate(dragRafTranslateX);
+    }
+
+    const moved = currentTranslateX - dragStartTranslateX;
+    const didDrag = dragDistance >= DRAG_START_THRESHOLD;
+
+    isPointerDragging = false;
+    if(activePointerId !== null && typeof rail.releasePointerCapture === 'function'){
+      try { rail.releasePointerCapture(activePointerId); } catch(_e) {}
+    }
+    activePointerId = null;
+
+    rail.classList.remove('is-dragging');
+    document.body.classList.remove('heroDragNoSelect');
+
+    if(!didDrag){
+      suppressClick = false;
+      moveToIndex(currentIndex, { animate: true });
+      return;
+    }
+
+    const direction = moved < 0 ? 1 : -1;
+    const slideThreshold = Math.max(SLIDE_TRIGGER_PX, cardStep * 0.24);
+    if(Math.abs(moved) >= slideThreshold){
+      moveBy(direction, true);
+    } else {
+      moveToIndex(currentIndex, { animate: true });
+    }
+  };
+
+  rail.addEventListener('pointerup', endPointerDrag);
+  rail.addEventListener('pointercancel', endPointerDrag);
+  rail.addEventListener('lostpointercapture', endPointerDrag);
 
   // ----------------------------------------
   // Click判定
   // ・ドラッグ成立時はクリック遷移を抑止
   // ・意図しないリンク遷移を防止
   // ----------------------------------------
-  cards.forEach((card) => {
+  slides.forEach((card) => {
     card.addEventListener('click', (e) => {
       if(!suppressClick) return;
       e.preventDefault();
