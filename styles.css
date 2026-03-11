@@ -6,6 +6,12 @@
   --bg-section:#faf8f6;
   --text-main:#333;
 
+  --space-xs:4px;
+  --space-sm:8px;
+  --space-md:16px;
+  --space-lg:24px;
+  --space-xl:40px;
+
   --accent:#8A1F4E;            /* DIC F66 Web近似 */
   --accent-700:#6F173F;
   --line:#e6e1d8;
@@ -146,6 +152,10 @@ img{display:block;max-width:100%}
    FOOTER
 ========================= */
 .footer{border-top:1px solid rgba(230,225,216,1);background:#fff;padding:26px 0 40px}
+/* =========================
+   SPACING VARIABLES
+========================= */
+
 /* =========================
    RESPONSIVE
 ========================= */
