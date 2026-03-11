@@ -2893,7 +2893,7 @@ html, body { overflow-x:hidden; }
 }
 .heroCard{
   display:block;
-  flex:0 0 clamp(320px, 22vw, 520px);
+  flex:0 0 clamp(320px, 22vw, 420px);
   border-radius:22px;
   overflow:hidden;
   border:1px solid rgba(230,225,216,1);
@@ -2902,6 +2902,20 @@ html, body { overflow-x:hidden; }
   scroll-snap-align:start;
   transition:transform .24s ease, box-shadow .24s ease;
 }
+@media (min-width:980px) and (max-width:1919px){
+  .heroCard{
+    flex:0 0 calc((100% - (var(--hero-card-gap) * 2)) / 3);
+    max-width:calc((100% - (var(--hero-card-gap) * 2)) / 3);
+  }
+}
+
+@media (min-width:1920px){
+  .heroCard{
+    flex:0 0 clamp(320px, 22vw, 420px);
+    max-width:clamp(320px, 22vw, 420px);
+  }
+}
+
 @media (hover:hover){
   .heroCard:hover{
     transform:translateY(-6px);
