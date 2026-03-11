@@ -1,4 +1,11 @@
 :root{
+  --bene-brown:#7b675b;
+  --bene-light:#a89284;
+  --border-soft:#e6e0db;
+  --bg-soft:#f8f5f3;
+  --bg-section:#faf8f6;
+  --text-main:#333;
+
   --accent:#8A1F4E;            /* DIC F66 Web近似 */
   --accent-700:#6F173F;
   --line:#e6e1d8;
