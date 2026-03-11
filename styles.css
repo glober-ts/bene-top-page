@@ -2893,7 +2893,7 @@ html, body { overflow-x:hidden; }
 }
 .heroCard{
   display:block;
-  flex:0 0 clamp(320px, 22vw, 420px);
+  flex:0 0 clamp(320px, 22vw, 520px);
   border-radius:22px;
   overflow:hidden;
   border:1px solid rgba(230,225,216,1);
