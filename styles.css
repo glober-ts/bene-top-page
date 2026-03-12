@@ -103,16 +103,13 @@ img{display:block;max-width:100%}
 .rankNo{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(138,31,78,.92);color:#fff;font-weight:900;font-size:13px}
 .rankCard p{margin:10px 10px 12px;font-size:12px;color:var(--text)}
 
-/* Cards */
-.cardGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+/* Cards / Features */
 .itemCard{border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden}
 .itemCard .img{aspect-ratio:1/1;overflow:hidden}
 .itemCard img{width:100%;height:100%;object-fit:cover}
 .name{margin:10px 10px 2px;font-size:13px;font-weight:900}
 .meta{margin:0 10px 12px;font-size:12px;color:var(--muted)}
 
-/* Features */
-.featGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .feat{border-radius:18px;overflow:hidden;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05)}
 .feat img{width:100%;aspect-ratio:16/10;object-fit:cover}
 .feat span{display:block;padding:10px 12px;font-size:13px;font-weight:900}
@@ -149,6 +146,96 @@ img{display:block;max-width:100%}
 
 .yen{display:inline-block;margin-top:4px;font-weight:700;color:var(--accent)}
 
+
+/* =========================
+   FEATURE SHOWCASE (YouTube上)
+========================= */
+.featureShowcaseSection{padding-top:14px}
+.featureShowcaseGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.featureShowcaseCard{
+  position:relative;
+  display:block;
+  min-height:210px;
+  border-radius:20px;
+  border:1px solid rgba(228,216,221,.95);
+  background:linear-gradient(140deg,#fff,#fdf7f9 58%,#f9f0f3);
+  overflow:hidden;
+  box-shadow:0 10px 26px rgba(70,32,48,.07);
+  isolation:isolate;
+}
+.featureShowcaseCard::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:var(--feature-bg);
+  background-size:cover;
+  background-position:center;
+  opacity:.16;
+  z-index:-2;
+}
+.featureShowcaseCard::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.78) 46%,rgba(255,255,255,.35) 100%);
+  z-index:-1;
+}
+.featureShowcaseContent{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  gap:10px;
+  width:min(74%,420px);
+  min-height:210px;
+  padding:24px;
+}
+.featureShowcaseLabel{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 10px;
+  border-radius:999px;
+  border:1px solid rgba(138,31,78,.22);
+  background:rgba(255,255,255,.72);
+  font-size:11px;
+  letter-spacing:.16em;
+  color:#8A1F4E;
+}
+.featureShowcaseTitle{
+  font-size:22px;
+  line-height:1.35;
+  letter-spacing:.05em;
+  color:#3f2832;
+}
+.featureShowcaseText{
+  font-size:13px;
+  line-height:1.8;
+  color:#6b565f;
+}
+.featureShowcaseCard:hover{
+  border-color:rgba(138,31,78,.34);
+  transform:translateY(-2px);
+  box-shadow:0 16px 34px rgba(70,32,48,.12);
+}
+
+@media (max-width:980px){
+  .featureShowcaseGrid{grid-template-columns:1fr;}
+  .featureShowcaseCard,
+  .featureShowcaseContent{min-height:190px;}
+  .featureShowcaseTitle{font-size:20px;}
+}
+@media (max-width:560px){
+  .featureShowcaseContent{
+    width:100%;
+    padding:20px 18px;
+  }
+  .featureShowcaseText{font-size:12px;}
+}
 
 /* =========================
    NEWS
