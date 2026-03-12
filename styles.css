@@ -148,6 +148,96 @@ img{display:block;max-width:100%}
 
 
 /* =========================
+   FEATURE SHOWCASE (YouTube上)
+========================= */
+.featureShowcaseSection{padding-top:14px}
+.featureShowcaseGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.featureShowcaseCard{
+  position:relative;
+  display:block;
+  min-height:210px;
+  border-radius:20px;
+  border:1px solid rgba(228,216,221,.95);
+  background:linear-gradient(140deg,#fff,#fdf7f9 58%,#f9f0f3);
+  overflow:hidden;
+  box-shadow:0 10px 26px rgba(70,32,48,.07);
+  isolation:isolate;
+}
+.featureShowcaseCard::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:var(--feature-bg);
+  background-size:cover;
+  background-position:center;
+  opacity:.16;
+  z-index:-2;
+}
+.featureShowcaseCard::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.78) 46%,rgba(255,255,255,.35) 100%);
+  z-index:-1;
+}
+.featureShowcaseContent{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  gap:10px;
+  width:min(74%,420px);
+  min-height:210px;
+  padding:24px;
+}
+.featureShowcaseLabel{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 10px;
+  border-radius:999px;
+  border:1px solid rgba(138,31,78,.22);
+  background:rgba(255,255,255,.72);
+  font-size:11px;
+  letter-spacing:.16em;
+  color:#8A1F4E;
+}
+.featureShowcaseTitle{
+  font-size:22px;
+  line-height:1.35;
+  letter-spacing:.05em;
+  color:#3f2832;
+}
+.featureShowcaseText{
+  font-size:13px;
+  line-height:1.8;
+  color:#6b565f;
+}
+.featureShowcaseCard:hover{
+  border-color:rgba(138,31,78,.34);
+  transform:translateY(-2px);
+  box-shadow:0 16px 34px rgba(70,32,48,.12);
+}
+
+@media (max-width:980px){
+  .featureShowcaseGrid{grid-template-columns:1fr;}
+  .featureShowcaseCard,
+  .featureShowcaseContent{min-height:190px;}
+  .featureShowcaseTitle{font-size:20px;}
+}
+@media (max-width:560px){
+  .featureShowcaseContent{
+    width:100%;
+    padding:20px 18px;
+  }
+  .featureShowcaseText{font-size:12px;}
+}
+
+/* =========================
    NEWS
 ========================= */
 .newsList{
