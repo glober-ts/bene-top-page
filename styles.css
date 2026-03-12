@@ -103,16 +103,13 @@ img{display:block;max-width:100%}
 .rankNo{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(138,31,78,.92);color:#fff;font-weight:900;font-size:13px}
 .rankCard p{margin:10px 10px 12px;font-size:12px;color:var(--text)}
 
-/* Cards */
-.cardGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+/* Cards / Features */
 .itemCard{border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden}
 .itemCard .img{aspect-ratio:1/1;overflow:hidden}
 .itemCard img{width:100%;height:100%;object-fit:cover}
 .name{margin:10px 10px 2px;font-size:13px;font-weight:900}
 .meta{margin:0 10px 12px;font-size:12px;color:var(--muted)}
 
-/* Features */
-.featGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .feat{border-radius:18px;overflow:hidden;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05)}
 .feat img{width:100%;aspect-ratio:16/10;object-fit:cover}
 .feat span{display:block;padding:10px 12px;font-size:13px;font-weight:900}
