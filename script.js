@@ -1163,9 +1163,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let movedY = 0;
     let didCapturePointer = false;
 
-    const getMaxScroll = () => Math.max(0, row.scrollWidth - row.clientWidth);
-    const clampScroll = (value) => Math.min(getMaxScroll(), Math.max(0, value));
-
     const resetState = (e) => {
       isPointerDown = false;
       isDragging = false;
@@ -1220,7 +1217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dragScrollNoSelect');
       }
 
-      row.scrollLeft = clampScroll(startLeft - deltaX);
+      row.scrollLeft = startLeft - deltaX;
       e.preventDefault();
     });
 
