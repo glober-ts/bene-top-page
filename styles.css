@@ -623,13 +623,15 @@ section[id^="pickup"]{
 @media (max-width:979px){
   .rankingRow,
   .rowScroll{
-    --shelf-gap:12px;
-    --shelf-inline-padding:2px;
+    --shelf-gap:10px;
+    --shelf-inline-padding:8px;
+    --shelf-card-width:clamp(156px, calc((100vw - 64px) / 1.7), 212px);
+    scroll-padding-inline:var(--shelf-inline-padding);
   }
 
   .productCard{
-    width:clamp(244px, 78vw, 286px);
-    min-width:clamp(244px, 78vw, 286px);
+    width:var(--shelf-card-width);
+    min-width:var(--shelf-card-width);
   }
 }
 
