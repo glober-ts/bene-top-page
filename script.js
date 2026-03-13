@@ -1166,7 +1166,6 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         isDragging = true;
-        suppressClick = true;
         row.classList.add('is-dragging');
         document.body.classList.add('dragScrollNoSelect');
       }
@@ -1178,6 +1177,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const endDrag = (e) => {
       if(!isPointerDown) return;
       if(e && e.pointerId !== undefined && activePointerId !== null && e.pointerId !== activePointerId) return;
+      suppressClick = isDragging;
       resetState(e);
     };
 
