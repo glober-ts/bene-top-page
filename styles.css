@@ -98,10 +98,51 @@ img{display:block;max-width:100%}
 /* ========================================
    PICKUP
 ========================= */
-.rankCard{min-width:170px;scroll-snap-align:start;border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden;position:relative} /* 170px: SPでも商品名が潰れにくい最小幅 */
-.rankCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.productCard{width:170px;min-width:170px;scroll-snap-align:start;border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden;position:relative} /* 170px: SPでも商品名が潰れにくい最小幅 */
+.productCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.productCard p{margin:10px 10px 12px;font-size:12px;color:var(--text)}
+
 .rankNo{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(138,31,78,.92);color:#fff;font-weight:900;font-size:13px}
-.rankCard p{margin:10px 10px 12px;font-size:12px;color:var(--text)}
+
+/* Ranking section (independent from PICK UP) */
+.rankingSection{padding-top:24px}
+.rankingHead{align-items:center}
+.rankingLabel{margin:0 0 6px;font-size:10px;letter-spacing:.2em;color:rgba(138,31,78,.72)}
+.rankingCarousel{position:relative}
+.rankingRow{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  padding:4px 2px 10px;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  cursor:grab;
+}
+.rankingRow.is-dragging{cursor:grabbing}
+.rankingRow::-webkit-scrollbar{height:8px}
+.rankingRow::-webkit-scrollbar-thumb{background:rgba(230,225,216,1);border-radius:999px}
+.rankingRow::-webkit-scrollbar-track{background:rgba(250,249,247,1)}
+
+.rankingCard{flex:0 0 auto}
+.rankingNo{
+  position:absolute;
+  top:10px;
+  left:10px;
+  min-width:46px;
+  height:22px;
+  padding:0 8px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(138,31,78,.9);
+  color:#fff;
+  font-weight:700;
+  font-size:11px;
+  letter-spacing:.02em;
+}
+.rankingCard:nth-child(-n+3){border-color:rgba(138,31,78,.26)}
+.rankingCard:nth-child(-n+3) .rankingNo{background:linear-gradient(135deg,#a23263,#7f2049)}
 
 /* Cards / Features */
 .itemCard{border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden}
@@ -3581,7 +3622,7 @@ section[id^="pickup"] .h2,
 }
 
 .name,
-.rankCard p{
+.productCard p{
   font-weight:400;
 }
 
