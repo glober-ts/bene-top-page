@@ -1131,11 +1131,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const rows = Array.from(document.querySelectorAll('.rankingRow, .rowScroll'));
   if(!rows.length) return;
 
-  const SWIPE_THRESHOLD = 8;
-  const INERTIA_STOP_VELOCITY = 0.02;
-  const INERTIA_FRICTION_BASE = 0.9;
-  const MAX_DRAG_VELOCITY = 1.2;
-  const INERTIA_VELOCITY_SCALE = 0.82;
+  const SWIPE_THRESHOLD = 6;
 
   const isSmartphoneMode =
     window.matchMedia('(max-width: 979px)').matches ||
@@ -1155,7 +1151,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // PC: 既存のドラッグ + 慣性ロジックを維持
+    // PC: 追従性最優先（慣性なし）
     let suppressClick = false;
     let isPointerDown = false;
     let isDragging = false;
@@ -1166,71 +1162,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let movedX = 0;
     let movedY = 0;
     let didCapturePointer = false;
-    let currentScroll = row.scrollLeft;
-    let rafId = null;
-    let velocity = 0;
-    let lastMoveX = 0;
-    let lastMoveTime = 0;
-    let inertiaVelocity = 0;
-    let inertiaActive = false;
-    let lastRafTime = 0;
-
-    const getMaxScroll = () => Math.max(0, row.scrollWidth - row.clientWidth);
-    const clampScroll = (value) => Math.min(getMaxScroll(), Math.max(0, value));
-    const clampVelocity = (value) => Math.min(MAX_DRAG_VELOCITY, Math.max(-MAX_DRAG_VELOCITY, value));
-
-    const stopRafIfIdle = () => {
-      if((isPointerDown || inertiaActive) && rafId) return;
-      if(!rafId) return;
-      cancelAnimationFrame(rafId);
-      rafId = null;
-      lastRafTime = 0;
-    };
-
-    const step = (now) => {
-      if(lastRafTime === 0) lastRafTime = now;
-      const dt = Math.max(1, now - lastRafTime);
-      lastRafTime = now;
-
-      if(inertiaActive){
-        currentScroll = clampScroll(currentScroll + inertiaVelocity * dt);
-        const friction = Math.pow(INERTIA_FRICTION_BASE, dt / 16);
-        inertiaVelocity *= friction;
-
-        if(currentScroll <= 0 || currentScroll >= getMaxScroll()){
-          inertiaVelocity = 0;
-          inertiaActive = false;
-        }
-        if(Math.abs(inertiaVelocity) < INERTIA_STOP_VELOCITY){
-          inertiaVelocity = 0;
-          inertiaActive = false;
-        }
-      }
-
-      row.scrollLeft = currentScroll;
-
-      if(inertiaActive){
-        rafId = requestAnimationFrame(step);
-      } else {
-        rafId = null;
-        lastRafTime = 0;
-      }
-    };
-
-    const ensureRaf = () => {
-      if(rafId) return;
-      rafId = requestAnimationFrame(step);
-    };
-
-    const stopInertia = () => {
-      inertiaActive = false;
-      inertiaVelocity = 0;
-      if(rafId){
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-      lastRafTime = 0;
-    };
 
     const resetState = (e) => {
       isPointerDown = false;
@@ -1242,7 +1173,6 @@ document.addEventListener('DOMContentLoaded', () => {
         try { row.releasePointerCapture(e.pointerId); } catch(_e) {}
       }
       didCapturePointer = false;
-      stopRafIfIdle();
     };
 
     row.addEventListener('pointerdown', (e) => {
@@ -1260,12 +1190,6 @@ document.addEventListener('DOMContentLoaded', () => {
       startLeft = row.scrollLeft;
       movedX = 0;
       movedY = 0;
-      currentScroll = row.scrollLeft;
-      velocity = 0;
-      lastMoveX = e.clientX;
-      lastMoveTime = performance.now();
-      stopInertia();
-      stopRafIfIdle();
     });
 
     row.addEventListener('pointermove', (e) => {
@@ -1293,16 +1217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dragScrollNoSelect');
       }
 
-      const now = performance.now();
-      const dt = Math.max(1, now - lastMoveTime);
-      const dx = e.clientX - lastMoveX;
-      const instantVelocity = clampVelocity((-dx) / dt);
-      velocity = clampVelocity((velocity * 0.72) + (instantVelocity * 0.28));
-      lastMoveX = e.clientX;
-      lastMoveTime = now;
-
-      currentScroll = clampScroll(startLeft - deltaX);
-      row.scrollLeft = currentScroll;
+      row.scrollLeft = startLeft - deltaX;
       e.preventDefault();
     });
 
@@ -1310,16 +1225,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if(!isPointerDown) return;
       if(e && e.pointerId !== undefined && activePointerId !== null && e.pointerId !== activePointerId) return;
       suppressClick = isDragging;
-      currentScroll = row.scrollLeft;
-
-      if(isDragging && Math.abs(velocity) >= INERTIA_STOP_VELOCITY){
-        inertiaVelocity = clampVelocity(velocity * INERTIA_VELOCITY_SCALE);
-        inertiaActive = true;
-        ensureRaf();
-      } else {
-        stopInertia();
-      }
-
       resetState(e);
     };
 

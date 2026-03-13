@@ -3383,8 +3383,15 @@ html, body { overflow-x:hidden; }
 }
 
 @media (min-width:980px) and (pointer:fine){
+  .rankingRow,
   .rowScroll{
-    cursor:grab;
+    scroll-snap-type:none;
+  }
+  .rankingRow > *,
+  .rowScroll > *,
+  .rankingRow .productCard,
+  .rowScroll .productCard{
+    scroll-snap-align:none;
   }
   .heroRail{
     cursor:grab;
