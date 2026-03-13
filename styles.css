@@ -82,6 +82,7 @@ img{display:block;max-width:100%}
 .section.soft{background:linear-gradient(180deg,#fbfaf8,#ffffff)}
 .headRow{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px}
 .h2{margin:0;font-size:16px;letter-spacing:.08em}
+.subsectionTitle{font-weight:700}
 .more{font-size:12px;color:var(--muted);padding:8px 10px;border-radius:999px}
 .more:hover{background:#faf9f7;color:var(--text)}
 
@@ -3272,19 +3273,6 @@ html, body { overflow-x:hidden; }
   padding-top:8px;
 }
 
-.categorySectionHeading{
-  display:inline-flex;
-  align-items:center;
-  padding:10px 18px;
-  border-radius:999px;
-  background:#f6efea;
-  border:1px solid #e9dfd8;
-  color:#7a5a63;
-  font-size:14px;
-  letter-spacing:.08em;
-  line-height:1;
-}
-
 .categoryQuickGrid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -3670,8 +3658,7 @@ html, body { overflow-x:hidden; }
 
 /* v131: typography hierarchy refinement */
 .ytSection .h2,
-#features .h2,
-#material .categorySectionHeading{
+#features .h2{
   font-weight:600;
 }
 
