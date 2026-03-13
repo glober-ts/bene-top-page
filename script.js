@@ -1093,41 +1093,93 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
 });
 
-/* v134: ranking row drag-scroll (mouse/pointer) */
+/* v135: product rows drag/swipe scroll (ranking + pick up) */
 document.addEventListener('DOMContentLoaded', () => {
-  const row = document.querySelector('.rankingRow');
-  if(!row) return;
+  const rows = Array.from(document.querySelectorAll('.rankingRow, .rowScroll'));
+  if(!rows.length) return;
 
-  let isDown = false;
-  let startX = 0;
-  let startLeft = 0;
+  const DRAG_THRESHOLD = 8;
 
-  row.addEventListener('pointerdown', (e) => {
-    if(e.pointerType === 'mouse' && e.button !== 0) return;
-    isDown = true;
-    startX = e.clientX;
-    startLeft = row.scrollLeft;
-    row.classList.add('is-dragging');
-    if(typeof row.setPointerCapture === 'function'){
-      try { row.setPointerCapture(e.pointerId); } catch(_e) {}
-    }
+  rows.forEach((row) => {
+    let isPointerDown = false;
+    let isDragging = false;
+    let suppressClick = false;
+    let activePointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let startLeft = 0;
+    let movedX = 0;
+    let movedY = 0;
+
+    const resetState = (e) => {
+      isPointerDown = false;
+      isDragging = false;
+      activePointerId = null;
+      row.classList.remove('is-dragging');
+      document.body.classList.remove('dragScrollNoSelect');
+      if(e && typeof row.releasePointerCapture === 'function' && e.pointerId !== undefined){
+        try { row.releasePointerCapture(e.pointerId); } catch(_e) {}
+      }
+    };
+
+    row.addEventListener('pointerdown', (e) => {
+      if(!e.isPrimary) return;
+      if(e.pointerType === 'mouse' && e.button !== 0) return;
+      isPointerDown = true;
+      isDragging = false;
+      suppressClick = false;
+      activePointerId = e.pointerId;
+      startX = e.clientX;
+      startY = e.clientY;
+      startLeft = row.scrollLeft;
+      movedX = 0;
+      movedY = 0;
+      if(typeof row.setPointerCapture === 'function'){
+        try { row.setPointerCapture(e.pointerId); } catch(_e) {}
+      }
+    });
+
+    row.addEventListener('pointermove', (e) => {
+      if(!isPointerDown || e.pointerId !== activePointerId) return;
+
+      const deltaX = e.clientX - startX;
+      const deltaY = e.clientY - startY;
+      movedX = Math.max(movedX, Math.abs(deltaX));
+      movedY = Math.max(movedY, Math.abs(deltaY));
+
+      if(!isDragging){
+        if(movedX < DRAG_THRESHOLD) return;
+        if(movedY > movedX){
+          resetState(e);
+          return;
+        }
+        isDragging = true;
+        suppressClick = true;
+        row.classList.add('is-dragging');
+        document.body.classList.add('dragScrollNoSelect');
+      }
+
+      row.scrollLeft = startLeft - deltaX;
+      e.preventDefault();
+    });
+
+    const endDrag = (e) => {
+      if(!isPointerDown) return;
+      if(e && e.pointerId !== undefined && activePointerId !== null && e.pointerId !== activePointerId) return;
+      resetState(e);
+    };
+
+    row.addEventListener('pointerup', endDrag);
+    row.addEventListener('pointercancel', endDrag);
+    row.addEventListener('lostpointercapture', endDrag);
+
+    row.addEventListener('click', (e) => {
+      if(!suppressClick) return;
+      const link = e.target.closest('a[href]');
+      if(!link || !row.contains(link)) return;
+      e.preventDefault();
+      e.stopPropagation();
+      suppressClick = false;
+    }, true);
   });
-
-  const endDrag = (e) => {
-    if(!isDown) return;
-    isDown = false;
-    row.classList.remove('is-dragging');
-    if(e && typeof row.releasePointerCapture === 'function'){
-      try { row.releasePointerCapture(e.pointerId); } catch(_e) {}
-    }
-  };
-
-  row.addEventListener('pointermove', (e) => {
-    if(!isDown) return;
-    row.scrollLeft = startLeft - (e.clientX - startX);
-  });
-
-  row.addEventListener('pointerup', endDrag);
-  row.addEventListener('pointercancel', endDrag);
-  row.addEventListener('lostpointercapture', endDrag);
 });

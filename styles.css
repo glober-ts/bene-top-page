@@ -574,11 +574,6 @@ section[id^="pickup"]{
 }
 
 
-.rowScroll.dragging, .newsList.dragging{
-  cursor: grabbing;
-}
-
-
 /* PICK UP + NEWS controls (consolidated) */
 .carousel{position:relative;}
 .rowScroll{
@@ -590,6 +585,7 @@ section[id^="pickup"]{
   -webkit-overflow-scrolling:touch;
   padding:6px 2px 10px;
 }
+.rowScroll.is-dragging{cursor:grabbing}
 .rowScroll > *{scroll-snap-align:start}
 .carousel .rowScroll{padding:4px 54px 10px;}
 .carousel .carBtn{display:none;}
@@ -3017,6 +3013,10 @@ html, body { overflow-x:hidden; }
 .heroDragNoSelect *{
   user-select:none;
 }
+.dragScrollNoSelect,
+.dragScrollNoSelect *{
+  user-select:none;
+}
 .heroCard{
   display:block;
   flex:0 0 580px;
@@ -3330,6 +3330,9 @@ html, body { overflow-x:hidden; }
 }
 
 @media (min-width:980px) and (pointer:fine){
+  .rowScroll{
+    cursor:grab;
+  }
   .heroRail{
     cursor:grab;
   }
