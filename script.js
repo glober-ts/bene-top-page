@@ -1092,3 +1092,42 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.setAttribute('aria-expanded', String(willOpen));
   }, true);
 });
+
+/* v134: ranking row drag-scroll (mouse/pointer) */
+document.addEventListener('DOMContentLoaded', () => {
+  const row = document.querySelector('.rankingRow');
+  if(!row) return;
+
+  let isDown = false;
+  let startX = 0;
+  let startLeft = 0;
+
+  row.addEventListener('pointerdown', (e) => {
+    if(e.pointerType === 'mouse' && e.button !== 0) return;
+    isDown = true;
+    startX = e.clientX;
+    startLeft = row.scrollLeft;
+    row.classList.add('is-dragging');
+    if(typeof row.setPointerCapture === 'function'){
+      try { row.setPointerCapture(e.pointerId); } catch(_e) {}
+    }
+  });
+
+  const endDrag = (e) => {
+    if(!isDown) return;
+    isDown = false;
+    row.classList.remove('is-dragging');
+    if(e && typeof row.releasePointerCapture === 'function'){
+      try { row.releasePointerCapture(e.pointerId); } catch(_e) {}
+    }
+  };
+
+  row.addEventListener('pointermove', (e) => {
+    if(!isDown) return;
+    row.scrollLeft = startLeft - (e.clientX - startX);
+  });
+
+  row.addEventListener('pointerup', endDrag);
+  row.addEventListener('pointercancel', endDrag);
+  row.addEventListener('lostpointercapture', endDrag);
+});
