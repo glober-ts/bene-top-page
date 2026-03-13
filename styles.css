@@ -491,21 +491,6 @@ section[id^="pickup"]{
   }
 }
 
-/* Shop icon */
-.shopIcon{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:34px;
-  height:34px;
-  margin-right:8px;
-  border-radius:50%;
-  background:rgba(138,31,78,.12);
-  color:#8A1F4E;
-  font-size:18px;
-}
-
-
 /* Salon (店舗案内) */
 .salonGrid{gap:16px}
 .salonGrid .box{padding:18px 18px}
@@ -2884,12 +2869,6 @@ html, body { overflow-x:hidden; }
     grid-template-columns:1fr;
     gap:20px;
   }
-  .footCalendarWrap{
-    order:2;
-  }
-  .footMain{
-    order:1;
-  }
   .footCalendarHead{
     margin-bottom:8px;
   }
@@ -3007,11 +2986,7 @@ html, body { overflow-x:hidden; }
     grid-template-columns:1fr;
     gap:24px;
   }
-  .footCalendarWrap{
-    order:1;
-  }
   .footMain{
-    order:2;
     padding-top:0;
   }
   .footCalendarHead{
@@ -3694,9 +3669,7 @@ html, body { overflow-x:hidden; }
 
 
 /* v131: typography hierarchy refinement */
-section[id^="pickup"] .h2,
 .ytSection .h2,
-#cats .categorySectionHeading,
 #features .h2,
 #material .categorySectionHeading{
   font-weight:600;
@@ -3789,9 +3762,6 @@ section[id^="pickup"] .h2,
 .trustSection{
   padding-top:24px;
   padding-bottom:12px;
-}
-.trustTitle{
-  margin-bottom:18px;
 }
 .trust-grid{
   display:grid;
