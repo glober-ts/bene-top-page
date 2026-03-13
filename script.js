@@ -768,13 +768,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
   let isPointerDragging = false;
   let activePointerId = null;
   let dragStartX = 0;
+  let dragStartY = 0;
   let dragStartTranslateX = 0;
   let currentTranslateX = 0;
   let dragDistance = 0;
+  let dragDistanceY = 0;
   let suppressClick = false;
   let didCapturePointer = false;
   let dragRafId = null;
   let dragRafTranslateX = 0;
+  let dragIntent = null;
 
   let isLoopJumping = false;
   // 無限ループ実現のため先頭/末尾のクローンを挿入し、端到達時の見た目を自然にする
@@ -955,8 +958,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     dragDistance = 0;
     didCapturePointer = false;
     dragStartX = e.clientX;
+    dragStartY = e.clientY;
     dragStartTranslateX = currentTranslateX;
     dragRafTranslateX = currentTranslateX;
+    dragDistanceY = 0;
+    dragIntent = null;
     setTransition(false);
     rail.classList.add('is-dragging');
     document.body.classList.add('heroDragNoSelect');
@@ -967,9 +973,30 @@ document.addEventListener('DOMContentLoaded', ()=>{
   rail.addEventListener('pointermove', (e) => {
     if(!isPointerDragging || e.pointerId !== activePointerId) return;
     const deltaX = e.clientX - dragStartX;
+    const deltaY = e.clientY - dragStartY;
     dragDistance = Math.max(dragDistance, Math.abs(deltaX));
+    dragDistanceY = Math.max(dragDistanceY, Math.abs(deltaY));
+
+    if(dragIntent === null){
+      if(dragDistance < 5 && dragDistanceY < 5) return;
+      if(dragDistanceY > dragDistance * 1.15){
+        isPointerDragging = false;
+        activePointerId = null;
+        rail.classList.remove('is-dragging');
+        document.body.classList.remove('heroDragNoSelect');
+        setTransition(true);
+        applyTranslate(dragStartTranslateX);
+        return;
+      }
+      dragIntent = 'x';
+    }
+
     if(dragDistance >= DRAG_START_THRESHOLD){
-      if(!didCapturePointer && typeof rail.setPointerCapture === 'function'){
+      if(
+        !didCapturePointer &&
+        e.pointerType === 'mouse' &&
+        typeof rail.setPointerCapture === 'function'
+      ){
         try {
           rail.setPointerCapture(e.pointerId);
           didCapturePointer = true;
@@ -1001,6 +1028,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
     didCapturePointer = false;
     activePointerId = null;
+    dragIntent = null;
 
     rail.classList.remove('is-dragging');
     document.body.classList.remove('heroDragNoSelect');
@@ -1098,21 +1126,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
 });
 
-/* v136: product rows drag/swipe scroll (ranking + pick up, smooth + light inertia) */
+/* v138: product rows scroll control (SP native / PC drag) */
 document.addEventListener('DOMContentLoaded', () => {
   const rows = Array.from(document.querySelectorAll('.rankingRow, .rowScroll'));
   if(!rows.length) return;
 
-  const DRAG_THRESHOLD = 8;
+  const SWIPE_THRESHOLD = 8;
   const INERTIA_STOP_VELOCITY = 0.02;
   const INERTIA_FRICTION_BASE = 0.9;
   const MAX_DRAG_VELOCITY = 1.2;
   const INERTIA_VELOCITY_SCALE = 0.82;
 
+  const isSmartphoneMode =
+    window.matchMedia('(max-width: 979px)').matches ||
+    window.matchMedia('(any-pointer: coarse)').matches;
+
   rows.forEach((row) => {
+    row.querySelectorAll('img, a').forEach((el) => {
+      el.setAttribute('draggable', 'false');
+    });
+
+    row.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+
+    // SP: 独自ドラッグ処理を完全にスキップし、ネイティブ横スクロールのみ利用
+    if(isSmartphoneMode){
+      return;
+    }
+
+    // PC: 既存のドラッグ + 慣性ロジックを維持
+    let suppressClick = false;
     let isPointerDown = false;
     let isDragging = false;
-    let suppressClick = false;
     let activePointerId = null;
     let startX = 0;
     let startY = 0;
@@ -1186,14 +1232,6 @@ document.addEventListener('DOMContentLoaded', () => {
       lastRafTime = 0;
     };
 
-    row.querySelectorAll('img, a').forEach((el) => {
-      el.setAttribute('draggable', 'false');
-    });
-
-    row.addEventListener('dragstart', (e) => {
-      e.preventDefault();
-    });
-
     const resetState = (e) => {
       isPointerDown = false;
       isDragging = false;
@@ -1209,10 +1247,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     row.addEventListener('pointerdown', (e) => {
       if(!e.isPrimary) return;
-      if(e.pointerType === 'mouse' && e.button !== 0) return;
-
-      const card = e.target.closest('.productCard');
-      if(card && !row.contains(card)) return;
+      if(e.pointerType !== 'mouse') return;
+      if(e.button !== 0) return;
 
       isPointerDown = true;
       isDragging = false;
@@ -1241,7 +1277,7 @@ document.addEventListener('DOMContentLoaded', () => {
       movedY = Math.max(movedY, Math.abs(deltaY));
 
       if(!isDragging){
-        if(movedX < DRAG_THRESHOLD) return;
+        if(movedX < SWIPE_THRESHOLD) return;
         if(movedY > movedX){
           resetState(e);
           return;
