@@ -123,7 +123,7 @@ img{display:block;max-width:100%}
   overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
-  touch-action:pan-y;
+  touch-action:auto;
 }
 .rankingRow{
   gap:14px;
