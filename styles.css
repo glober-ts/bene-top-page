@@ -169,9 +169,7 @@ img{display:block;max-width:100%}
 .box p{margin:0;color:var(--muted);line-height:1.8;font-size:13px}
 
 /* Guide */
-.guideRow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.guide{border-radius:16px;border:1px solid rgba(230,225,216,1);background:#faf9f7;padding:12px 12px;text-align:center;font-weight:900;font-size:13px}
-.guide:hover{background:#fff;border-color:rgba(138,31,78,.28)}
+.guideRow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 
 /* =========================
    FOOTER
@@ -3297,7 +3295,13 @@ html, body { overflow-x:hidden; }
   align-items:center;
   justify-content:center;
   min-height:48px;
-  padding:14px 14px;
+  border-radius:16px;
+  border:1px solid rgba(230,225,216,1);
+  background:#faf9f7;
+  padding:14px;
+  text-align:center;
+  font-weight:900;
+  font-size:13px;
   transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease;
 }
 .guide:hover{
