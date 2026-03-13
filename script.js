@@ -772,6 +772,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   let currentTranslateX = 0;
   let dragDistance = 0;
   let suppressClick = false;
+  let didCapturePointer = false;
   let dragRafId = null;
   let dragRafTranslateX = 0;
 
@@ -952,6 +953,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     activePointerId = e.pointerId;
     suppressClick = false;
     dragDistance = 0;
+    didCapturePointer = false;
     dragStartX = e.clientX;
     dragStartTranslateX = currentTranslateX;
     dragRafTranslateX = currentTranslateX;
@@ -959,9 +961,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     rail.classList.add('is-dragging');
     document.body.classList.add('heroDragNoSelect');
 
-    if(typeof rail.setPointerCapture === 'function'){
-      try { rail.setPointerCapture(e.pointerId); } catch(_e) {}
-    }
     onUserInteract();
   });
 
@@ -970,7 +969,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const deltaX = e.clientX - dragStartX;
     dragDistance = Math.max(dragDistance, Math.abs(deltaX));
     if(dragDistance >= DRAG_START_THRESHOLD){
-      suppressClick = true;
+      if(!didCapturePointer && typeof rail.setPointerCapture === 'function'){
+        try {
+          rail.setPointerCapture(e.pointerId);
+          didCapturePointer = true;
+        } catch(_e) {}
+      }
       e.preventDefault();
     }
     dragRafTranslateX = dragStartTranslateX + deltaX;
@@ -989,18 +993,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     const moved = currentTranslateX - dragStartTranslateX;
     const didDrag = dragDistance >= DRAG_START_THRESHOLD;
+    suppressClick = didDrag;
 
     isPointerDragging = false;
-    if(activePointerId !== null && typeof rail.releasePointerCapture === 'function'){
+    if(didCapturePointer && activePointerId !== null && typeof rail.releasePointerCapture === 'function'){
       try { rail.releasePointerCapture(activePointerId); } catch(_e) {}
     }
+    didCapturePointer = false;
     activePointerId = null;
 
     rail.classList.remove('is-dragging');
     document.body.classList.remove('heroDragNoSelect');
 
     if(!didDrag){
-      suppressClick = false;
       moveToIndex(currentIndex, { animate: true });
       return;
     }
@@ -1110,6 +1115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let startLeft = 0;
     let movedX = 0;
     let movedY = 0;
+    let didCapturePointer = false;
 
     row.querySelectorAll('img, a').forEach((el) => {
       el.setAttribute('draggable', 'false');
@@ -1125,9 +1131,10 @@ document.addEventListener('DOMContentLoaded', () => {
       activePointerId = null;
       row.classList.remove('is-dragging');
       document.body.classList.remove('dragScrollNoSelect');
-      if(e && typeof row.releasePointerCapture === 'function' && e.pointerId !== undefined){
+      if(didCapturePointer && e && typeof row.releasePointerCapture === 'function' && e.pointerId !== undefined){
         try { row.releasePointerCapture(e.pointerId); } catch(_e) {}
       }
+      didCapturePointer = false;
     };
 
     row.addEventListener('pointerdown', (e) => {
@@ -1140,15 +1147,13 @@ document.addEventListener('DOMContentLoaded', () => {
       isPointerDown = true;
       isDragging = false;
       suppressClick = false;
+      didCapturePointer = false;
       activePointerId = e.pointerId;
       startX = e.clientX;
       startY = e.clientY;
       startLeft = row.scrollLeft;
       movedX = 0;
       movedY = 0;
-      if(typeof row.setPointerCapture === 'function'){
-        try { row.setPointerCapture(e.pointerId); } catch(_e) {}
-      }
     });
 
     row.addEventListener('pointermove', (e) => {
@@ -1166,6 +1171,12 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         isDragging = true;
+        if(!didCapturePointer && typeof row.setPointerCapture === 'function'){
+          try {
+            row.setPointerCapture(e.pointerId);
+            didCapturePointer = true;
+          } catch(_e) {}
+        }
         row.classList.add('is-dragging');
         document.body.classList.add('dragScrollNoSelect');
       }
