@@ -1131,11 +1131,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const rows = Array.from(document.querySelectorAll('.rankingRow, .rowScroll'));
   if(!rows.length) return;
 
-  const SWIPE_THRESHOLD = 8;
-  const INERTIA_STOP_VELOCITY = 0.02;
-  const INERTIA_FRICTION_BASE = 0.9;
-  const MAX_DRAG_VELOCITY = 1.2;
-  const INERTIA_VELOCITY_SCALE = 0.82;
+  const SWIPE_THRESHOLD = 6;
+  const INERTIA_STOP_VELOCITY = 0.03;
+  const INERTIA_FRICTION_BASE = 0.82;
+  const MAX_DRAG_VELOCITY = 1.0;
+  const INERTIA_VELOCITY_SCALE = 0.58;
+  const EDGE_SOFT_ZONE = 56;
+  const EDGE_DAMP_MIN = 0.72;
 
   const isSmartphoneMode =
     window.matchMedia('(max-width: 979px)').matches ||
@@ -1178,6 +1180,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const getMaxScroll = () => Math.max(0, row.scrollWidth - row.clientWidth);
     const clampScroll = (value) => Math.min(getMaxScroll(), Math.max(0, value));
     const clampVelocity = (value) => Math.min(MAX_DRAG_VELOCITY, Math.max(-MAX_DRAG_VELOCITY, value));
+    const edgeDamp = (position) => {
+      const max = getMaxScroll();
+      if(max <= 0) return 1;
+      const distToEdge = Math.min(position, Math.max(0, max - position));
+      const ratio = Math.min(1, distToEdge / EDGE_SOFT_ZONE);
+      return EDGE_DAMP_MIN + ((1 - EDGE_DAMP_MIN) * ratio);
+    };
 
     const stopRafIfIdle = () => {
       if((isPointerDown || inertiaActive) && rafId) return;
@@ -1195,7 +1204,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if(inertiaActive){
         currentScroll = clampScroll(currentScroll + inertiaVelocity * dt);
         const friction = Math.pow(INERTIA_FRICTION_BASE, dt / 16);
-        inertiaVelocity *= friction;
+        inertiaVelocity *= friction * edgeDamp(currentScroll);
 
         if(currentScroll <= 0 || currentScroll >= getMaxScroll()){
           inertiaVelocity = 0;
@@ -1297,7 +1306,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const dt = Math.max(1, now - lastMoveTime);
       const dx = e.clientX - lastMoveX;
       const instantVelocity = clampVelocity((-dx) / dt);
-      velocity = clampVelocity((velocity * 0.72) + (instantVelocity * 0.28));
+      velocity = clampVelocity((velocity * 0.2) + (instantVelocity * 0.8));
       lastMoveX = e.clientX;
       lastMoveTime = now;
 
