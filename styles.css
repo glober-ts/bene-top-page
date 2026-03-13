@@ -604,10 +604,12 @@ section[id^="pickup"]{
   cursor:grab;
 }
 .rowScroll.is-dragging{cursor:grabbing}
-.ytCarousel .ytList{
+.ytCarousel .ytList,
+.newsCarousel .newsList{
   cursor:grab;
 }
-.ytCarousel .ytList.is-dragging{
+.ytCarousel .ytList.is-dragging,
+.newsCarousel .newsList.is-dragging{
   cursor:grabbing;
 }
 .rowScroll > *{scroll-snap-align:start}
@@ -727,7 +729,8 @@ section[id^="pickup"]{
 
 
 @media (hover:none), (pointer:coarse){
-  .ytCarousel .ytList{
+  .ytCarousel .ytList,
+  .newsCarousel .newsList{
     cursor:auto;
   }
 }
@@ -3062,7 +3065,8 @@ html, body { overflow-x:hidden; }
 }
 .rankingRow img,
 .rowScroll img,
-.ytList img{
+.ytList img,
+.newsList img{
   -webkit-user-drag:none;
   user-drag:none;
 }

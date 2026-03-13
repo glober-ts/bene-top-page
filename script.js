@@ -1338,15 +1338,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* v139: YouTube list vertical drag scroll on desktop mouse */
+/* v139: vertical drag scroll for YouTube/NEWS on desktop mouse */
 document.addEventListener('DOMContentLoaded', () => {
-  const ytLists = Array.from(document.querySelectorAll('.ytCarousel .ytList'));
-  if(!ytLists.length) return;
+  const verticalLists = Array.from(document.querySelectorAll('.ytCarousel .ytList, .newsCarousel .newsList'));
+  if(!verticalLists.length) return;
 
   const DRAG_THRESHOLD = 8;
-  const isDesktopMouseMode = () => window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const isDesktopMouseMode = () =>
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+    !window.matchMedia('(any-pointer: coarse)').matches;
 
-  ytLists.forEach((list) => {
+  verticalLists.forEach((list) => {
     list.querySelectorAll('img, a').forEach((el) => {
       el.setAttribute('draggable', 'false');
     });
@@ -1410,6 +1412,7 @@ document.addEventListener('DOMContentLoaded', () => {
           resetState(e);
           return;
         }
+
         isDragging = true;
         if(!didCapturePointer && typeof list.setPointerCapture === 'function'){
           try {
