@@ -772,6 +772,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   let currentTranslateX = 0;
   let dragDistance = 0;
   let suppressClick = false;
+  let didCapturePointer = false;
   let dragRafId = null;
   let dragRafTranslateX = 0;
 
@@ -952,6 +953,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     activePointerId = e.pointerId;
     suppressClick = false;
     dragDistance = 0;
+    didCapturePointer = false;
     dragStartX = e.clientX;
     dragStartTranslateX = currentTranslateX;
     dragRafTranslateX = currentTranslateX;
@@ -959,9 +961,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     rail.classList.add('is-dragging');
     document.body.classList.add('heroDragNoSelect');
 
-    if(typeof rail.setPointerCapture === 'function'){
-      try { rail.setPointerCapture(e.pointerId); } catch(_e) {}
-    }
     onUserInteract();
   });
 
@@ -970,7 +969,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const deltaX = e.clientX - dragStartX;
     dragDistance = Math.max(dragDistance, Math.abs(deltaX));
     if(dragDistance >= DRAG_START_THRESHOLD){
-      suppressClick = true;
+      if(!didCapturePointer && typeof rail.setPointerCapture === 'function'){
+        try {
+          rail.setPointerCapture(e.pointerId);
+          didCapturePointer = true;
+        } catch(_e) {}
+      }
       e.preventDefault();
     }
     dragRafTranslateX = dragStartTranslateX + deltaX;
@@ -989,18 +993,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     const moved = currentTranslateX - dragStartTranslateX;
     const didDrag = dragDistance >= DRAG_START_THRESHOLD;
+    suppressClick = didDrag;
 
     isPointerDragging = false;
-    if(activePointerId !== null && typeof rail.releasePointerCapture === 'function'){
+    if(didCapturePointer && activePointerId !== null && typeof rail.releasePointerCapture === 'function'){
       try { rail.releasePointerCapture(activePointerId); } catch(_e) {}
     }
+    didCapturePointer = false;
     activePointerId = null;
 
     rail.classList.remove('is-dragging');
     document.body.classList.remove('heroDragNoSelect');
 
     if(!didDrag){
-      suppressClick = false;
       moveToIndex(currentIndex, { animate: true });
       return;
     }
@@ -1093,41 +1098,206 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
 });
 
-/* v134: ranking row drag-scroll (mouse/pointer) */
+/* v136: product rows drag/swipe scroll (ranking + pick up, smooth + light inertia) */
 document.addEventListener('DOMContentLoaded', () => {
-  const row = document.querySelector('.rankingRow');
-  if(!row) return;
+  const rows = Array.from(document.querySelectorAll('.rankingRow, .rowScroll'));
+  if(!rows.length) return;
 
-  let isDown = false;
-  let startX = 0;
-  let startLeft = 0;
+  const DRAG_THRESHOLD = 8;
+  const INERTIA_STOP_VELOCITY = 0.02;
+  const INERTIA_FRICTION_BASE = 0.9;
+  const MAX_DRAG_VELOCITY = 1.2;
+  const INERTIA_VELOCITY_SCALE = 0.82;
 
-  row.addEventListener('pointerdown', (e) => {
-    if(e.pointerType === 'mouse' && e.button !== 0) return;
-    isDown = true;
-    startX = e.clientX;
-    startLeft = row.scrollLeft;
-    row.classList.add('is-dragging');
-    if(typeof row.setPointerCapture === 'function'){
-      try { row.setPointerCapture(e.pointerId); } catch(_e) {}
-    }
+  rows.forEach((row) => {
+    let isPointerDown = false;
+    let isDragging = false;
+    let suppressClick = false;
+    let activePointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let startLeft = 0;
+    let movedX = 0;
+    let movedY = 0;
+    let didCapturePointer = false;
+    let currentScroll = row.scrollLeft;
+    let rafId = null;
+    let velocity = 0;
+    let lastMoveX = 0;
+    let lastMoveTime = 0;
+    let inertiaVelocity = 0;
+    let inertiaActive = false;
+    let lastRafTime = 0;
+
+    const getMaxScroll = () => Math.max(0, row.scrollWidth - row.clientWidth);
+    const clampScroll = (value) => Math.min(getMaxScroll(), Math.max(0, value));
+    const clampVelocity = (value) => Math.min(MAX_DRAG_VELOCITY, Math.max(-MAX_DRAG_VELOCITY, value));
+
+    const stopRafIfIdle = () => {
+      if((isPointerDown || inertiaActive) && rafId) return;
+      if(!rafId) return;
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      lastRafTime = 0;
+    };
+
+    const step = (now) => {
+      if(lastRafTime === 0) lastRafTime = now;
+      const dt = Math.max(1, now - lastRafTime);
+      lastRafTime = now;
+
+      if(inertiaActive){
+        currentScroll = clampScroll(currentScroll + inertiaVelocity * dt);
+        const friction = Math.pow(INERTIA_FRICTION_BASE, dt / 16);
+        inertiaVelocity *= friction;
+
+        if(currentScroll <= 0 || currentScroll >= getMaxScroll()){
+          inertiaVelocity = 0;
+          inertiaActive = false;
+        }
+        if(Math.abs(inertiaVelocity) < INERTIA_STOP_VELOCITY){
+          inertiaVelocity = 0;
+          inertiaActive = false;
+        }
+      }
+
+      row.scrollLeft = currentScroll;
+
+      if(inertiaActive){
+        rafId = requestAnimationFrame(step);
+      } else {
+        rafId = null;
+        lastRafTime = 0;
+      }
+    };
+
+    const ensureRaf = () => {
+      if(rafId) return;
+      rafId = requestAnimationFrame(step);
+    };
+
+    const stopInertia = () => {
+      inertiaActive = false;
+      inertiaVelocity = 0;
+      if(rafId){
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      lastRafTime = 0;
+    };
+
+    row.querySelectorAll('img, a').forEach((el) => {
+      el.setAttribute('draggable', 'false');
+    });
+
+    row.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+
+    const resetState = (e) => {
+      isPointerDown = false;
+      isDragging = false;
+      activePointerId = null;
+      row.classList.remove('is-dragging');
+      document.body.classList.remove('dragScrollNoSelect');
+      if(didCapturePointer && e && typeof row.releasePointerCapture === 'function' && e.pointerId !== undefined){
+        try { row.releasePointerCapture(e.pointerId); } catch(_e) {}
+      }
+      didCapturePointer = false;
+      stopRafIfIdle();
+    };
+
+    row.addEventListener('pointerdown', (e) => {
+      if(!e.isPrimary) return;
+      if(e.pointerType === 'mouse' && e.button !== 0) return;
+
+      const card = e.target.closest('.productCard');
+      if(card && !row.contains(card)) return;
+
+      isPointerDown = true;
+      isDragging = false;
+      suppressClick = false;
+      didCapturePointer = false;
+      activePointerId = e.pointerId;
+      startX = e.clientX;
+      startY = e.clientY;
+      startLeft = row.scrollLeft;
+      movedX = 0;
+      movedY = 0;
+      currentScroll = row.scrollLeft;
+      velocity = 0;
+      lastMoveX = e.clientX;
+      lastMoveTime = performance.now();
+      stopInertia();
+      stopRafIfIdle();
+    });
+
+    row.addEventListener('pointermove', (e) => {
+      if(!isPointerDown || e.pointerId !== activePointerId) return;
+
+      const deltaX = e.clientX - startX;
+      const deltaY = e.clientY - startY;
+      movedX = Math.max(movedX, Math.abs(deltaX));
+      movedY = Math.max(movedY, Math.abs(deltaY));
+
+      if(!isDragging){
+        if(movedX < DRAG_THRESHOLD) return;
+        if(movedY > movedX){
+          resetState(e);
+          return;
+        }
+        isDragging = true;
+        if(!didCapturePointer && typeof row.setPointerCapture === 'function'){
+          try {
+            row.setPointerCapture(e.pointerId);
+            didCapturePointer = true;
+          } catch(_e) {}
+        }
+        row.classList.add('is-dragging');
+        document.body.classList.add('dragScrollNoSelect');
+      }
+
+      const now = performance.now();
+      const dt = Math.max(1, now - lastMoveTime);
+      const dx = e.clientX - lastMoveX;
+      const instantVelocity = clampVelocity((-dx) / dt);
+      velocity = clampVelocity((velocity * 0.72) + (instantVelocity * 0.28));
+      lastMoveX = e.clientX;
+      lastMoveTime = now;
+
+      currentScroll = clampScroll(startLeft - deltaX);
+      row.scrollLeft = currentScroll;
+      e.preventDefault();
+    });
+
+    const endDrag = (e) => {
+      if(!isPointerDown) return;
+      if(e && e.pointerId !== undefined && activePointerId !== null && e.pointerId !== activePointerId) return;
+      suppressClick = isDragging;
+      currentScroll = row.scrollLeft;
+
+      if(isDragging && Math.abs(velocity) >= INERTIA_STOP_VELOCITY){
+        inertiaVelocity = clampVelocity(velocity * INERTIA_VELOCITY_SCALE);
+        inertiaActive = true;
+        ensureRaf();
+      } else {
+        stopInertia();
+      }
+
+      resetState(e);
+    };
+
+    row.addEventListener('pointerup', endDrag);
+    row.addEventListener('pointercancel', endDrag);
+    row.addEventListener('lostpointercapture', endDrag);
+
+    row.querySelectorAll('a[href]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        if(!suppressClick) return;
+        e.preventDefault();
+        e.stopPropagation();
+        suppressClick = false;
+      });
+    });
   });
-
-  const endDrag = (e) => {
-    if(!isDown) return;
-    isDown = false;
-    row.classList.remove('is-dragging');
-    if(e && typeof row.releasePointerCapture === 'function'){
-      try { row.releasePointerCapture(e.pointerId); } catch(_e) {}
-    }
-  };
-
-  row.addEventListener('pointermove', (e) => {
-    if(!isDown) return;
-    row.scrollLeft = startLeft - (e.clientX - startX);
-  });
-
-  row.addEventListener('pointerup', endDrag);
-  row.addEventListener('pointercancel', endDrag);
-  row.addEventListener('lostpointercapture', endDrag);
 });
