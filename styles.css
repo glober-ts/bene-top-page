@@ -101,6 +101,8 @@ img{display:block;max-width:100%}
 .productCard{width:170px;min-width:170px;scroll-snap-align:start;border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden;position:relative} /* 170px: SPでも商品名が潰れにくい最小幅 */
 .productCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .productCard p{margin:10px 10px 12px;font-size:12px;color:var(--text)}
+.rankingRow .productCard,
+.rowScroll .productCard{cursor:inherit}
 
 .rankNo{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(138,31,78,.92);color:#fff;font-weight:900;font-size:13px}
 
@@ -116,6 +118,7 @@ img{display:block;max-width:100%}
   padding:4px 2px 10px;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
   cursor:grab;
 }
 .rankingRow.is-dragging{cursor:grabbing}
@@ -583,6 +586,7 @@ section[id^="pickup"]{
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
   padding:6px 2px 10px;
 }
 .rowScroll.is-dragging{cursor:grabbing}
@@ -3016,6 +3020,11 @@ html, body { overflow-x:hidden; }
 .dragScrollNoSelect,
 .dragScrollNoSelect *{
   user-select:none;
+}
+.rankingRow img,
+.rowScroll img{
+  -webkit-user-drag:none;
+  user-drag:none;
 }
 .heroCard{
   display:block;

@@ -1111,6 +1111,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let movedX = 0;
     let movedY = 0;
 
+    row.querySelectorAll('img, a').forEach((el) => {
+      el.setAttribute('draggable', 'false');
+    });
+
+    row.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+
     const resetState = (e) => {
       isPointerDown = false;
       isDragging = false;
@@ -1125,6 +1133,10 @@ document.addEventListener('DOMContentLoaded', () => {
     row.addEventListener('pointerdown', (e) => {
       if(!e.isPrimary) return;
       if(e.pointerType === 'mouse' && e.button !== 0) return;
+
+      const card = e.target.closest('.productCard');
+      if(card && !row.contains(card)) return;
+
       isPointerDown = true;
       isDragging = false;
       suppressClick = false;
