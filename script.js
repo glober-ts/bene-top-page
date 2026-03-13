@@ -1126,21 +1126,88 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
 });
 
-/* v136: product rows drag/swipe scroll (ranking + pick up, smooth + light inertia) */
+/* v137: product rows drag/swipe scroll (PC drag + SP native swipe) */
 document.addEventListener('DOMContentLoaded', () => {
   const rows = Array.from(document.querySelectorAll('.rankingRow, .rowScroll'));
   if(!rows.length) return;
 
-  const DRAG_THRESHOLD = 8;
+  const SWIPE_THRESHOLD = 8;
   const INERTIA_STOP_VELOCITY = 0.02;
   const INERTIA_FRICTION_BASE = 0.9;
   const MAX_DRAG_VELOCITY = 1.2;
   const INERTIA_VELOCITY_SCALE = 0.82;
+  const prefersNativeTouchScroll = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 
   rows.forEach((row) => {
+    let suppressClick = false;
+
+    row.querySelectorAll('img, a').forEach((el) => {
+      el.setAttribute('draggable', 'false');
+    });
+
+    row.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+
+    // SP / touch: ネイティブ横スクロールを優先（独自ドラッグは使わない）
+    if(prefersNativeTouchScroll){
+      let touchPointerId = null;
+      let startY = 0;
+      let startLeft = 0;
+      let movedX = 0;
+      let movedY = 0;
+
+      const resetTouchState = () => {
+        touchPointerId = null;
+        startY = 0;
+        startLeft = row.scrollLeft;
+        movedX = 0;
+        movedY = 0;
+      };
+
+      row.addEventListener('pointerdown', (e) => {
+        if(!e.isPrimary) return;
+        if(e.pointerType !== 'touch' && e.pointerType !== 'pen') return;
+        touchPointerId = e.pointerId;
+        startLeft = row.scrollLeft;
+        startY = e.clientY;
+        movedX = 0;
+        movedY = 0;
+        suppressClick = false;
+      });
+
+      row.addEventListener('pointermove', (e) => {
+        if(touchPointerId === null || e.pointerId !== touchPointerId) return;
+        movedX = Math.max(movedX, Math.abs(row.scrollLeft - startLeft));
+        movedY = Math.max(movedY, Math.abs(e.clientY - startY));
+      }, { passive: true });
+
+      const endTouch = (e) => {
+        if(touchPointerId === null) return;
+        if(e && e.pointerId !== undefined && e.pointerId !== touchPointerId) return;
+        suppressClick = movedX >= SWIPE_THRESHOLD && movedX > movedY;
+        resetTouchState();
+      };
+
+      row.addEventListener('pointerup', endTouch);
+      row.addEventListener('pointercancel', endTouch);
+      row.addEventListener('lostpointercapture', endTouch);
+
+      row.querySelectorAll('a[href]').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          if(!suppressClick) return;
+          e.preventDefault();
+          e.stopPropagation();
+          suppressClick = false;
+        });
+      });
+
+      return;
+    }
+
+    // PC: 既存のドラッグ + 慣性ロジックを維持
     let isPointerDown = false;
     let isDragging = false;
-    let suppressClick = false;
     let activePointerId = null;
     let startX = 0;
     let startY = 0;
@@ -1156,7 +1223,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let inertiaVelocity = 0;
     let inertiaActive = false;
     let lastRafTime = 0;
-    let useNativeTouchScroll = false;
 
     const getMaxScroll = () => Math.max(0, row.scrollWidth - row.clientWidth);
     const clampScroll = (value) => Math.min(getMaxScroll(), Math.max(0, value));
@@ -1215,19 +1281,10 @@ document.addEventListener('DOMContentLoaded', () => {
       lastRafTime = 0;
     };
 
-    row.querySelectorAll('img, a').forEach((el) => {
-      el.setAttribute('draggable', 'false');
-    });
-
-    row.addEventListener('dragstart', (e) => {
-      e.preventDefault();
-    });
-
     const resetState = (e) => {
       isPointerDown = false;
       isDragging = false;
       activePointerId = null;
-      useNativeTouchScroll = false;
       row.classList.remove('is-dragging');
       document.body.classList.remove('dragScrollNoSelect');
       if(didCapturePointer && e && typeof row.releasePointerCapture === 'function' && e.pointerId !== undefined){
@@ -1240,16 +1297,13 @@ document.addEventListener('DOMContentLoaded', () => {
     row.addEventListener('pointerdown', (e) => {
       if(!e.isPrimary) return;
       if(e.pointerType === 'mouse' && e.button !== 0) return;
-
-      const card = e.target.closest('.productCard');
-      if(card && !row.contains(card)) return;
+      if(e.pointerType !== 'mouse') return;
 
       isPointerDown = true;
       isDragging = false;
       suppressClick = false;
       didCapturePointer = false;
       activePointerId = e.pointerId;
-      useNativeTouchScroll = e.pointerType === 'touch' || e.pointerType === 'pen';
       startX = e.clientX;
       startY = e.clientY;
       startLeft = row.scrollLeft;
@@ -1271,15 +1325,8 @@ document.addEventListener('DOMContentLoaded', () => {
       movedX = Math.max(movedX, Math.abs(deltaX));
       movedY = Math.max(movedY, Math.abs(deltaY));
 
-      if(useNativeTouchScroll){
-        if(!suppressClick && movedX >= DRAG_THRESHOLD && movedX > movedY){
-          suppressClick = true;
-        }
-        return;
-      }
-
       if(!isDragging){
-        if(movedX < DRAG_THRESHOLD) return;
+        if(movedX < SWIPE_THRESHOLD) return;
         if(movedY > movedX){
           resetState(e);
           return;
@@ -1312,9 +1359,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if(!isPointerDown) return;
       if(e && e.pointerId !== undefined && activePointerId !== null && e.pointerId !== activePointerId) return;
       suppressClick = isDragging;
-      if(useNativeTouchScroll){
-        suppressClick = suppressClick || (movedX >= DRAG_THRESHOLD && movedX > movedY);
-      }
       currentScroll = row.scrollLeft;
 
       if(isDragging && Math.abs(velocity) >= INERTIA_STOP_VELOCITY){
