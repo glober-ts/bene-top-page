@@ -604,6 +604,12 @@ section[id^="pickup"]{
   cursor:grab;
 }
 .rowScroll.is-dragging{cursor:grabbing}
+.ytCarousel .ytList{
+  cursor:grab;
+}
+.ytCarousel .ytList.is-dragging{
+  cursor:grabbing;
+}
 .rowScroll > *{scroll-snap-align:start}
 .carousel .carBtn{display:none;}
 .carousel.isScrollable .carBtn{display:flex;}
@@ -719,6 +725,12 @@ section[id^="pickup"]{
   .navBtn{width:34px;height:34px;}
 }
 
+
+@media (hover:none), (pointer:coarse){
+  .ytCarousel .ytList{
+    cursor:auto;
+  }
+}
 
 /* v33: YouTube section responsive (stack list under video on mobile) */
 @media (max-width:980px){
@@ -3049,7 +3061,8 @@ html, body { overflow-x:hidden; }
   user-select:none;
 }
 .rankingRow img,
-.rowScroll img{
+.rowScroll img,
+.ytList img{
   -webkit-user-drag:none;
   user-drag:none;
 }
