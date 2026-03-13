@@ -1337,3 +1337,115 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+/* v139: vertical drag scroll for YouTube/NEWS on desktop mouse */
+document.addEventListener('DOMContentLoaded', () => {
+  const verticalLists = Array.from(document.querySelectorAll('.ytCarousel .ytList, .newsCarousel .newsList'));
+  if(!verticalLists.length) return;
+
+  const DRAG_THRESHOLD = 8;
+  const isDesktopMouseMode = () =>
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+    !window.matchMedia('(any-pointer: coarse)').matches;
+
+  verticalLists.forEach((list) => {
+    list.querySelectorAll('img, a').forEach((el) => {
+      el.setAttribute('draggable', 'false');
+    });
+
+    list.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+
+    let suppressClick = false;
+    let isPointerDown = false;
+    let isDragging = false;
+    let activePointerId = null;
+    let didCapturePointer = false;
+    let startX = 0;
+    let startY = 0;
+    let startTop = 0;
+    let movedX = 0;
+    let movedY = 0;
+
+    const resetState = (e) => {
+      isPointerDown = false;
+      isDragging = false;
+      activePointerId = null;
+      list.classList.remove('is-dragging');
+      document.body.classList.remove('dragScrollNoSelect');
+      if(didCapturePointer && e && typeof list.releasePointerCapture === 'function' && e.pointerId !== undefined){
+        try { list.releasePointerCapture(e.pointerId); } catch(_e) {}
+      }
+      didCapturePointer = false;
+    };
+
+    list.addEventListener('pointerdown', (e) => {
+      if(!isDesktopMouseMode()) return;
+      if(!e.isPrimary) return;
+      if(e.pointerType !== 'mouse') return;
+      if(e.button !== 0) return;
+
+      isPointerDown = true;
+      isDragging = false;
+      suppressClick = false;
+      activePointerId = e.pointerId;
+      didCapturePointer = false;
+      startX = e.clientX;
+      startY = e.clientY;
+      startTop = list.scrollTop;
+      movedX = 0;
+      movedY = 0;
+    });
+
+    list.addEventListener('pointermove', (e) => {
+      if(!isPointerDown || e.pointerId !== activePointerId) return;
+
+      const deltaX = e.clientX - startX;
+      const deltaY = e.clientY - startY;
+      movedX = Math.max(movedX, Math.abs(deltaX));
+      movedY = Math.max(movedY, Math.abs(deltaY));
+
+      if(!isDragging){
+        if(movedY < DRAG_THRESHOLD) return;
+        if(movedX > movedY){
+          resetState(e);
+          return;
+        }
+
+        isDragging = true;
+        if(!didCapturePointer && typeof list.setPointerCapture === 'function'){
+          try {
+            list.setPointerCapture(e.pointerId);
+            didCapturePointer = true;
+          } catch(_e) {}
+        }
+        list.classList.add('is-dragging');
+        document.body.classList.add('dragScrollNoSelect');
+      }
+
+      list.scrollTop = startTop - deltaY;
+      e.preventDefault();
+    });
+
+    const endDrag = (e) => {
+      if(!isPointerDown) return;
+      if(e && e.pointerId !== undefined && activePointerId !== null && e.pointerId !== activePointerId) return;
+      suppressClick = isDragging;
+      resetState(e);
+    };
+
+    list.addEventListener('pointerup', endDrag);
+    list.addEventListener('pointercancel', endDrag);
+    list.addEventListener('lostpointercapture', endDrag);
+
+    list.querySelectorAll('a[href]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        if(!suppressClick) return;
+        e.preventDefault();
+        e.stopPropagation();
+        suppressClick = false;
+      });
+    });
+  });
+});
