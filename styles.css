@@ -120,6 +120,7 @@ img{display:block;max-width:100%}
   flex-wrap:nowrap;
   overflow-x:auto;
   overflow-y:hidden;
+  overscroll-behavior-x:contain;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
   touch-action:pan-y;

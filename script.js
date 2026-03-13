@@ -1150,35 +1150,8 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
     });
 
-    // SP: 独自ドラッグ処理を使わず、ネイティブ横スクロールのみ
+    // SP: 独自ドラッグ処理を完全にスキップし、ネイティブ横スクロールのみ利用
     if(isSmartphoneMode){
-      let startLeft = row.scrollLeft;
-      let movedX = 0;
-      let suppressNextClick = false;
-
-      row.addEventListener('touchstart', () => {
-        startLeft = row.scrollLeft;
-        movedX = 0;
-        suppressNextClick = false;
-      }, { passive: true });
-
-      row.addEventListener('touchmove', () => {
-        movedX = Math.max(movedX, Math.abs(row.scrollLeft - startLeft));
-      }, { passive: true });
-
-      row.addEventListener('touchend', () => {
-        suppressNextClick = movedX >= SWIPE_THRESHOLD;
-      }, { passive: true });
-
-      row.querySelectorAll('a[href]').forEach((link) => {
-        link.addEventListener('click', (e) => {
-          if(!suppressNextClick) return;
-          e.preventDefault();
-          e.stopPropagation();
-          suppressNextClick = false;
-        });
-      });
-
       return;
     }
 
