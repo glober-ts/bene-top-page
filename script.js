@@ -1104,7 +1104,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if(!rows.length) return;
 
   const DRAG_THRESHOLD = 8;
-  const DRAG_LERP = 0.34;
   const INERTIA_STOP_VELOCITY = 0.02;
   const INERTIA_FRICTION_BASE = 0.9;
   const MAX_DRAG_VELOCITY = 1.2;
@@ -1122,7 +1121,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let movedY = 0;
     let didCapturePointer = false;
     let currentScroll = row.scrollLeft;
-    let targetScroll = row.scrollLeft;
     let rafId = null;
     let velocity = 0;
     let lastMoveX = 0;
@@ -1148,12 +1146,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const dt = Math.max(1, now - lastRafTime);
       lastRafTime = now;
 
-      if(isPointerDown){
-        currentScroll += (targetScroll - currentScroll) * DRAG_LERP;
-        if(Math.abs(targetScroll - currentScroll) < 0.35){
-          currentScroll = targetScroll;
-        }
-      } else if(inertiaActive){
+      if(inertiaActive){
         currentScroll = clampScroll(currentScroll + inertiaVelocity * dt);
         const friction = Math.pow(INERTIA_FRICTION_BASE, dt / 16);
         inertiaVelocity *= friction;
@@ -1170,7 +1163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       row.scrollLeft = currentScroll;
 
-      if(isPointerDown || inertiaActive){
+      if(inertiaActive){
         rafId = requestAnimationFrame(step);
       } else {
         rafId = null;
@@ -1181,6 +1174,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const ensureRaf = () => {
       if(rafId) return;
       rafId = requestAnimationFrame(step);
+    };
+
+    const stopInertia = () => {
+      inertiaActive = false;
+      inertiaVelocity = 0;
+      if(rafId){
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      lastRafTime = 0;
     };
 
     row.querySelectorAll('img, a').forEach((el) => {
@@ -1222,12 +1225,10 @@ document.addEventListener('DOMContentLoaded', () => {
       movedX = 0;
       movedY = 0;
       currentScroll = row.scrollLeft;
-      targetScroll = currentScroll;
       velocity = 0;
       lastMoveX = e.clientX;
       lastMoveTime = performance.now();
-      inertiaVelocity = 0;
-      inertiaActive = false;
+      stopInertia();
       stopRafIfIdle();
     });
 
@@ -1264,8 +1265,8 @@ document.addEventListener('DOMContentLoaded', () => {
       lastMoveX = e.clientX;
       lastMoveTime = now;
 
-      targetScroll = clampScroll(startLeft - deltaX);
-      ensureRaf();
+      currentScroll = clampScroll(startLeft - deltaX);
+      row.scrollLeft = currentScroll;
       e.preventDefault();
     });
 
@@ -1274,15 +1275,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if(e && e.pointerId !== undefined && activePointerId !== null && e.pointerId !== activePointerId) return;
       suppressClick = isDragging;
       currentScroll = row.scrollLeft;
-      targetScroll = row.scrollLeft;
 
       if(isDragging && Math.abs(velocity) >= INERTIA_STOP_VELOCITY){
         inertiaVelocity = clampVelocity(velocity * INERTIA_VELOCITY_SCALE);
         inertiaActive = true;
         ensureRaf();
       } else {
-        inertiaVelocity = 0;
-        inertiaActive = false;
+        stopInertia();
       }
 
       resetState(e);
