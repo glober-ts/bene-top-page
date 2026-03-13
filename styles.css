@@ -98,7 +98,17 @@ img{display:block;max-width:100%}
 /* ========================================
    PICKUP
 ========================= */
-.productCard{width:170px;min-width:170px;scroll-snap-align:start;border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden;position:relative} /* 170px: SPでも商品名が潰れにくい最小幅 */
+.productCard{
+  width:clamp(188px, 18.8vw, 208px);
+  min-width:clamp(188px, 18.8vw, 208px);
+  scroll-snap-align:start;
+  border-radius:18px;
+  border:1px solid rgba(230,225,216,1);
+  background:#fff;
+  box-shadow:0 10px 22px rgba(0,0,0,.05);
+  overflow:hidden;
+  position:relative;
+}
 .productCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .productCard p{margin:10px 10px 12px;font-size:12px;color:var(--text)}
 .rankingRow .productCard,
@@ -116,8 +126,12 @@ img{display:block;max-width:100%}
 .rankingCarousel{position:relative}
 .rankingRow,
 .rowScroll{
+  --shelf-gap:clamp(12px, 1.2vw, 16px);
+  --shelf-inline-padding:clamp(2px, .5vw, 6px);
   display:flex;
   flex-wrap:nowrap;
+  gap:var(--shelf-gap);
+  padding:4px var(--shelf-inline-padding) 10px;
   overflow-x:auto;
   overflow-y:hidden;
   overscroll-behavior-x:contain;
@@ -126,8 +140,6 @@ img{display:block;max-width:100%}
   touch-action:auto;
 }
 .rankingRow{
-  gap:14px;
-  padding:4px 2px 10px;
   cursor:grab;
 }
 .rankingRow.is-dragging{cursor:grabbing}
@@ -589,12 +601,10 @@ section[id^="pickup"]{
 /* PICK UP + NEWS controls (consolidated) */
 .carousel{position:relative;}
 .rowScroll{
-  gap:12px;
-  padding:6px 2px 10px;
+  cursor:grab;
 }
 .rowScroll.is-dragging{cursor:grabbing}
 .rowScroll > *{scroll-snap-align:start}
-.carousel .rowScroll{padding:4px 54px 10px;}
 .carousel .carBtn{display:none;}
 .carousel.isScrollable .carBtn{display:flex;}
 .carousel .carBtn{z-index:20;pointer-events:auto;}
@@ -608,7 +618,19 @@ section[id^="pickup"]{
 
 @media (hover:none), (pointer:coarse){
   .carousel .carBtn,.newsCarousel .newsBtn{display:none;}
-  .carousel .rowScroll{padding:4px 0 10px;}
+}
+
+@media (max-width:979px){
+  .rankingRow,
+  .rowScroll{
+    --shelf-gap:12px;
+    --shelf-inline-padding:2px;
+  }
+
+  .productCard{
+    width:clamp(244px, 78vw, 286px);
+    min-width:clamp(244px, 78vw, 286px);
+  }
 }
 
 
