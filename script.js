@@ -768,13 +768,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
   let isPointerDragging = false;
   let activePointerId = null;
   let dragStartX = 0;
+  let dragStartY = 0;
   let dragStartTranslateX = 0;
   let currentTranslateX = 0;
   let dragDistance = 0;
+  let dragDistanceY = 0;
   let suppressClick = false;
   let didCapturePointer = false;
   let dragRafId = null;
   let dragRafTranslateX = 0;
+  let dragIntent = null;
 
   let isLoopJumping = false;
   // 無限ループ実現のため先頭/末尾のクローンを挿入し、端到達時の見た目を自然にする
@@ -955,8 +958,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
     dragDistance = 0;
     didCapturePointer = false;
     dragStartX = e.clientX;
+    dragStartY = e.clientY;
     dragStartTranslateX = currentTranslateX;
     dragRafTranslateX = currentTranslateX;
+    dragDistanceY = 0;
+    dragIntent = null;
     setTransition(false);
     rail.classList.add('is-dragging');
     document.body.classList.add('heroDragNoSelect');
@@ -967,9 +973,30 @@ document.addEventListener('DOMContentLoaded', ()=>{
   rail.addEventListener('pointermove', (e) => {
     if(!isPointerDragging || e.pointerId !== activePointerId) return;
     const deltaX = e.clientX - dragStartX;
+    const deltaY = e.clientY - dragStartY;
     dragDistance = Math.max(dragDistance, Math.abs(deltaX));
+    dragDistanceY = Math.max(dragDistanceY, Math.abs(deltaY));
+
+    if(dragIntent === null){
+      if(dragDistance < 5 && dragDistanceY < 5) return;
+      if(dragDistanceY > dragDistance * 1.15){
+        isPointerDragging = false;
+        activePointerId = null;
+        rail.classList.remove('is-dragging');
+        document.body.classList.remove('heroDragNoSelect');
+        setTransition(true);
+        applyTranslate(dragStartTranslateX);
+        return;
+      }
+      dragIntent = 'x';
+    }
+
     if(dragDistance >= DRAG_START_THRESHOLD){
-      if(!didCapturePointer && typeof rail.setPointerCapture === 'function'){
+      if(
+        !didCapturePointer &&
+        e.pointerType === 'mouse' &&
+        typeof rail.setPointerCapture === 'function'
+      ){
         try {
           rail.setPointerCapture(e.pointerId);
           didCapturePointer = true;
@@ -1001,6 +1028,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
     didCapturePointer = false;
     activePointerId = null;
+    dragIntent = null;
 
     rail.classList.remove('is-dragging');
     document.body.classList.remove('heroDragNoSelect');
@@ -1128,6 +1156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let inertiaVelocity = 0;
     let inertiaActive = false;
     let lastRafTime = 0;
+    let useNativeTouchScroll = false;
 
     const getMaxScroll = () => Math.max(0, row.scrollWidth - row.clientWidth);
     const clampScroll = (value) => Math.min(getMaxScroll(), Math.max(0, value));
@@ -1198,6 +1227,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isPointerDown = false;
       isDragging = false;
       activePointerId = null;
+      useNativeTouchScroll = false;
       row.classList.remove('is-dragging');
       document.body.classList.remove('dragScrollNoSelect');
       if(didCapturePointer && e && typeof row.releasePointerCapture === 'function' && e.pointerId !== undefined){
@@ -1219,6 +1249,7 @@ document.addEventListener('DOMContentLoaded', () => {
       suppressClick = false;
       didCapturePointer = false;
       activePointerId = e.pointerId;
+      useNativeTouchScroll = e.pointerType === 'touch' || e.pointerType === 'pen';
       startX = e.clientX;
       startY = e.clientY;
       startLeft = row.scrollLeft;
@@ -1239,6 +1270,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const deltaY = e.clientY - startY;
       movedX = Math.max(movedX, Math.abs(deltaX));
       movedY = Math.max(movedY, Math.abs(deltaY));
+
+      if(useNativeTouchScroll){
+        if(!suppressClick && movedX >= DRAG_THRESHOLD && movedX > movedY){
+          suppressClick = true;
+        }
+        return;
+      }
 
       if(!isDragging){
         if(movedX < DRAG_THRESHOLD) return;
@@ -1274,6 +1312,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if(!isPointerDown) return;
       if(e && e.pointerId !== undefined && activePointerId !== null && e.pointerId !== activePointerId) return;
       suppressClick = isDragging;
+      if(useNativeTouchScroll){
+        suppressClick = suppressClick || (movedX >= DRAG_THRESHOLD && movedX > movedY);
+      }
       currentScroll = row.scrollLeft;
 
       if(isDragging && Math.abs(velocity) >= INERTIA_STOP_VELOCITY){
