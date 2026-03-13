@@ -85,6 +85,26 @@ img{display:block;max-width:100%}
 .more{font-size:12px;color:var(--muted);padding:8px 10px;border-radius:999px}
 .more:hover{background:#faf9f7;color:var(--text)}
 
+.sectionMore{
+  display:inline-flex;
+  align-items:center;
+  gap:.4em;
+  font-size:14px;
+  font-weight:500;
+  line-height:1;
+  color:#9a4f66;
+  text-decoration:none;
+  padding:8px 0;
+  border-radius:0;
+  transition:opacity .2s ease,color .2s ease;
+}
+.sectionMore:hover{
+  background:transparent;
+  color:#7c2f49;
+  opacity:.7;
+}
+
+
 /* =========================
    CATEGORY
 ========================= */
