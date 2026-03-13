@@ -491,21 +491,6 @@ section[id^="pickup"]{
   }
 }
 
-/* Shop icon */
-.shopIcon{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:34px;
-  height:34px;
-  margin-right:8px;
-  border-radius:50%;
-  background:rgba(138,31,78,.12);
-  color:#8A1F4E;
-  font-size:18px;
-}
-
-
 /* Salon (店舗案内) */
 .salonGrid{gap:16px}
 .salonGrid .box{padding:18px 18px}
@@ -2884,12 +2869,6 @@ html, body { overflow-x:hidden; }
     grid-template-columns:1fr;
     gap:20px;
   }
-  .footCalendarWrap{
-    order:2;
-  }
-  .footMain{
-    order:1;
-  }
   .footCalendarHead{
     margin-bottom:8px;
   }
@@ -3007,11 +2986,7 @@ html, body { overflow-x:hidden; }
     grid-template-columns:1fr;
     gap:24px;
   }
-  .footCalendarWrap{
-    order:1;
-  }
   .footMain{
-    order:2;
     padding-top:0;
   }
   .footCalendarHead{
@@ -3971,4 +3946,111 @@ section[id^="pickup"] .h2,
     gap:24px;
     height:100%;
   }
+}
+
+
+/* ===== v140 section hierarchy cleanup ===== */
+#pickup2{
+  background:linear-gradient(135deg, rgba(246,230,236,.95), rgba(255,255,255,.98));
+  position:relative;
+}
+#pickup2::before,
+#pickup2::after,
+#cats .categorySectionHeading::before,
+#cats .categorySectionHeading::after,
+.trustTitle::before,
+.trustTitle::after{
+  content:"";
+  display:inline-block;
+  vertical-align:middle;
+}
+#pickup2::before,
+#pickup2::after{
+  position:absolute;
+  width:70px;
+  height:1px;
+  background:rgba(138,31,78,.28);
+  top:26px;
+}
+#pickup2::before{left:20px;}
+#pickup2::after{right:20px;}
+
+#pickup3,
+#pickup4,
+#pickup5{
+  background:#fff;
+}
+
+.heroInfoSection .news-info-layout{
+  background:linear-gradient(140deg, rgba(246,230,236,.92), rgba(255,255,255,.98));
+  border:1px solid rgba(230,225,216,1);
+  border-radius:24px;
+  padding:16px;
+}
+
+#new{
+  background:linear-gradient(140deg, rgba(246,230,236,.9), rgba(255,255,255,.97));
+  border-top:1px solid rgba(230,225,216,.8);
+  border-bottom:1px solid rgba(230,225,216,.8);
+}
+
+.sectionGroup .section{
+  padding-top:18px;
+  padding-bottom:18px;
+}
+.itemGroup .sectionGroupInner,
+.serviceGuideGroup .sectionGroupInner{
+  background:#fff;
+  border:1px solid rgba(230,225,216,1);
+  border-radius:24px;
+  padding:8px 0;
+}
+#cats .categorySectionHeading{
+  font-size:clamp(24px,3vw,32px);
+  font-weight:700;
+  letter-spacing:.06em;
+  background:transparent;
+  border:0;
+  padding:0;
+}
+#cats .categorySectionHeading::before,
+#cats .categorySectionHeading::after{
+  width:26px;
+  height:1px;
+  background:rgba(138,31,78,.4);
+  margin:0 10px;
+}
+#material .categorySectionHeading,
+#birthstone .h2,
+#price .h2,
+#new .categorySectionHeading,
+#features .h2,
+#guide .h2{
+  font-size:clamp(18px,2vw,24px);
+  letter-spacing:.04em;
+}
+
+.trustSection{
+  background:linear-gradient(140deg, rgba(246,230,236,.95), rgba(255,255,255,.98));
+  border-radius:20px;
+}
+.trustTitle{
+  font-size:clamp(24px,2.6vw,32px);
+  text-align:center;
+}
+.trustTitle::before,
+.trustTitle::after{
+  width:32px;
+  height:1px;
+  background:rgba(138,31,78,.42);
+  margin:0 10px;
+}
+#guide{
+  background:transparent;
+}
+
+@media (max-width:979px){
+  #pickup2::before,
+  #pickup2::after{display:none;}
+  .heroInfoSection .news-info-layout{padding:12px;}
 }
