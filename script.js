@@ -1098,12 +1098,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }, true);
 });
 
-/* v135: product rows drag/swipe scroll (ranking + pick up) */
+/* v136: product rows drag/swipe scroll (ranking + pick up, smooth + light inertia) */
 document.addEventListener('DOMContentLoaded', () => {
   const rows = Array.from(document.querySelectorAll('.rankingRow, .rowScroll'));
   if(!rows.length) return;
 
   const DRAG_THRESHOLD = 8;
+  const DRAG_LERP = 0.34;
+  const INERTIA_STOP_VELOCITY = 0.02;
+  const INERTIA_FRICTION_BASE = 0.9;
+  const MAX_DRAG_VELOCITY = 1.2;
+  const INERTIA_VELOCITY_SCALE = 0.82;
 
   rows.forEach((row) => {
     let isPointerDown = false;
@@ -1116,6 +1121,67 @@ document.addEventListener('DOMContentLoaded', () => {
     let movedX = 0;
     let movedY = 0;
     let didCapturePointer = false;
+    let currentScroll = row.scrollLeft;
+    let targetScroll = row.scrollLeft;
+    let rafId = null;
+    let velocity = 0;
+    let lastMoveX = 0;
+    let lastMoveTime = 0;
+    let inertiaVelocity = 0;
+    let inertiaActive = false;
+    let lastRafTime = 0;
+
+    const getMaxScroll = () => Math.max(0, row.scrollWidth - row.clientWidth);
+    const clampScroll = (value) => Math.min(getMaxScroll(), Math.max(0, value));
+    const clampVelocity = (value) => Math.min(MAX_DRAG_VELOCITY, Math.max(-MAX_DRAG_VELOCITY, value));
+
+    const stopRafIfIdle = () => {
+      if((isPointerDown || inertiaActive) && rafId) return;
+      if(!rafId) return;
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      lastRafTime = 0;
+    };
+
+    const step = (now) => {
+      if(lastRafTime === 0) lastRafTime = now;
+      const dt = Math.max(1, now - lastRafTime);
+      lastRafTime = now;
+
+      if(isPointerDown){
+        currentScroll += (targetScroll - currentScroll) * DRAG_LERP;
+        if(Math.abs(targetScroll - currentScroll) < 0.35){
+          currentScroll = targetScroll;
+        }
+      } else if(inertiaActive){
+        currentScroll = clampScroll(currentScroll + inertiaVelocity * dt);
+        const friction = Math.pow(INERTIA_FRICTION_BASE, dt / 16);
+        inertiaVelocity *= friction;
+
+        if(currentScroll <= 0 || currentScroll >= getMaxScroll()){
+          inertiaVelocity = 0;
+          inertiaActive = false;
+        }
+        if(Math.abs(inertiaVelocity) < INERTIA_STOP_VELOCITY){
+          inertiaVelocity = 0;
+          inertiaActive = false;
+        }
+      }
+
+      row.scrollLeft = currentScroll;
+
+      if(isPointerDown || inertiaActive){
+        rafId = requestAnimationFrame(step);
+      } else {
+        rafId = null;
+        lastRafTime = 0;
+      }
+    };
+
+    const ensureRaf = () => {
+      if(rafId) return;
+      rafId = requestAnimationFrame(step);
+    };
 
     row.querySelectorAll('img, a').forEach((el) => {
       el.setAttribute('draggable', 'false');
@@ -1135,6 +1201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try { row.releasePointerCapture(e.pointerId); } catch(_e) {}
       }
       didCapturePointer = false;
+      stopRafIfIdle();
     };
 
     row.addEventListener('pointerdown', (e) => {
@@ -1154,6 +1221,14 @@ document.addEventListener('DOMContentLoaded', () => {
       startLeft = row.scrollLeft;
       movedX = 0;
       movedY = 0;
+      currentScroll = row.scrollLeft;
+      targetScroll = currentScroll;
+      velocity = 0;
+      lastMoveX = e.clientX;
+      lastMoveTime = performance.now();
+      inertiaVelocity = 0;
+      inertiaActive = false;
+      stopRafIfIdle();
     });
 
     row.addEventListener('pointermove', (e) => {
@@ -1181,7 +1256,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('dragScrollNoSelect');
       }
 
-      row.scrollLeft = startLeft - deltaX;
+      const now = performance.now();
+      const dt = Math.max(1, now - lastMoveTime);
+      const dx = e.clientX - lastMoveX;
+      const instantVelocity = clampVelocity((-dx) / dt);
+      velocity = clampVelocity((velocity * 0.72) + (instantVelocity * 0.28));
+      lastMoveX = e.clientX;
+      lastMoveTime = now;
+
+      targetScroll = clampScroll(startLeft - deltaX);
+      ensureRaf();
       e.preventDefault();
     });
 
@@ -1189,6 +1273,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if(!isPointerDown) return;
       if(e && e.pointerId !== undefined && activePointerId !== null && e.pointerId !== activePointerId) return;
       suppressClick = isDragging;
+      currentScroll = row.scrollLeft;
+      targetScroll = row.scrollLeft;
+
+      if(isDragging && Math.abs(velocity) >= INERTIA_STOP_VELOCITY){
+        inertiaVelocity = clampVelocity(velocity * INERTIA_VELOCITY_SCALE);
+        inertiaActive = true;
+        ensureRaf();
+      } else {
+        inertiaVelocity = 0;
+        inertiaActive = false;
+      }
+
       resetState(e);
     };
 
