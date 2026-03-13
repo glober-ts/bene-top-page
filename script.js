@@ -1185,13 +1185,13 @@ document.addEventListener('DOMContentLoaded', () => {
     row.addEventListener('pointercancel', endDrag);
     row.addEventListener('lostpointercapture', endDrag);
 
-    row.addEventListener('click', (e) => {
-      if(!suppressClick) return;
-      const link = e.target.closest('a[href]');
-      if(!link || !row.contains(link)) return;
-      e.preventDefault();
-      e.stopPropagation();
-      suppressClick = false;
-    }, true);
+    row.querySelectorAll('a[href]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        if(!suppressClick) return;
+        e.preventDefault();
+        e.stopPropagation();
+        suppressClick = false;
+      });
+    });
   });
 });
