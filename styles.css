@@ -79,7 +79,7 @@ img{display:block;max-width:100%}
 
 /* Sections */
 .section{padding:26px 0}
-.section.soft{background:linear-gradient(180deg,#fbfaf8,#ffffff)}
+.section.sectionGradient{background:linear-gradient(180deg,#fbfaf8,#ffffff)}
 .headRow{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px}
 .h2{margin:0;font-size:16px;letter-spacing:.08em}
 .subsectionTitle{font-weight:700}
