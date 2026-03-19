@@ -3749,7 +3749,6 @@ html, body { overflow-x:hidden; }
 .trustSection{
   padding-top:28px;
   padding-bottom:20px;
-  background:linear-gradient(180deg,#fbf5f7 0%, #ffffff 100%);
 }
 .trust-grid{
   display:grid;
