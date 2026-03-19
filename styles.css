@@ -131,11 +131,41 @@ img{display:block;max-width:100%}
   position:relative;
 }
 .productCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
-.productCard p{margin:10px 10px 12px;font-size:12px;color:var(--text)}
+.productCard p{margin:10px 10px 12px;font-size:12px;color:var(--text);line-height:1.5}
 .rankingRow .productCard,
 .rowScroll .productCard{
   cursor:inherit;
   flex:0 0 auto;
+}
+
+.productClampSection .productCard{
+  display:flex;
+  flex-direction:column;
+}
+
+.productClampSection .productCard p{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:6px;
+  min-height:calc(1.5em * 4 + 6px);
+}
+
+.productClampSection .productCardTitle{
+  display:block;
+  display:-webkit-box;
+  overflow:hidden;
+  line-height:1.5;
+  max-height:calc(1.5em * 3);
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  line-clamp:3;
+  text-overflow:ellipsis;
+}
+
+.productClampSection .productCard .yen{
+  margin-top:auto;
 }
 
 .rankNo{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(138,31,78,.92);color:#fff;font-weight:900;font-size:13px}
