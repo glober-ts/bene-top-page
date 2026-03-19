@@ -3747,8 +3747,9 @@ html, body { overflow-x:hidden; }
    TRUST
 ========================= */
 .trustSection{
-  padding-top:24px;
-  padding-bottom:12px;
+  padding-top:28px;
+  padding-bottom:20px;
+  background:linear-gradient(180deg,#fbf5f7 0%, #ffffff 100%);
 }
 .trust-grid{
   display:grid;
@@ -3762,7 +3763,6 @@ html, body { overflow-x:hidden; }
   border-radius:16px;
   background:#fff;
   color:var(--text);
-  text-decoration:none;
   transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
 }
 .trust-item img{
