@@ -3952,13 +3952,18 @@ html, body { overflow-x:hidden; }
 
 .sharpMediaCard{
   border-radius:var(--soft-card-radius);
-  overflow:visible;
+  overflow:hidden;
+}
+
+.heroCard.sharpMediaCard{
+  border-radius:22px;
 }
 
 .sharpMediaFrame{
   display:block;
-  border-radius:0;
-  overflow:visible;
+  width:100%;
+  border-radius:inherit;
+  overflow:hidden;
 }
 
 .sharpMediaFrame > img,
@@ -3966,7 +3971,8 @@ img.sharpMedia{
   display:block;
   width:100%;
   max-width:100%;
-  border-radius:0;
+  height:auto;
+  border-radius:inherit;
   -webkit-user-drag:none;
 }
 
@@ -3975,13 +3981,13 @@ img.sharpMedia{
 .itemCard .sharpMediaFrame,
 .feat > img.sharpMedia,
 .ytThumb.sharpMediaFrame{
-  border-radius:0;
-  overflow:visible;
+  border-radius:inherit;
+  overflow:hidden;
 }
 
 .heroCard picture.sharpMediaFrame img{
   aspect-ratio:auto;
-  object-fit:contain;
+  object-fit:cover;
 }
 
 .productCard > img.sharpMedia{
@@ -3989,18 +3995,17 @@ img.sharpMedia{
   object-fit:cover;
 }
 
-.itemCard .sharpMediaFrame .sharpMedia{
+.itemCard .sharpMediaFrame .sharpMedia,
+.feat > img.sharpMedia,
+.ytThumb.sharpMediaFrame .sharpMedia{
   height:100%;
   object-fit:cover;
 }
 
 .feat > img.sharpMedia{
   aspect-ratio:16/10;
-  object-fit:cover;
 }
 
 .ytThumb.sharpMediaFrame .sharpMedia{
-  height:100%;
   aspect-ratio:16/9;
-  object-fit:cover;
 }
