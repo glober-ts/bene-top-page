@@ -123,14 +123,11 @@ img{display:block;max-width:100%}
   width:clamp(188px, 18.8vw, 208px);
   min-width:clamp(188px, 18.8vw, 208px);
   scroll-snap-align:start;
-  border-radius:18px;
   border:1px solid rgba(230,225,216,1);
   background:#fff;
   box-shadow:0 10px 22px rgba(0,0,0,.05);
-  overflow:hidden;
   position:relative;
 }
-.productCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .productCard p{margin:10px 10px 12px;font-size:12px;color:var(--text);line-height:1.5}
 .rankingRow .productCard,
 .rowScroll .productCard{
@@ -225,14 +222,12 @@ img{display:block;max-width:100%}
 .rankingCard:nth-child(-n+3) .rankingNo{background:linear-gradient(135deg,#a23263,#7f2049)}
 
 /* Cards / Features */
-.itemCard{border-radius:18px;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05);overflow:hidden}
-.itemCard .img{aspect-ratio:1/1;overflow:hidden}
-.itemCard img{width:100%;height:100%;object-fit:cover}
+.itemCard{border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05)}
+.itemCard .img{aspect-ratio:1/1}
 .name{margin:10px 10px 2px;font-size:13px;font-weight:900}
 .meta{margin:0 10px 12px;font-size:12px;color:var(--muted)}
 
-.feat{border-radius:18px;overflow:hidden;border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05)}
-.feat img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.feat{border:1px solid rgba(230,225,216,1);background:#fff;box-shadow:0 10px 22px rgba(0,0,0,.05)}
 .feat span{display:block;padding:10px 12px;font-size:13px;font-weight:900}
 
 /* Birth */
@@ -279,10 +274,8 @@ img{display:block;max-width:100%}
   position:relative;
   display:block;
   min-height:210px;
-  border-radius:20px;
   border:1px solid rgba(228,216,221,.95);
   background:linear-gradient(140deg,#fff,#fdf7f9 58%,#f9f0f3);
-  overflow:hidden;
   box-shadow:0 10px 26px rgba(70,32,48,.07);
   isolation:isolate;
 }
@@ -444,12 +437,9 @@ img{display:block;max-width:100%}
 }
 .ytItem:hover{background:#fff; border-color: rgba(138,31,78,.28)}
 .ytThumb{
-  border-radius:14px;
-  overflow:hidden;
   border:1px solid rgba(230,225,216,1);
   background:#fff;
 }
-.ytThumb img{width:100%; height:100%; object-fit:cover; aspect-ratio: 16 / 9}
 .ytMeta strong{display:block; font-size:13px}
 .ytMeta small{display:block; color:var(--muted); font-size:12px; margin-top:4px; line-height:1.5}
 
@@ -3105,8 +3095,6 @@ html, body { overflow-x:hidden; }
   display:block;
   flex:0 0 580px;
   flex-shrink:0;
-  border-radius:22px;
-  overflow:hidden;
   border:1px solid rgba(230,225,216,1);
   box-shadow:var(--shadow);
   background:#fff;
@@ -3118,14 +3106,6 @@ html, body { overflow-x:hidden; }
     transform:translateY(-6px);
     box-shadow:0 18px 32px rgba(0,0,0,.14);
   }
-}
-.heroCard img{
-  display:block;
-  width:100%;
-  height:auto;
-  aspect-ratio:auto;
-  object-fit:contain;
-  -webkit-user-drag:none;
 }
 .heroScrollHint{
   margin:12px 0 0;
@@ -3962,4 +3942,65 @@ html, body { overflow-x:hidden; }
     gap:24px;
     height:100%;
   }
+}
+
+
+/* ===== v137: shared sharp-image card rules ===== */
+:root{
+  --soft-card-radius:14px;
+}
+
+.sharpMediaCard{
+  border-radius:var(--soft-card-radius);
+  overflow:visible;
+}
+
+.sharpMediaFrame{
+  display:block;
+  border-radius:0;
+  overflow:visible;
+}
+
+.sharpMediaFrame > img,
+img.sharpMedia{
+  display:block;
+  width:100%;
+  max-width:100%;
+  border-radius:0;
+  -webkit-user-drag:none;
+}
+
+.heroCard .sharpMediaFrame,
+.productCard > img.sharpMedia,
+.itemCard .sharpMediaFrame,
+.feat > img.sharpMedia,
+.ytThumb.sharpMediaFrame{
+  border-radius:0;
+  overflow:visible;
+}
+
+.heroCard picture.sharpMediaFrame img{
+  aspect-ratio:auto;
+  object-fit:contain;
+}
+
+.productCard > img.sharpMedia{
+  aspect-ratio:1/1;
+  object-fit:cover;
+}
+
+.itemCard .sharpMediaFrame .sharpMedia{
+  height:100%;
+  object-fit:cover;
+}
+
+.feat > img.sharpMedia{
+  aspect-ratio:16/10;
+  object-fit:cover;
+}
+
+.ytThumb.sharpMediaFrame .sharpMedia{
+  height:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
 }
