@@ -3948,6 +3948,8 @@ html, body { overflow-x:hidden; }
 /* ===== v137: shared sharp-image card rules ===== */
 :root{
   --soft-card-radius:14px;
+  --product-media-radius:10px;
+  --hero-media-radius:20px;
 }
 
 .sharpMediaCard{
@@ -3955,8 +3957,12 @@ html, body { overflow-x:hidden; }
   overflow:hidden;
 }
 
+.productCard.sharpMediaCard{
+  border-radius:var(--product-media-radius);
+}
+
 .heroCard.sharpMediaCard{
-  border-radius:22px;
+  border-radius:var(--hero-media-radius);
 }
 
 .sharpMediaFrame{
