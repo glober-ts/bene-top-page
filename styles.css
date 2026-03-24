@@ -260,7 +260,6 @@ img{display:block;max-width:100%}
 .feat span{display:block;padding:10px 12px;font-size:13px;font-weight:900}
 
 /* Birth */
-.birthGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .birth{border-radius:var(--radius-card-md);border:1px solid rgba(230,225,216,1);background:#fff;padding:12px 12px;box-shadow:0 10px 22px rgba(0,0,0,.04)}
 .birth span{display:block;font-size:12px;color:var(--muted)}
 .birth strong{display:block;margin-top:6px;font-size:13px}
@@ -673,7 +672,7 @@ section[id^="pickup"]{
 
 
 @media (max-width:560px){
-  .priceGrid{grid-template-columns:1fr;}
+  .priceGrid{grid-template-columns:repeat(2, minmax(0,1fr));}
 }
 
 
@@ -758,7 +757,7 @@ section[id^="pickup"]{
   .cardGrid{grid-template-columns:repeat(2, minmax(0,1fr));}
 }
 @media (max-width:560px){
-  .cardGrid{grid-template-columns:1fr;}
+  .cardGrid{grid-template-columns:repeat(2, minmax(0,1fr));}
 }
 
 .featGrid{
@@ -775,24 +774,67 @@ section[id^="pickup"]{
 
 
 /* v31: Birthstone grid columns (PC 4 cols like original) */
-#birthstone .birthGrid, #birthstone .stoneGrid, #birthstone .birthstoneGrid{
+#birthstone .birthGrid{
   display:grid;
   grid-template-columns:repeat(4, minmax(0,1fr));
   gap:12px;
 }
 @media (max-width:1100px){
-  #birthstone .birthGrid, #birthstone .stoneGrid, #birthstone .birthstoneGrid{
+  #birthstone .birthGrid{
     grid-template-columns:repeat(3, minmax(0,1fr));
   }
 }
 @media (max-width:980px){
-  #birthstone .birthGrid, #birthstone .stoneGrid, #birthstone .birthstoneGrid{
+  #birthstone .birthGrid{
     grid-template-columns:repeat(2, minmax(0,1fr));
   }
 }
 @media (max-width:560px){
-  #birthstone .birthGrid, #birthstone .stoneGrid, #birthstone .birthstoneGrid{
-    grid-template-columns:1fr;
+  #birthstone .birthGrid{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+  }
+
+  #birthstone .birthGrid,
+  #price .priceGrid,
+  #new .cardGrid{
+    gap:8px;
+  }
+
+  #birthstone .birth{
+    padding:10px 9px;
+    min-height:72px;
+  }
+  #birthstone .birth span{
+    font-size:11px;
+    line-height:1.4;
+  }
+  #birthstone .birth strong{
+    margin-top:4px;
+    font-size:12px;
+    line-height:1.45;
+    letter-spacing:.01em;
+  }
+
+  #price .priceCard{
+    min-height:58px;
+    padding:12px 8px;
+    font-size:12px;
+    line-height:1.45;
+    letter-spacing:.01em;
+  }
+
+  #new .itemCard .img{
+    aspect-ratio:4 / 3;
+  }
+  #new .itemCard .name{
+    margin:8px 8px 3px;
+    font-size:12px;
+    line-height:1.45;
+  }
+  #new .itemCard .meta{
+    margin:0 8px 10px;
+    font-size:11px;
+    line-height:1.45;
   }
 }
 
