@@ -24,6 +24,7 @@
 
   /* radius token: カード */
   --radius-card-lg:20px;       /* 大型情報カード 20px*/
+  --radius-card-mg:0px;       /* 通常カード 16px*/
   --radius-card-md:16px;       /* 通常カード 16px*/
   --radius-card-sm:14px;       /* ミニカード/補助リンク 14px*/
   --radius-card-xs:12px;       /* 小型UIカード 12px*/
@@ -819,7 +820,7 @@ section[id^="pickup"]{
     border-radius:var(--radius-card-lg);
   }
   .noticeCard,.promoCard{
-    border-radius:var(--radius-card-lg);
+    border-radius:var(--radius-card-mg);
   }
   /* Make hero buttons slightly smaller on narrow */
   .navBtn{width:36px;height:36px;}
