@@ -8,6 +8,8 @@
 <link href="https://www.rakuten.ne.jp/gold/bene/date.css" rel="stylesheet"/>
 <meta content="ベーネベーネ Yahoo店のトップ掲載項目を、余白多め・マガジン風に再構成したサンプルページ（HTML+CSS分離）。" name="description"/>
 <meta content="assets/slide1.png" property="og:image"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="strict-origin-when-cross-origin" http-equiv="Referrer-Policy"/>
 <!-- Fonts: Noto Serif JP + Noto Sans JP -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -506,7 +508,7 @@ window.BENE_UI = {
 <div class="ytGrid">
 <div class="ytPlayer">
 <!-- ▼ ここを実動画に：VIDEO_ID をYouTubeのIDに差し替え -->
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" id="ytPlayer" src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="YouTube video player"></iframe>
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" id="ytPlayer" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1&playsinline=1" title="YouTube video player"></iframe>
 </div>
 <div class="ytCarousel">
 <div aria-label="動画リスト（サンプル）" class="ytList">
@@ -797,7 +799,7 @@ window.BENE_UI = {
 /* YouTube切り替え: 右リストを押すと左プレイヤーを自動再生し、タイトルも同期する */
 (function(){
   function buildSrc(id){
-    const base = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id);
+    const base = 'https://www.youtube.com/embed/' + encodeURIComponent(id);
     return base + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
   }
 
