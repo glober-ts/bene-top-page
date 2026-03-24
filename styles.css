@@ -1979,7 +1979,7 @@ header, .siteHeader, .header{
 .floatLeft{
   position:fixed;
   left:14px;
-  bottom:100x;
+  bottom:100px;
   display:flex;
   flex-direction:column;
   gap:10px;
