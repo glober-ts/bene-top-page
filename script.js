@@ -25,7 +25,6 @@
     btn.addEventListener('click', () => {
       const open = gnav.classList.toggle('is-open');
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      document.documentElement.classList.toggle('noScroll', open);
     });
   }
   const sbtn = document.getElementById('searchFocusBtn');
@@ -606,6 +605,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
   } else {
     bindFixes();
   }
+})();
+
+/* v137: keep page scroll on body/html unless drawer is actually open */
+(function(){
+  function syncDrawerScrollLock(){
+    const drawer = document.getElementById('gnav');
+    const isOpen = !!(drawer && drawer.classList.contains('is-open'));
+    document.documentElement.classList.toggle('noScroll', isOpen);
+    document.body.classList.toggle('noScroll', isOpen);
+  }
+
+  document.addEventListener('DOMContentLoaded', syncDrawerScrollLock);
+  window.addEventListener('pageshow', syncDrawerScrollLock);
+  window.addEventListener('resize', syncDrawerScrollLock);
 })();
 
 /* v113: show toTop after 50vh, not after 50% of total page */
