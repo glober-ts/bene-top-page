@@ -1979,7 +1979,7 @@ header, .siteHeader, .header{
 .floatLeft{
   position:fixed;
   left:14px;
-  bottom:14px;
+  bottom:100x;
   display:flex;
   flex-direction:column;
   gap:10px;
@@ -2139,14 +2139,14 @@ header, .siteHeader, .header{
 
 /* Mobile size tuning */
 @media (max-width:480px){
-  .floatLeft{ left:10px; bottom:10px; gap:10px; }
+  .floatLeft{ left:0px; bottom:15px; gap:0px; }
   .floatBtn.iconImg{ width:50px; height:50px; }
   .floatBtn.iconImg img{ width:74%; height:74%; }
 }
 
 /* ===== v99: floating icons no extra whitespace ===== */
 .floatBtn.iconImg{
-  width:64px; height:64px;
+  width:80px; height:80px;
   border:none;
   background:transparent;
   box-shadow:none;
@@ -2157,7 +2157,7 @@ header, .siteHeader, .header{
   object-fit:contain;
 }
 @media (max-width:480px){
-  .floatBtn.iconImg{ width:54px; height:54px; }
+  .floatBtn.iconImg{ width:65px; height:65px; }
 }
 
 /* ===== v99: hamburger fixed rightmost on mobile ===== */
