@@ -503,7 +503,10 @@ window.BENE_UI = {
 </div>
 <div class="ytNowPlaying top">
 <span class="label">再生中</span>
+<div class="ytNowPlayingLinks">
 <a href="#" id="ytTitle" rel="noopener" target="_blank">動画タイトルが表示されます</a>
+<a class="ytProductLink" href="#" id="ytProductLink" rel="noopener" target="_blank">商品ページへ →</a>
+</div>
 </div>
 <div class="ytGrid">
 <div class="ytPlayer">
@@ -911,8 +914,9 @@ window.BENE_UI = {
   function initYT(){
     const iframe = document.getElementById('ytPlayer');
     const titleEl = document.getElementById('ytTitle');
+    const productLinkEl = document.getElementById('ytProductLink');
     const items = Array.from(document.querySelectorAll('.ytList .ytItem'));
-    if(!iframe || !titleEl || !items.length) return;
+    if(!iframe || !titleEl || !productLinkEl || !items.length) return;
 
     function setActive(el){
       items.forEach(x => x.classList.remove('isActive'));
@@ -932,7 +936,11 @@ window.BENE_UI = {
         iframe.src = base + '?' + params.join('&');
       }
       if(t) titleEl.textContent = t;
-      if(u) titleEl.setAttribute('href', u);
+      if(u){
+        titleEl.setAttribute('href', u);
+        productLinkEl.setAttribute('href', u);
+      }
+      productLinkEl.setAttribute('aria-label', t ? t + ' の商品ページへ' : '商品ページへ');
       setActive(el);
     }
 
