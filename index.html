@@ -503,7 +503,7 @@ window.BENE_UI = {
 </div>
 <div class="ytNowPlaying top">
 <span class="label">再生中</span>
-<span id="ytTitle">動画タイトルが表示されます</span>
+<a href="#" id="ytTitle" rel="noopener" target="_blank">動画タイトルが表示されます</a>
 </div>
 <div class="ytGrid">
 <div class="ytPlayer">
@@ -512,27 +512,27 @@ window.BENE_UI = {
 </div>
 <div class="ytCarousel">
 <div aria-label="動画リスト（サンプル）" class="ytList">
-<a class="ytItem" data-video-id="VIDEO_ID_1" href="#">
+<a class="ytItem" data-title="サンプル動画タイトル 1" data-url="https://store.shopping.yahoo.co.jp/benebene/tr-443-saq-rsd.html" data-video-id="VIDEO_ID_1" href="#">
 <span class="ytThumb"><img alt="YouTube サムネイル 1" src="assets/p1.jpg" draggable="false"/></span>
 <span class="ytMeta"><strong>サンプル動画タイトル 1</strong><small>2026.02.11</small></span>
 </a>
-<a class="ytItem" data-video-id="VIDEO_ID_2" href="#">
+<a class="ytItem" data-title="サンプル動画タイトル 2" data-url="https://store.shopping.yahoo.co.jp/benebene/tp-1244-saq-rsd.html" data-video-id="VIDEO_ID_2" href="#">
 <span class="ytThumb"><img alt="YouTube サムネイル 2" src="assets/p2.jpg" draggable="false"/></span>
 <span class="ytMeta"><strong>サンプル動画タイトル 2</strong><small>2026.02.12</small></span>
 </a>
-<a class="ytItem" data-video-id="VIDEO_ID_3" href="#">
+<a class="ytItem" data-title="サンプル動画タイトル 3" data-url="https://store.shopping.yahoo.co.jp/benebene/tra2610009.html" data-video-id="VIDEO_ID_3" href="#">
 <span class="ytThumb"><img alt="YouTube サムネイル 3" src="assets/p3.jpg" draggable="false"/></span>
 <span class="ytMeta"><strong>サンプル動画タイトル 3</strong><small>2026.02.13</small></span>
 </a>
-<a class="ytItem" data-video-id="VIDEO_ID_4" href="#">
+<a class="ytItem" data-title="サンプル動画タイトル 4" data-url="https://store.shopping.yahoo.co.jp/benebene/tp-478-scl-rsd-d.html" data-video-id="VIDEO_ID_4" href="#">
 <span class="ytThumb"><img alt="YouTube サムネイル 4" src="assets/p4.jpg" draggable="false"/></span>
 <span class="ytMeta"><strong>サンプル動画タイトル 4</strong><small>2026.02.14</small></span>
 </a>
-<a class="ytItem" data-video-id="VIDEO_ID_5" href="#">
+<a class="ytItem" data-title="サンプル動画タイトル 5" data-url="https://store.shopping.yahoo.co.jp/benebene/tr-931-rlq.html" data-video-id="VIDEO_ID_5" href="#">
 <span class="ytThumb"><img alt="YouTube サムネイル 5" src="assets/p5.jpg" draggable="false"/></span>
 <span class="ytMeta"><strong>サンプル動画タイトル 5</strong><small>2026.02.15</small></span>
 </a>
-<a class="ytItem" data-video-id="VIDEO_ID_6" href="#">
+<a class="ytItem" data-title="サンプル動画タイトル 6" data-url="https://store.shopping.yahoo.co.jp/benebene/tp-785-rlq.html" data-video-id="VIDEO_ID_6" href="#">
 <span class="ytThumb"><img alt="YouTube サムネイル 6" src="assets/p6.jpg" draggable="false"/></span>
 <span class="ytMeta"><strong>サンプル動画タイトル 6</strong><small>2026.02.16</small></span>
 </a>
@@ -816,7 +816,8 @@ window.BENE_UI = {
 
     function play(el){
       const id = el.getAttribute('data-video-id');
-      const t = (el.querySelector('.ytMeta strong')?.textContent || '').trim();
+      const t = (el.getAttribute('data-title') || '').trim();
+      const u = (el.getAttribute('data-url') || '').trim();
       if(id && id !== 'VIDEO_ID'){
         iframe.src = buildSrc(id);
       }else if(iframe.src){
@@ -824,6 +825,7 @@ window.BENE_UI = {
         iframe.src = base + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
       }
       if(t) titleEl.textContent = t;
+      if(u) titleEl.setAttribute('href', u);
       setActive(el);
     }
 
@@ -831,9 +833,7 @@ window.BENE_UI = {
 
     // 初期状態: 1件目を選択中にして、見出しも1件目の文言を表示
     const first = items[0];
-    const t0 = (first.querySelector('.ytMeta strong')?.textContent || '').trim();
-    if(t0) titleEl.textContent = t0;
-    setActive(first);
+    play(first);
   }
 
   window.addEventListener('load', initYT);
