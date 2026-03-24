@@ -537,6 +537,13 @@ section[id^="pickup"]{
   color:#8A1F4E;
   letter-spacing:.06em;
 }
+.ytNowPlaying.top #ytTitle{
+  color:inherit;
+  text-decoration:none;
+}
+.ytNowPlaying.top #ytTitle:hover{
+  text-decoration:underline;
+}
 
 
 /* Shop section PC two-column layout */
