@@ -144,8 +144,8 @@ img{display:block;max-width:100%}
    PICKUP
 ========================= */
 .productCard{
-  width:clamp(188px, 18.8vw, 208px);
-  min-width:clamp(188px, 18.8vw, 208px);
+  width:clamp(182px, 18.2vw, 198px);
+  min-width:clamp(182px, 18.2vw, 198px);
   scroll-snap-align:start;
   border-radius:var(--radius-product-card);
   border:1px solid rgba(230,225,216,1);
@@ -206,8 +206,8 @@ img{display:block;max-width:100%}
 .rankingCarousel{position:relative}
 .rankingRow,
 .rowScroll{
-  --shelf-gap:clamp(12px, 1.2vw, 16px);
-  --shelf-inline-padding:clamp(2px, .5vw, 6px);
+  --shelf-gap:clamp(10px, 1vw, 14px);
+  --shelf-inline-padding:clamp(2px, .4vw, 5px);
   display:flex;
   flex-wrap:nowrap;
   gap:var(--shelf-gap);
@@ -218,11 +218,10 @@ img{display:block;max-width:100%}
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling:touch;
   touch-action:auto;
-}
-.rankingRow{
   cursor:grab;
 }
-.rankingRow.is-dragging{cursor:grabbing}
+.rankingRow.is-dragging,
+.rowScroll.is-dragging{cursor:grabbing}
 .rankingRow::-webkit-scrollbar{height:8px}
 .rankingRow::-webkit-scrollbar-thumb{background:rgba(230,225,216,1);border-radius:var(--radius-pill)}
 .rankingRow::-webkit-scrollbar-track{background:rgba(250,249,247,1)}
@@ -722,10 +721,6 @@ section[id^="pickup"]{
 
 /* PICK UP + NEWS controls (consolidated) */
 .carousel{position:relative;}
-.rowScroll{
-  cursor:grab;
-}
-.rowScroll.is-dragging{cursor:grabbing}
 .ytCarousel .ytList,
 .newsCarousel .newsList{
   cursor:grab;
@@ -753,9 +748,9 @@ section[id^="pickup"]{
 @media (max-width:979px){
   .rankingRow,
   .rowScroll{
-    --shelf-gap:10px;
-    --shelf-inline-padding:8px;
-    --shelf-card-width:clamp(156px, calc((100vw - 64px) / 1.7), 212px);
+    --shelf-gap:8px;
+    --shelf-inline-padding:6px;
+    --shelf-card-width:clamp(158px, calc((100vw - 56px) / 1.95), 194px);
     scroll-padding-inline:var(--shelf-inline-padding);
   }
 
