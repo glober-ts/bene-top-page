@@ -31,10 +31,10 @@ li.undefined {
 /*ui*/
 div.cal_wrapper {
 	padding: 0px;
-	width: 175px!important;
-	width/**/: 175px;
-	height: 160px!important;
-	height/**/: 160px;
+	width: 345px!important;
+	width/**/: 345px;
+	height: 225px!important;
+	height/**/: 225px;
 	background-image: url(background.gif);
 	background-position: bottom right;
 	background-repeat: no-repeat;
@@ -85,10 +85,10 @@ ul.cal_main {
 }
 ul.cal_main li {
 	/*padding: 3px 0px 3px 0px;*/
-	width: 25px;
+	width: 49px;
 	text-align: center;
 	list-style: none;
-	font-size: 10px;
+	font-size: 13px;
 	float: left;
 	overflow: hidden;
 	border-bottom: solid 1px #CCCCCC;
