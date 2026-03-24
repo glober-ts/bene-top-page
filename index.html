@@ -901,9 +901,11 @@ window.BENE_UI = {
 ======================================== */
 /* YouTube切り替え: 右リストを押すと左プレイヤーを自動再生し、タイトルも同期する */
 (function(){
-  function buildSrc(id){
+  function buildSrc(id, autoplay){
     const base = 'https://www.youtube.com/embed/' + encodeURIComponent(id);
-    return base + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    const params = ['rel=0', 'modestbranding=1', 'playsinline=1'];
+    if(autoplay) params.unshift('autoplay=1');
+    return base + '?' + params.join('&');
   }
 
   function initYT(){
@@ -917,26 +919,28 @@ window.BENE_UI = {
       el.classList.add('isActive');
     }
 
-    function play(el){
+    function syncPlayer(el, shouldAutoplay){
       const id = el.getAttribute('data-video-id');
       const t = (el.getAttribute('data-title') || '').trim();
       const u = (el.getAttribute('data-url') || '').trim();
       if(id && id !== 'VIDEO_ID'){
-        iframe.src = buildSrc(id);
+        iframe.src = buildSrc(id, shouldAutoplay);
       }else if(iframe.src){
         const base = iframe.src.split('?')[0];
-        iframe.src = base + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+        const params = ['rel=0', 'modestbranding=1', 'playsinline=1'];
+        if(shouldAutoplay) params.unshift('autoplay=1');
+        iframe.src = base + '?' + params.join('&');
       }
       if(t) titleEl.textContent = t;
       if(u) titleEl.setAttribute('href', u);
       setActive(el);
     }
 
-    items.forEach(el => el.addEventListener('click', (e)=>{ e.preventDefault(); play(el); }));
+    items.forEach(el => el.addEventListener('click', (e)=>{ e.preventDefault(); syncPlayer(el, true); }));
 
     // 初期状態: 1件目を選択中にして、見出しも1件目の文言を表示
     const first = items[0];
-    play(first);
+    syncPlayer(first, false);
   }
 
   window.addEventListener('load', initYT);
