@@ -927,6 +927,7 @@ window.BENE_UI = {
       const id = el.getAttribute('data-video-id');
       const t = (el.getAttribute('data-title') || '').trim();
       const u = (el.getAttribute('data-url') || '').trim();
+      const hasUrl = !!u;
       if(id && id !== 'VIDEO_ID'){
         iframe.src = buildSrc(id, shouldAutoplay);
       }else if(iframe.src){
@@ -936,10 +937,19 @@ window.BENE_UI = {
         iframe.src = base + '?' + params.join('&');
       }
       if(t) titleEl.textContent = t;
-      if(u){
+
+      if(hasUrl){
         titleEl.setAttribute('href', u);
+        titleEl.classList.remove('isLinkDisabled');
         productLinkEl.setAttribute('href', u);
+        productLinkEl.classList.remove('isHidden');
+      }else{
+        titleEl.removeAttribute('href');
+        titleEl.classList.add('isLinkDisabled');
+        productLinkEl.removeAttribute('href');
+        productLinkEl.classList.add('isHidden');
       }
+
       productLinkEl.setAttribute('aria-label', t ? t + ' の商品ページへ' : '商品ページへ');
       setActive(el);
     }

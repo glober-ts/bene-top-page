@@ -570,6 +570,14 @@ section[id^="pickup"]{
 .ytNowPlaying.top .ytProductLink:hover{
   background:rgba(138,31,78,.16);
 }
+.ytNowPlaying .isHidden{
+  display:none;
+}
+.ytNowPlaying.top #ytTitle.isLinkDisabled{
+  pointer-events:none;
+  text-decoration:none;
+  cursor:default;
+}
 @media (max-width:980px){
   .ytNowPlaying.top{
     align-items:flex-start;
