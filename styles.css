@@ -2484,7 +2484,7 @@ html, body { overflow-x:hidden; }
     display:flex !important;
     align-items:center;
     gap:8px;
-    padding-right:10px !important;
+    padding-right:15px !important;
   }
   #menuBtn{ display:inline-grid !important; }
   /* ensure icons never wrap offscreen */
