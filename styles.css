@@ -10,28 +10,28 @@
   --max:1120px;
 
   /* radius token: 共通 */
-  --radius-none:0;             /* 角丸なし（区切り線・フラット要素） */
-  --radius-circle:50%;         /* 円形アイコン・バッジ */
-  --radius-pill:999px;         /* ピル型（ボタン/チップ/スクロールバー） */
+  --radius-none:0;             /* 角丸なし（区切り線・フラット要素） 0 */
+  --radius-circle:50%;         /* 円形アイコン・バッジ 50%*/
+  --radius-pill:999px;         /* ピル型（ボタン/チップ/スクロールバー） 999px*/
 
   /* radius token: ヒーロー */
-  --radius-hero-lg:24px;       /* メインヒーロー/サイドヒーローカード */
-  --radius-hero-md:22px;       /* ヒーロー比率ラッパー/下位ヒーローブロック */
+  --radius-hero-lg:0px;       /* メインヒーロー/サイドヒーローカード 24px */
+  --radius-hero-md:0px;       /* ヒーロー比率ラッパー/下位ヒーローブロック 22px*/
 
   /* radius token: 商品 */
-  --radius-product-card:18px;  /* 商品カード本体・商品系コンテナ */
-  --radius-product-media:16px; /* 商品サムネイル */
+  --radius-product-card:0px;  /* 商品カード本体・商品系コンテナ 18px*/
+  --radius-product-media:0px; /* 商品サムネイル 16px*/
 
   /* radius token: カード */
-  --radius-card-lg:20px;       /* 大型情報カード */
-  --radius-card-md:16px;       /* 通常カード */
-  --radius-card-sm:14px;       /* ミニカード/補助リンク */
-  --radius-card-xs:12px;       /* 小型UIカード */
+  --radius-card-lg:20px;       /* 大型情報カード 20px*/
+  --radius-card-md:16px;       /* 通常カード 16px*/
+  --radius-card-sm:14px;       /* ミニカード/補助リンク 14px*/
+  --radius-card-xs:12px;       /* 小型UIカード 12px*/
 
   /* radius token: ボタン/装飾 */
-  --radius-button-sm:12px;     /* 小型ボタン/モーダル閉じる */
-  --radius-badge:10px;         /* 小型バッジ */
-  --radius-hairline:2px;       /* 細線インジケーター */
+  --radius-button-sm:12px;     /* 小型ボタン/モーダル閉じる 12px*/
+  --radius-badge:10px;         /* 小型バッジ 10px*/
+  --radius-hairline:2px;       /* 細線インジケーター 2px*/
 }
 *{box-sizing:border-box}
 html,body{height:100%}
