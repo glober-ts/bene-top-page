@@ -745,21 +745,6 @@ section[id^="pickup"]{
   .carousel .carBtn,.newsCarousel .newsBtn{display:none;}
 }
 
-@media (max-width:979px){
-  .rankingRow,
-  .rowScroll{
-    --shelf-gap:8px;
-    --shelf-inline-padding:6px;
-    --shelf-card-width:clamp(158px, calc((100vw - 56px) / 1.95), 194px);
-    scroll-padding-inline:var(--shelf-inline-padding);
-  }
-
-  .productCard{
-    width:var(--shelf-card-width);
-    min-width:var(--shelf-card-width);
-  }
-}
-
 
 
 /* v30 sanity: keep New/Feature sizes consistent and responsive */
@@ -4037,5 +4022,23 @@ html, body { overflow-x:hidden; }
     flex-direction:column;
     gap:24px;
     height:100%;
+  }
+}
+
+
+/* ===== v137 SP shelf cards: keep ~2.2 cards visible ===== */
+@media (max-width:979px){
+  .rankingRow,
+  .rowScroll{
+    --shelf-gap:8px;
+    --shelf-inline-padding:6px;
+    --shelf-card-width:calc((100% - var(--shelf-gap)) / 2.2);
+    scroll-padding-inline:var(--shelf-inline-padding);
+  }
+
+  .rankingRow .productCard,
+  .rowScroll .productCard{
+    width:var(--shelf-card-width);
+    min-width:var(--shelf-card-width);
   }
 }
