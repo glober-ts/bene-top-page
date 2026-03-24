@@ -292,7 +292,7 @@ img{display:block;max-width:100%}
 /* =========================
    FEATURE SHOWCASE (YouTube上)
 ========================= */
-.featureShowcaseSection{padding-top:14px}
+.featureShowcaseSection{padding-top:40px}
 .featureShowcaseGrid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
@@ -1779,7 +1779,7 @@ header, .siteHeader, .header{
 /* add more breathing room before YouTube section */
 .youtube, .ytSection, section.youtube{
   margin-top: 26px !important;
-  padding-top: 6px;
+  padding-top: 40px;
 }
 
 /* ===== v87 Delivery promo (replace PICK UP promoCard) ===== */
@@ -3314,7 +3314,7 @@ html, body { overflow-x:hidden; }
   }
 }
 
-.heroInfoSection{padding-top:8px}
+.heroInfoSection{padding-top:40px}
 .heroInfoGrid{
   display:grid;
   grid-template-columns:1fr;
