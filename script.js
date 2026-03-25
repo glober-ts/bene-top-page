@@ -65,18 +65,18 @@
   const initToTop = () => {
     const btn = document.getElementById('toTopBtn') || document.querySelector('.toTop');
     if(!btn) return;
-    let threshold = 1;
-    let isVisible = false;
 
-    const setThreshold = () => {
-      threshold = Math.max(1, document.documentElement.scrollHeight * 0.9);
-    };
+    const target = document.querySelector('.section.ytSection');
+    const fallbackThreshold = document.documentElement.scrollHeight * 0.8;
+    let isVisible = false;
 
     const update = () => {
       const y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
 
-      const showThreshold = threshold;
-      const hideThreshold = threshold * 0.7;
+      const showThreshold = target
+        ? target.getBoundingClientRect().top + y
+        : fallbackThreshold;
+      const hideThreshold = showThreshold * 0.7;
 
       if(!isVisible && y >= showThreshold){
         isVisible = true;
@@ -92,17 +92,10 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    setThreshold();
     update();
     window.addEventListener('scroll', update, { passive:true });
-    window.addEventListener('resize', () => {
-      setThreshold();
-      update();
-    });
-    window.addEventListener('load', () => {
-      setThreshold();
-      update();
-    });
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
     window.addEventListener('pageshow', update);
   };
 
