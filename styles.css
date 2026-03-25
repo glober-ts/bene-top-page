@@ -2783,6 +2783,10 @@ body.noScroll{ overflow:hidden; }
   .hamburger,
   #menuBtn{
     display:grid !important;
+    place-items:center;
+    box-sizing:border-box;
+    padding:0;
+    line-height:1;
   }
   .headerQuick{
     gap:12px;
