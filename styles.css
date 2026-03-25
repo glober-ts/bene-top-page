@@ -161,8 +161,7 @@ img{display:block;max-width:100%}
 }
 .productCard img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .productCard p{margin:10px 10px 12px;font-size:12px;color:var(--text);line-height:1.5}
-.rankingRow .productCard,
-.rowScroll .productCard{
+.horizontalScroll .productCard{
   cursor:inherit;
   flex:0 0 auto;
 }
@@ -209,8 +208,7 @@ img{display:block;max-width:100%}
 .rankingHead{align-items:center}
 .rankingLabel{margin:0 0 6px;font-size:10px;letter-spacing:.2em;color:rgba(138,31,78,.72)}
 .rankingCarousel{position:relative}
-.rankingRow,
-.rowScroll{
+.horizontalScroll{
   --shelf-gap:clamp(10px, 1vw, 14px);
   --shelf-inline-padding:clamp(2px, .4vw, 5px);
   display:flex;
@@ -225,14 +223,10 @@ img{display:block;max-width:100%}
   touch-action:auto;
   cursor:grab;
 }
-.rankingRow.is-dragging,
-.rowScroll.is-dragging{cursor:grabbing}
-.rankingRow::-webkit-scrollbar,
-.rowScroll::-webkit-scrollbar{height:8px}
-.rankingRow::-webkit-scrollbar-thumb,
-.rowScroll::-webkit-scrollbar-thumb{background:rgba(230,225,216,1);border-radius:var(--radius-pill)}
-.rankingRow::-webkit-scrollbar-track,
-.rowScroll::-webkit-scrollbar-track{background:rgba(250,249,247,1)}
+.horizontalScroll.is-dragging{cursor:grabbing}
+.horizontalScroll::-webkit-scrollbar{height:8px}
+.horizontalScroll::-webkit-scrollbar-thumb{background:rgba(230,225,216,1);border-radius:var(--radius-pill)}
+.horizontalScroll::-webkit-scrollbar-track{background:rgba(250,249,247,1)}
 
 .rankingCard{flex:0 0 auto}
 .rankingNo{
@@ -716,7 +710,7 @@ section[id^="pickup"]{
 .newsCarousel .newsList.is-dragging{
   cursor:grabbing;
 }
-.rowScroll > *{scroll-snap-align:start}
+.horizontalScroll > *{scroll-snap-align:start}
 .carousel .carBtn{display:none;}
 .carousel.isScrollable .carBtn{display:flex;}
 .carousel .carBtn{z-index:20;pointer-events:auto;}
@@ -2353,8 +2347,7 @@ body.noScroll{ overflow:hidden; }
 .dragScrollNoSelect *{
   user-select:none;
 }
-.rankingRow img,
-.rowScroll img,
+.horizontalScroll img,
 .ytList img,
 .newsList img{
   -webkit-user-drag:none;
@@ -2660,14 +2653,11 @@ body.noScroll{ overflow:hidden; }
 }
 
 @media (min-width:980px) and (pointer:fine){
-  .rankingRow,
-  .rowScroll{
+  .horizontalScroll{
     scroll-snap-type:none;
   }
-  .rankingRow > *,
-  .rowScroll > *,
-  .rankingRow .productCard,
-  .rowScroll .productCard{
+  .horizontalScroll > *,
+  .horizontalScroll .productCard{
     scroll-snap-align:none;
   }
   .heroRail{
@@ -3372,16 +3362,14 @@ body.noScroll{ overflow:hidden; }
 
 /* ===== v137 SP shelf cards: keep ~2.2 cards visible ===== */
 @media (max-width:979px){
-  .rankingRow,
-  .rowScroll{
+  .horizontalScroll{
     --shelf-gap:8px;
     --shelf-inline-padding:6px;
     --shelf-card-width:calc((100% - var(--shelf-gap)) / 2.2);
     scroll-padding-inline:var(--shelf-inline-padding);
   }
 
-  .rankingRow .productCard,
-  .rowScroll .productCard{
+  .horizontalScroll .productCard{
     width:var(--shelf-card-width);
     min-width:var(--shelf-card-width);
   }
