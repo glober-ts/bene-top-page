@@ -1825,187 +1825,46 @@ header, .siteHeader, .header{
   letter-spacing:.02em;
 }
 
-/* Hide PC hamburger/menu button if present */
-@media (min-width: 980px){
-  .hamburger, .menuBtn, .spOnly{ display:none !important; }
-}
-
-/* ===== v93 floating buttons ===== */
+/* ===== v141: unified floating/drawer/toTop state ===== */
 .floatLeft{
   position:fixed;
   left:14px;
-  bottom:0px;
+  bottom:0;
   display:flex;
   flex-direction:column;
-  gap:0px;
+  gap:8px;
   z-index:50;
 }
 .floatBtn{
   display:flex;
   align-items:center;
-  gap:10px;
-  padding:10px;
-  border-radius:var(--radius-pill);
-  background:#fff;
-  border:1px solid rgba(0,0,0,.14);
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  justify-content:center;
   text-decoration:none;
-  color:#222;
-  font-size:13px;
-}
-.iconCircle.sm{
-  width:30px;
-  height:30px;
-}
-.toTop{
-  position:fixed;
-  right:14px;
-  bottom:14px;
-  border:0;
-  background:transparent;
-  padding:0;
-  z-index:50;
-  opacity:0;
-  pointer-events:none;
-  transform: translateY(10px);
-  transition: opacity .2s ease, transform .2s ease;
-}
-.toTop.is-show{
-  opacity:1;
-  pointer-events:auto;
-  transform: translateY(0);
-}
-.toTop .iconCircle.sm{
-  background:#fff;
-  border:1px solid rgba(0,0,0,.14);
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
-  color:#333;
-  font-weight:700;
-}
-
-/* Mobile: keep header compact; phone block moves into menu (existing menu already OK) */
-@media (max-width: 979px){
-  .headerPhone{ display:none; } /* phone shown in menu instead */
-  .headerIcons .iconLabel{ display:none; } /* icons only */
-  .headerActions{ align-items:center; }
-}
-
-/* ===== v97 header fix (stable) ===== */
-.headerRow{ display:flex; align-items:center; gap:18px; padding:14px 0; }
-.logoImg{ height:36px; width:auto; display:block; }
-.searchWrap{ flex:1; }
-.headerActions{ display:flex; align-items:center; gap:18px; justify-content:flex-end; }
-.headerQuick{ display:flex; align-items:center; gap:10px; }
-.icoBtn{
-  width:36px; height:36px;
-  border-radius:var(--radius-pill);
-  border:1px solid rgba(0,0,0,.14);
-  background:#fff;
-  display:grid;
-  place-items:center;
-  color:#6f655d;
-  cursor:pointer;
-  text-decoration:none;
-}
-.icoBtn svg{
-  width:18px; height:18px;
-  stroke:currentColor;
-  fill:none;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-.hamburger{
-  width:36px; height:36px;
-  border-radius:var(--radius-pill);
-  border:1px solid rgba(0,0,0,.14);
-  background:#fff;
-  display:grid;
-  place-items:center;
-  font-size:18px;
   line-height:1;
-  cursor:pointer;
-  color:#6f655d;
 }
-.headerPhone{ text-align:right; white-space:nowrap; }
-.phoneMeta{ font-size:12px; color:#666; }
-.phonePlain{ font-size:14px; font-weight:600; letter-spacing:.02em; color:#222; margin-top:4px; }
-
-/* Desktop: hamburger hidden, gnav always visible */
-@media (min-width:980px){
-  .hamburger{ display:none; }
-  #gnav{ display:block !important; }
-}
-
-/* Mobile: gnav drawer trigger spacing */
-@media (max-width:979px){
-  .headerPhone{ display:none; }
-}
-
-/* v97: make toTop bigger */
-.toTop .iconCircle.sm{ width:56px; height:56px; font-size:20px; }
-
-/* ===== v98: hamburger to far right on mobile ===== */
-.headerQuick{ display:flex; align-items:center; }
-@media (max-width:979px){
-  .hamburger{ order: 99; }
-  .headerQuick{ gap:10px; }
-}
-
-/* ===== v98: floating icon images ===== */
 .floatBtn.iconImg{
-  width:56px; height:56px;
-  border-radius:var(--radius-pill);
-  background:#fff;
-  border:1px solid rgba(0,0,0,.10);
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-}
-.floatBtn.iconImg img{
-  width:70%;
-  height:70%;
-  object-fit:contain;
-  display:block;
-}
-
-/* Mobile size tuning */
-@media (max-width:480px){
-  .floatLeft{ left:5px; bottom:0px; gap:0px; }
-  .floatBtn.iconImg{ width:50px; height:50px; }
-  .floatBtn.iconImg img{ width:74%; height:74%; }
-}
-
-/* ===== v99: floating icons no extra whitespace ===== */
-.floatBtn.iconImg{
-  width:80px; height:80px;
-  border:none;
+  width:80px;
+  height:80px;
+  padding:0;
+  margin:0;
+  border:0;
   background:transparent;
   box-shadow:none;
 }
 .floatBtn.iconImg img{
   width:100%;
   height:100%;
+  display:block;
   object-fit:contain;
 }
-@media (max-width:480px){
-  .floatBtn.iconImg{ width:65px; height:60px; }
-  .padding:10px; 
-}
 
-/* ===== v99: hamburger fixed rightmost on mobile ===== */
-@media (max-width:979px){
-  .headerActions{ width:100%; justify-content:flex-end; }
-  .headerQuick{ margin-left:auto; }
-  #menuBtn{ order:99; }
-}
+#menuBtn{ position:relative; z-index:120; pointer-events:auto; }
+.header, .headerRow, .headerActions, .headerQuick{ overflow:visible; }
 
-/* ===== v99: drawer base state (PC/SP共通) ===== */
 #gnavBackdrop{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.18);
+  background:rgba(22,16,12,.28);
   opacity:0;
   visibility:hidden;
   pointer-events:none;
@@ -2017,16 +1876,18 @@ header, .siteHeader, .header{
   visibility:visible;
   pointer-events:auto;
 }
+
 #gnav.gnavDrawer{
   position:fixed;
   top:0;
   right:0;
   bottom:0;
   left:auto;
-  width:min(420px, 34vw);
+  width:min(420px,34vw);
   height:100dvh;
   background:#fff;
-  border-left:1px solid rgba(0,0,0,.10);
+  border-left:1px solid rgba(191,148,125,.28);
+  box-shadow:-28px 0 54px rgba(0,0,0,.18);
   transform:translateX(102%);
   visibility:hidden;
   pointer-events:none;
@@ -2043,18 +1904,12 @@ header, .siteHeader, .header{
 }
 body.noScroll{ overflow:hidden; }
 
-@media (max-width:979px){
-  #gnav.gnavDrawer{
-    width:min(86vw, 360px);
-    height:100dvh;
-  }
-  .gnavList{ padding:14px 16px 24px; }
-}
-
 .gnavClose{
   position:absolute;
-  top:14px; right:14px;
-  width:38px; height:38px;
+  top:8px;
+  right:8px;
+  width:38px;
+  height:38px;
   border-radius:var(--radius-pill);
   border:1px solid rgba(0,0,0,.12);
   background:#fff;
@@ -2063,115 +1918,16 @@ body.noScroll{ overflow:hidden; }
   display:grid;
   place-items:center;
   cursor:pointer;
-}
-.gnavInner{ padding:64px 16px 24px; }
-.gnavTitle{ font-size:12px; letter-spacing:.16em; color:#777; margin:0 0 10px; }
-.gnavList{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }
-.gnavLink{
-  display:block;
-  padding:12px 12px;
-  border-radius:var(--radius-card-xs);
-  border:1px solid rgba(0,0,0,.08);
-  text-decoration:none;
-  color:#222;
-  background:#fff;
-}
-.gnavSub{ list-style:none; padding:8px 0 0; margin:0; display:grid; gap:6px; }
-.gnavSublink{
-  display:block;
-  padding:10px 12px;
-  border-radius:var(--radius-card-xs);
-  border:1px solid rgba(0,0,0,.06);
-  text-decoration:none;
-  color:#444;
-  background:#faf8f6;
-  font-size:14px;
-}
-/* ===== v100: ensure hamburger clickable ===== */
-#menuBtn{ position:relative; z-index:120; pointer-events:auto; }
-.header, .headerRow, .headerActions, .headerQuick{ overflow:visible; }
-
-/* ===== v100: search modal ===== */
-.modal{ position:fixed; inset:0; z-index:200; display:none; }
-.modal.is-open{ display:block; }
-.modalBackdrop{ position:absolute; inset:0; background:rgba(0,0,0,.18); }
-.modalPanel{
-  position:absolute;
-  left:50%; top:12vh;
-  transform:translateX(-50%);
-  width:min(92vw, 560px);
-  border-radius:var(--radius-product-card);
-  background:#fff;
-  border:1px solid rgba(0,0,0,.10);
-  box-shadow:0 20px 60px rgba(0,0,0,.16);
-  padding:18px 18px 16px;
-}
-.modalClose{
-  position:absolute;
-  top:10px; right:10px;
-  width:38px; height:38px;
-  border-radius:var(--radius-pill);
-  border:1px solid rgba(0,0,0,.12);
-  background:#fff;
-  font-size:22px;
-  line-height:1;
-  display:grid;
-  place-items:center;
-  cursor:pointer;
-}
-.modalHead{ font-size:14px; letter-spacing:.12em; color:#6f655d; margin:0 0 12px; }
-.modalForm{ display:flex; gap:10px; }
-.modalInput{
-  flex:1;
-  height:44px;
-  border-radius:var(--radius-card-xs);
-  border:1px solid rgba(0,0,0,.14);
-  padding:0 12px;
-  outline:none;
-}
-.modalInput:focus{ border-color: rgba(102,102,102,.55); }
-.modalSubmit{
-  height:44px;
-  padding:0 14px;
-  border-radius:var(--radius-card-xs);
-  border:1px solid rgba(0,0,0,.12);
-  background:#fff;
-  cursor:pointer;
-}
-.modalQuick{ margin-top:14px; }
-.modalSub{ font-size:12px; color:#777; margin-bottom:10px; }
-.quickChips{ display:flex; flex-wrap:wrap; gap:8px; }
-.chip{
-  display:inline-flex;
-  align-items:center;
-  height:34px;
-  padding:0 12px;
-  border-radius:var(--radius-pill);
-  border:1px solid rgba(0,0,0,.10);
-  background:#faf8f6;
-  text-decoration:none;
-  color:#222;
-  font-size:13px;
-}
-@media (max-width:480px){
-  .modalPanel{ top:10vh; padding:16px 14px 14px; }
-  .modalForm{ flex-direction:column; }
-  .modalSubmit{ width:100%; }
+  z-index:50;
 }
 
-/* ===== v101: modal clickability + close ===== */
-#searchModal .modalBackdrop{ z-index:0; pointer-events:auto; }
-#searchModal .modalPanel{ z-index:1; pointer-events:auto; }
-#searchModal .modalClose{ pointer-events:auto; }
-
-/* Drawer top area */
 .drawerTop{
-  padding:16px 16px 10px;
+  padding:8px 14px 8px;
   border-bottom:1px solid rgba(0,0,0,.08);
   background:#fff;
 }
 .drawerPhoneMeta{ font-size:12px; color:#666; }
-.drawerPhoneNum{ font-size:16px; font-weight:700; color:#222; margin-top:6px; }
+.drawerPhoneNum{ display:inline-block; margin-top:6px; font-size:16px; font-weight:700; color:#222; text-decoration:none; }
 .drawerActions{ display:flex; gap:10px; margin-top:10px; }
 .drawerIco{
   flex:1;
@@ -2185,383 +1941,47 @@ body.noScroll{ overflow:hidden; }
   color:#222;
   font-size:13px;
 }
-.drawerIco:active{ transform: translateY(1px); }
 
-/* ===== v102: harden layering/click ===== */
-.modal{ z-index:220 !important; }
-#searchModal .modalBackdrop{ z-index:0 !important; pointer-events:auto !important; }
-#searchModal .modalPanel{ z-index:1 !important; pointer-events:auto !important; }
-#searchModal .modalClose{ z-index:2 !important; pointer-events:auto !important; }
-#searchModal a.chip{ position:relative; z-index:3; pointer-events:auto; }
-
-/* ===== v104: drawer top actions clickable ===== */
-.drawerTop{ position:sticky; top:0; z-index:3; }
-.gnavClose{ z-index:4; }
-.drawerActions, .drawerIco{ pointer-events:auto; }
-.drawerPhoneNum{
-  display:inline-block;
-  text-decoration:none;
-  color:#222;
-}
-
-/* ===== v105: drawer top should scroll away (no sticky) ===== */
-@media (max-width:979px){
-  .drawerTop{ position:static !important; top:auto !important; }
-}
-
-/* ===== v106: mobile drawer close button always clickable ===== */
-@media (max-width:979px){
-  #gnav .gnavClose{
-    position:sticky;
-    top:0;
-    z-index:10;
-    pointer-events:auto;
-  }
-}
-
-/* ===== v106: keep logo aspect ratio on mobile ===== */
-@media (max-width:979px){
-  .brand img, .logo img, .siteLogo img, header img[alt*="Bene"]{
-    height:34px !important;
-    width:auto !important;
-    max-width:60vw;
-    object-fit:contain;
-  }
-}
-
-/* ===== v107: mobile drawer close button position + clickability ===== */
-@media (max-width:979px){
-  #gnav.gnavDrawer .gnavClose{
-    position:absolute !important;
-    top:10px !important;
-    right:10px !important;
-    left:auto !important;
-    z-index:50 !important;
-    width:38px;
-    height:38px;
-    border-radius:var(--radius-pill);
-    display:grid;
-    place-items:center;
-    background:#fff;
-    border:1px solid rgba(0,0,0,.12);
-    box-shadow:0 10px 24px rgba(0,0,0,.08);
-    pointer-events:auto !important;
-  }
-  /* give drawer content top padding so close button doesn't overlap */
-  #gnav.gnavDrawer .drawerTop{ padding-top:56px !important; }
-}
-
-/* ===== v108: prevent horizontal scroll on mobile + header icon alignment ===== */
-body { overflow-x:hidden; }
-@media (max-width:979px){
-  .wrap{ max-width:100%; }
-  header, .header, .siteHeader{ max-width:100vw; }
-  .hdrRight, .headerRight, .topActions, .headerActions{
-    right:0 !important;
-    margin-right:0 !important;
-    padding-right:12px !important;
-    box-sizing:border-box;
-  }
-  #menuBtn{ margin-right:0 !important; }
-  /* prevent any accidental wide elements */
-  .hero, .section, .sectionLite, .card, .panel, .grid, .heroGrid{ max-width:100%; }
-}
-
-/* ===== v108: floating contact buttons always visible ===== */
-.floatActions, .floatContact, .floatButtons{
-  position:fixed !important;
-  left:12px;
-  bottom:86px;
-  z-index:300 !important;
-  display:flex !important;
-  flex-direction:column;
-  gap:10px;
-  pointer-events:auto;
-}
-@media (max-width:979px){
-  .floatActions, .floatContact, .floatButtons{ left:10px; bottom:84px; }
-}
-
-/* keep to-top inside viewport */
-.toTop, .floatTop, #toTopBtn{ right:12px !important; }
-@media (max-width:979px){ .toTop, .floatTop, #toTopBtn{ right:20px !important; } }
-
-/* ===== v109: keep hamburger & toTop visible on mobile (logo shrink + header flex) ===== */
-@media (max-width:979px){
-  .header .headerRow{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-  }
-  /* logo area */
-  .brand, .siteLogo, .logo{
-    flex:1 1 auto;
-    min-width:0;
-  }
-  .brand a, .siteLogo a, .logo a{ display:flex; align-items:center; gap:8px; min-width:0; }
-  .brand img, .siteLogo img, .logo img{
-    height:32px !important;
-    width:auto !important;
-    max-width:42vw !important; /* leave space for icons */
-    object-fit:contain;
-  }
-  /* right actions (including hamburger) */
-  .hdrRight, .headerRight, .topActions, .headerActions{
-    flex:0 0 auto;
-    display:flex !important;
-    align-items:center;
-    gap:8px;
-    padding-right:25px !important;
-  }
-  #menuBtn{ display:inline-grid !important; }
-  /* ensure icons never wrap offscreen */
-  .hdrRight > *, .headerRight > *, .topActions > *, .headerActions > *{ flex:0 0 auto; }
-}
-
-@media (max-width:979px){
-  .header{
-    backdrop-filter:none;
-    -webkit-backdrop-filter:none;
-  }
-}
-
-/* v109: toTop always on top and inside viewport */
-.toTop, .floatTop, #toTopBtn{
-  display:flex !important;
-  align-items:center;
-  justify-content:center;
-  z-index:350 !important;
-}
-
-/* ===== v110: toTop shows after 50% scroll (not always) ===== */
-.toTop, .floatTop, #toTopBtn{
-  opacity:0;
-  transform:translateY(8px);
-  pointer-events:none;
-  transition:opacity .18s ease, transform .18s ease;
-}
-.toTop.is-show, .floatTop.is-show, #toTopBtn.is-show{
-  opacity:1;
-  transform:translateY(0);
-  pointer-events:auto;
-}
-
-/* ===== v110: reduce mobile drawer top whitespace ===== */
-@media (max-width:979px){
-  #gnav.gnavDrawer .drawerTop{ padding-top:14px !important; }
-  #gnav.gnavDrawer .drawerTop .drawerPhone{ margin-top:6px !important; }
-  #gnav.gnavDrawer .drawerTop .drawerBtns{ margin-top:10px !important; }
-}
-
-/* ===== v111: stronger mobile drawer fixes ===== */
-@media (max-width:979px){
-  #gnav.gnavDrawer .gnavClose{
-    position:absolute !important;
-    top:10px !important;
-    right:10px !important;
-    left:auto !important;
-    z-index:500 !important;
-    pointer-events:auto !important;
-  }
-  /* reduce whitespace before MENU list */
-  #gnav.gnavDrawer .drawerTop{
-    padding:14px 16px 10px !important;
-    margin:0 !important;
-  }
-  #gnav.gnavDrawer .gnavInner{
-    padding:14px 16px 24px !important;
-  }
-}
-
-/* ===== v111: toTop explicit state ===== */
-#toTopBtn{
-  right:20px !important;
-  bottom:10px !important;
-  z-index:500 !important;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-#toTopBtn.is-show{
-  opacity:1 !important;
-  transform:translateY(0) !important;
-  pointer-events:auto !important;
-}
-
-/* ===== v112: drawer top spacing + close button ===== */
-@media (max-width:979px){
-  #gnav.gnavDrawer .drawerTop{
-    padding:12px 16px 8px !important;
-    margin:0 !important;
-  }
-  #gnav.gnavDrawer .gnavInner{
-    padding:8px 16px 20px !important;
-  }
-  #gnav.gnavDrawer .gnavTitle{
-    margin:0 0 8px !important;
-  }
-  #gnav.gnavDrawer .gnavClose{
-    position:absolute !important;
-    top:8px !important;
-    right:8px !important;
-    left:auto !important;
-    z-index:999 !important;
-    width:38px !important;
-    height:38px !important;
-    border-radius:var(--radius-pill) !important;
-    border:1px solid rgba(0,0,0,.12) !important;
-    background:#fff !important;
-    display:grid !important;
-    place-items:center !important;
-    pointer-events:auto !important;
-  }
-}
-
-/* ===== v112: toTop visible only after 50% scroll ===== */
-#toTopBtn{
-  position:fixed !important;
-  right:20px !important;
-  bottom:10px !important;
-  z-index:500 !important;
-  display:grid !important;
-  place-items:center !important;
-  opacity:0 !important;
-  transform:translateY(8px) !important;
-  pointer-events:none !important;
-  transition:opacity .18s ease, transform .18s ease !important;
-}
-#toTopBtn.is-show{
-  opacity:1 !important;
-  transform:translateY(0) !important;
-  pointer-events:auto !important;
-}
-
-/* ===== v113: actually fix drawer top whitespace ===== */
-@media (max-width:979px){
-  #gnav.gnavDrawer{
-    padding-top:0 !important;   /* old 78px override */
-    top:0 !important;
-  }
-  #gnav.gnavDrawer .drawerTop{
-    padding:8px 14px 8px !important;
-    margin:0 !important;
-  }
-  #gnav.gnavDrawer .gnavInner{
-    padding:6px 14px 18px !important;
-    margin:0 !important;
-  }
-  #gnav.gnavDrawer .gnavTitle{
-    margin:0 0 6px !important;
-  }
-  #gnav.gnavDrawer .gnavClose{
-    top:6px !important;
-    right:6px !important;
-  }
-}
-
-/* ===== v113: toTop truly controlled by class only ===== */
-#toTopBtn,
 .toTop,
-.floatTop{
-  position:fixed !important;
-  right:20px !important;
-  bottom:10px !important;
-  z-index:999 !important;
-  opacity:0 !important;
-  visibility:hidden !important;
-  transform:translateY(8px) !important;
-  pointer-events:none !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
+#toTopBtn{
+  position:fixed;
+  right:20px;
+  bottom:10px;
+  z-index:350;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(8px);
+  transition:opacity .18s ease, transform .18s ease, visibility .18s ease;
 }
-#toTopBtn.is-show,
 .toTop.is-show,
-.floatTop.is-show{
-  opacity:1 !important;
-  visibility:visible !important;
-  transform:translateY(0) !important;
-  pointer-events:auto !important;
+#toTopBtn.is-show{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateY(0);
 }
 
-/* ===== v114: guaranteed toTop button ===== */
-#toTopBtn{
-  position:fixed !important;
-  right:20px !important;
-  bottom:10px !important;
-  width:auto !important;
-  height:auto !important;
-  z-index:9999 !important;
-  opacity:0 !important;
-  visibility:hidden !important;
-  transform:translateY(8px) !important;
-  pointer-events:none !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  background:transparent !important;
-  border:0 !important;
-  padding:0 !important;
-}
-#toTopBtn .iconCircle.sm{
-  width:56px !important;
-  height:56px !important;
-  border-radius:var(--radius-pill) !important;
-  background:#fff !important;
-  border:1px solid rgba(0,0,0,.14) !important;
-  box-shadow:0 10px 30px rgba(0,0,0,.08) !important;
-  display:grid !important;
-  place-items:center !important;
-  font-size:20px !important;
-  color:#333 !important;
-}
-#toTopBtn.is-show{
-  opacity:1 !important;
-  visibility:visible !important;
-  transform:translateY(0) !important;
-  pointer-events:auto !important;
+@media (max-width:979px){
+  .headerPhone{ display:none; }
+  .headerIcons .iconLabel{ display:none; }
+  .headerActions{ width:100%; justify-content:flex-end; }
+  .headerQuick{ margin-left:auto; gap:10px; }
+  .hamburger{ order:99; }
+  #menuBtn{ order:99; margin-right:0; }
+
+  #gnav.gnavDrawer{
+    width:min(86vw,360px);
+    height:100dvh;
+    padding-top:0;
+  }
+  #gnav.gnavDrawer .gnavInner{ padding:6px 14px 18px; }
+  #gnav.gnavDrawer .gnavTitle{ margin:0 0 6px; }
+
+  .floatLeft{ left:5px; bottom:0; gap:4px; }
+  .floatBtn.iconImg{ width:65px; height:60px; }
 }
 
-/* ===== v115: hard reset toTop ===== */
-#toTopBtn{
-  position:fixed !important;
-  right:20px !important;
-  bottom:10px !important;
-  z-index:2147483000 !important;
-  width:auto !important;
-  height:auto !important;
-  margin:0 !important;
-  padding:0 !important;
-  border:0 !important;
-  background:transparent !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  opacity:0 !important;
-  visibility:hidden !important;
-  pointer-events:none !important;
-  transform:translateY(8px) !important;
-  transition:opacity .18s ease, transform .18s ease, visibility .18s ease !important;
-}
-#toTopBtn .iconCircle.sm{
-  width:56px !important;
-  height:56px !important;
-  border-radius:var(--radius-pill) !important;
-  display:grid !important;
-  place-items:center !important;
-  background:#fff !important;
-  border:1px solid rgba(0,0,0,.14) !important;
-  box-shadow:0 10px 30px rgba(0,0,0,.10) !important;
-  color:#333 !important;
-  font-size:20px !important;
-}
-#toTopBtn.is-show{
-  opacity:1 !important;
-  visibility:visible !important;
-  pointer-events:auto !important;
-  transform:translateY(0) !important;
-}
 
 /* ===== v121 calendar ===== */
 #calendar .headRow{align-items:end}
