@@ -63,7 +63,6 @@ img{display:block;max-width:100%}
 .icons{display:flex;gap:10px;align-items:center}
 .icoBtn{width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--radius-pill);border:1px solid rgba(230,225,216,1);background:#fff;cursor:pointer}
 .icoBtn:hover{transform:translateY(-1px)}
-.gnav{display:flex;gap:14px;padding:10px 0 14px;flex-wrap:wrap}
 .gnav a{font-size:13px;color:var(--muted);padding:8px 10px;border-radius:var(--radius-pill)}
 .gnav a:hover{background:#faf9f7;color:var(--text)}
 
@@ -79,9 +78,6 @@ img{display:block;max-width:100%}
 .hero{padding:18px 0 10px} /* 上:ヘッダーとの間隔 / 下:次セクションへのつなぎ余白 */
 .heroGrid{display:grid;grid-template-columns:1.55fr .75fr;gap:14px;align-items:stretch} /* 左(メイン) : 右(補助情報) の比率 */
 .slider{position:relative;border-radius:var(--radius-hero-lg);overflow:hidden;border:1px solid rgba(230,225,216,1);box-shadow:var(--shadow);background:#fff}
-.slides{display:flex}
-.slide{min-width:100%;display:none}
-.slide.is-active{display:block}
 .slide img{width:100%;aspect-ratio:16/9;object-fit:cover}
 .navBtn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:var(--radius-pill);border:1px solid rgba(230,225,216,1);background:rgba(255,255,255,.88);cursor:pointer} /* 40px: タップしやすさと圧迫感のバランス */
 .navBtn.prev{left:10px}
@@ -422,24 +418,11 @@ img{display:block;max-width:100%}
   color:var(--text);
   line-height:1.5;
 }
-.newsList::-webkit-scrollbar{width:10px}
-.newsList::-webkit-scrollbar-thumb{
-  background: rgba(230,225,216,1);
-  border-radius:var(--radius-pill);
-  border:3px solid rgba(250,249,247,1);
-}
-.newsList::-webkit-scrollbar-track{background: rgba(250,249,247,1)}
 
 /* =========================
    YOUTUBE
 ========================= */
 .ytSection{padding-top:8px}
-.ytGrid{
-  display:grid;
-  grid-template-columns: 1.35fr .65fr; /* 左:プレイヤーを広め、右:一覧を補助幅に設定 */
-  gap:12px;
-  align-items:stretch;
-}
 .ytPlayer{
   border-radius:var(--radius-hero-lg);
   overflow:hidden;
@@ -683,13 +666,6 @@ section[id^="pickup"]{
   .priceGrid{grid-template-columns:repeat(2, minmax(0,1fr));}
 }
 
-
-/* HERO ratio: 1080x1128 (approx 0.957) */
-.heroRatio .slide img{
-  aspect-ratio: 1080 / 1128;
-  object-fit: contain;
-  background:#f6f4f1;
-}
 
 /* Equal height HERO & NEWS on PC */
 @media (min-width:981px){
@@ -989,26 +965,19 @@ section[id^="pickup"]{
   background:transparent;
 }
 
-/* v57: Safe elegant fade (no layout break) */
-.slider .slide{
-  opacity: 0;
-  transition: opacity 900ms ease;
-}
-.slider .slide.is-active{
-  opacity: 1;
-}
-
-
 /* v58: HERO crossfade works with existing markup */
 .slider .slides{
   position: relative !important;
   display: block !important; /* override flex */
   overflow: hidden;
+  height: 100%;
+  min-height: 100%;
 }
 .slider .slide{
   position: absolute !important;
   inset: 0 !important;
   display: block !important; /* override display:none */
+  height: 100%;
   opacity: 0;
   pointer-events: none;
   transition: opacity 900ms ease;
@@ -1019,28 +988,7 @@ section[id^="pickup"]{
 }
 
 
-/* v59: Fix HERO visibility (absolute slides need container height) */
-.slider{ overflow:hidden; }
-.slider .slides{
-  height: 100% !important;
-  min-height: 100% !important;
-}
-.slider.heroRatio{ height: auto; } /* keep aspect ratio behavior */
-
-
-/* v63: Keep v59 effect but make it mobile-safe */
-.slider.heroRatio{
-  aspect-ratio: 1080 / 1128;
-}
-@media (max-width: 980px){
-  .slider.heroRatio{
-    aspect-ratio: 4 / 5; /* safe SP ratio */
-  }
-}
-
-
 /* v64: HERO dots compact on SP, arrow icons with transparency */
-.slider{ position: relative; }
 .slider .navBtn{
   position: absolute;
   top: 50%;
@@ -1048,22 +996,22 @@ section[id^="pickup"]{
   width: 42px;
   height: 42px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(255,255,255,.55);
-  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(0,0,0,0.20);
+  background: rgba(255,255,255,0.38);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   display: grid;
   place-items: center;
   color: rgba(255,255,255,.92);
-  opacity: .72;
+  opacity: 0.90;
   cursor: pointer;
   z-index: 10; /* ensure above slides */
 }
-.slider .navBtn:hover{ opacity: .92; }
+.slider .navBtn:hover{ background: rgba(255,255,255,0.55); opacity: 1; }
 .slider .navBtn:active{ opacity: 1; transform: translateY(-50%) scale(.98); }
 .slider .navBtn.prev{ left: 10px; }
 .slider .navBtn.next{ right: 10px; }
-.slider .navBtn .chev{ width: 20px; height: 20px; }
+.slider .navBtn .chev{ width: 20px; height: 20px; color: #000; }
 
 /* dots: overlay (no extra blank space) */
 .slider .dots{
@@ -1086,32 +1034,7 @@ section[id^="pickup"]{
 }
 
 
-/* v65: HERO arrows more visible, black chevrons */
-.slider .navBtn{
-  background: rgba(255,255,255,0.38);
-  border: 1px solid rgba(0,0,0,0.20);
-  opacity: 0.90;
-}
-.slider .navBtn:hover{
-  background: rgba(255,255,255,0.55);
-  opacity: 1;
-}
-.slider .navBtn .chev{
-  color: #000;
-}
-
-
 /* v66: Fix SP HERO blank space (use cover, ratio on container not img) */
-.slider.heroRatio{
-  aspect-ratio: 1080 / 1128;
-}
-@media (max-width: 980px){
-  .slider.heroRatio{
-    aspect-ratio: 1080 / 1128; /* keep same to avoid tall blank area */
-  }
-}
-
-/* override old contain settings */
 .heroRatio .slide img{
   aspect-ratio: auto;
   width: 100%;
@@ -1119,11 +1042,6 @@ section[id^="pickup"]{
   object-fit: cover; /* fill area, no letterbox */
   background: transparent;
 }
-
-/* ensure slide layers fill */
-.slider .slides{ height: 100%; }
-.slider .slide{ height: 100%; }
-
 
 /* v67: Global header logo */
 .headerLogo{
@@ -1225,7 +1143,14 @@ html.is-modal-open, html.is-modal-open body{ overflow: hidden; }
 
 
 /* v72: Global nav structure */
-.gnav{ margin-top: 10px; }
+.gnav{
+  display:flex;
+  gap:14px;
+  padding:10px 0 14px;
+  flex-wrap:wrap;
+  margin-top:10px;
+  margin-bottom:0 !important;
+}
 .gnavList{
   list-style:none;
   display:flex;
@@ -1444,7 +1369,12 @@ h1, h2, h3, .heroTitle, .sectionTitle, .titleSerif{
 /* v79: Hero master (make HERO the star) */
 .hero{ padding-top: 8px; padding-bottom: 26px; }
 .heroGrid{ gap: 22px; }
-.slider.heroRatio{ position: relative; overflow: hidden; border-radius: var(--radius-hero-md); }
+.slider.heroRatio{
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-hero-md);
+  aspect-ratio: 1080 / 1128;
+}
 .heroOverlay{
   position:absolute;
   left: 18px; right: 18px;
@@ -1601,9 +1531,6 @@ header, .siteHeader, .header{
   padding-bottom: 10px;
 }
 
-/* if gnav has a top border/underline, keep distance below */
-.gnav{ margin-bottom: 12px; }
-
 /* HERO should not stick to header */
 .hero{ margin-top: 14px; }
 
@@ -1623,11 +1550,6 @@ header, .siteHeader, .header{
 /* restore tighter spacing under header menu */
 header, .siteHeader, .header{
   padding-bottom: 0 !important;
-}
-
-/* remove extra gap under global nav menu text */
-.gnav{
-  margin-bottom: 0 !important;
 }
 
 /* ===== v85 YouTube top spacing ===== */
