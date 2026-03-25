@@ -1396,6 +1396,9 @@ html body #toTopBtn.is-show{
 <script id="v119-topbtn-script">
 (function(){
   var btn = document.getElementById('toTopBtn');
+  var target = document.querySelector('.section.ytSection');
+  var fallbackThreshold = document.documentElement.scrollHeight * 0.8;
+  var isVisible = false;
   function currentY(){
     return Math.max(
       window.pageYOffset || 0,
@@ -1403,14 +1406,19 @@ html body #toTopBtn.is-show{
       document.body.scrollTop || 0
     );
   }
-  function threshold(){
-    return Math.max(1, Math.round(window.innerHeight * 0.5));
-  }
   function update(){
     if(!btn) return;
-    if(currentY() >= threshold()){
+    var y = currentY();
+    var showThreshold = target
+      ? target.getBoundingClientRect().top + y
+      : fallbackThreshold;
+    var hideThreshold = showThreshold * 0.7;
+
+    if(!isVisible && y >= showThreshold){
+      isVisible = true;
       btn.classList.add('is-show');
-    }else{
+    }else if(isVisible && y <= hideThreshold){
+      isVisible = false;
       btn.classList.remove('is-show');
     }
   }
