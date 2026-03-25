@@ -227,9 +227,12 @@ img{display:block;max-width:100%}
 }
 .rankingRow.is-dragging,
 .rowScroll.is-dragging{cursor:grabbing}
-.rankingRow::-webkit-scrollbar{height:8px}
-.rankingRow::-webkit-scrollbar-thumb{background:rgba(230,225,216,1);border-radius:var(--radius-pill)}
-.rankingRow::-webkit-scrollbar-track{background:rgba(250,249,247,1)}
+.rankingRow::-webkit-scrollbar,
+.rowScroll::-webkit-scrollbar{height:8px}
+.rankingRow::-webkit-scrollbar-thumb,
+.rowScroll::-webkit-scrollbar-thumb{background:rgba(230,225,216,1);border-radius:var(--radius-pill)}
+.rankingRow::-webkit-scrollbar-track,
+.rowScroll::-webkit-scrollbar-track{background:rgba(250,249,247,1)}
 
 .rankingCard{flex:0 0 auto}
 .rankingNo{
