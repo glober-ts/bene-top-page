@@ -3211,8 +3211,8 @@ html, body { overflow-x:hidden; }
   flex-shrink:0;
   border-radius:var(--radius-hero-md);
   overflow:hidden;
-  border:1px solid rgba(230,225,216,1);
-  box-shadow:var(--shadow);
+  /*border:1px solid rgba(230,225,216,1);　一旦無しに*/
+  /*box-shadow:var(--shadow);　一旦無しに*/
   background:#fff;
   scroll-snap-align:start;
   transition:transform .24s ease, box-shadow .24s ease;
