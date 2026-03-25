@@ -880,259 +880,100 @@ section[id^="pickup"]{
   }
 }
 
-/* v33: YouTube section responsive (stack list under video on mobile) */
-@media (max-width:980px){
-  .ytGrid{
-    grid-template-columns: 1fr !important;
-  }
-  .ytList{
-    max-height: none !important;
-  }
-}
-
-
 /* YouTube list active state */
 .ytItem.isActive{
-  outline: 2px solid rgba(138,31,78,.35);
-  background: #faf9f7;
+  outline:2px solid rgba(138,31,78,.35);
+  background:#faf9f7;
 }
 .ytItem.isActive .ytMeta strong{
   color:#8A1F4E;
 }
 
-
-/* v35: YouTube list should not expand video height; list scrolls */
+/* NEWS / YouTube scroll container policy
+   - PC: keep list in-card scroll
+   - SP: release to page(body) scroll so iOS Safari URL bar can shrink */
 .ytGrid{
-  align-items: stretch;
-}
-.ytPlayer{
-  aspect-ratio: 16 / 9;
-}
-.ytPlayer iframe{
-  width:100%;
-  height:100%;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 360px;
+  gap:16px;
+  align-items:start;
 }
 .ytCarousel{
   display:grid;
-  grid-template-rows:auto 1fr auto;
+  grid-template-rows:auto minmax(0,1fr) auto;
   gap:10px;
-  height:100%;
   min-height:0;
 }
-.ytCarousel .ytList{
-  overflow-y:auto !important;
-  max-height: none !important;
-  min-height:0;
-}
-.ytCarousel.isScrollable /* Hide YouTube arrows on touch devices; swipe/scroll only */
-@media (hover:none), (pointer:coarse){
-  .ytCarousel }
-@media (max-width:980px){
-  /* stack already handled; keep list under video, allow finger scroll */
-  .ytCarousel }
 
-
-/* v36: Fix YouTube layout when list grows (prevent overlay/centering) */
-.ytGrid{
-  display:grid !important;
-  grid-template-columns: minmax(0, 1fr) 360px !important;
-  gap:16px !important;
-  align-items:start !important;
-  justify-items:stretch !important;
-}
-.ytPlayer{
-  width:100%;
-  border-radius:var(--radius-hero-md);
-  overflow:hidden;
-}
-.ytCarousel{
-  height:auto !important;
-  align-content:start !important;
-}
-.ytCarousel .ytList{
-  overflow-y:auto !important;
-}
-
-/* If screen is a bit narrower but still PC, reduce list column width */
 @media (max-width:1120px){
-  .ytGrid{grid-template-columns:minmax(0,1fr) 320px !important;}
-}
-@media (max-width:980px){
-  .ytGrid{grid-template-columns:1fr !important;}
+  .ytGrid{grid-template-columns:minmax(0,1fr) 320px;}
 }
 
-
-/* v37: YouTube list fixed height + scroll */
-.ytList{
-  overflow-y:auto !important;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* YouTube arrows: show on PC (mouse), hide on touch */
-@media (hover:hover) and (pointer:fine){
-  .ytCarousel.isScrollable }
-@media (hover:none), (pointer:coarse){
-  .ytCarousel }
-@media (max-width:980px){
-  .ytCarousel }
-
-
-/* v38: YouTube list height lock (override previous max-height:none !important) */
-.ytList{
-  max-height: var(--ytListMax, none) !important;
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch;
-}
-
-
-/* v39: Ensure NEWS scroll works */
-.newsList{
-  overflow-y:auto !important;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* v39: YouTube list fixed height (match video) and overlay arrows without increasing height */
-.ytCarousel{
-  position:relative !important;
-  height: var(--ytListMax, auto) !important;
-  max-height: var(--ytListMax, none) !important;
-}
-.ytCarousel .ytList{
-  max-height: var(--ytListMax, none) !important;
-  overflow-y:auto !important;
-  }
-
-/* overlay buttons (do not affect layout height) */
-/* Show arrows only on PC mouse; hide on touch/mobile */
-@media (hover:hover) and (pointer:fine){
-  .ytCarousel.isScrollable }
-@media (hover:none), (pointer:coarse){
-  .ytCarousel }
-@media (max-width:980px){
-  .ytCarousel{height:auto !important; max-height:none !important;}
-  .ytCarousel .ytList{
-    max-height: var(--ytListMax, none) !important; /* 5 items from JS */
-    padding-top:8px !important;
-    padding-bottom:8px !important;
-  }
-  .ytCarousel }
-
-
-/* v40: HERO/NEWS stability + NEWS scroll */
-.heroGrid{align-items:start !important;}
-.noticeCard{overflow:hidden !important;}
-.newsList{
-  overflow-y:auto !important;
-  -webkit-overflow-scrolling: touch;
-  max-height: var(--newsMax, none);
-}
-
-
-/* v41: Prevent NEWS growth from pushing PICK UP down (right column fixed height) */
-.heroGrid{
-  align-items:stretch !important;
-}
-.heroSide{
-  display:flex !important;
-  flex-direction:column !important;
-  gap:14px !important;
-  min-height:0 !important;
-}
-.noticeCard{
-  flex: 1 1 auto !important;
-  min-height:0 !important;
-  overflow:hidden !important;
-}
-.noticeCard .newsCarousel{
-  min-height:0 !important;
-}
-.newsList{
-  overflow-y:auto !important;
-  min-height:0 !important;
-}
-
-/* PICK UP block stays its natural height */
-.promoCard{
-  flex: 0 0 auto !important;
-}
-
-
-/* v42: prevent HERO from becoming too tall on PC (cap height) */
 @media (min-width:981px){
-  .slider{
-    aspect-ratio: 1080 / 1128; /* requested banner ratio */
-    max-height: 680px;         /* cap to avoid over-tall hero */
-    height: auto;
+  .ytList,
+  .newsList{
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
   }
-  .slider .slide, .slider .slide img{
-    height: 100%;
+
+  .ytList{
+    max-height:var(--ytListMax, none);
   }
-  .slider .slide img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+  .heroInfoSection .news-column .news-list-wrap{
+    display:flex;
+    flex-direction:column;
+    height:400px;
+    min-height:400px;
+    max-height:400px;
+    overflow:hidden;
+  }
+
+  .heroInfoSection .news-column .newsList,
+  .heroInfoSection .news-column .news-list{
+    flex:1 1 auto;
+    min-height:0;
+    max-height:100%;
+    overflow-y:auto;
+    overflow-x:hidden;
   }
 }
+
 @media (max-width:980px){
-  .slider{
-    max-height: none;
+  .ytGrid{grid-template-columns:1fr;}
+
+  .ytCarousel,
+  .heroInfoSection .news-column .news-list-wrap{
+    height:auto;
+    min-height:0;
+    max-height:none;
+    overflow:visible;
+  }
+
+  .ytList,
+  .newsList,
+  .heroInfoSection .news-column .newsList,
+  .heroInfoSection .news-column .news-list{
+    max-height:none;
+    overflow:visible;
   }
 }
 
-
-
-
-.ytList::-webkit-scrollbar, .newsList::-webkit-scrollbar{
-  width: 14px;
+.ytList::-webkit-scrollbar,
+.newsList::-webkit-scrollbar{
+  width:14px;
 }
-.ytList::-webkit-scrollbar-thumb, .newsList::-webkit-scrollbar-thumb{
-  background: rgba(80,80,80,.65);
-  border-radius: var(--radius-pill);
-  border: 4px solid rgba(0,0,0,0); /* makes it look like floating thumb */
-  background-clip: padding-box;
+.ytList::-webkit-scrollbar-thumb,
+.newsList::-webkit-scrollbar-thumb{
+  background:rgba(80,80,80,.65);
+  border-radius:var(--radius-pill);
+  border:4px solid rgba(0,0,0,0);
+  background-clip:padding-box;
 }
-.ytList::-webkit-scrollbar-track, .newsList::-webkit-scrollbar-track{
-  background: transparent;
+.ytList::-webkit-scrollbar-track,
+.newsList::-webkit-scrollbar-track{
+  background:transparent;
 }
-
-
-/* v46: unify NEWS & YouTube scrollbar appearance exactly */
-.newsList,
-.ytList{
-  padding: 8px;
-  overflow-y: auto !important;
-  scrollbar-width: auto; /* Firefox */
-  scrollbar-color: rgba(80,80,80,.65) transparent;
-}
-
-.newsList::-webkit-scrollbar,
-.ytList::-webkit-scrollbar{
-  width: 14px;
-}
-
-.newsList::-webkit-scrollbar-thumb,
-.ytList::-webkit-scrollbar-thumb{
-  background: rgba(80,80,80,.65);
-  border-radius: var(--radius-pill);
-  border: 4px solid transparent;
-  background-clip: padding-box;
-}
-
-.newsList::-webkit-scrollbar-track,
-.ytList::-webkit-scrollbar-track{
-  background: transparent;
-}
-
-/* YouTube arrow overlay spacing (do not affect scrollbar width) */
-.ytCarousel .ytCarousel 
-
-/* v48: YouTube list scroll only (no arrow buttons) */
-.ytList{
-  overflow-y:auto !important;
-  max-height: var(--ytListMax, none) !important;
-  -webkit-overflow-scrolling: touch;
-}
-
 
 /* v57: Safe elegant fade (no layout break) */
 .slider .slide{
@@ -2105,7 +1946,7 @@ header, .siteHeader, .header{
     opacity:1;
     pointer-events:auto;
   }
-  .noScroll{ overflow:hidden; }
+  body.noScroll{ overflow:hidden; }
   .gnavList{ padding:14px 16px 24px; }
 }
 
@@ -2317,10 +2158,8 @@ header, .siteHeader, .header{
     background:#fff !important;
   }
   #gnav.gnavDrawer.is-open{ pointer-events:auto !important; }
-  html.noScroll, body.noScroll{
-    overflow:hidden !important;
-    height:100%;
-    touch-action:none;
+  body.noScroll{
+    overflow:hidden;
   }
   #gnav.gnavDrawer{
     overscroll-behavior:contain;
@@ -4013,27 +3852,39 @@ html, body { overflow-x:hidden; }
   min-height:0;
   overflow:hidden;
 }
-.heroInfoSection .news-column .news-list-wrap{
-  display:flex;
-  flex-direction:column;
-  height:400px;
-  min-height:400px;
-  max-height:400px;
-  overflow:hidden;
-}
-.heroInfoSection .news-column .newsList,
-.heroInfoSection .news-column .news-list{
-  flex:1 1 auto;
-  height:100%;
-  max-height:100%;
-  min-height:0;
-  overflow-y:auto;
-  overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-}
 .heroInfoSection .news-column .news-tags{
   margin-top:16px;
   flex-shrink:0;
+}
+@media (min-width:981px){
+  .heroInfoSection .news-column .news-list-wrap{
+    display:flex;
+    flex-direction:column;
+    height:400px;
+    min-height:400px;
+    max-height:400px;
+    overflow:hidden;
+  }
+  .heroInfoSection .news-column .newsList,
+  .heroInfoSection .news-column .news-list{
+    flex:1 1 auto;
+    height:100%;
+    max-height:100%;
+    min-height:0;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+  }
+}
+@media (max-width:980px){
+  .heroInfoSection .news-column .news-list-wrap,
+  .heroInfoSection .news-column .newsList,
+  .heroInfoSection .news-column .news-list{
+    height:auto;
+    min-height:0;
+    max-height:none;
+    overflow:visible;
+  }
 }
 
 /* ===== v135 PC: align NEWS and side column heights ===== */
