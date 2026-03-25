@@ -191,8 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const drawerBack = document.getElementById('gnavBackdrop');
   const drawerClose = drawer ? drawer.querySelector('.gnavClose') : null;
 
-  const lock = () => { document.documentElement.classList.add('noScroll'); document.body.classList.add('noScroll'); };
-  const unlock = () => { document.documentElement.classList.remove('noScroll'); document.body.classList.remove('noScroll'); };
+  const lock = () => { document.body.classList.add('noScroll'); };
+  const unlock = () => { document.body.classList.remove('noScroll'); };
 
   function openDrawer(){
     if(!drawer) return;
@@ -239,8 +239,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const backdrop = ()=>document.getElementById('gnavBackdrop');
   const menuBtn = ()=>document.getElementById('menuBtn');
 
-  function lock(){ document.documentElement.classList.add('noScroll'); document.body.classList.add('noScroll'); }
-  function unlock(){ document.documentElement.classList.remove('noScroll'); document.body.classList.remove('noScroll'); }
+  function lock(){ document.body.classList.add('noScroll'); }
+  function unlock(){ document.body.classList.remove('noScroll'); }
 
   window.__openDrawer = function(){
     const d = drawer(); if(!d) return;
@@ -447,7 +447,6 @@ document.addEventListener('DOMContentLoaded', () => {
         drawer.classList.remove('is-open');
         const b = document.getElementById('gnavBackdrop');
         if(b) b.classList.remove('is-open');
-        document.documentElement.classList.remove('noScroll');
         document.body.classList.remove('noScroll');
       }
     }, true);
@@ -470,7 +469,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const backdrop = document.getElementById('gnavBackdrop') || document.querySelector('.gnavBackdrop');
     if(drawer) drawer.classList.remove('is-open');
     if(backdrop) backdrop.classList.remove('is-open');
-    document.documentElement.classList.remove('noScroll');
     document.body.classList.remove('noScroll');
   }
   // expose for onclick fallback
@@ -519,7 +517,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const backdrop = document.getElementById('gnavBackdrop') || document.querySelector('.gnavBackdrop');
     if(drawer) drawer.classList.remove('is-open');
     if(backdrop) backdrop.classList.remove('is-open');
-    document.documentElement.classList.remove('noScroll');
     document.body.classList.remove('noScroll');
   }
   window.__closeDrawer = closeDrawerNow;
@@ -566,7 +563,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     var backdrop = document.getElementById('gnavBackdrop') || document.querySelector('.gnavBackdrop');
     if(drawer) drawer.classList.remove('is-open');
     if(backdrop) backdrop.classList.remove('is-open');
-    document.documentElement.classList.remove('noScroll');
     document.body.classList.remove('noScroll');
   };
 
@@ -607,18 +603,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
   }
 })();
 
-/* v137: keep page scroll on body/html unless drawer is actually open */
+/* v137: keep page scroll on body unless drawer is actually open */
 (function(){
   function syncDrawerScrollLock(){
     const drawer = document.getElementById('gnav');
     const isOpen = !!(drawer && drawer.classList.contains('is-open'));
-    document.documentElement.classList.toggle('noScroll', isOpen);
     document.body.classList.toggle('noScroll', isOpen);
+    // legacy handlers may still toggle html.noScroll; keep html always unlocked.
+    document.documentElement.classList.remove('noScroll');
   }
 
-  document.addEventListener('DOMContentLoaded', syncDrawerScrollLock);
+  function observeDrawer(){
+    const drawer = document.getElementById('gnav');
+    if(!drawer || !window.MutationObserver) return;
+    const observer = new MutationObserver(syncDrawerScrollLock);
+    observer.observe(drawer, { attributes:true, attributeFilter:['class'] });
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    syncDrawerScrollLock();
+    observeDrawer();
+  });
   window.addEventListener('pageshow', syncDrawerScrollLock);
-  window.addEventListener('resize', syncDrawerScrollLock);
 })();
 
 /* v113: show toTop after 50vh, not after 50% of total page */
