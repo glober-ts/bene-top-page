@@ -2873,7 +2873,7 @@ body.noScroll{ overflow:hidden; }
 #gnav .submenu{
   display:none;
   width:100%;
-  margin-top:8px;
+  margin-top:6px;
   padding-left:0;
   position:static;
   transform:none;
@@ -2966,6 +2966,84 @@ body.noScroll{ overflow:hidden; }
   border-color:#cdbfb5;
 }
 
+/* ===== v142: header action tone + drawer spacing cleanup (PC/SP) ===== */
+.headerQuick{
+  gap:10px;
+}
+
+.headerQuick .icoBtn,
+.headerQuick .hamburger,
+.headerQuick #menuBtn{
+  width:38px;
+  height:38px;
+  border-radius:var(--radius-pill);
+  border:1px solid #ddd6d0;
+  background:#fff;
+  color:#8f7a70;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 38px;
+}
+
+.headerQuick .icoBtn svg{
+  width:18px;
+  height:18px;
+  display:block;
+}
+
+.headerQuick .icoBtn svg path{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.headerQuick .icoBtn:hover,
+.headerQuick .hamburger:hover,
+.headerQuick #menuBtn:hover{
+  background:#faf7f4;
+  border-color:#cdbfb5;
+}
+
+#gnav .gnavList{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+#gnav .menu-item{
+  margin:0;
+}
+
+#gnav .menu-row,
+#gnav .gnavLink{
+  min-height:44px;
+}
+
+#gnav .submenu{
+  margin-top:6px;
+}
+
+#gnav .submenu li{
+  margin-bottom:6px;
+}
+
+@media (min-width:980px){
+  .headerQuick{
+    gap:10px;
+    align-items:center;
+  }
+  .headerActions{
+    gap:16px;
+    align-items:center;
+  }
+  .headerPhone{
+    padding-left:4px;
+  }
+}
+
 #gnav .menu-item,
 #gnav .menu-item.is-open{
   border:0;
@@ -2977,7 +3055,7 @@ body.noScroll{ overflow:hidden; }
 #gnav .submenu{
   display:none;
   width:100%;
-  margin-top:8px;
+  margin-top:6px;
   padding:0;
   list-style:none;
   border:0;
@@ -2989,7 +3067,7 @@ body.noScroll{ overflow:hidden; }
   display:block;
 }
 #gnav .submenu li{
-  margin-bottom:8px;
+  margin-bottom:6px;
   padding:0;
   border:0;
   background:transparent;
