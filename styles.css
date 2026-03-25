@@ -3937,24 +3937,27 @@ html, body { overflow-x:hidden; }
 @media (max-width:979px){
   #gnav.gnavDrawer{
     opacity:1;
+    visibility:hidden;
     pointer-events:none;
     overflow:hidden;
-    overscroll-behavior:auto;
-    -webkit-overflow-scrolling:auto;
+    top:0;
+    bottom:0;
+    height:auto;
   }
 
   #gnav.gnavDrawer.is-open{
+    visibility:visible;
     pointer-events:auto;
     overflow-y:auto;
-    overscroll-behavior:contain;
-    -webkit-overflow-scrolling:touch;
   }
 
   #gnavBackdrop{
+    visibility:hidden;
     pointer-events:none;
   }
 
   #gnavBackdrop.is-open{
+    visibility:visible;
     pointer-events:auto;
   }
 
