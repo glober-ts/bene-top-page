@@ -1972,7 +1972,7 @@ header, .siteHeader, .header{
 
 /* Mobile size tuning */
 @media (max-width:480px){
-  .floatLeft{ left:5px; bottom:15px; gap:0px; }
+  .floatLeft{ left:5px; bottom:0px; gap:0px; }
   .floatBtn.iconImg{ width:50px; height:50px; }
   .floatBtn.iconImg img{ width:74%; height:74%; }
 }
