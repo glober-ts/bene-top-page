@@ -1790,7 +1790,7 @@ header, .siteHeader, .header{
 .floatLeft{
   position:fixed;
   left:14px;
-  bottom:0;
+  bottom:10;
   display:flex;
   flex-direction:column;
   gap:6px;
