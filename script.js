@@ -1373,3 +1373,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+
+/* v140: drawer close-state guard (single source of truth = body.noScroll) */
+(function(){
+  function syncDrawerState(){
+    const drawer = document.getElementById('gnav');
+    const backdrop = document.getElementById('gnavBackdrop');
+    const isOpen = !!(drawer && drawer.classList.contains('is-open'));
+
+    document.body.classList.toggle('noScroll', isOpen);
+    document.documentElement.classList.remove('noScroll');
+
+    if(backdrop){
+      backdrop.classList.toggle('is-open', isOpen);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', syncDrawerState);
+  window.addEventListener('pageshow', syncDrawerState);
+  window.addEventListener('resize', syncDrawerState);
+})();
