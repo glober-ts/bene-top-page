@@ -2000,41 +2000,53 @@ header, .siteHeader, .header{
   #menuBtn{ order:99; }
 }
 
-/* ===== v99: mobile drawer menu ===== */
+/* ===== v99: drawer base state (PC/SP共通) ===== */
+#gnavBackdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.18);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .22s ease, visibility .22s ease;
+  z-index:180;
+}
+#gnavBackdrop.is-open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+#gnav.gnavDrawer{
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:auto;
+  width:min(420px, 34vw);
+  height:100dvh;
+  background:#fff;
+  border-left:1px solid rgba(0,0,0,.10);
+  transform:translateX(102%);
+  visibility:hidden;
+  pointer-events:none;
+  overflow:hidden;
+  transition:transform .22s ease, visibility .22s ease;
+  z-index:190;
+}
+#gnav.gnavDrawer.is-open{
+  transform:translateX(0);
+  visibility:visible;
+  pointer-events:auto;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+body.noScroll{ overflow:hidden; }
+
 @media (max-width:979px){
-  #gnavBackdrop{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.18);
-    display:none;
-    z-index:180;
-  }
-  #gnavBackdrop.is-open{
-    display:block;
-  }
   #gnav.gnavDrawer{
-    position:fixed;
-    top:0;
-    right:0;
-    bottom:0;
-    left:auto;
     width:min(86vw, 360px);
-    height:auto;
-    background:#fff;
-    border-left:1px solid rgba(0,0,0,.10);
-    transform:translateX(102%);
-    display:none;
-    overflow:hidden;
-    transition:transform .22s ease;
-    z-index:190;
+    height:100dvh;
   }
-  #gnav.gnavDrawer.is-open{
-    display:block;
-    transform:translateX(0);
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
-  }
-  body.noScroll{ overflow:hidden; }
   .gnavList{ padding:14px 16px 24px; }
 }
 
@@ -2074,10 +2086,6 @@ header, .siteHeader, .header{
   background:#faf8f6;
   font-size:14px;
 }
-@media (min-width:980px){
-  .gnavBackdrop, .gnavDrawer{ display:none !important; }
-}
-
 /* ===== v100: ensure hamburger clickable ===== */
 #menuBtn{ position:relative; z-index:120; pointer-events:auto; }
 .header, .headerRow, .headerActions, .headerQuick{ overflow:visible; }
@@ -3374,11 +3382,6 @@ body { overflow-x:hidden; }
   }
   .headerQuick{
     gap:12px;
-  }
-  .gnavBackdrop,
-  .gnavDrawer,
-  #gnav.gnavDrawer{
-    display:block !important;
   }
   .gnavBackdrop{
     background:rgba(22, 16, 12, .28);
