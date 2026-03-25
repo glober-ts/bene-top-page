@@ -65,10 +65,14 @@
   const initToTop = () => {
     const btn = document.getElementById('toTopBtn') || document.querySelector('.toTop');
     if(!btn) return;
+    let threshold = 1;
+
+    const setThreshold = () => {
+      threshold = Math.max(1, document.documentElement.scrollHeight * 0.8);
+    };
 
     const update = () => {
       const y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      const threshold = Math.max(1, window.innerHeight * 0.5);
       btn.classList.toggle('is-show', y >= threshold);
     };
 
@@ -77,9 +81,17 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    setThreshold();
     update();
     window.addEventListener('scroll', update, { passive:true });
-    window.addEventListener('resize', update);
+    window.addEventListener('resize', () => {
+      setThreshold();
+      update();
+    });
+    window.addEventListener('load', () => {
+      setThreshold();
+      update();
+    });
     window.addEventListener('pageshow', update);
   };
 
