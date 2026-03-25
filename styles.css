@@ -1929,31 +1929,9 @@ header, .siteHeader, .header{
   #gnav{ display:block !important; }
 }
 
-/* Mobile: gnav is drawer */
+/* Mobile: gnav drawer trigger spacing */
 @media (max-width:979px){
   .headerPhone{ display:none; }
-  #gnav{
-    position:fixed;
-    top:0; right:0;
-    width:min(86vw, 360px);
-    height:100dvh;
-    background:#fff;
-    border-left:1px solid rgba(0,0,0,.10);
-    transform: translateX(102%);
-    opacity:0;
-    pointer-events:none;
-    transition: transform .2s ease, opacity .2s ease;
-    z-index:60;
-    overflow:auto;
-    padding-top:78px;
-  }
-  #gnav.is-open{
-    transform: translateX(0);
-    opacity:1;
-    pointer-events:auto;
-  }
-  body.noScroll{ overflow:hidden; }
-  .gnavList{ padding:14px 16px 24px; }
 }
 
 /* v97: make toTop bigger */
@@ -2015,29 +1993,51 @@ header, .siteHeader, .header{
 }
 
 /* ===== v99: mobile drawer menu ===== */
-.gnavBackdrop{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.18);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .2s ease;
-  z-index:80;
+@media (max-width:979px){
+  #gnavBackdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.18);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .2s ease, visibility 0s linear .2s;
+    z-index:180;
+  }
+  #gnavBackdrop.is-open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transition-delay:0s;
+  }
+  #gnav.gnavDrawer{
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:auto;
+    width:min(86vw, 360px);
+    height:auto;
+    background:#fff;
+    border-left:1px solid rgba(0,0,0,.10);
+    transform:translateX(102%);
+    visibility:hidden;
+    pointer-events:none;
+    overflow:hidden;
+    transition:transform .22s ease, visibility 0s linear .22s;
+    z-index:190;
+  }
+  #gnav.gnavDrawer.is-open{
+    transform:translateX(0);
+    visibility:visible;
+    pointer-events:auto;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    transition-delay:0s;
+  }
+  body.noScroll{ overflow:hidden; }
+  .gnavList{ padding:14px 16px 24px; }
 }
-.gnavDrawer{
-  position:fixed;
-  top:0; right:0;
-  width:min(86vw, 360px);
-  height:100dvh;
-  background:#fff;
-  border-left:1px solid rgba(0,0,0,.10);
-  transform:translateX(102%);
-  transition:transform .22s ease;
-  z-index:90;
-  overflow:auto;
-}
-.gnavDrawer.is-open{ transform:translateX(0); }
-.gnavBackdrop.is-open{ opacity:1; pointer-events:auto; }
 
 .gnavClose{
   position:absolute;
@@ -2180,8 +2180,6 @@ header, .siteHeader, .header{
 .drawerIco:active{ transform: translateY(1px); }
 
 /* ===== v102: harden layering/click ===== */
-.gnavBackdrop{ z-index:180 !important; }
-.gnavDrawer{ z-index:190 !important; }
 .modal{ z-index:220 !important; }
 #searchModal .modalBackdrop{ z-index:0 !important; pointer-events:auto !important; }
 #searchModal .modalPanel{ z-index:1 !important; pointer-events:auto !important; }
@@ -2189,8 +2187,6 @@ header, .siteHeader, .header{
 #searchModal a.chip{ position:relative; z-index:3; pointer-events:auto; }
 
 /* ===== v104: drawer top actions clickable ===== */
-.gnavDrawer{ z-index:190 !important; }
-.gnavBackdrop{ z-index:180 !important; }
 .drawerTop{ position:sticky; top:0; z-index:3; }
 .gnavClose{ z-index:4; }
 .drawerActions, .drawerIco{ pointer-events:auto; }
@@ -2227,7 +2223,6 @@ header, .siteHeader, .header{
 
 /* ===== v107: mobile drawer close button position + clickability ===== */
 @media (max-width:979px){
-  #gnav.gnavDrawer{ position:fixed; }
   #gnav.gnavDrawer .gnavClose{
     position:absolute !important;
     top:10px !important;
@@ -3932,36 +3927,3 @@ html, body { overflow-x:hidden; }
   }
 }
 
-
-/* ===== v140 drawer state normalization (SP) ===== */
-@media (max-width:979px){
-  #gnav.gnavDrawer{
-    opacity:1;
-    visibility:hidden;
-    pointer-events:none;
-    overflow:hidden;
-    top:0;
-    bottom:0;
-    height:auto;
-  }
-
-  #gnav.gnavDrawer.is-open{
-    visibility:visible;
-    pointer-events:auto;
-    overflow-y:auto;
-  }
-
-  #gnavBackdrop{
-    visibility:hidden;
-    pointer-events:none;
-  }
-
-  #gnavBackdrop.is-open{
-    visibility:visible;
-    pointer-events:auto;
-  }
-
-  body.noScroll{
-    overflow:hidden;
-  }
-}
