@@ -69,7 +69,7 @@
     let isVisible = false;
 
     const setThreshold = () => {
-      threshold = Math.max(1, document.documentElement.scrollHeight * 0.8);
+      threshold = Math.max(1, document.documentElement.scrollHeight * 0.9);
     };
 
     const update = () => {
