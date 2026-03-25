@@ -66,6 +66,7 @@
     const btn = document.getElementById('toTopBtn') || document.querySelector('.toTop');
     if(!btn) return;
     let threshold = 1;
+    let isVisible = false;
 
     const setThreshold = () => {
       threshold = Math.max(1, document.documentElement.scrollHeight * 0.8);
@@ -73,7 +74,17 @@
 
     const update = () => {
       const y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      btn.classList.toggle('is-show', y >= threshold);
+
+      const showThreshold = threshold;
+      const hideThreshold = threshold * 0.7;
+
+      if(!isVisible && y >= showThreshold){
+        isVisible = true;
+        btn.classList.add('is-show');
+      }else if(isVisible && y <= hideThreshold){
+        isVisible = false;
+        btn.classList.remove('is-show');
+      }
     };
 
     btn.addEventListener('click', (e) => {
