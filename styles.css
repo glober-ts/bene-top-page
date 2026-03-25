@@ -890,8 +890,7 @@ section[id^="pickup"]{
 }
 
 /* NEWS / YouTube scroll container policy
-   - PC: keep list in-card scroll
-   - SP: release to page(body) scroll so iOS Safari URL bar can shrink */
+   - PC/SPともに一覧はカード内スクロールを維持 */
 .ytGrid{
   display:grid;
   grid-template-columns:minmax(0,1fr) 360px;
@@ -946,16 +945,23 @@ section[id^="pickup"]{
   .heroInfoSection .news-column .news-list-wrap{
     height:auto;
     min-height:0;
-    max-height:none;
-    overflow:visible;
+    overflow:hidden;
   }
 
-  .ytList,
+  .ytList{
+    max-height:var(--ytListMax, 360px);
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+  }
+
   .newsList,
   .heroInfoSection .news-column .newsList,
   .heroInfoSection .news-column .news-list{
-    max-height:none;
-    overflow:visible;
+    max-height:var(--newsListMax, 340px);
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
   }
 }
 
@@ -2149,23 +2155,6 @@ header, .siteHeader, .header{
 #searchModal .modalBackdrop{ z-index:0; pointer-events:auto; }
 #searchModal .modalPanel{ z-index:1; pointer-events:auto; }
 #searchModal .modalClose{ pointer-events:auto; }
-
-/* ===== v101: robust drawer (override old #gnav rules) ===== */
-@media (max-width:979px){
-  #gnav.gnavDrawer{
-    opacity:1 !important;
-    pointer-events:auto !important;
-    background:#fff !important;
-  }
-  #gnav.gnavDrawer.is-open{ pointer-events:auto !important; }
-  body.noScroll{
-    overflow:hidden;
-  }
-  #gnav.gnavDrawer{
-    overscroll-behavior:contain;
-    -webkit-overflow-scrolling:touch;
-  }
-}
 
 /* Drawer top area */
 .drawerTop{
@@ -3877,13 +3866,19 @@ html, body { overflow-x:hidden; }
   }
 }
 @media (max-width:980px){
-  .heroInfoSection .news-column .news-list-wrap,
-  .heroInfoSection .news-column .newsList,
-  .heroInfoSection .news-column .news-list{
+  .heroInfoSection .news-column .news-list-wrap{
     height:auto;
     min-height:0;
-    max-height:none;
-    overflow:visible;
+    overflow:hidden;
+  }
+
+  .heroInfoSection .news-column .newsList,
+  .heroInfoSection .news-column .news-list{
+    min-height:0;
+    max-height:var(--newsListMax, 340px);
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
   }
 }
 
@@ -3934,5 +3929,36 @@ html, body { overflow-x:hidden; }
   .rowScroll .productCard{
     width:var(--shelf-card-width);
     min-width:var(--shelf-card-width);
+  }
+}
+
+
+/* ===== v140 drawer state normalization (SP) ===== */
+@media (max-width:979px){
+  #gnav.gnavDrawer{
+    opacity:1;
+    pointer-events:none;
+    overflow:hidden;
+    overscroll-behavior:auto;
+    -webkit-overflow-scrolling:auto;
+  }
+
+  #gnav.gnavDrawer.is-open{
+    pointer-events:auto;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  #gnavBackdrop{
+    pointer-events:none;
+  }
+
+  #gnavBackdrop.is-open{
+    pointer-events:auto;
+  }
+
+  body.noScroll{
+    overflow:hidden;
   }
 }
