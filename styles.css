@@ -2284,7 +2284,7 @@ body { overflow-x:hidden; }
 
 /* keep to-top inside viewport */
 .toTop, .floatTop, #toTopBtn{ right:12px !important; }
-@media (max-width:979px){ .toTop, .floatTop, #toTopBtn{ right:10px !important; } }
+@media (max-width:979px){ .toTop, .floatTop, #toTopBtn{ right:20px !important; } }
 
 /* ===== v109: keep hamburger & toTop visible on mobile (logo shrink + header flex) ===== */
 @media (max-width:979px){
@@ -2312,7 +2312,7 @@ body { overflow-x:hidden; }
     display:flex !important;
     align-items:center;
     gap:8px;
-    padding-right:15px !important;
+    padding-right:25px !important;
   }
   #menuBtn{ display:inline-grid !important; }
   /* ensure icons never wrap offscreen */
@@ -2376,7 +2376,7 @@ body { overflow-x:hidden; }
 
 /* ===== v111: toTop explicit state ===== */
 #toTopBtn{
-  right:10px !important;
+  right:20px !important;
   bottom:10px !important;
   z-index:500 !important;
   display:flex;
@@ -2421,7 +2421,7 @@ body { overflow-x:hidden; }
 /* ===== v112: toTop visible only after 50% scroll ===== */
 #toTopBtn{
   position:fixed !important;
-  right:10px !important;
+  right:20px !important;
   bottom:10px !important;
   z-index:500 !important;
   display:grid !important;
@@ -2465,7 +2465,7 @@ body { overflow-x:hidden; }
 .toTop,
 .floatTop{
   position:fixed !important;
-  right:10px !important;
+  right:20px !important;
   bottom:10px !important;
   z-index:999 !important;
   opacity:0 !important;
@@ -2488,7 +2488,7 @@ body { overflow-x:hidden; }
 /* ===== v114: guaranteed toTop button ===== */
 #toTopBtn{
   position:fixed !important;
-  right:10px !important;
+  right:20px !important;
   bottom:10px !important;
   width:auto !important;
   height:auto !important;
@@ -2526,7 +2526,7 @@ body { overflow-x:hidden; }
 /* ===== v115: hard reset toTop ===== */
 #toTopBtn{
   position:fixed !important;
-  right:10px !important;
+  right:20px !important;
   bottom:10px !important;
   z-index:2147483000 !important;
   width:auto !important;
