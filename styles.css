@@ -881,7 +881,7 @@ section[id^="pickup"]{
 .ytCarousel{
   display:grid;
   grid-template-rows:auto minmax(0,1fr) auto;
-  gap:10px;
+  gap:0px;
   min-height:0;
 }
 
