@@ -2464,70 +2464,126 @@ body.noScroll{ overflow:hidden; }
 }
 
 .customOrderSection{
-  padding:18px 0 28px;
+  padding:14px 0 24px;
 }
 .customOrderHead{
-  margin:0 0 18px;
+  margin:0 0 14px;
+}
+.customOrderVisual{
+  position:relative;
+  overflow:hidden;
+  margin:0 0 14px;
+  border:1px solid rgba(138,31,78,.18);
+  border-radius:var(--radius-card-lg);
+  background:linear-gradient(135deg, rgba(250,243,247,.95), rgba(255,255,255,1));
+  box-shadow:0 8px 18px rgba(0,0,0,.06);
+}
+.customOrderVisual img{
+  display:block;
+  width:100%;
+  height:clamp(156px, 24vw, 220px);
+  object-fit:cover;
+  opacity:.38;
+  filter:saturate(.85) contrast(1.04);
+}
+.customOrderVisualCatch{
+  position:absolute;
+  left:clamp(14px, 2.2vw, 28px);
+  bottom:clamp(12px, 2.2vw, 24px);
+  margin:0;
+  font-size:clamp(20px, 3vw, 32px);
+  line-height:1.35;
+  letter-spacing:.06em;
+  color:#5e1c38;
+  text-shadow:0 2px 6px rgba(255,255,255,.65);
 }
 .customOrderLead{
-  margin:0 0 8px;
-  font-size:clamp(18px, 2.2vw, 28px);
+  margin:0 0 6px;
+  font-size:clamp(16px, 2vw, 22px);
   line-height:1.35;
-  letter-spacing:.08em;
-  color:#8a1f4e;
+  letter-spacing:.1em;
+  color:#7e3555;
 }
 .customOrderSection .sectionTitle{
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 .customOrderDesc{
   margin:0;
   color:#4c4642;
-  line-height:1.9;
+  line-height:1.75;
   font-size:14px;
 }
 .customOrderGrid{
   display:grid;
   grid-template-columns:1fr;
-  gap:12px;
+  gap:10px;
 }
 .customOrderCard{
   display:block;
   border:1px solid rgba(138,31,78,.24);
   border-radius:var(--radius-card);
-  background:linear-gradient(180deg, rgba(255,255,255,1), rgba(252,247,249,1));
-  padding:16px 16px 15px;
+  background:linear-gradient(180deg, rgba(255,255,255,1), rgba(252,247,249,.95));
+  padding:14px 15px 13px;
   text-decoration:none;
-  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
+  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, background-color .22s ease;
+}
+.customOrderCardLabel{
+  display:inline-flex;
+  align-items:center;
+  margin-bottom:9px;
+  padding:3px 9px;
+  border-radius:var(--radius-pill);
+  border:1px solid rgba(138,31,78,.24);
+  font-size:11px;
+  letter-spacing:.06em;
+  color:#7f2d52;
+  background:#fff;
 }
 .customOrderCardTitle{
   display:block;
-  margin-bottom:8px;
-  font-size:18px;
+  margin-bottom:7px;
+  font-size:19px;
   font-weight:700;
-  line-height:1.4;
-  color:#8a1f4e;
+  line-height:1.5;
+  color:#6d1e42;
 }
 .customOrderCardText{
   display:block;
   font-size:14px;
-  line-height:1.8;
+  line-height:1.7;
   color:#3d3733;
 }
 @media (hover:hover){
   .customOrderCard:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 18px rgba(0,0,0,.08);
-    border-color:rgba(138,31,78,.42);
+    box-shadow:0 12px 20px rgba(0,0,0,.09);
+    border-color:rgba(138,31,78,.46);
+    background:#fff;
   }
 }
+.customOrderCard:focus-visible{
+  outline:2px solid rgba(138,31,78,.38);
+  outline-offset:2px;
+  border-color:rgba(138,31,78,.5);
+}
 @media (min-width:768px){
+  .customOrderSection{
+    padding:16px 0 26px;
+  }
+  .customOrderHead{
+    margin-bottom:16px;
+  }
+  .customOrderVisual{
+    margin-bottom:16px;
+  }
   .customOrderGrid{
     grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:14px;
+    gap:12px;
   }
   .customOrderCard{
-    min-height:154px;
-    padding:18px 18px 16px;
+    min-height:162px;
+    padding:16px 16px 15px;
   }
 }
 
