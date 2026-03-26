@@ -2454,15 +2454,15 @@ body.noScroll{ overflow:hidden; }
     --hero-card-gap:clamp(14px, 1.1vw, 24px);
   }
   .heroCard{
-    /* 1920px前後: 中央1枚主役（基準1080px）+ 左右見切れ */
-    flex:0 0 clamp(780px, 56.25vw, 1080px);
-    min-width:680px;
+    /* PC: 中央カードは常に1080px固定（1280〜1920でも維持） */
+    flex:0 0 1080px;
+    max-width:1080px;
   }
   .heroScrollHint{display:none}
 }
 
 /* 十分広い画面: 奇数枚表示へ段階切り替え（5枚） */
-@media (min-width:2480px){
+@media (min-width:2400px){
   .heroTrack{
     --hero-card-gap:clamp(12px, .7vw, 18px);
   }
@@ -2473,7 +2473,7 @@ body.noScroll{ overflow:hidden; }
 }
 
 /* さらに広い画面: 7枚表示 */
-@media (min-width:3360px){
+@media (min-width:3400px){
   .heroTrack{
     --hero-card-gap:clamp(10px, .55vw, 14px);
   }
