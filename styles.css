@@ -3381,7 +3381,21 @@ body.noScroll{ overflow:hidden; }
 }
 
 
-/* ===== v137 SP shelf cards: keep ~3.6 cards visible on wide SP ===== */
+/* ===== v137 SP shelf cards: keep ~2.2 on narrow SP and ~3.6 on wide SP ===== */
+@media (max-width:767px){
+  .horizontalScroll{
+    --shelf-gap:6px;
+    --shelf-inline-padding:6px;
+    --shelf-card-width:calc((100% - (var(--shelf-gap) * 1.2)) / 2.2);
+    scroll-padding-inline:var(--shelf-inline-padding);
+  }
+
+  .horizontalScroll .productCard{
+    width:var(--shelf-card-width);
+    min-width:var(--shelf-card-width);
+  }
+}
+
 @media (min-width:768px) and (max-width:979px){
   .horizontalScroll{
     --shelf-gap:6px;
