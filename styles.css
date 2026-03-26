@@ -2316,7 +2316,7 @@ body.noScroll{ overflow:hidden; }
 
 /* ===== v126 hero rail + info blocks ===== */
 .hero{
-  padding:14px 0 8px;
+  padding:14px 0 20px;
 }
 .hero > .wrap{
   max-width:100%;
@@ -2513,7 +2513,7 @@ body.noScroll{ overflow:hidden; }
 }
 
 .customOrderSection{
-  padding:8px 0 16px;
+  padding:8px 0 40px;
 }
 .customOrderHead{
   margin:0 0 10px;
