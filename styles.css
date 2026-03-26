@@ -2477,15 +2477,15 @@ body.noScroll{ overflow:hidden; }
 .customHeroMessage{
   position:absolute;
   top:50%;
-  right:clamp(40px, 6vw, 120px);
+  right:clamp(28px, 4.4vw, 108px);
   left:auto;
   transform:translateY(-50%);
   margin:0;
-  width:clamp(340px, 30vw, 520px);
-  max-width:min(520px, 44%);
-  font-size:clamp(30px, 2.2vw, 46px);
-  line-height:1.35;
-  font-weight:500;
+  width:clamp(380px, 31.5vw, 540px);
+  max-width:min(540px, 45%);
+  font-size:clamp(34px, 2.45vw, 44px);
+  line-height:1.28;
+  font-weight:550;
   letter-spacing:.04em;
   color:#6b2b37;
   text-align:right;
