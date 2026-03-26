@@ -2463,6 +2463,74 @@ body.noScroll{ overflow:hidden; }
   .heroScrollHint{display:none}
 }
 
+.customOrderSection{
+  padding:18px 0 28px;
+}
+.customOrderHead{
+  margin:0 0 18px;
+}
+.customOrderLead{
+  margin:0 0 8px;
+  font-size:clamp(18px, 2.2vw, 28px);
+  line-height:1.35;
+  letter-spacing:.08em;
+  color:#8a1f4e;
+}
+.customOrderSection .sectionTitle{
+  margin-bottom:12px;
+}
+.customOrderDesc{
+  margin:0;
+  color:#4c4642;
+  line-height:1.9;
+  font-size:14px;
+}
+.customOrderGrid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.customOrderCard{
+  display:block;
+  border:1px solid rgba(138,31,78,.24);
+  border-radius:var(--radius-card);
+  background:linear-gradient(180deg, rgba(255,255,255,1), rgba(252,247,249,1));
+  padding:16px 16px 15px;
+  text-decoration:none;
+  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.customOrderCardTitle{
+  display:block;
+  margin-bottom:8px;
+  font-size:18px;
+  font-weight:700;
+  line-height:1.4;
+  color:#8a1f4e;
+}
+.customOrderCardText{
+  display:block;
+  font-size:14px;
+  line-height:1.8;
+  color:#3d3733;
+}
+@media (hover:hover){
+  .customOrderCard:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 18px rgba(0,0,0,.08);
+    border-color:rgba(138,31,78,.42);
+  }
+}
+@media (min-width:768px){
+  .customOrderGrid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:14px;
+  }
+  .customOrderCard{
+    min-height:154px;
+    padding:18px 18px 16px;
+  }
+}
+
 .infoSection{padding-top:40px}
 .infoGrid{
   display:grid;
