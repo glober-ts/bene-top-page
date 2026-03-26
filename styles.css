@@ -3381,17 +3381,23 @@ body.noScroll{ overflow:hidden; }
 }
 
 
-/* ===== v137 SP shelf cards: keep ~2.2 cards visible ===== */
-@media (max-width:979px){
+/* ===== v137 SP shelf cards: keep ~3.6 cards visible on wide SP ===== */
+@media (min-width:768px) and (max-width:979px){
   .horizontalScroll{
-    --shelf-gap:8px;
+    --shelf-gap:6px;
     --shelf-inline-padding:6px;
-    --shelf-card-width:calc((100% - var(--shelf-gap)) / 2.2);
+    --shelf-card-width:calc((100% - (var(--shelf-gap) * 2.6)) / 3.6);
     scroll-padding-inline:var(--shelf-inline-padding);
   }
 
   .horizontalScroll .productCard{
     width:var(--shelf-card-width);
     min-width:var(--shelf-card-width);
+  }
+
+  .horizontalScroll .productCard p{
+    margin:8px 8px 10px;
+    font-size:11px;
+    line-height:1.45;
   }
 }
