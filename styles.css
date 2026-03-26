@@ -454,12 +454,14 @@ img{display:block;max-width:100%}
   background:#faf9f7;
 }
 .ytItem:hover{background:#fff; border-color: rgba(138,31,78,.28)}
+
+/*背景枠一旦無し
 .ytThumb{
   border-radius:var(--radius-card-sm);
   overflow:hidden;
-  border:1px solid rgba(230,225,216,1);
+  /*border:1px solid rgba(230,225,216,1);　
   background:#fff;
-}
+}　　*/
 .ytThumb img{width:100%; height:100%; object-fit:cover; aspect-ratio: 16 / 9}
 .ytMeta strong{display:block; font-size:13px}
 .ytMeta small{display:block; color:var(--muted); font-size:12px; margin-top:4px; line-height:1.5}
