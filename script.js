@@ -295,9 +295,9 @@
     }
 
     railOffset = 0;
-    // SPは両端余白を均して中央寄せ表示にし、見切れ時も視線が安定するよう調整
-    if(window.matchMedia('(max-width: 979px)').matches && firstRealCard){
-      railOffset = (rail.clientWidth - firstRealCard.getBoundingClientRect().width) / 2;
+    // 端末幅に関わらず、アクティブカードを常に中央軸へ揃える
+    if(firstRealCard){
+      railOffset = Math.max((rail.clientWidth - firstRealCard.getBoundingClientRect().width) / 2, 0);
     }
 
     setTransition(false);
