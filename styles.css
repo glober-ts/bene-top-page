@@ -2508,9 +2508,15 @@ body.noScroll{ overflow:hidden; }
   margin-bottom:10px;
 }
 .customOrderDesc{
-  margin:0;
+  margin:0 0 10px;
   color:#4c4642;
   line-height:1.75;
+  font-size:14px;
+}
+.customOrderSubCopy{
+  margin:0;
+  color:#4c4642;
+  line-height:1.85;
   font-size:14px;
 }
 .customOrderGrid{
@@ -2554,6 +2560,26 @@ body.noScroll{ overflow:hidden; }
   line-height:1.7;
   color:#3d3733;
 }
+.customOrderCtaWrap{
+  margin-top:14px;
+  padding-top:2px;
+}
+.customOrderCta{
+  display:inline-block;
+  font-size:17px;
+  line-height:1.5;
+  font-weight:600;
+  color:#6d1e42;
+  text-decoration:none;
+  border-bottom:1px solid rgba(109,30,66,.34);
+  transition:color .2s ease, border-color .2s ease;
+}
+.customOrderCtaNote{
+  margin:10px 0 0;
+  font-size:13px;
+  line-height:1.8;
+  color:#4c4642;
+}
 @media (hover:hover){
   .customOrderCard:hover{
     transform:translateY(-2px);
@@ -2561,11 +2587,19 @@ body.noScroll{ overflow:hidden; }
     border-color:rgba(138,31,78,.46);
     background:#fff;
   }
+  .customOrderCta:hover{
+    color:#8a1f4e;
+    border-color:rgba(138,31,78,.46);
+  }
 }
 .customOrderCard:focus-visible{
   outline:2px solid rgba(138,31,78,.38);
   outline-offset:2px;
   border-color:rgba(138,31,78,.5);
+}
+.customOrderCta:focus-visible{
+  outline:2px solid rgba(138,31,78,.38);
+  outline-offset:3px;
 }
 @media (min-width:768px){
   .customOrderSection{
@@ -2584,6 +2618,16 @@ body.noScroll{ overflow:hidden; }
   .customOrderCard{
     min-height:162px;
     padding:16px 16px 15px;
+  }
+  .customOrderCtaWrap{
+    margin-top:16px;
+  }
+  .customOrderCta{
+    font-size:18px;
+  }
+  .customOrderCtaNote{
+    margin-top:11px;
+    font-size:14px;
   }
 }
 
