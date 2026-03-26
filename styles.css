@@ -2450,15 +2450,36 @@ body.noScroll{ overflow:hidden; }
   .hero > .wrap{
     padding-inline:clamp(12px, 2vw, 36px);
   }
+  .heroTrack{
+    --hero-card-gap:clamp(14px, 1.1vw, 24px);
+  }
   .heroCard{
-    flex:0 0 calc((100% - (var(--hero-card-gap) * 2)) / 3);
+    /* 1920px前後: 中央1枚主役（基準1080px）+ 左右見切れ */
+    flex:0 0 clamp(780px, 56.25vw, 1080px);
+    min-width:680px;
   }
   .heroScrollHint{display:none}
 }
 
-@media (min-width:1921px){
+/* 十分広い画面: 奇数枚表示へ段階切り替え（5枚） */
+@media (min-width:2480px){
+  .heroTrack{
+    --hero-card-gap:clamp(12px, .7vw, 18px);
+  }
   .heroCard{
-    flex-basis:580px;
+    flex-basis:calc((100% - (var(--hero-card-gap) * 4)) / 5);
+    min-width:320px;
+  }
+}
+
+/* さらに広い画面: 7枚表示 */
+@media (min-width:3360px){
+  .heroTrack{
+    --hero-card-gap:clamp(10px, .55vw, 14px);
+  }
+  .heroCard{
+    flex-basis:calc((100% - (var(--hero-card-gap) * 6)) / 7);
+    min-width:260px;
   }
 }
 
