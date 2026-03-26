@@ -166,7 +166,10 @@
       searchModal.querySelectorAll('.chip[data-q]').forEach((chip) => {
         chip.addEventListener('click', () => {
           const input = searchModal.querySelector('#searchModalInput');
-          if(input) input.value = chip.getAttribute('data-q') || '';
+          if(input){
+            input.value = chip.getAttribute('data-q') || '';
+            if(input.form) input.form.submit();
+          }
         });
       });
     }
