@@ -2461,28 +2461,6 @@ body.noScroll{ overflow:hidden; }
   .heroScrollHint{display:none}
 }
 
-/* 十分広い画面: 奇数枚表示へ段階切り替え（5枚） */
-@media (min-width:2400px){
-  .heroTrack{
-    --hero-card-gap:clamp(12px, .7vw, 18px);
-  }
-  .heroCard{
-    flex-basis:calc((100% - (var(--hero-card-gap) * 4)) / 5);
-    min-width:320px;
-  }
-}
-
-/* さらに広い画面: 7枚表示 */
-@media (min-width:3400px){
-  .heroTrack{
-    --hero-card-gap:clamp(10px, .55vw, 14px);
-  }
-  .heroCard{
-    flex-basis:calc((100% - (var(--hero-card-gap) * 6)) / 7);
-    min-width:260px;
-  }
-}
-
 .infoSection{padding-top:40px}
 .infoGrid{
   display:grid;
