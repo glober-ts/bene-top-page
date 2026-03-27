@@ -2493,7 +2493,7 @@ body.noScroll{ overflow:hidden; }
 .customHeroNoWrap{
   white-space:nowrap;
 }
-@media (max-width:980px){
+@media (max-width:767px){
   .customHero{
     padding:6px 0 10px;
   }
