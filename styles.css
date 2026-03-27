@@ -2537,7 +2537,7 @@ body.noScroll{ overflow:hidden; }
   border:1px solid rgba(138,31,78,.24);
   border-radius:var(--radius-card);
   background:linear-gradient(180deg, rgba(255,255,255,1), rgba(252,247,249,.95));
-  padding:13px 14px 12px;
+  padding:10px 14px 10px;
   text-decoration:none;
   box-shadow:0 4px 12px rgba(0,0,0,.05);
   transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, background-color .22s ease;
@@ -2545,7 +2545,7 @@ body.noScroll{ overflow:hidden; }
 .customOrderCardLabel{
   display:inline-flex;
   align-items:center;
-  margin-bottom:9px;
+  margin-bottom:6px;
   padding:3px 9px;
   border-radius:var(--radius-pill);
   border:1px solid rgba(138,31,78,.24);
@@ -2557,15 +2557,15 @@ body.noScroll{ overflow:hidden; }
 .customOrderCardTitle{
   display:block;
   margin-bottom:6px;
-  font-size:18px;
-  font-weight:700;
+  font-size:16px;
+  font-weight:600;
   line-height:1.5;
   color:#6d1e42;
 }
 .customOrderCardText{
   display:block;
   font-size:13px;
-  line-height:1.6;
+  line-height:1.4;
   color:#3d3733;
 }
 .customOrderCtaWrap{
