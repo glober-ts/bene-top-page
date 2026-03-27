@@ -2497,6 +2497,17 @@ body.noScroll{ overflow:hidden; }
   .customHero{
     padding:6px 0 10px;
   }
+  .customHeroMedia{
+    aspect-ratio: 4 / 3;
+    overflow:hidden;
+    border-radius:var(--radius-card);
+  }
+  .customHeroMedia img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:22% center;
+  }
   .customHeroMessage{
     position:static;
     transform:none;
