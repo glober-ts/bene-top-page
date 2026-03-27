@@ -2549,7 +2549,7 @@ body.noScroll{ overflow:hidden; }
   padding:3px 9px;
   border-radius:var(--radius-pill);
   border:1px solid rgba(138,31,78,.24);
-  font-size:11px;
+  font-size:12px;
   letter-spacing:.06em;
   color:#7f2d52;
   background:#fff;
@@ -2614,7 +2614,7 @@ body.noScroll{ overflow:hidden; }
     gap:10px;
   }
   .customOrderCard{
-    min-height:148px;
+    min-height:110px;
     padding:14px 15px 13px;
   }
   .customOrderCtaWrap{
