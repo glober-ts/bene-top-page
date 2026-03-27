@@ -2570,6 +2570,7 @@ body.noScroll{ overflow:hidden; }
 }
 .customOrderCtaWrap{
   margin-top:10px;
+  text-align: right;
 }
 .customOrderCta{
   display:inline-block;
@@ -2619,6 +2620,7 @@ body.noScroll{ overflow:hidden; }
   }
   .customOrderCtaWrap{
     margin-top:12px;
+    text-align: right;
   }
   .customOrderCta{
     font-size:17px;
