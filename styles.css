@@ -2505,6 +2505,9 @@ body.noScroll{ overflow:hidden; }
     display:block;
     width:100%;
     height:auto;
+     max-height:260px;
+      object-fit:cover;
+     object-position:30% center;
   }
   .customHeroMessage{
     position:static;
