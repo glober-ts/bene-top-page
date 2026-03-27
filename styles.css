@@ -2568,10 +2568,10 @@ body.noScroll{ overflow:hidden; }
 .customOrderCardTitle{
   display:block;
   margin-bottom:6px;
-  font-size:clamp(13px, calc(14.3px - 0.08vw), 14px);
+  font-size:clamp(13px, 1vw, 15px);
   font-weight:600;
   line-height:1.48;
-  letter-spacing:.01em;
+  letter-spacing: clamp(-0.02em, calc(-0.02em + 0.016vw), 0em);
   color:#6d1e42;
 }
 .customOrderCardText{
