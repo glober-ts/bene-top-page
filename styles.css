@@ -316,9 +316,8 @@ img{display:block;max-width:100%}
   inset:0;
   width:100%;
   height:100%;
-  object-fit:contain;
+  object-fit:cover;
   object-position:center;
-  background:#f6f4f1;
   z-index:-2;
 }
 .featureShowcaseCard::after{
@@ -378,10 +377,10 @@ img{display:block;max-width:100%}
 .featureShowcaseCard:nth-child(4)::after{
   background:linear-gradient(90deg,rgba(255,255,255,.8) 0%,rgba(255,255,255,.6) 34%,rgba(255,255,255,.24) 56%,rgba(255,255,255,0) 78%);
 }
-.featureShowcaseCard:nth-child(1) .featureShowcaseImage{object-position:center;}
-.featureShowcaseCard:nth-child(2) .featureShowcaseImage{object-position:center;}
-.featureShowcaseCard:nth-child(3) .featureShowcaseImage{object-position:center;}
-.featureShowcaseCard:nth-child(4) .featureShowcaseImage{object-position:center;}
+.featureShowcaseCard:nth-child(1) .featureShowcaseImage{object-position:56% center;}
+.featureShowcaseCard:nth-child(2) .featureShowcaseImage{object-position:58% center;}
+.featureShowcaseCard:nth-child(3) .featureShowcaseImage{object-position:62% center;}
+.featureShowcaseCard:nth-child(4) .featureShowcaseImage{object-position:60% center;}
 .featureShowcaseCard:hover{
   border-color:rgba(138,31,78,.34);
   transform:translateY(-2px);
