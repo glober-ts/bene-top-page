@@ -767,6 +767,36 @@ section[id^="pickup"]{
   .cardGrid{grid-template-columns:repeat(2, minmax(0,1fr));}
 }
 
+/* Closeup: categorySection only */
+.categorySection--closeup .closeupGrid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+  justify-content:center;
+  margin-inline:auto;
+}
+
+.categorySection--closeup .closeupCard .closeupImageWrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  aspect-ratio:330 / 375;
+  overflow:hidden;
+}
+
+.categorySection--closeup .closeupCard img{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+}
+
+@media (max-width:980px){
+  .categorySection--closeup .closeupGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+}
+
 .featGrid{
   display:grid;
   grid-template-columns:repeat(4, minmax(0,1fr));
@@ -803,7 +833,7 @@ section[id^="pickup"]{
 
   #birthstone .birthGrid,
   #price .priceGrid,
-  #new .cardGrid{
+  .categorySection--closeup .closeupGrid{
     gap:8px;
   }
 
@@ -830,8 +860,8 @@ section[id^="pickup"]{
     letter-spacing:.01em;
   }
 
-  #new .itemCard .img{
-    aspect-ratio:4 / 3;
+  .categorySection--closeup .closeupCard .closeupImageWrap{
+    aspect-ratio:330 / 375;
   }
   #new .itemCard .name{
     margin:8px 8px 3px;
