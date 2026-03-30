@@ -778,18 +778,16 @@ section[id^="pickup"]{
 }
 
 .categorySection--closeup .closeupCard .closeupImageWrap{
-  display:block;
-  aspect-ratio:4 / 3;
-  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   background:#fff;
 }
 
 .categorySection--closeup .closeupCard .closeupImageWrap > img{
   display:block;
   width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
+  height:auto;
 }
 
 @media (max-width:980px){
@@ -865,9 +863,6 @@ section[id^="pickup"]{
     letter-spacing:.01em;
   }
 
-  .categorySection--closeup .closeupCard .closeupImageWrap{
-    aspect-ratio:330 / 375;
-  }
   #new .itemCard .name{
     margin:8px 8px 3px;
     font-size:12px;
