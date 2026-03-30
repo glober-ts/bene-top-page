@@ -3308,8 +3308,7 @@ body.noScroll{ overflow:hidden; }
 
 
 /* v131: typography hierarchy refinement */
-.ytSection .h2,
-#features .h2{
+.ytSection .h2{
   font-weight:600;
 }
 
