@@ -351,8 +351,9 @@ img{display:block;max-width:100%}
   color:#4b2635;
 }
 .featureShowcaseTitle{
-  font-size:22px;
-  line-height:1.35;
+  font-size:20px;
+  font-weight:500;
+  line-height:1.4;
   letter-spacing:.05em;
   color:#2c1a23;
   text-shadow:0 1px 10px rgba(255,255,255,.28);
@@ -388,7 +389,7 @@ img{display:block;max-width:100%}
 @media (max-width:980px){
   .featureShowcaseGrid{grid-template-columns:1fr;}
   .featureShowcaseCard{min-height:190px;}
-  .featureShowcaseTitle{font-size:20px;}
+  .featureShowcaseTitle{font-size:18px;}
 }
 @media (max-width:560px){
   .featureShowcaseContent{
