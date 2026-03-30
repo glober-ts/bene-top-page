@@ -1411,7 +1411,7 @@ if(!slides.length) return;
 </div>
 </nav>
 
-<button id="toTopBtn" type="button" aria-label="上に戻る" title="上に戻る" onclick="window.scrollTo({top:0,left:0,behavior:'smooth'});document.documentElement.scrollTop=0;document.body.scrollTop=0;return false;" ontouchend="window.scrollTo({top:0,left:0,behavior:'smooth'});document.documentElement.scrollTop=0;document.body.scrollTop=0;return false;" onpointerup="window.scrollTo({top:0,left:0,behavior:'smooth'});document.documentElement.scrollTop=0;document.body.scrollTop=0;return false;"><span>↑</span></button>
+<button id="toTopBtn" type="button" aria-label="上に戻る" title="上に戻る"><span>↑</span></button>
 <style id="v119-topbtn-style">
 html body #toTopBtn{
   position:fixed !important;
@@ -1488,13 +1488,11 @@ html body #toTopBtn.is-show{
   }
   function goTop(){
     try{ window.scrollTo({top:0,left:0,behavior:'smooth'}); }catch(e){ window.scrollTo(0,0); }
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
   }
   if(btn){
     btn.onclick = function(e){
       if(e){ e.preventDefault(); e.stopPropagation(); }
-      goTop(); document.documentElement.scrollTop = 0; document.body.scrollTop = 0; return false;
+      goTop(); return false;
     };
   }
   update();
