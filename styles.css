@@ -801,8 +801,8 @@ section[id^="pickup"]{
   display:grid;
   grid-template-columns:repeat(2, minmax(0, 1fr));
   gap:12px;
-  max-width:980px;
-  margin-inline:auto;
+  max-width:none;
+  margin-inline:0;
 }
 
 .categorySection--selection .feat{
