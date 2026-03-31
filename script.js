@@ -220,13 +220,15 @@
   // autoplay間隔(ms)
   // 5000ms: 内容認知とテンポ感のバランスを取る標準値
   const AUTOPLAY_MS = 5000;
+  // ユーザー操作後の自動再開待機(ms)
+  const AUTOPLAY_RESUME_DELAY_MS = 5000;
   // ドラッグしきい値(px)
   // クリック誤判定を避けるため、開始判定とスライド確定判定を分離
   const DRAG_START_THRESHOLD = 8;
   const SLIDE_TRIGGER_PX = 40;
 
   let timer = null;
-  let stoppedByUser = false;
+  let resumeTimer = null;
   let currentIndex = 0;
   let cardStep = 0;
   let railOffset = 0;
@@ -329,8 +331,7 @@
   // 前後移動: ループ境界はクローンへ一度遷移後、transitionendで実体スライドへ戻す
   const moveBy = (dir, byUser = false) => {
     if(byUser){
-      stoppedByUser = true;
-      stopAutoplay();
+      stopAutoSlide({ reserveResume: true });
     }
 
     const target = currentIndex + dir;
@@ -360,8 +361,7 @@
 
   // ユーザー操作後は自動再生を停止（勝手に動くストレスを避けるため）
   const onUserInteract = () => {
-    stoppedByUser = true;
-    stopAutoplay();
+    stopAutoSlide({ reserveResume: true });
   };
 
   // rAFでtransformを間引き、pointermove連打時の描画負荷を抑える
@@ -547,27 +547,46 @@
   // ・ホバー中は停止、離脱で再開
   // ----------------------------------------
   // autoplay: ユーザー操作が入るまで一定間隔で次へ送る
-  function startAutoplay(){
-    if(stoppedByUser || timer) return;
+  function startAutoSlide(){
+    if(timer) return;
+    if(resumeTimer){
+      clearTimeout(resumeTimer);
+      resumeTimer = null;
+    }
     timer = setInterval(() => moveBy(1, false), AUTOPLAY_MS);
   }
 
   // autoplay停止: 手動操作・ホバー時に意図せぬ移動を止める
-  function stopAutoplay(){
-    if(!timer) return;
-    clearInterval(timer);
-    timer = null;
+  function stopAutoSlide({ reserveResume = false } = {}){
+    if(timer){
+      clearInterval(timer);
+      timer = null;
+    }
+
+    if(resumeTimer){
+      clearTimeout(resumeTimer);
+      resumeTimer = null;
+    }
+
+    if(reserveResume){
+      resumeTimer = setTimeout(() => {
+        resumeTimer = null;
+        startAutoSlide();
+      }, AUTOPLAY_RESUME_DELAY_MS);
+    }
   }
 
-  rail.addEventListener('mouseenter', stopAutoplay);
-  rail.addEventListener('mouseleave', startAutoplay);
+  rail.addEventListener('mouseenter', () => stopAutoSlide());
+  rail.addEventListener('mouseleave', startAutoSlide);
+  rail.addEventListener('touchstart', onUserInteract, { passive: true });
+  rail.addEventListener('mousedown', onUserInteract);
 
   window.addEventListener('resize', updateMetrics);
   window.addEventListener('load', updateMetrics);
 
   updateMetrics();
   updateDots();
-  startAutoplay();
+  startAutoSlide();
 })();;
 
 /* v133: unified submenu toggle behavior for PC/SP (capture phase, conflict-safe) */
