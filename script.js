@@ -270,6 +270,22 @@
   });
 })();
 
+(function () {
+  const normalizeHashOnlyUrl = () => {
+    if(window.location.hash === '#'){
+      history.replaceState(
+        history.state,
+        document.title,
+        window.location.pathname + window.location.search
+      );
+    }
+  };
+
+  window.addEventListener('load', normalizeHashOnlyUrl);
+  window.addEventListener('pageshow', normalizeHashOnlyUrl);
+  window.addEventListener('hashchange', normalizeHashOnlyUrl);
+})();
+
 /*
   v128: HEROスライダー制御（transform方式）
   目的:
@@ -817,7 +833,7 @@ document.addEventListener('DOMContentLoaded', () => {
     !window.matchMedia('(any-pointer: coarse)').matches;
 
   verticalLists.forEach((list) => {
-    list.querySelectorAll('img, a').forEach((el) => {
+    list.querySelectorAll('img, a, button').forEach((el) => {
       el.setAttribute('draggable', 'false');
     });
 
@@ -907,7 +923,7 @@ document.addEventListener('DOMContentLoaded', () => {
     list.addEventListener('pointercancel', endDrag);
     list.addEventListener('lostpointercapture', endDrag);
 
-    list.querySelectorAll('a[href]').forEach((link) => {
+    list.querySelectorAll('a[href], button.ytItem, button.newsItem').forEach((link) => {
       link.addEventListener('click', (e) => {
         if(!suppressClick) return;
         e.preventDefault();
