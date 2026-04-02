@@ -7,6 +7,23 @@
   const getSearchModal = () => document.getElementById('searchModal');
   const getSearchInput = () => document.getElementById('searchModalInput');
   let isSubmittingSearch = false;
+  const SEARCH_NAV_LOCK_KEY = 'beneSearchNavLockUntil';
+  const SEARCH_NAV_LOCK_MS = 1800;
+
+  const getSearchNavLockUntil = () => {
+    const until = Number(window.sessionStorage.getItem(SEARCH_NAV_LOCK_KEY) || '0');
+    return Number.isFinite(until) ? until : 0;
+  };
+
+  const isSearchNavLocked = () => Date.now() < getSearchNavLockUntil();
+
+  const setSearchNavLock = () => {
+    window.sessionStorage.setItem(SEARCH_NAV_LOCK_KEY, String(Date.now() + SEARCH_NAV_LOCK_MS));
+  };
+
+  const clearSearchNavLock = () => {
+    window.sessionStorage.removeItem(SEARCH_NAV_LOCK_KEY);
+  };
 
   const syncDrawerState = () => {
     const drawer = getDrawer();
@@ -146,10 +163,11 @@
     };
 
     const goSearch = (keyword) => {
-      if(!searchForm || !searchInput || isSubmittingSearch) return;
+      if(!searchForm || !searchInput || isSubmittingSearch || isSearchNavLocked()) return;
       if(typeof keyword === 'string') searchInput.value = keyword;
 
       isSubmittingSearch = true;
+      setSearchNavLock();
       if(searchSubmitBtn) searchSubmitBtn.disabled = true;
       closeSearch();
 
@@ -233,14 +251,21 @@
     const searchForm = searchInput ? searchInput.form : null;
     const searchSubmitBtn = searchForm ? searchForm.querySelector('.searchModal__submit, button[type="submit"], input[type="submit"]') : null;
     if(searchSubmitBtn) searchSubmitBtn.disabled = false;
+    clearSearchNavLock();
     syncDrawerState();
   });
   window.addEventListener('pagehide', closeSearch);
   window.addEventListener('pageshow', (e) => {
     closeSearch();
+    clearSearchNavLock();
     if(e && e.persisted){
       const active = document.activeElement;
       if(active && typeof active.blur === 'function') active.blur();
+    }
+    const input = getSearchInput();
+    if(input){
+      input.disabled = false;
+      input.blur();
     }
   });
 })();
