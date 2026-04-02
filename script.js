@@ -6,6 +6,7 @@
   const getMenuBtn = () => document.getElementById('menuBtn') || document.querySelector('.hamburger');
   const getSearchModal = () => document.getElementById('searchModal');
   const getSearchInput = () => document.getElementById('searchModalInput');
+  let isSubmittingSearch = false;
 
   const syncDrawerState = () => {
     const drawer = getDrawer();
@@ -137,6 +138,32 @@
     const searchOverlay = searchModal ? searchModal.querySelector('.searchModal__overlay, [data-close="1"]') : null;
     const searchInput = getSearchInput();
     const searchForm = searchInput ? searchInput.form : null;
+    const searchSubmitBtn = searchForm ? searchForm.querySelector('.searchModal__submit, button[type="submit"], input[type="submit"]') : null;
+
+    const resetSearchSubmitting = () => {
+      isSubmittingSearch = false;
+      if(searchSubmitBtn) searchSubmitBtn.disabled = false;
+    };
+
+    const goSearch = (keyword) => {
+      if(!searchForm || !searchInput || isSubmittingSearch) return;
+      if(typeof keyword === 'string') searchInput.value = keyword;
+
+      isSubmittingSearch = true;
+      if(searchSubmitBtn) searchSubmitBtn.disabled = true;
+      closeSearch();
+
+      const action = searchForm.getAttribute('action') || window.location.href;
+      const formData = new FormData(searchForm);
+      const params = new URLSearchParams();
+      formData.forEach((value, key) => {
+        params.append(key, String(value));
+      });
+      const query = params.toString();
+      const separator = action.includes('?') ? '&' : '?';
+      const url = query ? `${action}${separator}${query}` : action;
+      window.location.assign(url);
+    };
 
     if(headerSearchBtn){
       headerSearchBtn.addEventListener('click', (e) => {
@@ -169,25 +196,17 @@
 
     if(searchModal){
       searchModal.querySelectorAll('.chip[data-q]').forEach((chip) => {
-        chip.addEventListener('click', () => {
-          if(searchInput){
-            searchInput.value = chip.getAttribute('data-q') || '';
-            closeSearch();
-            if(searchForm){
-              if(typeof searchForm.requestSubmit === 'function'){
-                searchForm.requestSubmit();
-              }else{
-                searchForm.submit();
-              }
-            }
-          }
+        chip.addEventListener('click', (e) => {
+          e.preventDefault();
+          goSearch(chip.getAttribute('data-q') || '');
         });
       });
     }
 
     if(searchForm){
-      searchForm.addEventListener('submit', () => {
-        closeSearch();
+      searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        goSearch();
       });
     }
 
@@ -204,10 +223,18 @@
 
     syncDrawerState();
     closeSearch();
+    resetSearchSubmitting();
     initToTop();
   });
 
-  window.addEventListener('pageshow', syncDrawerState);
+  window.addEventListener('pageshow', () => {
+    isSubmittingSearch = false;
+    const searchInput = getSearchInput();
+    const searchForm = searchInput ? searchInput.form : null;
+    const searchSubmitBtn = searchForm ? searchForm.querySelector('.searchModal__submit, button[type="submit"], input[type="submit"]') : null;
+    if(searchSubmitBtn) searchSubmitBtn.disabled = false;
+    syncDrawerState();
+  });
   window.addEventListener('pagehide', closeSearch);
   window.addEventListener('pageshow', (e) => {
     closeSearch();
