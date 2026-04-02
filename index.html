@@ -473,54 +473,54 @@ window.BENE_UI = {
 <button aria-label="上へ" class="newsBtn up" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M18 15l-6-6-6 6"></path></svg></button>
 <div class="news-list-wrap">
 <div aria-label="ニュース一覧" class="newsList news-list" role="list">
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-20">2026.02.20</time>
 <span>ホワイトデー特集：今なら間に合うラインナップ</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-18">2026.02.18</time>
 <span>限定再販：完売していた人気作が再登場</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-16">2026.02.16</time>
 <span>特選ルース：一点もの更新のお知らせ</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-14">2026.02.14</time>
 <span>誕生石（3月）：アクアマリン特集公開</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-12">2026.02.12</time>
 <span>重ね着け提案：リングの合わせ方ガイド</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-10">2026.02.10</time>
 <span>ご利用ガイド：配送・お支払いを更新</span>
-</a>
-   <a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+   <button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-20">2026.02.20</time>
 <span>ホワイトデー特集：今なら間に合うラインナップ</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-18">2026.02.18</time>
 <span>限定再販：完売していた人気作が再登場</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-16">2026.02.16</time>
 <span>特選ルース：一点もの更新のお知らせ</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-14">2026.02.14</time>
 <span>誕生石（3月）：アクアマリン特集公開</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-12">2026.02.12</time>
 <span>重ね着け提案：リングの合わせ方ガイド</span>
-</a>
-<a class="newsItem" href="#" rel="noopener" role="listitem" target="_blank">
+</button>
+<button class="newsItem" data-href="" role="listitem" type="button">
 <time datetime="2026-02-10">2026.02.10</time>
 <span>ご利用ガイド：配送・お支払いを更新</span>
-</a>
+</button>
 </div>
 </div>
 <button aria-label="下へ" class="newsBtn down" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg></button>
@@ -562,8 +562,8 @@ window.BENE_UI = {
 <div class="ytNowPlaying top">
 <span class="label">再生中</span>
 <div class="ytNowPlayingLinks">
-<a href="#" id="ytTitle" rel="noopener" target="_blank">動画タイトルが表示されます</a>
-<a class="ytProductLink" href="#" id="ytProductLink" rel="noopener" target="_blank">商品ページへ →</a>
+<a data-href="" id="ytTitle" rel="noopener" target="_blank">動画タイトルが表示されます</a>
+<a class="ytProductLink" data-href="" id="ytProductLink" rel="noopener" target="_blank">商品ページへ →</a>
 </div>
 </div>
 <div class="ytGrid">
@@ -573,11 +573,12 @@ window.BENE_UI = {
 </div>
 <div class="ytCarousel">
 <div aria-label="動画リスト（サンプル）" class="ytList">
-<a class="ytItem"
+<button class="ytItem"
    data-video-id="9ZxtuGJL84k"
+   data-href="https://store.shopping.yahoo.co.jp/benebene/tr-1380-mgn-rsd"
    data-url="https://store.shopping.yahoo.co.jp/benebene/tr-1380-mgn-rsd"
    data-title="モルガナイト ローズカットダイヤモンド リング コスモス"
-   href="#">
+   type="button">
   <span class="ytThumb">
     <span class="thumb-wrapper">
       <img class="thumb" src="https://img.youtube.com/vi/9ZxtuGJL84k/hqdefault.jpg" alt="モルガナイト ローズカットダイヤモンド リング コスモス" draggable="false">
@@ -587,13 +588,14 @@ window.BENE_UI = {
   <span class="ytMeta">
     <strong>モルガナイト ローズカットダイヤモンド リング コスモス</strong>
   </span>
-</a>
+</button>
 
-<a class="ytItem"
+<button class="ytItem"
    data-video-id="4naE1PbbQxw"
+   data-href="https://store.shopping.yahoo.co.jp/benebene/gsr-11-mgn"
    data-url="https://store.shopping.yahoo.co.jp/benebene/gsr-11-mgn"
    data-title="トップカラーモルガナイト ハート ピアス"
-   href="#">
+   type="button">
   <span class="ytThumb">
     <span class="thumb-wrapper">
       <img class="thumb" src="https://img.youtube.com/vi/4naE1PbbQxw/hqdefault.jpg" alt="トップカラーモルガナイト ハート ピアス" draggable="false">
@@ -603,13 +605,14 @@ window.BENE_UI = {
   <span class="ytMeta">
     <strong>トップカラーモルガナイト ハート ピアス</strong>
   </span>
-</a>
+</button>
 
-<a class="ytItem"
+<button class="ytItem"
    data-video-id="ueQIPn00woA"
+   data-href="https://store.shopping.yahoo.co.jp/benebene/tp-1460-toku-d"
    data-url="https://store.shopping.yahoo.co.jp/benebene/tp-1460-toku-d"
    data-title="K18YG パライバトルマリン バフトップ ペンダントネックレス チェーン付"
-   href="#">
+   type="button">
   <span class="ytThumb">
     <span class="thumb-wrapper">
       <img class="thumb" src="https://img.youtube.com/vi/ueQIPn00woA/hqdefault.jpg" alt="K18YG パライバトルマリン バフトップ ペンダントネックレス チェーン付" draggable="false">
@@ -619,13 +622,14 @@ window.BENE_UI = {
   <span class="ytMeta">
     <strong>K18YG パライバトルマリン バフトップ ペンダントネックレス チェーン付</strong>
   </span>
-</a>
+</button>
 
-<a class="ytItem"
+<button class="ytItem"
    data-video-id="HNeCMdSmuNw"
+   data-href="https://store.shopping.yahoo.co.jp/benebene/tp-663-toku-c"
    data-url="https://store.shopping.yahoo.co.jp/benebene/tp-663-toku-c"
    data-title="PT900 パライバトルマリン バフトップ ペンダントネックレス ルーメン チェーン付"
-   href="#">
+   type="button">
   <span class="ytThumb">
     <span class="thumb-wrapper">
       <img class="thumb" src="https://img.youtube.com/vi/HNeCMdSmuNw/hqdefault.jpg" alt="PT900 パライバトルマリン バフトップ ペンダントネックレス ルーメン チェーン付" draggable="false">
@@ -635,13 +639,14 @@ window.BENE_UI = {
   <span class="ytMeta">
     <strong>PT900 パライバトルマリン バフトップ ペンダントネックレス ルーメン チェーン付</strong>
   </span>
-</a>
+</button>
 
-<a class="ytItem"
+<button class="ytItem"
    data-video-id="54A6NtOMlco"
+   data-href="https://store.shopping.yahoo.co.jp/benebene/tr-107-alx"
    data-url="https://store.shopping.yahoo.co.jp/benebene/tr-107-alx"
    data-title="アレキサンドライト ベルトリング"
-   href="#">
+   type="button">
   <span class="ytThumb">
     <span class="thumb-wrapper">
       <img class="thumb" src="https://img.youtube.com/vi/54A6NtOMlco/hqdefault.jpg" alt="アレキサンドライト ベルトリング" draggable="false">
@@ -651,13 +656,14 @@ window.BENE_UI = {
   <span class="ytMeta">
     <strong>アレキサンドライト ベルトリング</strong>
   </span>
-</a>
+</button>
 
-<a class="ytItem"
+<button class="ytItem"
    data-video-id="A2nl9XagrxI"
+   data-href="https://store.shopping.yahoo.co.jp/benebene/tr-2807-aq-rsd"
    data-url="https://store.shopping.yahoo.co.jp/benebene/tr-2807-aq-rsd"
    data-title="アクアマリン ローズカットダイヤモンド デコラティブ リング"
-   href="#">
+   type="button">
   <span class="ytThumb">
     <span class="thumb-wrapper">
       <img class="thumb" src="https://img.youtube.com/vi/A2nl9XagrxI/hqdefault.jpg" alt="アクアマリン ローズカットダイヤモンド デコラティブ リング" draggable="false">
@@ -667,13 +673,14 @@ window.BENE_UI = {
   <span class="ytMeta">
     <strong>アクアマリン ローズカットダイヤモンド デコラティブ リング</strong>
   </span>
-</a>
+</button>
 
-<a class="ytItem"
+<button class="ytItem"
    data-video-id="_fJObLhYB8o"
+   data-href="https://store.shopping.yahoo.co.jp/benebene/tr-1566-toku-d"
    data-url="https://store.shopping.yahoo.co.jp/benebene/tr-1566-toku-d"
    data-title="PT900 アレキサンドライト キャッツアイ ダイヤモンド リング ファヤージュ"
-   href="#">
+   type="button">
   <span class="ytThumb">
     <span class="thumb-wrapper">
       <img class="thumb" src="https://img.youtube.com/vi/_fJObLhYB8o/hqdefault.jpg" alt="PT900 アレキサンドライト キャッツアイ ダイヤモンド リング ファヤージュ" draggable="false">
@@ -683,13 +690,14 @@ window.BENE_UI = {
   <span class="ytMeta">
     <strong>PT900 アレキサンドライト キャッツアイ ダイヤモンド リング ファヤージュ</strong>
   </span>
-</a>
+</button>
 
-<a class="ytItem"
+<button class="ytItem"
    data-video-id="Cc8FNNLcImY"
+   data-href="https://store.shopping.yahoo.co.jp/benebene/tp-345-toku-d"
    data-url="https://store.shopping.yahoo.co.jp/benebene/tp-345-toku-d"
    data-title="PT900 アレキサンドライト キャッツアイ ダイヤモンド ペンダントトップ"
-   href="#">
+   type="button">
   <span class="ytThumb">
     <span class="thumb-wrapper">
       <img class="thumb" src="https://img.youtube.com/vi/Cc8FNNLcImY/hqdefault.jpg" alt="PT900 アレキサンドライト キャッツアイ ダイヤモンド ペンダントトップ" draggable="false">
@@ -699,7 +707,7 @@ window.BENE_UI = {
   <span class="ytMeta">
     <strong>PT900 アレキサンドライト キャッツアイ ダイヤモンド ペンダントトップ</strong>
   </span>
-</a>
+</button>
 </div>
 </div>
 </div>
@@ -894,7 +902,7 @@ window.BENE_UI = {
 </span><span class="shopTitle">GINZA SALON</span></h3>
 <p>東京都中央区銀座3-12-11 第2タチバナ銀座ビル6階<br/>03-5565-0750</p>
 </div></a>
-<a class="shopLink" href="#" rel="noopener" target="_blank"><div class="box">
+<button class="shopLink" data-href="" type="button"><div class="box">
 <h3><span aria-hidden="true" class="shopIcon">
 <svg fill="none" height="18" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M3 10.5V20a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-9.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
@@ -904,8 +912,8 @@ window.BENE_UI = {
 </svg>
 </span><span class="shopTitle">KOFU SHOP &amp; HEAD OFFICE</span></h3>
 <p>山梨県甲府市下鍛冶屋町469-1<br/>0120-457-678</p>
-</div></a>
-<a class="shopLink" href="#" rel="noopener" target="_blank"><div class="box">
+</div></button>
+<button class="shopLink" data-href="" type="button"><div class="box">
 <h3><span aria-hidden="true" class="shopIcon">
 <svg fill="none" height="18" viewbox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 <path d="M3 10.5V20a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-9.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
@@ -915,7 +923,7 @@ window.BENE_UI = {
 </svg>
 </span><span class="shopTitle">OKACHI-MACHI LOOSE SHOWROOM</span></h3>
 <p>東京都台東区上野5-17-2<br/>三橋ビル1階</p>
-</div></a>
+</div></button>
 </div>
 </div>
 </section>
