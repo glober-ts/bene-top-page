@@ -8,6 +8,7 @@
   const getSearchInput = () => document.getElementById('searchModalInput');
   let isSubmittingSearch = false;
   const SEARCH_NAV_LOCK_KEY = 'beneSearchNavLockUntil';
+  const FORCE_REFRESH_ON_BACK_KEY = 'beneForceRefreshOnBackFromSearch';
   const SEARCH_NAV_LOCK_MS = 1800;
 
   const getSearchNavLockUntil = () => {
@@ -168,6 +169,7 @@
 
       isSubmittingSearch = true;
       setSearchNavLock();
+      window.sessionStorage.setItem(FORCE_REFRESH_ON_BACK_KEY, '1');
       if(searchSubmitBtn) searchSubmitBtn.disabled = true;
       closeSearch();
 
@@ -246,6 +248,11 @@
   });
 
   window.addEventListener('pageshow', () => {
+    if(window.sessionStorage.getItem(FORCE_REFRESH_ON_BACK_KEY) === '1'){
+      window.sessionStorage.removeItem(FORCE_REFRESH_ON_BACK_KEY);
+      window.location.reload();
+      return;
+    }
     isSubmittingSearch = false;
     const searchInput = getSearchInput();
     const searchForm = searchInput ? searchInput.form : null;
