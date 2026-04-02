@@ -1247,48 +1247,6 @@ if(!slides.length) return;
 </div>
 </div>
 <script>
-/* v71: Search modal */
-(function(){
-  const openBtn = document.getElementById('searchOpenBtn');
-  const modal = document.getElementById('searchModal');
-  const closeBtn = document.getElementById('searchCloseBtn');
-  const input = document.getElementById('searchModalInput');
-  if(!openBtn || !modal || !input) return;
-
-  function openModal(){
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden','false');
-    document.documentElement.classList.add('is-modal-open');
-    setTimeout(()=>input.focus(), 60);
-  }
-  function closeModal(){
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden','true');
-    document.documentElement.classList.remove('is-modal-open');
-  }
-
-  openBtn.addEventListener('click', openModal);
-  if(closeBtn) closeBtn.addEventListener('click', closeModal);
-
-  modal.addEventListener('click', (e)=>{
-    const t = e.target;
-    if(t && t.getAttribute && t.getAttribute('data-close')==='1') closeModal();
-  });
-
-  window.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-  });
-
-  // Quick chips: set keyword and submit immediately
-  modal.querySelectorAll('.chip[data-q]').forEach(ch=>{
-    ch.addEventListener('click', ()=>{
-      input.value = ch.getAttribute('data-q') || '';
-      if(input.form) input.form.submit();
-    });
-  });
-})();
-</script>
-<script>
 /* v72: Global nav (dropdown + mobile toggle) */
 (function(){
   const menuBtn = document.getElementById('menuBtn');
