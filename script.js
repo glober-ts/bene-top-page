@@ -5,6 +5,7 @@
   const getBackdrop = () => document.getElementById('gnavBackdrop');
   const getMenuBtn = () => document.getElementById('menuBtn') || document.querySelector('.hamburger');
   const getSearchModal = () => document.getElementById('searchModal');
+  const getSearchInput = () => document.getElementById('searchModalInput');
 
   const syncDrawerState = () => {
     const drawer = getDrawer();
@@ -45,12 +46,14 @@
     if(!modal) return;
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
-    const input = modal.querySelector('#searchModalInput');
+    document.documentElement.classList.add('is-modal-open');
+    const input = getSearchInput();
     setTimeout(() => { if(input) input.focus(); }, 0);
   };
 
   const closeSearch = () => {
     const modal = getSearchModal();
+    document.documentElement.classList.remove('is-modal-open');
     if(!modal) return;
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
@@ -132,6 +135,8 @@
     const drawerSearchBtn = document.getElementById('drawerSearchBtn');
     const searchCloseBtn = searchModal ? searchModal.querySelector('#searchCloseBtn, .searchModal__close') : null;
     const searchOverlay = searchModal ? searchModal.querySelector('.searchModal__overlay, [data-close="1"]') : null;
+    const searchInput = getSearchInput();
+    const searchForm = searchInput ? searchInput.form : null;
 
     if(headerSearchBtn){
       headerSearchBtn.addEventListener('click', (e) => {
@@ -165,12 +170,24 @@
     if(searchModal){
       searchModal.querySelectorAll('.chip[data-q]').forEach((chip) => {
         chip.addEventListener('click', () => {
-          const input = searchModal.querySelector('#searchModalInput');
-          if(input){
-            input.value = chip.getAttribute('data-q') || '';
-            if(input.form) input.form.submit();
+          if(searchInput){
+            searchInput.value = chip.getAttribute('data-q') || '';
+            closeSearch();
+            if(searchForm){
+              if(typeof searchForm.requestSubmit === 'function'){
+                searchForm.requestSubmit();
+              }else{
+                searchForm.submit();
+              }
+            }
           }
         });
+      });
+    }
+
+    if(searchForm){
+      searchForm.addEventListener('submit', () => {
+        closeSearch();
       });
     }
 
@@ -186,10 +203,19 @@
     }
 
     syncDrawerState();
+    closeSearch();
     initToTop();
   });
 
   window.addEventListener('pageshow', syncDrawerState);
+  window.addEventListener('pagehide', closeSearch);
+  window.addEventListener('pageshow', (e) => {
+    closeSearch();
+    if(e && e.persisted){
+      const active = document.activeElement;
+      if(active && typeof active.blur === 'function') active.blur();
+    }
+  });
 })();
 
 /*
