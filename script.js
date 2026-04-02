@@ -6,25 +6,6 @@
   const getMenuBtn = () => document.getElementById('menuBtn') || document.querySelector('.hamburger');
   const getSearchModal = () => document.getElementById('searchModal');
   const getSearchInput = () => document.getElementById('searchModalInput');
-  let isSubmittingSearch = false;
-  const SEARCH_NAV_LOCK_KEY = 'beneSearchNavLockUntil';
-  const FORCE_REFRESH_ON_BACK_KEY = 'beneForceRefreshOnBackFromSearch';
-  const SEARCH_NAV_LOCK_MS = 1800;
-
-  const getSearchNavLockUntil = () => {
-    const until = Number(window.sessionStorage.getItem(SEARCH_NAV_LOCK_KEY) || '0');
-    return Number.isFinite(until) ? until : 0;
-  };
-
-  const isSearchNavLocked = () => Date.now() < getSearchNavLockUntil();
-
-  const setSearchNavLock = () => {
-    window.sessionStorage.setItem(SEARCH_NAV_LOCK_KEY, String(Date.now() + SEARCH_NAV_LOCK_MS));
-  };
-
-  const clearSearchNavLock = () => {
-    window.sessionStorage.removeItem(SEARCH_NAV_LOCK_KEY);
-  };
 
   const syncDrawerState = () => {
     const drawer = getDrawer();
@@ -156,33 +137,12 @@
     const searchOverlay = searchModal ? searchModal.querySelector('.searchModal__overlay, [data-close="1"]') : null;
     const searchInput = getSearchInput();
     const searchForm = searchInput ? searchInput.form : null;
-    const searchSubmitBtn = searchForm ? searchForm.querySelector('.searchModal__submit, button[type="submit"], input[type="submit"]') : null;
-
-    const resetSearchSubmitting = () => {
-      isSubmittingSearch = false;
-      if(searchSubmitBtn) searchSubmitBtn.disabled = false;
-    };
 
     const goSearch = (keyword) => {
-      if(!searchForm || !searchInput || isSubmittingSearch || isSearchNavLocked()) return;
+      if(!searchForm || !searchInput) return;
       if(typeof keyword === 'string') searchInput.value = keyword;
-
-      isSubmittingSearch = true;
-      setSearchNavLock();
-      window.sessionStorage.setItem(FORCE_REFRESH_ON_BACK_KEY, '1');
-      if(searchSubmitBtn) searchSubmitBtn.disabled = true;
       closeSearch();
-
-      const action = searchForm.getAttribute('action') || window.location.href;
-      const formData = new FormData(searchForm);
-      const params = new URLSearchParams();
-      formData.forEach((value, key) => {
-        params.append(key, String(value));
-      });
-      const query = params.toString();
-      const separator = action.includes('?') ? '&' : '?';
-      const url = query ? `${action}${separator}${query}` : action;
-      window.location.assign(url);
+      searchForm.submit();
     };
 
     if(headerSearchBtn){
@@ -224,10 +184,7 @@
     }
 
     if(searchForm){
-      searchForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        goSearch();
-      });
+      searchForm.addEventListener('submit', closeSearch);
     }
 
     document.addEventListener('keydown', (e) => {
@@ -243,28 +200,13 @@
 
     syncDrawerState();
     closeSearch();
-    resetSearchSubmitting();
     initToTop();
   });
 
-  window.addEventListener('pageshow', () => {
-    if(window.sessionStorage.getItem(FORCE_REFRESH_ON_BACK_KEY) === '1'){
-      window.sessionStorage.removeItem(FORCE_REFRESH_ON_BACK_KEY);
-      window.location.reload();
-      return;
-    }
-    isSubmittingSearch = false;
-    const searchInput = getSearchInput();
-    const searchForm = searchInput ? searchInput.form : null;
-    const searchSubmitBtn = searchForm ? searchForm.querySelector('.searchModal__submit, button[type="submit"], input[type="submit"]') : null;
-    if(searchSubmitBtn) searchSubmitBtn.disabled = false;
-    clearSearchNavLock();
-    syncDrawerState();
-  });
+  window.addEventListener('pageshow', syncDrawerState);
   window.addEventListener('pagehide', closeSearch);
   window.addEventListener('pageshow', (e) => {
     closeSearch();
-    clearSearchNavLock();
     if(e && e.persisted){
       const active = document.activeElement;
       if(active && typeof active.blur === 'function') active.blur();
