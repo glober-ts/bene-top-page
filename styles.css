@@ -3709,3 +3709,65 @@ body.noScroll{ overflow:hidden; }
   height:1px;
   background:rgba(136,36,84,.32);
 }
+
+/* ===== v146 PC section breathing tune ===== */
+@media (min-width:980px){
+  #ranking{
+    padding-top:34px;
+    padding-bottom:32px;
+  }
+
+  .rankingSection .headRow{
+    margin-bottom:18px;
+  }
+
+  .rankingSection .rankingLabel{
+    margin-bottom:8px;
+    letter-spacing:.22em;
+  }
+
+  .featureShowcaseSection{
+    padding-top:56px;
+    padding-bottom:36px;
+  }
+
+  .featureShowcaseGrid{
+    gap:20px;
+  }
+
+  #pickup2,
+  #pickup3,
+  #pickup4,
+  #pickup5{
+    padding-top:34px;
+    padding-bottom:30px;
+  }
+
+  #pickup3,
+  #pickup4,
+  #pickup5{
+    margin-top:56px;
+  }
+
+  .infoSection{
+    padding-top:60px;
+    padding-bottom:34px;
+  }
+
+  .ytSection{
+    padding-top:30px;
+    padding-bottom:24px;
+  }
+
+  .sectionGroup.itemGroup{
+    padding-top:24px;
+  }
+}
+
+@media (max-width:979px){
+  #pickup3,
+  #pickup4,
+  #pickup5{
+    margin-top:38px;
+  }
+}
