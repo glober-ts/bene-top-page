@@ -3735,26 +3735,35 @@ body.noScroll{ overflow:hidden; }
   }
 
   .featureShowcaseSection{
-    padding-top:56px;
-    padding-bottom:36px;
+    padding-top:52px;
+    padding-bottom:32px;
   }
 
   .featureShowcaseGrid{
-    gap:20px;
+    gap:18px;
   }
 
-  #pickup2,
-  #pickup3,
-  #pickup4,
-  #pickup5{
+  #pickup2{
+    padding-top:33px;
+    padding-bottom:29px;
+  }
+
+  #pickup3{
+    padding-top:36px;
+    padding-bottom:31px;
+    margin-top:54px;
+  }
+
+  #pickup4{
     padding-top:34px;
     padding-bottom:30px;
+    margin-top:60px;
   }
 
-  #pickup3,
-  #pickup4,
   #pickup5{
-    margin-top:56px;
+    padding-top:35px;
+    padding-bottom:31px;
+    margin-top:57px;
   }
 
   .infoSection{
@@ -3784,43 +3793,43 @@ body.noScroll{ overflow:hidden; }
 @media (max-width:767px){
   .horizontalScroll .productCard p{
     margin:10px 10px 12px;
-    font-size:12px;
-    line-height:1.55;
+    font-size:12.5px;
+    line-height:1.58;
   }
 
   .horizontalScroll .productCard .yen{
     margin-top:6px;
-    font-size:13px;
+    font-size:13.5px;
     font-weight:700;
     letter-spacing:.02em;
   }
 
   .productTitleClampSection .productCard p{
-    gap:7px;
-    min-height:calc(1.55em * 4 + 7px);
+    gap:8px;
+    min-height:calc(1.58em * 4 + 8px);
   }
 }
 
 @media (max-width:979px){
   .ytList{
-    padding:14px;
-    gap:12px;
+    padding:15px;
+    gap:13px;
   }
 
   .ytItem{
     grid-template-columns:114px 1fr;
-    gap:12px;
-    padding:11px;
+    gap:13px;
+    padding:12px;
   }
 
   .ytMeta strong{
     font-size:13px;
-    line-height:1.5;
+    line-height:1.55;
   }
 
   .ytMeta small{
-    margin-top:5px;
-    line-height:1.6;
+    margin-top:6px;
+    line-height:1.65;
   }
 
   #material,
