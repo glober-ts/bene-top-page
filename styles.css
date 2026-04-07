@@ -436,6 +436,7 @@ img{display:block;max-width:100%}
   border-radius:var(--radius-card-xs);
   border:1px solid rgba(230,225,216,1);
   background:#fff;
+  text-align:left;
 }
 .newsItem:hover{border-color: rgba(138,31,78,.28)}
 .newsItem time{
