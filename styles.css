@@ -215,6 +215,19 @@ img{display:block;max-width:100%}
   line-height:1;
 }
 
+.rankNo.isRestock{
+  min-width:auto;
+  width:auto;
+  height:auto;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#8A1F4E;
+  color:#fff;
+  font-size:11px;
+  font-weight:700;
+  line-height:1;
+}
+
 /* Ranking section (independent from PICK UP) */
 .rankingSection{padding-top:24px}
 .rankingHead{align-items:center}
