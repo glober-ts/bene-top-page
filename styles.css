@@ -463,12 +463,20 @@ img{display:block;max-width:100%}
   line-height:1.5;
 }
 
-button.ytItem,
 button.shopLink{
   all:unset;
   display:block;
   cursor:pointer;
   box-sizing:border-box;
+}
+
+button.ytItem{
+  appearance:none;
+  -webkit-appearance:none;
+  font:inherit;
+  color:inherit;
+  text-align:inherit;
+  cursor:pointer;
 }
 
 /* =========================
