@@ -3779,3 +3779,55 @@ body.noScroll{ overflow:hidden; }
     margin-top:38px;
   }
 }
+
+/* ===== v147 SP readability fine tune (minimal) ===== */
+@media (max-width:767px){
+  .horizontalScroll .productCard p{
+    margin:10px 10px 12px;
+    font-size:12px;
+    line-height:1.55;
+  }
+
+  .horizontalScroll .productCard .yen{
+    margin-top:6px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.02em;
+  }
+
+  .productTitleClampSection .productCard p{
+    gap:7px;
+    min-height:calc(1.55em * 4 + 7px);
+  }
+}
+
+@media (max-width:979px){
+  .ytList{
+    padding:14px;
+    gap:12px;
+  }
+
+  .ytItem{
+    grid-template-columns:114px 1fr;
+    gap:12px;
+    padding:11px;
+  }
+
+  .ytMeta strong{
+    font-size:13px;
+    line-height:1.5;
+  }
+
+  .ytMeta small{
+    margin-top:5px;
+    line-height:1.6;
+  }
+
+  #material,
+  #price,
+  #new,
+  #features{
+    border-top:1px solid rgba(138,31,78,.14);
+    padding-top:22px;
+  }
+}
