@@ -3841,7 +3841,6 @@ body.noScroll{ overflow:hidden; }
   }
 
   .cvMessage,
-  .sectionLead,
   .cvTrust{
     width:min(100% - 32px, 26em);
     margin-left:auto;
@@ -3855,6 +3854,8 @@ body.noScroll{ overflow:hidden; }
 
   .sectionLead{
     margin:8px 0 18px;
+    padding-inline:16px;
+    box-sizing:border-box;
     font-size:12px;
     line-height:1.85;
   }
