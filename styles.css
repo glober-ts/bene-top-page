@@ -228,6 +228,60 @@ img{display:block;max-width:100%}
   line-height:1;
 }
 
+.badgeSub{
+  display:inline-block;
+  margin-top:4px;
+  font-size:9.5px;
+  line-height:1.4;
+  letter-spacing:.03em;
+  color:rgba(138,31,78,.82);
+  position:absolute;
+  top:36px;
+  left:10px;
+  z-index:1;
+}
+
+.cvMessage{
+  margin:32px 0;
+  text-align:center;
+  font-size:14px;
+  line-height:1.9;
+  letter-spacing:.08em;
+  color:#8A1F4E;
+}
+
+.cvNav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+  margin:28px 0;
+}
+
+.cvNav a{
+  padding-bottom:2px;
+  font-size:12px;
+  letter-spacing:.06em;
+  color:#8A1F4E;
+  text-decoration:none;
+  border-bottom:1px solid rgba(138,31,78,.28);
+  transition:opacity .2s ease;
+}
+
+.cvNav a:hover{
+  opacity:.72;
+}
+
+.cvTrust{
+  margin:24px 0 8px;
+  text-align:center;
+  font-size:12px;
+  line-height:1.8;
+  letter-spacing:.04em;
+  color:#666;
+}
+
 /* Ranking section (independent from PICK UP) */
 .rankingSection{padding-top:24px}
 .rankingHead{align-items:center}
@@ -3791,6 +3845,11 @@ body.noScroll{ overflow:hidden; }
 
 /* ===== v147 SP readability fine tune (minimal) ===== */
 @media (max-width:767px){
+  .badgeSub{
+    font-size:10px;
+    top:35px;
+  }
+
   .horizontalScroll .productCard p{
     margin:10px 10px 12px;
     font-size:12.5px;
