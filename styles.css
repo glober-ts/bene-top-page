@@ -3841,8 +3841,9 @@ body.noScroll{ overflow:hidden; }
   }
 
   .cvMessage,
-  .sectionLead{
-    max-width:28em;
+  .sectionLead,
+  .cvTrust{
+    width:min(100% - 32px, 26em);
     margin-left:auto;
     margin-right:auto;
   }
@@ -3855,8 +3856,12 @@ body.noScroll{ overflow:hidden; }
   .sectionLead{
     margin:8px 0 18px;
     font-size:12px;
+    line-height:1.85;
+  }
+
+  .cvTrust{
+    font-size:12px;
     line-height:1.8;
-    padding-inline:12px;
   }
 
   .horizontalScroll .productCard p{
