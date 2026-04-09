@@ -242,7 +242,8 @@ img{display:block;max-width:100%}
 }
 
 .cvMessage{
-  margin:32px 0;
+  margin:32px auto;
+  max-width:32ch;
   text-align:center;
   font-size:15px;
   line-height:2;
@@ -251,7 +252,8 @@ img{display:block;max-width:100%}
 }
 
 .sectionLead{
-  margin:8px 0 24px;
+  margin:8px auto 24px;
+  max-width:32ch;
   text-align:center;
   font-size:13px;
   line-height:1.8;
@@ -3840,23 +3842,14 @@ body.noScroll{ overflow:hidden; }
     top:35px;
   }
 
-  .cvMessage,
-  .sectionLead,
   .cvTrust{
     margin-left:16px;
     margin-right:16px;
   }
 
-  .cvMessage{
-    font-size:14px;
-    line-height:1.9;
-  }
-
   .sectionLead{
     margin-top:8px;
     margin-bottom:18px;
-    font-size:12px;
-    line-height:1.85;
   }
 
   .cvTrust{
