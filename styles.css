@@ -882,7 +882,13 @@ section[id^="pickup"]{
   height:auto;
 }
 
-@media (max-width:980px){
+@media (min-width:768px) and (max-width:980px){
+  .categorySection--closeup .closeupGrid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+
+@media (max-width:767px){
   .categorySection--closeup .closeupGrid{
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:8px;
