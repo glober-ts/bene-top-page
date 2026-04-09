@@ -3840,8 +3840,23 @@ body.noScroll{ overflow:hidden; }
     top:35px;
   }
 
+  .cvMessage,
+  .sectionLead{
+    max-width:28em;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .cvMessage{
+    font-size:14px;
+    line-height:1.9;
+  }
+
   .sectionLead{
     margin:8px 0 18px;
+    font-size:12px;
+    line-height:1.8;
+    padding-inline:12px;
   }
 
   .horizontalScroll .productCard p{
