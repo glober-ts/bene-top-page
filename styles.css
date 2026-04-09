@@ -244,49 +244,23 @@ img{display:block;max-width:100%}
 .cvMessage{
   margin:32px 0;
   text-align:center;
-  font-size:14px;
-  line-height:1.9;
-  letter-spacing:.08em;
+  font-size:15px;
+  line-height:2;
+  letter-spacing:.06em;
   color:#8A1F4E;
 }
 
 .sectionLead{
-  margin:6px 0 18px;
-  font-size:12px;
+  margin:8px 0 24px;
+  text-align:center;
+  font-size:13px;
   line-height:1.8;
-  letter-spacing:.04em;
-  color:rgba(138,31,78,.9);
-}
-
-.cvNav{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:16px;
-  margin:28px 0;
-}
-
-.cvNavPill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:32px;
-  padding:7px 16px;
-  border-radius:999px;
-  border:1px solid rgba(138,31,78,.24);
-  background:rgba(255,255,255,.82);
-  font-size:12px;
-  letter-spacing:.06em;
+  letter-spacing:.05em;
   color:#8A1F4E;
-  text-decoration:none;
-  transition:background-color .2s ease, border-color .2s ease, opacity .2s ease;
 }
 
-.cvNavPill:hover{
-  background:rgba(138,31,78,.08);
-  border-color:rgba(138,31,78,.34);
-  opacity:.92;
+.sectionLead--soft{
+  color:#666;
 }
 
 .cvTrust{
@@ -3867,9 +3841,7 @@ body.noScroll{ overflow:hidden; }
   }
 
   .sectionLead{
-    margin:6px 0 14px;
-    font-size:11px;
-    line-height:1.75;
+    margin:8px 0 18px;
   }
 
   .horizontalScroll .productCard p{
