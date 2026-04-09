@@ -242,21 +242,23 @@ img{display:block;max-width:100%}
 }
 
 .cvMessage{
-  margin:32px auto;
-  max-width:32ch;
+  margin:32px 0;
+  box-sizing:border-box;
+  padding-inline:16px;
   text-align:center;
   font-size:15px;
-  line-height:2;
+  line-height:1.9;
   letter-spacing:.06em;
   color:#8A1F4E;
 }
 
 .sectionLead{
-  margin:8px auto 24px;
-  max-width:32ch;
+  margin:8px 0 24px;
+  box-sizing:border-box;
+  padding-inline:16px;
   text-align:center;
   font-size:13px;
-  line-height:1.8;
+  line-height:1.85;
   letter-spacing:.05em;
   color:#8A1F4E;
 }
@@ -267,6 +269,8 @@ img{display:block;max-width:100%}
 
 .cvTrust{
   margin:24px 0 8px;
+  box-sizing:border-box;
+  padding-inline:16px;
   text-align:center;
   font-size:12px;
   line-height:1.8;
@@ -3842,19 +3846,9 @@ body.noScroll{ overflow:hidden; }
     top:35px;
   }
 
-  .cvTrust{
-    margin-left:16px;
-    margin-right:16px;
-  }
-
   .sectionLead{
     margin-top:8px;
     margin-bottom:18px;
-  }
-
-  .cvTrust{
-    font-size:12px;
-    line-height:1.8;
   }
 
   .horizontalScroll .productCard p{
