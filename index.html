@@ -1248,15 +1248,26 @@ window.BENE_UI = {
       const btn = document.getElementById('ytProductLink');
       if(!btn || !item) return;
 
-      const raw = item.dataset.url || item.dataset.href;
+      const raw = item.dataset.url ?? item.dataset.href;
       const url = normalizeUrl(raw);
+      console.log('[ytProductLink]', {
+        dataUrl: item.dataset.url,
+        dataHref: item.dataset.href,
+        normalizedUrl: url
+      });
 
       if(url){
         btn.href = url;
         btn.classList.remove('isHidden');
+        btn.hidden = false;
+        btn.setAttribute('aria-hidden', 'false');
+        btn.style.display = '';
       }else{
         btn.removeAttribute('href');
         btn.classList.add('isHidden');
+        btn.hidden = true;
+        btn.setAttribute('aria-hidden', 'true');
+        btn.style.display = 'none';
       }
     }
 
