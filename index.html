@@ -1230,12 +1230,34 @@ window.BENE_UI = {
     }
 
     function normalizeUrl(url){
-      const value = (url || '').trim();
-      if(!value) return '';
-      const normalized = value.toLowerCase();
-      if(normalized === 'null' || normalized === 'undefined' || normalized === 'none') return '';
-      if(value === '#') return '';
-      return value;
+      if(url == null) return null;
+      const v = String(url).trim().toLowerCase();
+      if(
+        v === '' ||
+        v === '#' ||
+        v === 'none' ||
+        v === 'null' ||
+        v === 'undefined'
+      ){
+        return null;
+      }
+      return String(url).trim();
+    }
+
+    function updateYtProductButton(item){
+      const btn = document.getElementById('ytProductLink');
+      if(!btn || !item) return;
+
+      const raw = item.dataset.url || item.dataset.href;
+      const url = normalizeUrl(raw);
+
+      if(url){
+        btn.href = url;
+        btn.classList.remove('isHidden');
+      }else{
+        btn.removeAttribute('href');
+        btn.classList.add('isHidden');
+      }
     }
 
     function syncPlayer(el, shouldAutoplay){
@@ -1256,14 +1278,11 @@ window.BENE_UI = {
       if(hasUrl){
         titleEl.setAttribute('href', u);
         titleEl.classList.remove('isLinkDisabled');
-        productLinkEl.setAttribute('href', u);
-        productLinkEl.classList.remove('isHidden');
       }else{
         titleEl.removeAttribute('href');
         titleEl.classList.add('isLinkDisabled');
-        productLinkEl.removeAttribute('href');
-        productLinkEl.classList.add('isHidden');
       }
+      updateYtProductButton(el);
 
       productLinkEl.setAttribute('aria-label', t ? t + ' の商品ページへ' : '商品ページへ');
       setActive(el);
