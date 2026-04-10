@@ -1,5 +1,30 @@
 
 /* ===== v141: unified drawer + search modal + toTop controls ===== */
+function updateNewsTextForDevice(){
+  const isSP = window.matchMedia('(max-width: 768px)').matches;
+
+  document.querySelectorAll('.newsItem').forEach((item) => {
+    const span = item.querySelector('span');
+    if(!span) return;
+
+    if(!span.dataset.original){
+      span.dataset.original = span.textContent;
+    }
+
+    if(isSP){
+      const spText = item.dataset.textSp;
+      if(spText){
+        span.textContent = spText;
+      }
+    }else{
+      span.textContent = span.dataset.original;
+    }
+  });
+}
+
+window.addEventListener('DOMContentLoaded', updateNewsTextForDevice);
+window.addEventListener('resize', updateNewsTextForDevice);
+
 (function(){
   const getDrawer = () => document.getElementById('gnav');
   const getBackdrop = () => document.getElementById('gnavBackdrop');
