@@ -1229,10 +1229,19 @@ window.BENE_UI = {
       el.classList.add('isActive');
     }
 
+    function normalizeUrl(url){
+      const value = (url || '').trim();
+      if(!value) return '';
+      const normalized = value.toLowerCase();
+      if(normalized === 'null' || normalized === 'undefined' || normalized === 'none') return '';
+      if(value === '#') return '';
+      return value;
+    }
+
     function syncPlayer(el, shouldAutoplay){
       const id = el.getAttribute('data-video-id');
       const t = (el.getAttribute('data-title') || '').trim();
-      const u = (el.getAttribute('data-url') || '').trim();
+      const u = normalizeUrl(el.getAttribute('data-url') || el.getAttribute('data-href'));
       const hasUrl = !!u;
       if(id && id !== 'VIDEO_ID'){
         iframe.src = buildSrc(id, shouldAutoplay);
