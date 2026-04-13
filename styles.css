@@ -2503,7 +2503,7 @@ body.noScroll{ overflow:hidden; }
   gap:var(--hero-card-gap);
   will-change:auto;
   transform:translate3d(0,0,0);
-  transition:transform .55s cubic-bezier(.22,.61,.36,1);
+  transition:none;
 }
 .heroTrack.is-animated{
   transition:transform .55s cubic-bezier(.22,.61,.36,1);
