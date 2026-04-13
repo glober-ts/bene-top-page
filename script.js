@@ -297,7 +297,8 @@ window.addEventListener('resize', updateNewsTextForDevice);
 
   let timer = null;
   let resumeTimer = null;
-  let currentIndex = 0;
+  let currentIndex = 1; // 表示用index（クローン込み）
+  let realIndex = 0; // 実体スライドindex（0始まり）
   let cardStep = 0;
   let railOffset = 0;
 
@@ -341,6 +342,7 @@ window.addEventListener('resize', updateNewsTextForDevice);
   // アニメーションON/OFF切り替え（ドラッグ中はOFFにして指/マウス追従を優先）
   const setTransition = (enabled) => {
     track.classList.toggle('is-animated', enabled);
+    track.style.transition = enabled ? '' : 'none';
   };
 
   const applyTranslate = (x) => {
@@ -348,13 +350,18 @@ window.addEventListener('resize', updateNewsTextForDevice);
     track.style.transform = `translate3d(${x}px, 0, 0)`;
   };
 
-  const getVisualIndex = () => currentIndex + 1;
   const getTranslateForVisualIndex = (visualIndex) => -(cardStep * visualIndex) + railOffset;
 
-  const normalizeIndex = (index) => {
+  const normalizeRealIndex = (index) => {
     if(index < 0) return cards.length - 1;
     if(index >= cards.length) return 0;
     return index;
+  };
+
+  const getRealIndexFromVisual = (visualIndex) => {
+    if(visualIndex === 0) return cards.length - 1;
+    if(visualIndex === cards.length + 1) return 0;
+    return normalizeRealIndex(visualIndex - 1);
   };
 
   // レイアウト再計算: リサイズ時にカード幅・中央寄せオフセットを再取得
@@ -374,7 +381,7 @@ window.addEventListener('resize', updateNewsTextForDevice);
     }
 
     setTransition(false);
-    applyTranslate(getTranslateForVisualIndex(getVisualIndex()));
+    applyTranslate(getTranslateForVisualIndex(currentIndex));
     requestAnimationFrame(() => setTransition(true));
   };
 
@@ -382,18 +389,24 @@ window.addEventListener('resize', updateNewsTextForDevice);
   const updateDots = () => {
     if(!dotsWrap) return;
     Array.from(dotsWrap.children).forEach((dot, i) => {
-      const active = i === currentIndex;
+      const active = i === realIndex;
       dot.classList.toggle('is-active', active);
       dot.setAttribute('aria-selected', active ? 'true' : 'false');
     });
   };
 
   // 指定インデックスへ移動（矢印/ドット/自動再生の共通入口）
-  const moveToIndex = (index, { animate = true } = {}) => {
-    currentIndex = normalizeIndex(index);
+  const moveToVisualIndex = (index, { animate = true } = {}) => {
+    currentIndex = index;
+    realIndex = getRealIndexFromVisual(currentIndex);
     setTransition(animate && !isPointerDragging);
-    applyTranslate(getTranslateForVisualIndex(getVisualIndex()));
+    applyTranslate(getTranslateForVisualIndex(currentIndex));
     updateDots();
+  };
+
+  const moveToRealIndex = (index, { animate = true } = {}) => {
+    const nextRealIndex = normalizeRealIndex(index);
+    moveToVisualIndex(nextRealIndex + 1, { animate });
   };
 
   // 前後移動: ループ境界はクローンへ一度遷移後、transitionendで実体スライドへ戻す
@@ -403,28 +416,22 @@ window.addEventListener('resize', updateNewsTextForDevice);
     }
 
     const target = currentIndex + dir;
-    const isForwardLoop = target >= cards.length;
-    const isBackwardLoop = target < 0;
+    const isForwardLoop = target === cards.length + 1;
+    const isBackwardLoop = target === 0;
 
     if(isForwardLoop){
       isLoopJumping = true;
-      setTransition(true);
-      applyTranslate(getTranslateForVisualIndex(cards.length + 1));
-      currentIndex = 0;
-      updateDots();
+      moveToVisualIndex(target, { animate: true });
       return;
     }
 
     if(isBackwardLoop){
       isLoopJumping = true;
-      setTransition(true);
-      applyTranslate(getTranslateForVisualIndex(0));
-      currentIndex = cards.length - 1;
-      updateDots();
+      moveToVisualIndex(target, { animate: true });
       return;
     }
 
-    moveToIndex(target, { animate: true });
+    moveToVisualIndex(target, { animate: true });
   };
 
   // ユーザー操作後は自動再生を停止（勝手に動くストレスを避けるため）
@@ -460,7 +467,7 @@ window.addEventListener('resize', updateNewsTextForDevice);
       dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
       dot.addEventListener('click', () => {
         onUserInteract();
-        moveToIndex(i, { animate: true });
+        moveToRealIndex(i, { animate: true });
       });
       dotsWrap.appendChild(dot);
     });
@@ -568,7 +575,7 @@ window.addEventListener('resize', updateNewsTextForDevice);
     document.body.classList.remove('heroDragNoSelect');
 
     if(!didDrag){
-      moveToIndex(currentIndex, { animate: true });
+      moveToVisualIndex(currentIndex, { animate: true });
       return;
     }
 
@@ -577,7 +584,7 @@ window.addEventListener('resize', updateNewsTextForDevice);
     if(Math.abs(moved) >= slideThreshold){
       moveBy(direction, true);
     } else {
-      moveToIndex(currentIndex, { animate: true });
+      moveToVisualIndex(currentIndex, { animate: true });
     }
   };
 
@@ -604,8 +611,18 @@ window.addEventListener('resize', updateNewsTextForDevice);
     if(!isLoopJumping) return;
     isLoopJumping = false;
     setTransition(false);
-    applyTranslate(getTranslateForVisualIndex(getVisualIndex()));
-    requestAnimationFrame(() => setTransition(true));
+    if(currentIndex === cards.length + 1){
+      currentIndex = 1;
+      realIndex = 0;
+    }else if(currentIndex === 0){
+      currentIndex = cards.length;
+      realIndex = cards.length - 1;
+    }
+    applyTranslate(getTranslateForVisualIndex(currentIndex));
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => setTransition(true));
+      updateDots();
+    });
   });
 
   // ----------------------------------------
