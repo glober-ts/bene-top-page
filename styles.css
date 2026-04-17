@@ -1293,6 +1293,38 @@ a.logo .logoImg{
   display:grid; place-items:center; cursor:pointer;
 }
 .searchModal__submit svg{ width: 18px; height: 18px; }
+.searchModal__priceRow{
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.searchModal__priceLabel{
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(45, 24, 36, .88);
+}
+.searchModal__priceInput{
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 12px;
+  padding: 0 12px;
+  background: #fff;
+  outline: none;
+  font-size: 14px;
+}
+.searchModal__priceInput:focus{
+  border-color: rgba(136,36,84,.38);
+  box-shadow: 0 0 0 3px rgba(136,36,84,.10);
+}
+@media (max-width: 640px){
+  .searchModal__priceRow{
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
 .searchModal__quickTitle{ margin-top: 14px; font-size: 12px; opacity: .78; }
 .searchModal__quick{ margin-top: 10px; display:flex; flex-wrap: wrap; gap: 10px; }
 .searchModal__quick .chip{
