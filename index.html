@@ -1583,6 +1583,20 @@ if(!slides.length) return;
 </a>
 </div>
 
+<div aria-hidden="true" class="popupModal" id="popupModal">
+  <div class="popupModal__overlay" data-popup-overlay></div>
+  <div class="popupModal__dialog" role="dialog" aria-modal="true" aria-label="お知らせポップアップ" data-popup-dialog>
+    <button aria-label="閉じる" class="popupModal__close" data-popup-close type="button">×</button>
+    <div class="popupModal__inner" data-popup-body>
+      <div class="popupModal__imageWrap" data-popup-image-wrap>
+        <img alt="" class="popupModal__image" data-popup-image src=""/>
+      </div>
+      <div class="popupModal__text" data-popup-text></div>
+      <div class="popupModal__buttons" data-popup-buttons></div>
+    </div>
+  </div>
+</div>
+
 <script src="script.js"></script>
 <div class="gnavBackdrop menu-overlay" id="gnavBackdrop"></div><nav aria-label="メニュー" class="gnavDrawer" id="gnav">
 <div class="drawerTop">

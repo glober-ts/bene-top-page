@@ -3906,3 +3906,146 @@ body.noScroll{ overflow:hidden; }
     padding-top:22px;
   }
 }
+
+/* ===== popup modal ===== */
+.popupModal{
+  --popup-width:560px;
+  --popup-max-width:90vw;
+  --popup-radius:20px;
+  --popup-bg:#ffffff;
+  --popup-overlay:rgba(0,0,0,.45);
+  --popup-text:#1b1b1b;
+  --popup-text-size:16px;
+  --popup-title-size:24px;
+  --popup-close-size:32px;
+  --popup-close-color:#333333;
+  position:fixed;
+  inset:0;
+  z-index:130;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.popupModal.is-open{
+  display:flex;
+}
+
+.popupModal__overlay{
+  position:absolute;
+  inset:0;
+  background:var(--popup-overlay);
+}
+
+.popupModal__dialog{
+  position:relative;
+  z-index:1;
+  width:var(--popup-width);
+  max-width:var(--popup-max-width);
+  max-height:min(90vh, 720px);
+  overflow:auto;
+  border-radius:var(--popup-radius);
+  background:var(--popup-bg);
+  box-shadow:0 20px 48px rgba(0,0,0,.2);
+}
+
+.popupModal__inner{
+  padding:26px 24px 24px;
+  color:var(--popup-text);
+  font-size:var(--popup-text-size);
+  line-height:1.8;
+}
+
+.popupModal__close{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:var(--popup-close-size);
+  height:var(--popup-close-size);
+  border:none;
+  border-radius:999px;
+  background:transparent;
+  color:var(--popup-close-color);
+  font-size:calc(var(--popup-close-size) * .72);
+  line-height:1;
+  cursor:pointer;
+}
+
+.popupModal__imageWrap{
+  width:100%;
+  overflow:hidden;
+  border-radius:calc(var(--popup-radius) * .65);
+  background:#f8f6f4;
+}
+
+.popupModal__image{
+  width:100%;
+  height:100%;
+  object-position:center;
+}
+
+.popupModal__text{
+  margin-top:16px;
+}
+
+.popupModal__text h1,
+.popupModal__text h2,
+.popupModal__text h3{
+  margin:0 0 10px;
+  font-family:"Noto Serif JP",serif;
+  font-size:var(--popup-title-size);
+  line-height:1.45;
+}
+
+.popupModal__text p{
+  margin:0;
+}
+
+.popupModal__buttons{
+  margin-top:18px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.popupModal__button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:10px 16px;
+  border:1px solid transparent;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+  line-height:1.3;
+}
+
+.popupModal__dialog.is-clickable{
+  cursor:pointer;
+}
+
+.popupModal__dialog.is-clickable .popupModal__button,
+.popupModal__dialog.is-clickable .popupModal__close{
+  cursor:pointer;
+}
+
+.popupModal--image .popupModal__text,
+.popupModal--image .popupModal__buttons{
+  display:none;
+}
+
+@media (max-width:979px){
+  .popupModal{
+    --popup-width:92vw;
+    --popup-max-width:92vw;
+    --popup-text-size:14px;
+    --popup-title-size:20px;
+    padding:12px;
+  }
+
+  .popupModal__inner{
+    padding:22px 14px 16px;
+  }
+}

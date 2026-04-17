@@ -927,3 +927,215 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 ;
+/* ===== popup modal controller ===== */
+(function(){
+  const popupConfig = {
+    enabled: true,
+    startAt: '2026-04-18T00:00:00+09:00',
+    endAt: '2026-04-25T23:59:59+09:00',
+    suppressHours: 4,
+
+    mode: 'image_text', // "image" or "image_text"
+
+    imageUrl: 'assets/custom_banner_top.jpg',
+    imageAlt: 'キャンペーンバナー',
+    imageAspectRatio: '4 / 5',
+    imageFit: 'cover', // cover or contain
+
+    textHtml: '<h2>お知らせ</h2><p>期間限定のイベントを開催中です。ぜひご覧ください。</p>',
+
+    popupClickable: true,
+    linkUrl: '',
+    linkTarget: '_self',
+
+    buttons: [
+      {
+        label: '詳しく見る',
+        url: '',
+        target: '_self',
+        bgColor: '#8A1F4E',
+        textColor: '#ffffff',
+        borderColor: '#8A1F4E'
+      }
+    ],
+
+    closeOnOverlay: true,
+
+    size: {
+      pc: {
+        width: '560px',
+        maxWidth: '90vw'
+      },
+      sp: {
+        width: '92vw',
+        maxWidth: '92vw'
+      }
+    },
+
+    borderRadius: '20px',
+    backgroundColor: '#ffffff',
+    overlayColor: 'rgba(0,0,0,.45)',
+
+    textColor: '#1b1b1b',
+    textSizePc: '16px',
+    textSizeSp: '14px',
+    titleSizePc: '24px',
+    titleSizeSp: '20px',
+
+    closeButtonColor: '#333333',
+    closeButtonSize: '32px',
+    storageKey: 'beneTopPopupDismissedAt'
+  };
+
+  const modal = document.getElementById('popupModal');
+  if(!modal) return;
+
+  const overlay = modal.querySelector('[data-popup-overlay]');
+  const dialog = modal.querySelector('[data-popup-dialog]');
+  const closeBtn = modal.querySelector('[data-popup-close]');
+  const imageWrap = modal.querySelector('[data-popup-image-wrap]');
+  const imageEl = modal.querySelector('[data-popup-image]');
+  const textEl = modal.querySelector('[data-popup-text]');
+  const buttonsWrap = modal.querySelector('[data-popup-buttons]');
+
+  const isTruthyString = (value) => typeof value === 'string' && value.trim().length > 0;
+
+  const parseTime = (value) => {
+    if(!isTruthyString(value)) return null;
+    const ts = new Date(value).getTime();
+    return Number.isFinite(ts) ? ts : null;
+  };
+
+  const isInSchedule = (nowTs) => {
+    const startTs = parseTime(popupConfig.startAt);
+    const endTs = parseTime(popupConfig.endAt);
+    if(startTs && nowTs < startTs) return false;
+    if(endTs && nowTs > endTs) return false;
+    return true;
+  };
+
+  const isSuppressed = (nowTs) => {
+    const lastDismissedAt = Number(localStorage.getItem(popupConfig.storageKey));
+    if(!Number.isFinite(lastDismissedAt)) return false;
+    const suppressMs = Math.max(0, Number(popupConfig.suppressHours) || 0) * 60 * 60 * 1000;
+    return nowTs < (lastDismissedAt + suppressMs);
+  };
+
+  const closePopup = () => {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    localStorage.setItem(popupConfig.storageKey, String(Date.now()));
+  };
+
+  const applyVisualConfig = () => {
+    modal.style.setProperty('--popup-radius', popupConfig.borderRadius || '20px');
+    modal.style.setProperty('--popup-bg', popupConfig.backgroundColor || '#ffffff');
+    modal.style.setProperty('--popup-overlay', popupConfig.overlayColor || 'rgba(0,0,0,.45)');
+    modal.style.setProperty('--popup-text', popupConfig.textColor || '#1b1b1b');
+    modal.style.setProperty('--popup-close-size', popupConfig.closeButtonSize || '32px');
+    modal.style.setProperty('--popup-close-color', popupConfig.closeButtonColor || '#333333');
+
+    const isSp = window.matchMedia('(max-width: 979px)').matches;
+    const currentSize = isSp ? popupConfig.size?.sp : popupConfig.size?.pc;
+    if(currentSize?.width) modal.style.setProperty('--popup-width', currentSize.width);
+    if(currentSize?.maxWidth) modal.style.setProperty('--popup-max-width', currentSize.maxWidth);
+    modal.style.setProperty('--popup-text-size', isSp ? (popupConfig.textSizeSp || '14px') : (popupConfig.textSizePc || '16px'));
+    modal.style.setProperty('--popup-title-size', isSp ? (popupConfig.titleSizeSp || '20px') : (popupConfig.titleSizePc || '24px'));
+  };
+
+  const buildButtons = () => {
+    buttonsWrap.innerHTML = '';
+    if(!Array.isArray(popupConfig.buttons)) return;
+
+    popupConfig.buttons.forEach((btnConfig) => {
+      if(!isTruthyString(btnConfig?.label) || !isTruthyString(btnConfig?.url)) return;
+      const link = document.createElement('a');
+      link.className = 'popupModal__button';
+      link.textContent = btnConfig.label;
+      link.href = btnConfig.url;
+      link.target = btnConfig.target || '_self';
+      link.rel = link.target === '_blank' ? 'noopener noreferrer' : '';
+      link.style.backgroundColor = btnConfig.bgColor || '#8A1F4E';
+      link.style.color = btnConfig.textColor || '#ffffff';
+      link.style.borderColor = btnConfig.borderColor || btnConfig.bgColor || '#8A1F4E';
+      link.addEventListener('click', (event) => event.stopPropagation());
+      buttonsWrap.appendChild(link);
+    });
+  };
+
+  const setupMode = () => {
+    const isImageOnly = popupConfig.mode === 'image';
+    modal.classList.toggle('popupModal--image', isImageOnly);
+    if(isTruthyString(popupConfig.imageUrl)){
+      imageEl.src = popupConfig.imageUrl;
+      imageEl.alt = popupConfig.imageAlt || '';
+      imageWrap.style.aspectRatio = popupConfig.imageAspectRatio || '4 / 5';
+      imageEl.style.objectFit = popupConfig.imageFit === 'contain' ? 'contain' : 'cover';
+      imageWrap.hidden = false;
+    }else{
+      imageWrap.hidden = true;
+    }
+
+    if(!isImageOnly){
+      textEl.innerHTML = popupConfig.textHtml || '';
+      buildButtons();
+    }else{
+      textEl.innerHTML = '';
+      buttonsWrap.innerHTML = '';
+    }
+  };
+
+  const setupClickable = () => {
+    const hasPopupLink = popupConfig.popupClickable && isTruthyString(popupConfig.linkUrl);
+    dialog.classList.toggle('is-clickable', hasPopupLink);
+
+    dialog.addEventListener('click', (event) => {
+      if(!hasPopupLink) return;
+      if(event.target.closest('[data-popup-close], .popupModal__button')) return;
+      window.open(popupConfig.linkUrl, popupConfig.linkTarget || '_self');
+    });
+  };
+
+  const openPopup = () => {
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+  };
+
+  const init = () => {
+    if(!popupConfig.enabled) return;
+
+    const nowTs = Date.now();
+    if(!isInSchedule(nowTs)) return;
+    if(isSuppressed(nowTs)) return;
+
+    applyVisualConfig();
+    setupMode();
+    setupClickable();
+    openPopup();
+  };
+
+  closeBtn?.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    closePopup();
+  });
+
+  overlay?.addEventListener('click', (event) => {
+    if(!popupConfig.closeOnOverlay) return;
+    event.preventDefault();
+    closePopup();
+  });
+
+  window.addEventListener('resize', applyVisualConfig);
+  document.addEventListener('keydown', (event) => {
+    if(event.key === 'Escape' && modal.classList.contains('is-open')){
+      closePopup();
+    }
+  });
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  }else{
+    init();
+  }
+})();
