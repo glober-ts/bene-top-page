@@ -983,9 +983,10 @@ document.addEventListener('DOMContentLoaded', () => {
     titleSizeSp: '20px',
 
     closeButtonColor: '#333333',
-    closeButtonSize: '32px',
-    storageKey: 'beneTopPopupDismissedAt'
+    closeButtonSize: '32px'
   };
+
+  const STORAGE_KEY = `benePopup_closedAt_${popupConfig.startAt || 'default'}_${popupConfig.endAt || 'default'}`;
 
   const modal = document.getElementById('popupModal');
   if(!modal) return;
@@ -1016,16 +1017,20 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const isSuppressed = (nowTs) => {
-    const lastDismissedAt = Number(localStorage.getItem(popupConfig.storageKey));
-    if(!Number.isFinite(lastDismissedAt)) return false;
     const suppressMs = Math.max(0, Number(popupConfig.suppressHours) || 0) * 60 * 60 * 1000;
+    const closedAt = localStorage.getItem(STORAGE_KEY);
+    if(!closedAt) return false;
+
+    const lastDismissedAt = Number(closedAt);
+    if(!Number.isFinite(lastDismissedAt)) return false;
+
     return nowTs < (lastDismissedAt + suppressMs);
   };
 
   const closePopup = () => {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
-    localStorage.setItem(popupConfig.storageKey, String(Date.now()));
+    localStorage.setItem(STORAGE_KEY, String(Date.now()));
   };
 
   const applyVisualConfig = () => {
