@@ -34,33 +34,29 @@ li.undefined {
 	cursor: pointer;
 }
 
-/* ===== UI ===== */
+/* ui */
 div.cal_wrapper {
-	padding: 0px;
+	padding: 0;
 	width: 100% !important;
-
-	/* ★ここが今回の修正ポイント */
-	min-height: 230px;
 	height: auto !important;
-
 	background-image: url(background.gif);
 	background-position: bottom right;
 	background-repeat: no-repeat;
 	background-color: #EEEEEE;
-
 	position: relative;
 	margin-bottom: 10px;
-
-	/* iPhone対策 */
 	overflow: hidden;
+	box-sizing: border-box;
 }
-
-/* 操作ボタン */
 ul.cal_ui {
-	padding: 0px;
-	margin: 0px;
-	width: 60px;
-	float: right;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: auto;
+	float: none;
+	z-index: 2;
 }
 
 ul.cal_ui li {
@@ -85,42 +81,41 @@ li.cal_next {
 	background-image: url(cal_03.gif);
 }
 
-/* カレンダー本体 */
 div.cal_base {
-	/* ★高さ崩れ防止 */
 	overflow: hidden;
 }
 
 div.cal_base p {
 	font-size: 12px;
-	padding: 5px;
-	margin: 0px;
+	padding: 5px 70px 5px 5px;
+	margin: 0;
 	border-bottom: solid 1px #CCCCCC;
+	box-sizing: border-box;
 }
 
-/* 日付エリア */
 ul.cal_main {
 	clear: both;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
+	width: 100%;
 }
 
-/* ★clearfix（超重要） */
 ul.cal_main::after {
 	content: "";
 	display: block;
 	clear: both;
 }
 
-/* 日付セル */
 ul.cal_main li {
-	width: 14%;
+	width: calc(100% / 7);
 	text-align: center;
 	list-style: none;
 	font-size: 13px;
 	float: left;
 	overflow: hidden;
 	border-bottom: solid 1px #CCCCCC;
+	box-sizing: border-box;
+	background-color: transparent;
 }
 
 ul.cal_main li span {
@@ -129,4 +124,5 @@ ul.cal_main li span {
 }
 
 li.cal_headline {
+	background-color: transparent;
 }
