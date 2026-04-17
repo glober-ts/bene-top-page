@@ -931,27 +931,27 @@ document.addEventListener('DOMContentLoaded', () => {
 (function(){
   const popupConfig = {
     enabled: true,
-    startAt: '2026-04-16T00:00:00+09:00',
-    endAt: '2026-04-25T23:59:59+09:00',
+    startAt: '2025-04-16T00:00:00+09:00',
+    endAt: '2025-04-25T23:59:59+09:00',
     suppressHours: 4,
 
     mode: 'image_text', // "image" or "image_text"
 
-    imageUrl: 'assets/custom_banner_top.jpg',
+    imageUrl: 'https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/260212cp.jpg',
     imageAlt: 'キャンペーンバナー',
-    imageAspectRatio: '4 / 5',
+    imageAspectRatio: '1/1',
     imageFit: 'cover', // cover or contain
 
     textHtml: '<h2>お知らせ</h2><p>期間限定のイベントを開催中です。ぜひご覧ください。</p>',
 
     popupClickable: true,
-    linkUrl: '',
+    linkUrl: 'https://www.rakuten.ne.jp/gold/bene/',
     linkTarget: '_self',
 
     buttons: [
       {
         label: '詳しく見る',
-        url: '',
+        url: 'https://shopping.geocities.jp/benebene/',
         target: '_self',
         bgColor: '#8A1F4E',
         textColor: '#ffffff',
@@ -963,12 +963,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     size: {
       pc: {
-        width: '480px',
-        maxWidth: '90vw'
+        width: '400px',
+        maxWidth: '70vw'
       },
       sp: {
-        width: '86vw',
-        maxWidth: '86vw'
+        width: '70vw',
+        maxWidth: '70vw'
       }
     },
 
