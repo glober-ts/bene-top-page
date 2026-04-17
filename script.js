@@ -931,8 +931,8 @@ document.addEventListener('DOMContentLoaded', () => {
 (function(){
   const popupConfig = {
     enabled: true,
-    startAt: '2025-04-16T00:00:00+09:00',
-    endAt: '2025-04-25T23:59:59+09:00',
+    startAt: '2026-04-16T00:00:00+09:00',
+    endAt: '2026-04-25T23:59:59+09:00',
     suppressHours: 4,
 
     mode: 'image_text', // "image" or "image_text"
@@ -955,6 +955,14 @@ document.addEventListener('DOMContentLoaded', () => {
         target: '_self',
         bgColor: '#8A1F4E',
         textColor: '#ffffff',
+        borderColor: '#8A1F4E'
+      },
+            {
+        label: '対象商品を見る',
+        url: 'https://shop.bene-bene.com/fs/rosecut/',
+        target: '_blank',
+        bgColor: '#fff',    // サブ
+        textColor: '#8A1F4E',
         borderColor: '#8A1F4E'
       }
     ],
