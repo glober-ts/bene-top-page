@@ -963,12 +963,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     size: {
       pc: {
-        width: '560px',
+        width: '480px',
         maxWidth: '90vw'
       },
       sp: {
-        width: '92vw',
-        maxWidth: '92vw'
+        width: '88vw',
+        maxWidth: '88vw'
       }
     },
 
@@ -1101,17 +1101,27 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.setAttribute('aria-hidden', 'false');
   };
 
-  const init = () => {
-    if(!popupConfig.enabled) return;
+  const hasValidElements = () => Boolean(modal && overlay && dialog && closeBtn && imageWrap && imageEl && textEl && buttonsWrap);
 
+  const canShowPopup = () => {
+    if(!popupConfig.enabled) return false;
+    if(!hasValidElements()) return false;
     const nowTs = Date.now();
-    if(!isInSchedule(nowTs)) return;
-    if(isSuppressed(nowTs)) return;
+    if(!isInSchedule(nowTs)) return false;
+    if(isSuppressed(nowTs)) return false;
+    return true;
+  };
+
+  const init = () => {
+    if(!canShowPopup()) return;
 
     applyVisualConfig();
     setupMode();
     setupClickable();
-    openPopup();
+    window.setTimeout(() => {
+      if(!canShowPopup()) return;
+      openPopup();
+    }, 4000);
   };
 
   closeBtn?.addEventListener('click', (event) => {

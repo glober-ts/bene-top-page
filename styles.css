@@ -3909,7 +3909,7 @@ body.noScroll{ overflow:hidden; }
 
 /* ===== popup modal ===== */
 .popupModal{
-  --popup-width:560px;
+  --popup-width:480px;
   --popup-max-width:90vw;
   --popup-radius:20px;
   --popup-bg:#ffffff;
@@ -3917,7 +3917,7 @@ body.noScroll{ overflow:hidden; }
   --popup-text:#1b1b1b;
   --popup-text-size:16px;
   --popup-title-size:24px;
-  --popup-close-size:32px;
+  --popup-close-size:36px;
   --popup-close-color:#333333;
   position:fixed;
   inset:0;
@@ -3925,7 +3925,7 @@ body.noScroll{ overflow:hidden; }
   display:none;
   align-items:center;
   justify-content:center;
-  padding:20px;
+  padding:24px;
 }
 
 .popupModal.is-open{
@@ -3943,7 +3943,7 @@ body.noScroll{ overflow:hidden; }
   z-index:1;
   width:var(--popup-width);
   max-width:var(--popup-max-width);
-  max-height:min(90vh, 720px);
+  max-height:min(86vh, 680px);
   overflow:auto;
   border-radius:var(--popup-radius);
   background:var(--popup-bg);
@@ -3951,7 +3951,7 @@ body.noScroll{ overflow:hidden; }
 }
 
 .popupModal__inner{
-  padding:26px 24px 24px;
+  padding:22px 20px 20px;
   color:var(--popup-text);
   font-size:var(--popup-text-size);
   line-height:1.8;
@@ -3959,13 +3959,13 @@ body.noScroll{ overflow:hidden; }
 
 .popupModal__close{
   position:absolute;
-  top:10px;
-  right:10px;
+  top:8px;
+  right:8px;
   width:var(--popup-close-size);
   height:var(--popup-close-size);
   border:none;
   border-radius:999px;
-  background:transparent;
+  background:rgba(255,255,255,.85);
   color:var(--popup-close-color);
   font-size:calc(var(--popup-close-size) * .72);
   line-height:1;
@@ -3986,7 +3986,7 @@ body.noScroll{ overflow:hidden; }
 }
 
 .popupModal__text{
-  margin-top:16px;
+  margin-top:14px;
 }
 
 .popupModal__text h1,
@@ -4003,7 +4003,7 @@ body.noScroll{ overflow:hidden; }
 }
 
 .popupModal__buttons{
-  margin-top:18px;
+  margin-top:14px;
   display:flex;
   flex-wrap:wrap;
   gap:10px;
@@ -4038,14 +4038,14 @@ body.noScroll{ overflow:hidden; }
 
 @media (max-width:979px){
   .popupModal{
-    --popup-width:92vw;
-    --popup-max-width:92vw;
+    --popup-width:88vw;
+    --popup-max-width:88vw;
     --popup-text-size:14px;
     --popup-title-size:20px;
-    padding:12px;
+    padding:16px;
   }
 
   .popupModal__inner{
-    padding:22px 14px 16px;
+    padding:20px 14px 16px;
   }
 }
