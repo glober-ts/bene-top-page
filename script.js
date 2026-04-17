@@ -967,8 +967,8 @@ document.addEventListener('DOMContentLoaded', () => {
         maxWidth: '90vw'
       },
       sp: {
-        width: '88vw',
-        maxWidth: '88vw'
+        width: '86vw',
+        maxWidth: '86vw'
       }
     },
 
@@ -997,6 +997,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const imageEl = modal.querySelector('[data-popup-image]');
   const textEl = modal.querySelector('[data-popup-text]');
   const buttonsWrap = modal.querySelector('[data-popup-buttons]');
+  let popupTimerStarted = false;
 
   const isTruthyString = (value) => typeof value === 'string' && value.trim().length > 0;
 
@@ -1113,6 +1114,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const init = () => {
+    if(popupTimerStarted) return;
+    popupTimerStarted = true;
+
     if(!canShowPopup()) return;
 
     applyVisualConfig();

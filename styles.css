@@ -3938,13 +3938,14 @@ body.noScroll{ overflow:hidden; }
   background:var(--popup-overlay);
 }
 
-.popupModal__dialog{
+.popupModal__dialog,
+.popupContent{
   position:relative;
   z-index:1;
   width:var(--popup-width);
   max-width:var(--popup-max-width);
-  max-height:min(86vh, 680px);
-  overflow:auto;
+  max-height:min(80vh, 720px);
+  overflow-y:auto;
   border-radius:var(--popup-radius);
   background:var(--popup-bg);
   box-shadow:0 20px 48px rgba(0,0,0,.2);
@@ -3961,8 +3962,11 @@ body.noScroll{ overflow:hidden; }
   position:absolute;
   top:8px;
   right:8px;
-  width:var(--popup-close-size);
-  height:var(--popup-close-size);
+  width:40px;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   border:none;
   border-radius:999px;
   background:rgba(255,255,255,.85);
@@ -4038,8 +4042,8 @@ body.noScroll{ overflow:hidden; }
 
 @media (max-width:979px){
   .popupModal{
-    --popup-width:88vw;
-    --popup-max-width:88vw;
+    --popup-width:86vw;
+    --popup-max-width:86vw;
     --popup-text-size:14px;
     --popup-title-size:20px;
     padding:16px;
