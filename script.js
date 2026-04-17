@@ -995,6 +995,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const STORAGE_KEY = `benePopup_closedAt_${popupConfig.startAt || 'default'}_${popupConfig.endAt || 'default'}`;
+  const DISMISS_UNTIL_END_KEY = `benePopup_dismissUntilEnd_${popupConfig.startAt || 'default'}_${popupConfig.endAt || 'default'}`;
 
   const modal = document.getElementById('popupModal');
   if(!modal) return;
@@ -1035,10 +1036,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return nowTs < (lastDismissedAt + suppressMs);
   };
 
-  const closePopup = () => {
+  const isDismissedUntilEnd = () => localStorage.getItem(DISMISS_UNTIL_END_KEY) === '1';
+
+  const closePopup = ({ dismissUntilEnd = false } = {}) => {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
-    localStorage.setItem(STORAGE_KEY, String(Date.now()));
+    if(dismissUntilEnd){
+      localStorage.setItem(DISMISS_UNTIL_END_KEY, '1');
+      localStorage.setItem(STORAGE_KEY, String(Date.now()));
+    }
   };
 
   const applyVisualConfig = () => {
@@ -1072,7 +1078,11 @@ document.addEventListener('DOMContentLoaded', () => {
       link.style.backgroundColor = btnConfig.bgColor || '#8A1F4E';
       link.style.color = btnConfig.textColor || '#ffffff';
       link.style.borderColor = btnConfig.borderColor || btnConfig.bgColor || '#8A1F4E';
-      link.addEventListener('click', (event) => event.stopPropagation());
+      link.addEventListener('click', (event) => {
+        event.stopPropagation();
+        localStorage.setItem(DISMISS_UNTIL_END_KEY, '1');
+        localStorage.setItem(STORAGE_KEY, String(Date.now()));
+      });
       buttonsWrap.appendChild(link);
     });
   };
@@ -1122,6 +1132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(!hasValidElements()) return false;
     const nowTs = Date.now();
     if(!isInSchedule(nowTs)) return false;
+    if(isDismissedUntilEnd()) return false;
     if(isSuppressed(nowTs)) return false;
     return true;
   };
@@ -1144,19 +1155,19 @@ document.addEventListener('DOMContentLoaded', () => {
   closeBtn?.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
-    closePopup();
+    closePopup({ dismissUntilEnd: true });
   });
 
   overlay?.addEventListener('click', (event) => {
     if(!popupConfig.closeOnOverlay) return;
     event.preventDefault();
-    closePopup();
+    closePopup({ dismissUntilEnd: false });
   });
 
   window.addEventListener('resize', applyVisualConfig);
   document.addEventListener('keydown', (event) => {
     if(event.key === 'Escape' && modal.classList.contains('is-open')){
-      closePopup();
+      closePopup({ dismissUntilEnd: false });
     }
   });
 
