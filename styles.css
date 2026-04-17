@@ -3978,9 +3978,15 @@ body.noScroll{ overflow:hidden; }
 
 .popupModal__imageWrap{
   width:100%;
+  aspect-ratio:4 / 5;
   overflow:hidden;
   border-radius:calc(var(--popup-radius) * .65);
-  background:#f8f6f4;
+  background:#f6f4f1;
+}
+
+.popupImageWrap{
+  aspect-ratio:4 / 5;
+  background:#f6f4f1;
 }
 
 .popupModal__image{
