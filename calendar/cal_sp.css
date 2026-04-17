@@ -6,48 +6,63 @@ span.Today {
 	display: block;
 	background-color: #FFFFFF;
 }
+
 .deli {
 	background-color: #009900;
 	color: #FFFFFF;
 }
+
 li.openingsale {
 	color: #FFFFFF;
 	font-weight: bolder;
 	background-color: #FF0000;
 }
+
 li.holyday {
 	color: #FF0000;
 }
+
 li.Sun {
 	color: #FF0000;
 }
+
 li.Sat {
 	color: #FF0000;
 }
+
 li.undefined {
 	cursor: pointer;
 }
 
-/*ui*/
+/* ===== UI ===== */
 div.cal_wrapper {
 	padding: 0px;
-	width: 100%!important;
-	width/**/: 175px;
-	height: 230px!important;
-	height/**/: 230px;
+	width: 100% !important;
+
+	/* ★ここが今回の修正ポイント */
+	min-height: 230px;
+	height: auto !important;
+
 	background-image: url(background.gif);
 	background-position: bottom right;
 	background-repeat: no-repeat;
 	background-color: #EEEEEE;
+
 	position: relative;
 	margin-bottom: 10px;
+
+	/* iPhone対策 */
+	overflow: hidden;
 }
+
+/* 操作ボタン */
 ul.cal_ui {
 	padding: 0px;
 	margin: 0px;
 	width: 60px;
 	float: right;
 }
+
 ul.cal_ui li {
 	float: left;
 	width: 20px;
@@ -57,18 +72,23 @@ ul.cal_ui li {
 	background-repeat: no-repeat;
 	cursor: pointer;
 }
+
 li.cal_prev {
 	background-image: url(cal_01.gif);
 }
+
 li.cal_to {
 	background-image: url(cal_02.gif);
 }
+
 li.cal_next {
 	background-image: url(cal_03.gif);
 }
 
+/* カレンダー本体 */
 div.cal_base {
-	
+	/* ★高さ崩れ防止 */
+	overflow: hidden;
 }
 
 div.cal_base p {
@@ -78,13 +98,22 @@ div.cal_base p {
 	border-bottom: solid 1px #CCCCCC;
 }
 
+/* 日付エリア */
 ul.cal_main {
 	clear: both;
 	padding: 0px;
 	margin: 0px;
 }
+
+/* ★clearfix（超重要） */
+ul.cal_main::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+/* 日付セル */
 ul.cal_main li {
-	/*padding: 3px 0px 3px 0px;*/
 	width: 14%;
 	text-align: center;
 	list-style: none;
@@ -93,11 +122,11 @@ ul.cal_main li {
 	overflow: hidden;
 	border-bottom: solid 1px #CCCCCC;
 }
+
 ul.cal_main li span {
 	padding: 3px;
 	display: block;
 }
 
 li.cal_headline {
-	
 }
