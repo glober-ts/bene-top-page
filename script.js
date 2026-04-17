@@ -931,7 +931,7 @@ document.addEventListener('DOMContentLoaded', () => {
 (function(){
   const popupConfig = {
     enabled: true,
-    startAt: '2026-04-18T00:00:00+09:00',
+    startAt: '2026-04-16T00:00:00+09:00',
     endAt: '2026-04-25T23:59:59+09:00',
     suppressHours: 4,
 
