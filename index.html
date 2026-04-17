@@ -1495,6 +1495,16 @@ if(!slides.length) return;
 <svg aria-hidden="true" viewbox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 105.02 13.06l3.21 3.22a1 1 0 001.42-1.42l-3.22-3.21A7.5 7.5 0 0010.5 3zm0 2a5.5 5.5 0 110 11 5.5 5.5 0 010-11z" fill="currentColor"></path></svg>
 </button>
 </div>
+<div class="searchModal__priceRow" role="group" aria-label="価格帯検索">
+<label class="searchModal__priceLabel" for="searchPriceMin">
+<span>下限価格</span>
+<input autocomplete="off" class="searchModal__priceInput" id="searchPriceMin" inputmode="numeric" name="pf" placeholder="例：10000" type="text"/>
+</label>
+<label class="searchModal__priceLabel" for="searchPriceMax">
+<span>上限価格</span>
+<input autocomplete="off" class="searchModal__priceInput" id="searchPriceMax" inputmode="numeric" name="pt" placeholder="例：19999" type="text"/>
+</label>
+</div>
 <div class="searchModal__quickTitle">ワンクリック検索</div>
 <div class="searchModal__quick" id="searchQuickChips">
 <button class="chip" data-q="新作" type="button">新作</button>

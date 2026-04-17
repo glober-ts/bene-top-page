@@ -31,6 +31,8 @@ window.addEventListener('resize', updateNewsTextForDevice);
   const getMenuBtn = () => document.getElementById('menuBtn') || document.querySelector('.hamburger');
   const getSearchModal = () => document.getElementById('searchModal');
   const getSearchInput = () => document.getElementById('searchModalInput');
+  const getSearchPriceMinInput = () => document.getElementById('searchPriceMin');
+  const getSearchPriceMaxInput = () => document.getElementById('searchPriceMax');
 
   const syncDrawerState = () => {
     const drawer = getDrawer();
@@ -161,13 +163,57 @@ window.addEventListener('resize', updateNewsTextForDevice);
     const searchCloseBtn = searchModal ? searchModal.querySelector('#searchCloseBtn, .searchModal__close') : null;
     const searchOverlay = searchModal ? searchModal.querySelector('.searchModal__overlay, [data-close="1"]') : null;
     const searchInput = getSearchInput();
+    const searchPriceMinInput = getSearchPriceMinInput();
+    const searchPriceMaxInput = getSearchPriceMaxInput();
     const searchForm = searchInput ? searchInput.form : null;
 
+    const sanitizePrice = (value) => {
+      if(value === null || value === undefined) return '';
+      const normalized = String(value).replace(/,/g, '');
+      const digitsOnly = normalized.replace(/\D/g, '');
+      return digitsOnly;
+    };
+
+    const getSearchValues = (keyword) => {
+      const rawKeyword = typeof keyword === 'string' ? keyword : (searchInput ? searchInput.value : '');
+      const trimmedKeyword = rawKeyword.trim();
+      const keywordValue = trimmedKeyword || '';
+
+      let minPrice = sanitizePrice(searchPriceMinInput ? searchPriceMinInput.value : '');
+      let maxPrice = sanitizePrice(searchPriceMaxInput ? searchPriceMaxInput.value : '');
+
+      if(minPrice && maxPrice && Number(minPrice) > Number(maxPrice)){
+        const swappedMin = maxPrice;
+        const swappedMax = minPrice;
+        minPrice = swappedMin;
+        maxPrice = swappedMax;
+      }
+
+      return { keywordValue, minPrice, maxPrice };
+    };
+
+    const buildSearchUrl = ({ keywordValue, minPrice, maxPrice }) => {
+      const params = new URLSearchParams();
+      if(keywordValue) params.set('p', keywordValue);
+      if(minPrice) params.set('pf', minPrice);
+      if(maxPrice) params.set('pt', maxPrice);
+      const query = params.toString();
+      const baseUrl = 'https://store.shopping.yahoo.co.jp/benebene/search.html';
+      return query ? `${baseUrl}?${query}` : baseUrl;
+    };
+
     const goSearch = (keyword) => {
-      if(!searchForm || !searchInput) return;
-      if(typeof keyword === 'string') searchInput.value = keyword;
+      const values = getSearchValues(keyword);
+      const nextUrl = buildSearchUrl(values);
+      if(searchInput) searchInput.value = values.keywordValue;
+      if(searchPriceMinInput){
+        searchPriceMinInput.value = values.minPrice;
+      }
+      if(searchPriceMaxInput){
+        searchPriceMaxInput.value = values.maxPrice;
+      }
       closeSearch();
-      searchForm.submit();
+      window.location.href = nextUrl;
     };
 
     if(headerSearchBtn){
@@ -209,7 +255,10 @@ window.addEventListener('resize', updateNewsTextForDevice);
     }
 
     if(searchForm){
-      searchForm.addEventListener('submit', closeSearch);
+      searchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        goSearch();
+      });
     }
 
     document.addEventListener('keydown', (e) => {
