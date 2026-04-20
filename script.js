@@ -1,4 +1,49 @@
 
+(function(){
+  const getDailySeed = () => {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    return Number(`${yyyy}${mm}${dd}`);
+  };
+
+  const createSeededRandom = (seed) => {
+    let t = seed >>> 0;
+    return () => {
+      t += 0x6D2B79F5;
+      let x = Math.imul(t ^ (t >>> 15), 1 | t);
+      x ^= x + Math.imul(x ^ (x >>> 7), 61 | x);
+      return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+    };
+  };
+
+  const shuffleBySeed = (items, seed) => {
+    const rand = createSeededRandom(seed);
+    const arr = items.slice();
+    for(let i = arr.length - 1; i > 0; i -= 1){
+      const j = Math.floor(rand() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  };
+
+  const applyDailyCloseupOrder = () => {
+    const closeupGrid = document.querySelector('.closeupGrid');
+    if(!closeupGrid) return;
+
+    const cards = Array.from(closeupGrid.querySelectorAll('.closeupCard'));
+    if(cards.length <= 1) return;
+
+    const seed = getDailySeed();
+    const shuffledCards = shuffleBySeed(cards, seed);
+    shuffledCards.forEach((card) => closeupGrid.appendChild(card));
+  };
+
+  document.addEventListener('DOMContentLoaded', applyDailyCloseupOrder);
+})();
+
+
 /* ===== v141: unified drawer + search modal + toTop controls ===== */
 function updateNewsTextForDevice(){
   const isSP = window.matchMedia('(max-width: 768px)').matches;
