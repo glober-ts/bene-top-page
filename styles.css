@@ -608,13 +608,14 @@ img{display:block;max-width:100%}
     gap:8px;
     align-items:center;
     flex-wrap:wrap;
-    margin-bottom:4px;
+    margin-bottom:6px;
   }
 
   .newsItem__date,
   .newsItem time{
     flex:initial;
     margin-bottom:0;
+    white-space:nowrap;
   }
 
   .newsItem__category{
