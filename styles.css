@@ -879,6 +879,7 @@ section[id^="pickup"]{
   gap:12px;
   justify-content:center;
   margin-inline:auto;
+      margin-bottom: 30px;
 }
 
 .categorySection--closeup .closeupCard{
@@ -2951,7 +2952,7 @@ body.noScroll{ overflow:hidden; }
 }
 
 .categorySection + .categorySection{
-  padding-top:8px;
+  padding-top:35px;
 }
 
 .categoryQuickGrid{
