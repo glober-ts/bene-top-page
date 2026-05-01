@@ -191,6 +191,48 @@ img{display:block;max-width:100%}
 
 
 /* =========================
+   TOP BANNER BLOCK
+========================= */
+.topBannerBlock{
+  width:100%;
+}
+
+.topBannerBlock--easyCustom{
+  padding:18px 0 28px;
+}
+
+.topBannerBlock--guidebook{
+  padding:34px 0 30px;
+}
+
+.topBannerBlock__link{
+  display:block;
+  overflow:hidden;
+  border-radius:14px;
+  box-shadow:0 10px 26px rgba(0,0,0,.04);
+}
+
+.topBannerBlock__link img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+@media (max-width:767px){
+  .topBannerBlock--easyCustom{
+    padding:14px 0 22px;
+  }
+
+  .topBannerBlock--guidebook{
+    padding:26px 0 24px;
+  }
+
+  .topBannerBlock__link{
+    border-radius:10px;
+  }
+}
+
+/* =========================
    CATEGORY
 ========================= */
 /* Icon grid */
