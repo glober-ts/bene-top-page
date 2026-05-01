@@ -2805,58 +2805,44 @@ body.noScroll{ overflow:hidden; }
 .customOrderGrid{
   display:grid;
   grid-template-columns:1fr;
-  gap:10px;
+  gap:8px;
 }
 .customOrderCard{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-  border:1px solid rgba(138,31,78,.15);
-  border-radius:16px;
-  background:linear-gradient(180deg, #fff, #fbfaf8);
-  padding:13px 15px 14px;
+  display:block;
+  border:1px solid rgba(138,31,78,.24);
+  border-radius:var(--radius-card);
+  background:linear-gradient(180deg, rgba(255,255,255,1), rgba(252,247,249,.95));
+  padding:10px 14px 10px;
   text-decoration:none;
-  box-shadow:0 10px 24px rgba(0,0,0,.035);
-  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-}
-.customOrderCard::before{
-  content:"";
-  position:absolute;
-  inset:0 auto 0 0;
-  width:2px;
-  border-radius:16px 0 0 16px;
-  background:linear-gradient(180deg, rgba(138,31,78,.42), rgba(138,31,78,.15));
-}
-.customOrderCardMeta{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  line-height:1;
-}
-.customOrderCardNum{
-  font-size:11px;
-  letter-spacing:.14em;
-  color:rgba(138,31,78,.72);
+  box-shadow:0 4px 12px rgba(0,0,0,.05);
+  transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, background-color .22s ease;
 }
 .customOrderCardLabel{
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:#807973;
+  display:inline-flex;
+  align-items:center;
+  margin-bottom:6px;
+  padding:3px 9px;
+  border-radius:var(--radius-pill);
+  border:1px solid rgba(138,31,78,.24);
+  font-size:12px;
+  letter-spacing:.06em;
+  color:#7f2d52;
+  background:#fff;
 }
 .customOrderCardTitle{
   display:block;
-  font-size:17px;
-  font-weight:500;
-  line-height:1.45;
-  color:#5e2240;
+  margin-bottom:6px;
+  font-size:clamp(13px, 1vw, 15px);
+  font-weight:600;
+  line-height:1.48;
+  letter-spacing: clamp(-0.02em, calc(-0.02em + 0.016vw), 0em);
+  color:#6d1e42;
 }
 .customOrderCardText{
   display:block;
   font-size:13px;
-  line-height:1.7;
-  color:#5d5651;
+  line-height:1.4;
+  color:#3d3733;
 }
 .customOrderCtaWrap{
   margin-top:10px;
@@ -2875,8 +2861,9 @@ body.noScroll{ overflow:hidden; }
 @media (hover:hover){
   .customOrderCard:hover{
     transform:translateY(-2px);
-    box-shadow:0 12px 26px rgba(0,0,0,.045);
-    border-color:rgba(138,31,78,.3);
+    box-shadow:0 12px 20px rgba(0,0,0,.09);
+    border-color:rgba(138,31,78,.46);
+    background:#fff;
   }
   .customOrderCta:hover{
     color:#8a1f4e;
@@ -2884,9 +2871,9 @@ body.noScroll{ overflow:hidden; }
   }
 }
 .customOrderCard:focus-visible{
-  outline:2px solid rgba(138,31,78,.32);
+  outline:2px solid rgba(138,31,78,.38);
   outline-offset:2px;
-  border-color:rgba(138,31,78,.4);
+  border-color:rgba(138,31,78,.5);
 }
 .customOrderCta:focus-visible{
   outline:2px solid rgba(138,31,78,.38);
@@ -2901,11 +2888,11 @@ body.noScroll{ overflow:hidden; }
   }
   .customOrderGrid{
     grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:12px;
+    gap:10px;
   }
   .customOrderCard{
-    min-height:154px;
-    padding:16px 18px;
+    min-height:110px;
+    padding:14px 15px 13px;
   }
   .customOrderCtaWrap{
     margin-top:12px;
@@ -2915,6 +2902,7 @@ body.noScroll{ overflow:hidden; }
     font-size:17px;
   }
 }
+
 .infoSection{padding-top:40px}
 .infoGrid{
   display:grid;
