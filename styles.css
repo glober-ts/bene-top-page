@@ -49,7 +49,8 @@ img{display:block;max-width:100%}
 
 /* ===== section inner width control (unified wide) ===== */
 @media (min-width:980px){
-  .section > .wrap{
+  .section > .wrap,
+  .customHero > .wrap{
     max-width:var(--inner-unified);
     padding-inline:var(--inner-padding-pc);
   }
@@ -3751,6 +3752,20 @@ body.noScroll{ overflow:hidden; }
   }
 }
 
+
+@media (min-width:980px){
+  .horizontalScroll{
+    --shelf-gap:clamp(10px, .9vw, 14px);
+    --shelf-inline-padding:clamp(2px, .4vw, 6px);
+    --shelf-card-width:clamp(188px, calc((100% - (var(--shelf-gap) * 4)) / 4.33), 248px);
+    scroll-padding-inline:var(--shelf-inline-padding);
+  }
+
+  .horizontalScroll .productCard{
+    width:var(--shelf-card-width);
+    min-width:var(--shelf-card-width);
+  }
+}
 
 /* ===== v137 SP shelf cards: keep ~2.2 on narrow SP and ~3.6 on wide SP ===== */
 @media (max-width:767px){
