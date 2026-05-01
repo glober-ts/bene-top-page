@@ -8,6 +8,8 @@
   --muted:#6f6f6f;
   --shadow:0 14px 34px rgba(0,0,0,.06);
   --max:1120px;
+  --inner-wide:1560px;
+  --inner-middle:1180px;
 
   /* radius token: 共通 */
   --radius-none:0;             /* 角丸なし（区切り線・フラット要素） 0 */
@@ -45,35 +47,18 @@ img{display:block;max-width:100%}
   padding:0 18px;
 }
 
-/* ===== section inner width control (wide but readable) ===== */
+/* ===== section inner width control (wide / middle / full) ===== */
 @media (min-width:980px){
   .section > .wrap{
-    max-width:var(--section-inner-max, 1480px);
-    padding-inline:var(--section-inner-pad, clamp(40px, 4.8vw, 72px));
+    max-width:var(--inner-middle);
+    padding-inline:clamp(24px, 3vw, 44px);
   }
 
   .section.productTitleClampSection > .wrap,
   .section.rankingSection > .wrap,
   .section.featureShowcaseSection > .wrap{
-    --section-inner-max:1560px;
-    --section-inner-pad:clamp(48px, 5.2vw, 80px);
-  }
-
-  .section.infoSection > .wrap,
-  .section.ytSection > .wrap,
-  .section.customOrderSection > .wrap,
-  .section.trustSection > .wrap{
-    --section-inner-max:1400px;
-    --section-inner-pad:clamp(40px, 4.2vw, 64px);
-  }
-
-  .section.categorySection > .wrap,
-  .section#birthstone > .wrap,
-  .section#price > .wrap,
-  .section#guide > .wrap,
-  .section#salon > .wrap{
-    --section-inner-max:1460px;
-    --section-inner-pad:clamp(44px, 4.6vw, 72px);
+    max-width:var(--inner-wide);
+    padding-inline:clamp(36px, 4.4vw, 72px);
   }
 }
 
@@ -1079,7 +1064,7 @@ section[id^="pickup"]{
    - PC/SPともに一覧はカード内スクロールを維持 */
 .ytGrid{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 360px;
+  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
   gap:16px;
   align-items:start;
 }
@@ -1091,7 +1076,7 @@ section[id^="pickup"]{
 }
 
 @media (max-width:1120px){
-  .ytGrid{grid-template-columns:minmax(0,1fr) 320px;}
+  .ytGrid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);}
 }
 
 @media (min-width:981px){
@@ -1783,13 +1768,13 @@ header, .siteHeader, .header{
 
 /* restore tighter spacing under header menu */
 header, .siteHeader, .header{
-  padding-bottom: 0 !important;
+  padding-bottom: 0;
 }
 
 /* ===== v85 YouTube top spacing ===== */
 /* add more breathing room before YouTube section */
 .youtube, .ytSection, section.youtube{
-  margin-top: 26px !important;
+  margin-top: 26px;
   padding-top: 40px;
 }
 
