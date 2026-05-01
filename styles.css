@@ -8,8 +8,8 @@
   --muted:#6f6f6f;
   --shadow:0 14px 34px rgba(0,0,0,.06);
   --max:1120px;
-  --inner-unified:1400px;
-  --inner-padding-pc:clamp(40px, 4vw, 60px);
+  --content-max-wide:1400px;
+  --content-padding-pc:clamp(40px, 4vw, 60px);
 
   /* radius token: 共通 */
   --radius-none:0;             /* 角丸なし（区切り線・フラット要素） 0 */
@@ -51,10 +51,15 @@ img{display:block;max-width:100%}
 @media (min-width:980px){
   .section > .wrap,
   .customHero > .wrap{
-    max-width:var(--inner-unified);
-    padding-inline:var(--inner-padding-pc);
+    max-width:var(--content-max-wide);
+    padding-inline:var(--content-padding-pc);
+  }
+  .header > .wrap{
+    max-width:var(--content-max-wide);
+    padding-inline:var(--content-padding-pc);
   }
 }
+
 
 /* =========================
    HEADER
@@ -68,7 +73,7 @@ img{display:block;max-width:100%}
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
 }
-.headerRow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 10px 14px 0px}
+.headerRow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:14px}
 .logo{display:flex;align-items:center;gap:10px}
 .logoMark{width:34px;height:34px;border-radius:var(--radius-card-xs);border:1px solid rgba(230,225,216,1);background:radial-gradient(circle at 30% 30%,#fff,#efe5cf);box-shadow:0 10px 22px rgba(0,0,0,.08)}
 .logoText{font-weight:900;letter-spacing:.06em}
