@@ -553,27 +553,36 @@ img{display:block;max-width:100%}
 }
 .newsItem{
   display:grid;
-  grid-template-columns: 92px 1fr;
-  gap:10px;
-  align-items:center;
-  padding:10px 10px;
-  border-radius:var(--radius-card-xs);
-  border:1px solid rgba(230,225,216,1);
-  background:#fff;
+  grid-template-columns: 98px 1fr;
+  gap:12px;
+  align-items:start;
+  padding:12px 10px;
+  border-radius:12px;
+  border:1px solid rgba(0,0,0,.06);
+  background:#fffdfb;
   text-align:left;
+  transition:background-color .25s ease, border-color .25s ease;
 }
-.newsItem:hover{border-color: rgba(138,31,78,.28)}
+.newsItem:hover{
+  border-color: rgba(138,31,78,.2);
+  background:rgba(138,31,78,.035);
+}
 .newsItem time{
   font-size:12px;
-  color:var(--muted);
+  letter-spacing:.08em;
+  color:#6f6961;
   font-variant-numeric: tabular-nums;
+  line-height:1.5;
 }
 .newsItem span{
   display:block;
   max-width:880px;
   font-size:13px;
   color:var(--text);
-  line-height:1.5;
+  line-height:1.7;
+}
+.newsItem span[class*="【"]{
+  word-break:break-word;
 }
 
 button.shopLink{
@@ -624,12 +633,14 @@ button.ytItem{
   grid-template-columns: 104px 1fr;
   gap:10px;
   align-items:center;
-  padding:10px;
-  border-radius:var(--radius-card-md);
-  border:1px solid rgba(230,225,216,1);
-  background:#faf9f7;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(230,225,216,.9);
+  background:#fbfaf8;
+  position:relative;
+  transition:background-color .25s ease, border-color .25s ease;
 }
-.ytItem:hover{background:#fff; border-color: rgba(138,31,78,.28)}
+.ytItem:hover{background:#fff; border-color: rgba(138,31,78,.24)}
 
 /*背景枠一旦無し
 .ytThumb{
@@ -682,29 +693,46 @@ section[id^="pickup"]{
 
 
 
-.ytNowPlaying .label{font-weight:800;color:#8A1F4E;letter-spacing:.08em;}
+.ytNowPlaying .label{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:84px;
+}
+.ytNowLabelEn{
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#8A1F4E;
+  font-weight:600;
+}
+.ytNowLabelJa{
+  font-size:13px;
+  letter-spacing:.05em;
+  color:#4f4a45;
+  font-weight:500;
+}
 
 
 /* YouTube title (under heading, above video & list) */
 .ytNowPlaying.top{
   display:flex;
-  gap:12px;
-  align-items:center;
-  margin:10px 0 14px;
-  padding:8px 14px;
-  border-left:4px solid #8A1F4E;
-  background:linear-gradient(90deg, rgba(138,31,78,.08), transparent);
+  gap:14px;
+  align-items:flex-start;
+  margin:10px 0 16px;
+  padding:12px 14px;
+  border:1px solid rgba(138,31,78,.2);
+  border-left:3px solid rgba(138,31,78,.55);
+  border-radius:14px;
+  background:linear-gradient(90deg, rgba(138,31,78,.06), rgba(255,255,255,.96) 38%);
   font-family:"Noto Sans JP",system-ui,sans-serif;
   font-size:14px;
-}
-.ytNowPlaying.top .label{
-  font-weight:900;
-  color:#8A1F4E;
-  letter-spacing:.06em;
 }
 .ytNowPlaying.top #ytTitle{
   color:inherit;
   text-decoration:none;
+  line-height:1.6;
+  font-size:16px;
 }
 .ytNowPlaying.top #ytTitle:hover{
   text-decoration:underline;
@@ -725,15 +753,28 @@ section[id^="pickup"]{
   border-radius:10px;
 }
 .ytNowPlaying.top .ytProductLink{
-  color:#8A1F4E;
+  color:#5d3648;
   text-decoration:none;
-  font-size:12px;
-  font-weight:600;
-  letter-spacing:.04em;
-  background:rgba(138,31,78,.10);
+  gap:2px;
+  padding:8px 14px;
+  border:1px solid rgba(138,31,78,.26);
+  background:#fff;
+  border-radius:14px;
 }
 .ytNowPlaying.top .ytProductLink:hover{
-  background:rgba(138,31,78,.16);
+  background:rgba(138,31,78,.05);
+}
+.ytProductLink__label{
+  display:block;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#8A1F4E;
+}
+.ytProductLink__text{
+  display:block;
+  font-size:13px;
+  letter-spacing:.04em;
 }
 .ytNowPlaying .isHidden{
   display:none;
@@ -752,11 +793,8 @@ section[id^="pickup"]{
     gap:8px;
   }
   .ytNowPlaying.top .ytProductLink{
-    font-size:13px;
-    font-weight:700;
-    background:rgba(138,31,78,.14);
     min-height:40px;
-    padding:6px 10px;
+    padding:8px 12px;
   }
 }
 
@@ -1096,11 +1134,22 @@ section[id^="pickup"]{
 
 /* YouTube list active state */
 .ytItem.isActive{
-  outline:2px solid rgba(138,31,78,.35);
-  background:#faf9f7;
+  outline:none;
+  border-color:rgba(138,31,78,.34);
+  background:rgba(138,31,78,.04);
 }
 .ytItem.isActive .ytMeta strong{
   color:#8A1F4E;
+}
+.ytItem.isActive::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:10px;
+  bottom:10px;
+  width:2px;
+  border-radius:2px;
+  background:rgba(138,31,78,.55);
 }
 
 /* NEWS / YouTube scroll container policy
