@@ -1271,3 +1271,17 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
   }
 })();
+
+
+(() => {
+  const notice = document.querySelector('.js-periodNotice');
+  if (!notice) return;
+
+  const startAt = new Date('2026-05-01T00:00:00+09:00');
+  const endAt = new Date('2026-05-07T23:59:59+09:00');
+  const now = new Date();
+
+  if (now < startAt || now > endAt) {
+    notice.hidden = true;
+  }
+})();

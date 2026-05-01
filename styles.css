@@ -90,6 +90,34 @@ img{display:block;max-width:100%}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:var(--radius-pill);border:1px solid rgba(230,225,216,1);background:#fff;font-weight:800;font-size:13px}
 .btn.primary{border-color:transparent;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-700));box-shadow:0 12px 22px rgba(138,31,78,.22)}
 
+
+/* =========================
+   PERIOD NOTICE
+========================= */
+.siteNotice{padding:12px 0 6px}
+.siteNotice .wrap{max-width:var(--content-max-wide);padding-inline:var(--content-padding-pc)}
+.noticeAccordion{border:1px solid var(--line);background:linear-gradient(180deg,#fff,var(--soft));border-radius:var(--radius-card-xs)}
+.noticeAccordion__summary{list-style:none;display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer}
+.noticeAccordion__summary::-webkit-details-marker{display:none}
+.noticeAccordion__icon{position:relative;flex:0 0 26px;width:26px;height:26px;border-radius:var(--radius-circle);border:1px solid rgba(138,31,78,.25);background:#fff}
+.noticeAccordion__icon::before,.noticeAccordion__icon::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.5px;background:var(--accent);transform:translate(-50%,-50%)}
+.noticeAccordion__icon::after{transform:translate(-50%,-50%) rotate(90deg)}
+.noticeAccordion[open] .noticeAccordion__icon::after{display:none}
+.noticeAccordion__title{font-size:14px;line-height:1.6;font-weight:600;color:var(--text)}
+.noticeAccordion__body{padding:0 18px 18px 56px;color:var(--text);font-size:13px;line-height:1.9}
+.noticeAccordion__body p{margin:0}
+.noticeAccordion__body p + p{margin-top:12px}
+.noticeAccordion__term{padding:10px 12px;background:rgba(255,255,255,.75);border:1px solid var(--line)}
+
+@media (max-width: 979px){
+  .siteNotice{padding:10px 0 4px}
+  .siteNotice .wrap{max-width:var(--max);padding:0 18px}
+  .noticeAccordion__summary{gap:10px;padding:12px 14px}
+  .noticeAccordion__icon{flex-basis:24px;width:24px;height:24px}
+  .noticeAccordion__title{font-size:13px;line-height:1.5}
+  .noticeAccordion__body{padding:0 14px 14px 14px;font-size:12px;line-height:1.85}
+  .noticeAccordion__term{padding:8px 10px}
+}
 /* ========================================
    HERO SECTION
    トップメインビジュアルのレイアウト
