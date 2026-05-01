@@ -2887,7 +2887,7 @@ body.noScroll{ overflow:hidden; }
 
 @media (min-width:1024px){
   .infoGrid.infoLayout{
-    grid-template-columns:minmax(0,2.2fr) minmax(320px,1fr);
+    grid-template-columns:minmax(0,2.5fr) minmax(360px,1fr);
     align-items:start;
     gap:24px;
   }
