@@ -3768,6 +3768,13 @@ body.noScroll{ overflow:hidden; }
   }
 }
 
+
+@media (min-width:1440px){
+  .horizontalScroll{
+    --shelf-card-width:calc((100% - (var(--shelf-gap) * 4.5)) / 5.5);
+  }
+}
+
 /* ===== v137 SP shelf cards: keep ~2.2 on narrow SP and ~3.6 on wide SP ===== */
 @media (max-width:767px){
   .horizontalScroll{
