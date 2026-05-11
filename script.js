@@ -411,6 +411,7 @@ window.addEventListener('resize', updateNewsTextForDevice);
   let dragIntent = null;
 
   let isLoopJumping = false;
+  let loopFallbackTimer = null;
   // 無限ループ実現のため先頭/末尾のクローンを挿入し、端到達時の見た目を自然にする
   const cloneStart = cards[0].cloneNode(true);
   const cloneEnd = cards[cards.length - 1].cloneNode(true);
@@ -440,11 +441,27 @@ window.addEventListener('resize', updateNewsTextForDevice);
   };
 
   const applyTranslate = (x) => {
-    currentTranslateX = x;
-    track.style.transform = `translate3d(${x}px, 0, 0)`;
+    const safeX = Number.isFinite(x) ? x : 0;
+    currentTranslateX = safeX;
+    track.style.transform = `translate3d(${safeX}px, 0, 0)`;
   };
 
   const getTranslateForVisualIndex = (visualIndex) => -(cardStep * visualIndex) + railOffset;
+
+  const isUsableMetric = (value) => Number.isFinite(value) && value > 0;
+
+  const ensureHeroImagesVisible = () => {
+    slides.forEach((slide) => {
+      slide.hidden = false;
+      slide.style.removeProperty('display');
+      slide.style.removeProperty('visibility');
+      slide.querySelectorAll('img').forEach((img) => {
+        img.hidden = false;
+        img.style.removeProperty('display');
+        img.style.removeProperty('visibility');
+      });
+    });
+  };
 
   const normalizeRealIndex = (index) => {
     if(index < 0) return cards.length - 1;
@@ -458,25 +475,75 @@ window.addEventListener('resize', updateNewsTextForDevice);
     return normalizeRealIndex(visualIndex - 1);
   };
 
+  const normalizeVisualIndex = (index) => {
+    if(!Number.isFinite(index)) return 1;
+    if(index < 0 || index > cards.length + 1) return 1;
+    return index;
+  };
+
+  const normalizeToRealVisualIndex = (index) => {
+    const nextRealIndex = getRealIndexFromVisual(normalizeVisualIndex(index));
+    return Math.max(0, Math.min(nextRealIndex, cards.length - 1)) + 1;
+  };
+
+  const finishLoopJump = () => {
+    if(loopFallbackTimer){
+      clearTimeout(loopFallbackTimer);
+      loopFallbackTimer = null;
+    }
+
+    if(!isLoopJumping) return;
+    isLoopJumping = false;
+    setTransition(false);
+    if(currentIndex >= cards.length + 1){
+      currentIndex = 1;
+      realIndex = 0;
+    }else if(currentIndex <= 0){
+      currentIndex = cards.length;
+      realIndex = cards.length - 1;
+    }
+    applyTranslate(getTranslateForVisualIndex(currentIndex));
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => setTransition(true));
+      updateDots();
+    });
+  };
+
+  const scheduleLoopFallback = () => {
+    if(loopFallbackTimer) clearTimeout(loopFallbackTimer);
+    loopFallbackTimer = setTimeout(finishLoopJump, 900);
+  };
+
   // レイアウト再計算: リサイズ時にカード幅・中央寄せオフセットを再取得
   const updateMetrics = () => {
     const firstRealCard = slides[1] || slides[0];
-    cardStep = firstRealCard ? firstRealCard.getBoundingClientRect().width : 0;
+    const firstRect = firstRealCard ? firstRealCard.getBoundingClientRect() : null;
+    const rectWidth = firstRect ? firstRect.width : 0;
+    let nextCardStep = rectWidth;
     if(slides.length > 2){
       const a = slides[1].offsetLeft;
       const b = slides[2].offsetLeft;
-      if(b > a) cardStep = b - a;
+      if(Number.isFinite(a) && Number.isFinite(b) && b > a) nextCardStep = b - a;
     }
+
+    if(!isUsableMetric(nextCardStep) || !isUsableMetric(rectWidth)){
+      return false;
+    }
+
+    cardStep = nextCardStep;
+    currentIndex = normalizeVisualIndex(currentIndex);
 
     railOffset = 0;
     // 端末幅に関わらず、アクティブカードを常に中央軸へ揃える
-    if(firstRealCard){
-      railOffset = Math.max((rail.clientWidth - firstRealCard.getBoundingClientRect().width) / 2, 0);
-    }
+    railOffset = Math.max((rail.clientWidth - rectWidth) / 2, 0);
+    if(!Number.isFinite(railOffset)) railOffset = 0;
 
+    ensureHeroImagesVisible();
     setTransition(false);
     applyTranslate(getTranslateForVisualIndex(currentIndex));
     requestAnimationFrame(() => setTransition(true));
+    updateDots();
+    return true;
   };
 
   // ドットUI同期: 現在インデックスを視覚/ARIAの両方に反映
@@ -489,10 +556,20 @@ window.addEventListener('resize', updateNewsTextForDevice);
     });
   };
 
+  const syncDots = () => updateDots();
+
+  const syncHeroPosition = ({ animate = false } = {}) => {
+    setTransition(animate && !isPointerDragging);
+    applyTranslate(getTranslateForVisualIndex(currentIndex));
+  };
+
   // 指定インデックスへ移動（矢印/ドット/自動再生の共通入口）
   const moveToVisualIndex = (index, { animate = true } = {}) => {
-    currentIndex = index;
+    if(!isUsableMetric(cardStep) && !updateMetrics()) return;
+
+    currentIndex = normalizeVisualIndex(index);
     realIndex = getRealIndexFromVisual(currentIndex);
+    ensureHeroImagesVisible();
     setTransition(animate && !isPointerDragging);
     applyTranslate(getTranslateForVisualIndex(currentIndex));
     updateDots();
@@ -509,6 +586,11 @@ window.addEventListener('resize', updateNewsTextForDevice);
       stopAutoSlide({ reserveResume: true });
     }
 
+    if(isPointerDragging) return;
+    if(isLoopJumping) finishLoopJump();
+    if(!isUsableMetric(cardStep) && !updateMetrics()) return;
+
+    currentIndex = normalizeVisualIndex(currentIndex);
     const target = currentIndex + dir;
     const isForwardLoop = target === cards.length + 1;
     const isBackwardLoop = target === 0;
@@ -516,12 +598,14 @@ window.addEventListener('resize', updateNewsTextForDevice);
     if(isForwardLoop){
       isLoopJumping = true;
       moveToVisualIndex(target, { animate: true });
+      scheduleLoopFallback();
       return;
     }
 
     if(isBackwardLoop){
       isLoopJumping = true;
       moveToVisualIndex(target, { animate: true });
+      scheduleLoopFallback();
       return;
     }
 
@@ -701,22 +785,9 @@ window.addEventListener('resize', updateNewsTextForDevice);
   });
 
   // 無限ループ補正: クローン位置から実体位置へ瞬時に戻し、つなぎ目を隠す
-  track.addEventListener('transitionend', () => {
-    if(!isLoopJumping) return;
-    isLoopJumping = false;
-    setTransition(false);
-    if(currentIndex === cards.length + 1){
-      currentIndex = 1;
-      realIndex = 0;
-    }else if(currentIndex === 0){
-      currentIndex = cards.length;
-      realIndex = cards.length - 1;
-    }
-    applyTranslate(getTranslateForVisualIndex(currentIndex));
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => setTransition(true));
-      updateDots();
-    });
+  track.addEventListener('transitionend', (e) => {
+    if(e.target !== track || e.propertyName !== 'transform') return;
+    finishLoopJump();
   });
 
   // ----------------------------------------
@@ -732,7 +803,10 @@ window.addEventListener('resize', updateNewsTextForDevice);
       clearTimeout(resumeTimer);
       resumeTimer = null;
     }
-    timer = setInterval(() => moveBy(1, false), AUTOPLAY_MS);
+    timer = setInterval(() => {
+      if(document.hidden) return;
+      moveBy(1, false);
+    }, AUTOPLAY_MS);
   }
 
   // autoplay停止: 手動操作・ホバー時に意図せぬ移動を止める
@@ -760,10 +834,31 @@ window.addEventListener('resize', updateNewsTextForDevice);
   rail.addEventListener('touchstart', onUserInteract, { passive: true });
   rail.addEventListener('mousedown', onUserInteract);
 
-  window.addEventListener('resize', updateMetrics);
-  window.addEventListener('load', updateMetrics);
+  const normalizeHeroState = () => {
+    if(isLoopJumping) finishLoopJump();
+    currentIndex = normalizeToRealVisualIndex(currentIndex);
+    realIndex = getRealIndexFromVisual(currentIndex);
+    updateMetrics();
+    currentIndex = normalizeToRealVisualIndex(currentIndex);
+    realIndex = getRealIndexFromVisual(currentIndex);
+    syncHeroPosition({ animate: false });
+    requestAnimationFrame(() => setTransition(true));
+    syncDots();
+  };
 
-  updateMetrics();
+  window.addEventListener('resize', normalizeHeroState);
+  window.addEventListener('load', normalizeHeroState);
+  window.addEventListener('pageshow', normalizeHeroState);
+  document.addEventListener('visibilitychange', () => {
+    if(!document.hidden){
+      requestAnimationFrame(() => {
+        normalizeHeroState();
+        startAutoSlide();
+      });
+    }
+  });
+
+  requestAnimationFrame(updateMetrics);
   updateDots();
   startAutoSlide();
 })();;
