@@ -208,11 +208,45 @@ img{display:block;max-width:100%}
 }
 
 .campaignBannerSection{
-  padding:18px 0 28px;
+  padding:18px 0 32px;
 }
 
 .topBannerBlock--easyCustom{
-  padding:14px 0 22px;
+  padding:10px 0 22px;
+}
+
+.bannerSectionHead{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:0 0 10px;
+}
+
+.bannerSectionHead::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg, rgba(138,31,78,.18), rgba(138,31,78,0));
+}
+
+.bannerSectionHead__label{
+  color:var(--accent);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:12px;
+  font-style:italic;
+  letter-spacing:.12em;
+  line-height:1.4;
+}
+
+.bannerSectionHead__title{
+  color:var(--text);
+  font-size:13px;
+  letter-spacing:.08em;
+  line-height:1.5;
+}
+
+.bannerSectionHead--subtle{
+  margin-bottom:9px;
 }
 
 .topBannerBlock--guidebook{
@@ -241,9 +275,27 @@ img{display:block;max-width:100%}
 }
 
 @media (max-width:767px){
-  .campaignBannerSection,
+  .campaignBannerSection{
+    padding:14px 0 26px;
+  }
+
   .topBannerBlock--easyCustom{
-    padding:14px 0 22px;
+    padding:8px 0 22px;
+  }
+
+  .bannerSectionHead{
+    gap:8px;
+    margin-bottom:8px;
+  }
+
+  .bannerSectionHead__label{
+    font-size:11px;
+    letter-spacing:.1em;
+  }
+
+  .bannerSectionHead__title{
+    font-size:12px;
+    letter-spacing:.06em;
   }
 
   .topBannerBlock--guidebook{
