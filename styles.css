@@ -2937,7 +2937,10 @@ body.noScroll{ overflow:hidden; }
 }
 
 .customHero{
-  padding:30px 0 16px;
+  padding:30px 0 14px;
+}
+.customHero .customOrderHead{
+  margin:0 0 16px;
 }
 .customHeroMedia{
   position:relative;
@@ -2968,7 +2971,10 @@ body.noScroll{ overflow:hidden; }
 }
 @media (max-width:767px){
   .customHero{
-    padding:6px 0 10px;
+    padding:6px 0 12px;
+  }
+  .customHero .customOrderHead{
+    margin-bottom:14px;
   }
   .customHeroMedia{
     height:180px;
@@ -2997,7 +3003,7 @@ body.noScroll{ overflow:hidden; }
 }
 
 .customOrderSection{
-  padding:8px 0 40px;
+  padding:0 0 40px;
 }
 .customOrderHead{
   margin:0 0 10px;
@@ -3091,7 +3097,7 @@ body.noScroll{ overflow:hidden; }
 }
 @media (min-width:768px){
   .customOrderSection{
-    padding:10px 0 40px;
+    padding:0 0 40px;
   }
   .customOrderHead{
     margin-bottom:12px;
