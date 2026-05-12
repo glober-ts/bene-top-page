@@ -193,8 +193,13 @@ img{display:block;max-width:100%}
 /* =========================
    TOP BANNER BLOCK
 ========================= */
-.topBannerBlock{
+.topBannerBlock,
+.campaignBannerSection{
   width:100%;
+}
+
+.campaignBannerSection{
+  padding:18px 0 28px;
 }
 
 .topBannerBlock--easyCustom{
@@ -205,20 +210,23 @@ img{display:block;max-width:100%}
   padding:34px 0 30px;
 }
 
-.topBannerBlock__link{
+.topBannerBlock__link,
+.campaignBannerSection__link{
   display:block;
   overflow:hidden;
   border-radius:14px;
   box-shadow:0 10px 26px rgba(0,0,0,.04);
 }
 
-.topBannerBlock__link img{
+.topBannerBlock__link img,
+.campaignBannerSection__link img{
   display:block;
   width:100%;
   height:auto;
 }
 
 @media (max-width:767px){
+  .campaignBannerSection,
   .topBannerBlock--easyCustom{
     padding:14px 0 22px;
   }
@@ -227,7 +235,8 @@ img{display:block;max-width:100%}
     padding:26px 0 24px;
   }
 
-  .topBannerBlock__link{
+  .topBannerBlock__link,
+  .campaignBannerSection__link{
     border-radius:10px;
   }
 }

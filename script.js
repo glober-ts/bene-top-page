@@ -1380,3 +1380,16 @@ document.addEventListener('DOMContentLoaded', () => {
     notice.hidden = true;
   }
 })();
+
+(() => {
+  const banner = document.querySelector('.js-campaignBanner');
+  if (!banner) return;
+
+  const startAt = new Date('2026-05-09T20:00:00+09:00');
+  const endAt = new Date('2026-05-16T01:59:59+09:00');
+  const now = new Date();
+
+  if (now < startAt || now > endAt) {
+    banner.hidden = true;
+  }
+})();
