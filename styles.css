@@ -9,6 +9,8 @@
   --shadow:0 14px 34px rgba(0,0,0,.06);
   --max:1120px;
   --content-max-wide:1400px;
+  --content-wide:min(var(--content-max-wide), calc(100vw - 48px));
+  --content-wide-sp:calc(100vw - 24px);
   --content-padding-pc:clamp(40px, 4vw, 60px);
 
   /* radius token: 共通 */
@@ -53,6 +55,12 @@ img{display:block;max-width:100%}
   .customHero > .wrap{
     max-width:var(--content-max-wide);
     padding-inline:var(--content-padding-pc);
+  }
+  .campaignBannerSection > .wrap,
+  .topBannerBlock > .wrap{
+    width:var(--content-wide);
+    max-width:var(--content-wide);
+    padding-inline:0;
   }
   .header > .wrap{
     max-width:var(--content-max-wide);
@@ -223,6 +231,15 @@ img{display:block;max-width:100%}
   display:block;
   width:100%;
   height:auto;
+}
+
+@media (max-width:979px){
+  .campaignBannerSection > .wrap,
+  .topBannerBlock > .wrap{
+    width:var(--content-wide-sp);
+    max-width:var(--content-wide-sp);
+    padding-inline:0;
+  }
 }
 
 @media (max-width:767px){
