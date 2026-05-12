@@ -222,9 +222,6 @@ img{display:block;max-width:100%}
 .topBannerBlock__link,
 .campaignBannerSection__link{
   display:block;
-  overflow:hidden;
-  border-radius:14px;
-  box-shadow:0 10px 26px rgba(0,0,0,.04);
 }
 
 .topBannerBlock__link img,
@@ -251,11 +248,6 @@ img{display:block;max-width:100%}
 
   .topBannerBlock--guidebook{
     padding:26px 0 24px;
-  }
-
-  .topBannerBlock__link,
-  .campaignBannerSection__link{
-    border-radius:10px;
   }
 }
 
