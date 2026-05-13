@@ -45,31 +45,6 @@
 
 
 /* ===== v141: unified drawer + search modal + toTop controls ===== */
-function updateNewsTextForDevice(){
-  const isSP = window.matchMedia('(max-width: 768px)').matches;
-
-  document.querySelectorAll('.newsItem').forEach((item) => {
-    const span = item.querySelector('span');
-    if(!span) return;
-
-    if(!span.dataset.original){
-      span.dataset.original = span.textContent;
-    }
-
-    if(isSP){
-      const spText = item.dataset.textSp;
-      if(spText){
-        span.textContent = spText;
-      }
-    }else{
-      span.textContent = span.dataset.original;
-    }
-  });
-}
-
-window.addEventListener('DOMContentLoaded', updateNewsTextForDevice);
-window.addEventListener('resize', updateNewsTextForDevice);
-
 (function(){
   const getDrawer = () => document.getElementById('gnav');
   const getBackdrop = () => document.getElementById('gnavBackdrop');
@@ -181,13 +156,10 @@ window.addEventListener('resize', updateNewsTextForDevice);
     const closeBtn = drawer ? drawer.querySelector('.gnavClose') : null;
 
     if(menuBtn){
-      const hasInlineToggle = /__toggleDrawer/.test(menuBtn.getAttribute('onclick') || '');
-      if(!hasInlineToggle){
-        menuBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          toggleDrawer();
-        });
-      }
+      menuBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleDrawer();
+      });
     }
     if(closeBtn){
       closeBtn.addEventListener('click', (e) => {
@@ -1118,70 +1090,51 @@ document.addEventListener('DOMContentLoaded', () => {
 ;
 /* ===== popup modal controller ===== */
 (function(){
-  const popupConfig = {
-    enabled: true,
-    startAt: '2026-04-16T00:00:00+09:00',
-    endAt: '2026-04-25T23:59:59+09:00',
-    suppressHours: 4,
-
-    mode: 'image_text', // "image" or "image_text"
-
-    imageUrl: 'https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/260212cp.jpg',
-    imageAlt: 'キャンペーンバナー',
-    imageAspectRatio: '1/1',
-    imageFit: 'cover', // cover or contain
-
-    textHtml: '<h2>お知らせ</h2><p>期間限定のイベントを開催中です。ぜひご覧ください。</p>',
-
-    popupClickable: true,
-    linkUrl: 'https://www.rakuten.ne.jp/gold/bene/',
-    linkTarget: '_self',
-
-    buttons: [
-      {
-        label: '詳しく見る',
-        url: 'https://shopping.geocities.jp/benebene/',
-        target: '_self',
-        bgColor: '#8A1F4E',
-        textColor: '#ffffff',
-        borderColor: '#8A1F4E'
-      },
-            {
-        label: '対象商品を見る',
-        url: 'https://shop.bene-bene.com/fs/rosecut/',
-        target: '_blank',
-        bgColor: '#fff',    // サブ
-        textColor: '#8A1F4E',
-        borderColor: '#8A1F4E'
-      }
-    ],
-
-    closeOnOverlay: true,
-
-    size: {
-      pc: {
-        width: '400px',
-        maxWidth: '70vw'
-      },
-      sp: {
-        width: '70vw',
-        maxWidth: '70vw'
-      }
+  const defaultNoticeConfig = {
+    popup: {
+      enabled: true,
+      startAt: '2026-04-16T00:00:00+09:00',
+      endAt: '2026-04-25T23:59:59+09:00',
+      suppressHours: 4,
+      mode: 'image_text',
+      imageUrl: 'https://image.rakuten.co.jp/bene/cabinet/tao/gold/topcontent/260212cp.jpg',
+      imageAlt: 'キャンペーンバナー',
+      imageAspectRatio: '1/1',
+      imageFit: 'cover',
+      textHtml: '<h2>お知らせ</h2><p>期間限定のイベントを開催中です。ぜひご覧ください。</p>',
+      popupClickable: true,
+      linkUrl: 'https://www.rakuten.ne.jp/gold/bene/',
+      linkTarget: '_self',
+      buttons: [
+        {
+          label: '詳しく見る',
+          url: 'https://shopping.geocities.jp/benebene/',
+          target: '_self'
+        },
+        {
+          label: '対象商品を見る',
+          url: 'https://shop.bene-bene.com/fs/rosecut/',
+          target: '_blank'
+        }
+      ],
+      closeOnOverlay: true
     },
-
-    borderRadius: '20px',
-    backgroundColor: '#ffffff',
-    overlayColor: 'rgba(0,0,0,.45)',
-
-    textColor: '#1b1b1b',
-    textSizePc: '16px',
-    textSizeSp: '14px',
-    titleSizePc: '24px',
-    titleSizeSp: '20px',
-
-    closeButtonColor: '#333333',
-    closeButtonSize: '32px'
+    holiday: {
+      startAt: '2026-05-01T00:00:00+09:00',
+      endAt: '2026-05-07T23:59:59+09:00'
+    },
+    campaignBanner: {
+      startAt: '2026-05-09T20:00:00+09:00',
+      endAt: '2026-05-16T01:59:59+09:00'
+    }
   };
+
+  const noticeConfig = window.BENE_TOP_NOTICE_CONFIG || {};
+  const popupConfig = {
+    ...defaultNoticeConfig.popup,
+    ...(noticeConfig.popup || {})
+  };
+  window.BENE_TOP_NOTICE_DEFAULTS = defaultNoticeConfig;
 
   const STORAGE_KEY = `benePopup_closedAt_${popupConfig.startAt || 'default'}_${popupConfig.endAt || 'default'}`;
   const DISMISS_UNTIL_END_KEY = `benePopup_dismissUntilEnd_${popupConfig.startAt || 'default'}_${popupConfig.endAt || 'default'}`;
@@ -1236,22 +1189,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const applyVisualConfig = () => {
-    modal.style.setProperty('--popup-radius', popupConfig.borderRadius || '20px');
-    modal.style.setProperty('--popup-bg', popupConfig.backgroundColor || '#ffffff');
-    modal.style.setProperty('--popup-overlay', popupConfig.overlayColor || 'rgba(0,0,0,.45)');
-    modal.style.setProperty('--popup-text', popupConfig.textColor || '#1b1b1b');
-    modal.style.setProperty('--popup-close-size', popupConfig.closeButtonSize || '32px');
-    modal.style.setProperty('--popup-close-color', popupConfig.closeButtonColor || '#333333');
-
-    const isSp = window.matchMedia('(max-width: 979px)').matches;
-    const currentSize = isSp ? popupConfig.size?.sp : popupConfig.size?.pc;
-    if(currentSize?.width) modal.style.setProperty('--popup-width', currentSize.width);
-    if(currentSize?.maxWidth) modal.style.setProperty('--popup-max-width', currentSize.maxWidth);
-    modal.style.setProperty('--popup-text-size', isSp ? (popupConfig.textSizeSp || '14px') : (popupConfig.textSizePc || '16px'));
-    modal.style.setProperty('--popup-title-size', isSp ? (popupConfig.titleSizeSp || '20px') : (popupConfig.titleSizePc || '24px'));
-  };
-
   const buildButtons = () => {
     buttonsWrap.innerHTML = '';
     if(!Array.isArray(popupConfig.buttons)) return;
@@ -1264,9 +1201,6 @@ document.addEventListener('DOMContentLoaded', () => {
       link.href = btnConfig.url;
       link.target = btnConfig.target || '_self';
       link.rel = link.target === '_blank' ? 'noopener noreferrer' : '';
-      link.style.backgroundColor = btnConfig.bgColor || '#8A1F4E';
-      link.style.color = btnConfig.textColor || '#ffffff';
-      link.style.borderColor = btnConfig.borderColor || btnConfig.bgColor || '#8A1F4E';
       link.addEventListener('click', (event) => {
         event.stopPropagation();
         localStorage.setItem(DISMISS_UNTIL_END_KEY, '1');
@@ -1332,7 +1266,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(!canShowPopup()) return;
 
-    applyVisualConfig();
     setupMode();
     setupClickable();
     window.setTimeout(() => {
@@ -1353,7 +1286,6 @@ document.addEventListener('DOMContentLoaded', () => {
     closePopup({ dismissUntilEnd: false });
   });
 
-  window.addEventListener('resize', applyVisualConfig);
   document.addEventListener('keydown', (event) => {
     if(event.key === 'Escape' && modal.classList.contains('is-open')){
       closePopup({ dismissUntilEnd: false });
@@ -1367,29 +1299,50 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })();
 
+const getNoticeConfigSection = (sectionName, fallback = {}) => {
+  const defaults = window.BENE_TOP_NOTICE_DEFAULTS?.[sectionName] || {};
+  const config = window.BENE_TOP_NOTICE_CONFIG?.[sectionName] || {};
+  return { ...fallback, ...defaults, ...config };
+};
+
+const parseNoticeTime = (value) => {
+  if(typeof value !== 'string' || !value.trim()) return null;
+  const ts = new Date(value).getTime();
+  return Number.isFinite(ts) ? ts : null;
+};
+
+const isWithinNoticePeriod = ({ startAt, endAt }, nowTs = Date.now()) => {
+  const startTs = parseNoticeTime(startAt);
+  const endTs = parseNoticeTime(endAt);
+  if(startTs && nowTs < startTs) return false;
+  if(endTs && nowTs > endTs) return false;
+  return true;
+};
 
 (() => {
   const notice = document.querySelector('.js-periodNotice');
-  if (!notice) return;
+  if(!notice) return;
 
-  const startAt = new Date('2026-05-01T00:00:00+09:00');
-  const endAt = new Date('2026-05-07T23:59:59+09:00');
-  const now = new Date();
+  const holidayConfig = getNoticeConfigSection('holiday', {
+    startAt: '2026-05-01T00:00:00+09:00',
+    endAt: '2026-05-07T23:59:59+09:00'
+  });
 
-  if (now < startAt || now > endAt) {
+  if(!isWithinNoticePeriod(holidayConfig)){
     notice.hidden = true;
   }
 })();
 
 (() => {
   const banner = document.querySelector('.js-campaignBanner');
-  if (!banner) return;
+  if(!banner) return;
 
-  const startAt = new Date('2026-05-09T20:00:00+09:00');
-  const endAt = new Date('2026-05-16T01:59:59+09:00');
-  const now = new Date();
+  const campaignBannerConfig = getNoticeConfigSection('campaignBanner', {
+    startAt: '2026-05-09T20:00:00+09:00',
+    endAt: '2026-05-16T01:59:59+09:00'
+  });
 
-  if (now < startAt || now > endAt) {
+  if(!isWithinNoticePeriod(campaignBannerConfig)){
     banner.hidden = true;
   }
 })();
