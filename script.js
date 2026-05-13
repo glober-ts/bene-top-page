@@ -1114,7 +1114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
           label: '対象商品を見る',
           url: 'https://shop.bene-bene.com/fs/rosecut/',
-          target: '_blank'
+          target: '_self'
         }
       ],
       closeOnOverlay: true
@@ -1191,6 +1191,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const isAllowedNewTabUrl = (url) => (
+    typeof url === 'string' && (
+      url.includes('/event/benebene_guide.html') ||
+      url.includes('line.me/R/ti/p/@640zgbge') ||
+      url.includes('/shop/shop.html#ginzasalon') ||
+      url.includes('/shop/shop.html#kofushop')
+    )
+  );
+
+  const resolveLinkTarget = (url, requestedTarget) => (
+    requestedTarget === '_blank' && isAllowedNewTabUrl(url) ? '_blank' : '_self'
+  );
+
   const buildButtons = () => {
     buttonsWrap.innerHTML = '';
     if(!Array.isArray(popupConfig.buttons)) return;
@@ -1198,11 +1211,17 @@ document.addEventListener('DOMContentLoaded', () => {
     popupConfig.buttons.forEach((btnConfig) => {
       if(!isTruthyString(btnConfig?.label) || !isTruthyString(btnConfig?.url)) return;
       const link = document.createElement('a');
+      const target = resolveLinkTarget(btnConfig.url, btnConfig.target);
       link.className = 'popupModal__button';
       link.textContent = btnConfig.label;
       link.href = btnConfig.url;
-      link.target = btnConfig.target || '_self';
-      link.rel = link.target === '_blank' ? 'noopener noreferrer' : '';
+      if(target === '_blank'){
+        link.target = '_blank';
+        link.rel = 'noopener';
+      }else{
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+      }
       link.addEventListener('click', (event) => {
         event.stopPropagation();
         localStorage.setItem(DISMISS_UNTIL_END_KEY, '1');
@@ -1241,7 +1260,12 @@ document.addEventListener('DOMContentLoaded', () => {
     dialog.addEventListener('click', (event) => {
       if(!hasPopupLink) return;
       if(event.target.closest('[data-popup-close], .popupModal__button')) return;
-      window.open(popupConfig.linkUrl, popupConfig.linkTarget || '_self');
+      const target = resolveLinkTarget(popupConfig.linkUrl, popupConfig.linkTarget);
+      if(target === '_blank'){
+        window.open(popupConfig.linkUrl, '_blank', 'noopener');
+      }else{
+        window.open(popupConfig.linkUrl, '_self');
+      }
     });
   };
 
