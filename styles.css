@@ -50,6 +50,24 @@ img{display:block;max-width:100%}
   padding:0 18px;
 }
 
+.pageTitleSeo{
+  max-width:var(--content-max-wide);
+  margin:18px auto 4px;
+  padding:0 18px;
+  color:#6b2b37;
+  font-family:"Noto Serif JP",serif;
+  font-size:clamp(16px, 1.4vw, 20px);
+  font-weight:500;
+  line-height:1.7;
+  letter-spacing:.06em;
+}
+
+@media (min-width:980px){
+  .pageTitleSeo{
+    padding-inline:var(--content-padding-pc);
+  }
+}
+
 /* ===== section inner width control (unified wide) ===== */
 @media (min-width:980px){
   .section > .wrap,
@@ -3028,6 +3046,15 @@ body.noScroll{ overflow:hidden; }
   color:#4c4642;
   line-height:1.5;
   font-size:14px;
+}
+
+.seoIntroText{
+  max-width:960px;
+  margin:12px 0 0;
+  color:#5f5650;
+  font-size:13px;
+  line-height:1.9;
+  letter-spacing:.04em;
 }
 .customOrderGrid{
   display:grid;
