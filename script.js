@@ -1120,10 +1120,12 @@ document.addEventListener('DOMContentLoaded', () => {
       closeOnOverlay: true
     },
     holiday: {
+      enabled: true,
       startAt: '2026-05-01T00:00:00+09:00',
       endAt: '2026-05-07T23:59:59+09:00'
     },
     campaignBanner: {
+      enabled: true,
       startAt: '2026-05-09T20:00:00+09:00',
       endAt: '2026-05-16T01:59:59+09:00'
     }
@@ -1328,7 +1330,7 @@ const isWithinNoticePeriod = ({ startAt, endAt }, nowTs = Date.now()) => {
     endAt: '2026-05-07T23:59:59+09:00'
   });
 
-  if(!isWithinNoticePeriod(holidayConfig)){
+  if(holidayConfig.enabled === false || !isWithinNoticePeriod(holidayConfig)){
     notice.hidden = true;
   }
 })();
@@ -1342,7 +1344,7 @@ const isWithinNoticePeriod = ({ startAt, endAt }, nowTs = Date.now()) => {
     endAt: '2026-05-16T01:59:59+09:00'
   });
 
-  if(!isWithinNoticePeriod(campaignBannerConfig)){
+  if(campaignBannerConfig.enabled === false || !isWithinNoticePeriod(campaignBannerConfig)){
     banner.hidden = true;
   }
 })();
