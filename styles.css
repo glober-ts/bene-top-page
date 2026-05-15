@@ -185,7 +185,24 @@ img{display:block;max-width:100%}
   -webkit-backdrop-filter:blur(10px);
 }
 .headerRow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:14px}
-.logo{display:flex;align-items:center;gap:10px}
+.headerBrand{display:flex;align-items:center;min-width:0;flex:0 1 auto}
+.logo{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.pcShopLabel{
+  display:inline-flex;
+  align-items:center;
+  min-height:22px;
+  margin-left:10px;
+  padding:2px 9px;
+  border:1px solid rgba(138,31,78,.20);
+  border-radius:var(--radius-pill);
+  background:rgba(138,31,78,.045);
+  color:var(--accent);
+  font-size:11px;
+  font-weight:500;
+  line-height:1.35;
+  letter-spacing:.05em;
+  white-space:nowrap;
+}
 .logoMark{width:34px;height:34px;border-radius:var(--radius-card-xs);border:1px solid rgba(230,225,216,1);background:radial-gradient(circle at 30% 30%,#fff,#efe5cf);box-shadow:0 10px 22px rgba(0,0,0,.08)}
 .logoText{font-weight:900;letter-spacing:.06em}
 .searchWrap{flex:1;display:flex;justify-content:center}
@@ -1594,7 +1611,7 @@ section[id^="pickup"]{
 
 
 /* v69: Use image logo in header */
-a.logo{ display:flex; align-items:center; gap:10px; }
+a.logo{ display:flex; align-items:center; gap:10px; flex:0 0 auto; }
 a.logo .logoMark, a.logo .logoText{ display:none !important; }
 a.logo .logoImg{
   height: 28px;
@@ -2368,9 +2385,34 @@ body.noScroll{ overflow:hidden; }
   border-bottom:1px solid rgba(0,0,0,.08);
   background:#fff;
 }
+.drawerShopLabel{
+  display:none;
+  margin-bottom:14px;
+  padding:12px 13px;
+  border:1px solid rgba(138,31,78,.16);
+  border-radius:14px;
+  background:rgba(138,31,78,.04);
+  color:var(--text);
+  line-height:1.45;
+}
+.drawerShopLabel__brand,
+.drawerShopLabel__store{
+  display:block;
+}
+.drawerShopLabel__brand{
+  font-size:12px;
+  letter-spacing:.05em;
+}
+.drawerShopLabel__store{
+  margin-top:2px;
+  color:var(--accent);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.06em;
+}
 .drawerPhoneMeta{ font-size:12px; color:#666; }
 .drawerPhoneNum{ display:inline-block; margin-top:6px; font-size:16px; font-weight:700; color:#222; text-decoration:none; }
-.drawerActions{ display:flex; gap:10px; margin-top:10px; }
+.drawerActions{ display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; margin-top:10px; }
 .drawerIco{
   flex:1;
   height:40px;
@@ -2430,6 +2472,12 @@ body.noScroll{ overflow:hidden; }
 }
 
 @media (max-width:979px){
+  .headerBrand{
+    flex:1 1 auto;
+  }
+  .pcShopLabel{
+    display:none;
+  }
   .headerActions{
     display:flex;
     align-items:center;
@@ -2455,7 +2503,8 @@ body.noScroll{ overflow:hidden; }
     height:100dvh;
     padding-top:0;
   }
-  #gnav.gnavDrawer .drawerTop{ padding:20px 14px 6px; margin:0; }
+  #gnav.gnavDrawer .drawerTop{ padding:20px 14px 10px; margin:0; }
+  #gnav.gnavDrawer .drawerShopLabel{ display:block; }
   #gnav.gnavDrawer .gnavInner{ padding:4px 14px 40px; margin:0; }
   #gnav.gnavDrawer .gnavTitle{ margin:0 0 4px; }
 

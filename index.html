@@ -52,9 +52,12 @@ window.BENE_UI = {
 <body>
 <header class="header" id="top">
 <div class="wrap headerRow">
+<div class="headerBrand">
 <a aria-label="トップへ" class="logo" href="#top">
 <img alt="Bene Bene" class="logoImg" src="assets/m_g_bene_logo.png"/>
 </a>
+<span class="pcShopLabel" aria-label="現在のショップ">Yahoo!ショッピング店</span>
+</div>
 <div aria-label="検索" class="searchWrap" role="search">
 <input aria-label="検索" id="q" placeholder="キーワード検索（例：パライバ / ピンクダイヤ / ローズカット）" type="search"/>
 </div>
@@ -1822,9 +1825,15 @@ window.BENE_TOP_NOTICE_CONFIG = {
 <script src="script.js"></script>
 <div class="gnavBackdrop menu-overlay" id="gnavBackdrop"></div><nav aria-label="メニュー" class="gnavDrawer" id="gnav">
 <div class="drawerTop">
+  <div class="drawerShopLabel" aria-label="現在のショップ">
+    <span class="drawerShopLabel__brand">ジュエリー工房ベーネベーネ</span>
+    <span class="drawerShopLabel__store">Yahoo!ショッピング店</span>
+  </div>
   <div class="drawerPhoneMeta">電話でのお問合せは　営業日 10:00-18:00</div>
   <a aria-label="電話をかける" class="drawerPhoneNum" href="tel:0120457678">0120-457-678</a>
   <div class="drawerActions">
+    <a aria-label="ログイン" class="drawerIco" href="https://login.yahoo.co.jp/">ログイン</a>
+    <a aria-label="マイページ" class="drawerIco" href="https://shopping.yahoo.co.jp/my/">マイページ</a>
     <button aria-label="検索" class="drawerIco" id="drawerSearchBtn" type="button">検索</button>
     <a aria-label="MAILMAGAZINE" class="drawerIco" href="https://snlweb.shopping.yahoo.co.jp/shp_snl/optin/select/benebene/">MAILMAGAZINE</a>
   </div>
