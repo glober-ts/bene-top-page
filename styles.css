@@ -186,7 +186,7 @@ img{display:block;max-width:100%}
 }
 .headerRow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-block:14px}
 .headerBrand{display:flex;align-items:center;min-width:0;flex:0 1 auto}
-.logo{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.logo{display:flex;align-items:center;gap:10px}
 .pcShopLabel{
   display:inline-flex;
   align-items:center;
@@ -1611,7 +1611,7 @@ section[id^="pickup"]{
 
 
 /* v69: Use image logo in header */
-a.logo{ display:flex; align-items:center; gap:10px; flex:0 0 auto; }
+a.logo{ display:flex; align-items:center; gap:10px; }
 a.logo .logoMark, a.logo .logoText{ display:none !important; }
 a.logo .logoImg{
   height: 28px;
@@ -2464,9 +2464,6 @@ body.noScroll{ overflow:hidden; }
 }
 
 @media (max-width:979px){
-  .headerBrand{
-    flex:1 1 auto;
-  }
   .pcShopLabel{
     display:none;
   }
