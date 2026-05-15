@@ -634,7 +634,7 @@ img{display:block;max-width:100%}
 .box p{margin:0;color:var(--muted);line-height:1.8;font-size:13px}
 
 /* Guide */
-.guideRow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.guideRow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 
 /* =========================
    FOOTER
@@ -4689,6 +4689,9 @@ body.noScroll{ overflow:hidden; }
 }
 .guide__label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(138,31,78,.64)}
 .guide__title{font-size:14px;color:var(--text);line-height:1.5}
+@media (max-width:767px){
+  .guideRow{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
 .guide:hover{background:#fff;border-color:rgba(138,31,78,.28);box-shadow:0 10px 22px rgba(0,0,0,.04);transform:none}
 
 .categorySection .iconCard,
