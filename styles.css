@@ -191,7 +191,7 @@ img{display:block;max-width:100%}
   display:inline-flex;
   align-items:center;
   min-height:22px;
-  margin-left:10px;
+  margin-left:12px;
   padding:2px 9px;
   border:1px solid rgba(138,31,78,.20);
   border-radius:var(--radius-pill);
@@ -202,7 +202,6 @@ img{display:block;max-width:100%}
   line-height:1.35;
   letter-spacing:.05em;
   white-space:nowrap;
-  margin-left: 12px;
 }
 .logoMark{width:34px;height:34px;border-radius:var(--radius-card-xs);border:1px solid rgba(230,225,216,1);background:radial-gradient(circle at 30% 30%,#fff,#efe5cf);box-shadow:0 10px 22px rgba(0,0,0,.08)}
 .logoText{font-weight:900;letter-spacing:.06em}
@@ -2389,10 +2388,10 @@ body.noScroll{ overflow:hidden; }
 .drawerShopLabel{
   display:none;
   margin-bottom:14px;
-  padding:12px 13px;
-  border:1px solid rgba(138,31,78,.16);
-  border-radius:14px;
-  background:rgba(138,31,78,.04);
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
   color:var(--text);
   line-height:1.45;
 }
