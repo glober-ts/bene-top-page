@@ -202,6 +202,7 @@ img{display:block;max-width:100%}
   line-height:1.35;
   letter-spacing:.05em;
   white-space:nowrap;
+  margin-left: 12px;
 }
 .logoMark{width:34px;height:34px;border-radius:var(--radius-card-xs);border:1px solid rgba(230,225,216,1);background:radial-gradient(circle at 30% 30%,#fff,#efe5cf);box-shadow:0 10px 22px rgba(0,0,0,.08)}
 .logoText{font-weight:900;letter-spacing:.06em}
