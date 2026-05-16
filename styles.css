@@ -2453,7 +2453,7 @@ body.noScroll{ overflow:hidden; }
   transform:translateY(0);
 }
 
-@media (min-width:980px){
+@media (min-width:768px){
   .pcShopLabel{
     display:inline-flex;
   }
@@ -2463,7 +2463,7 @@ body.noScroll{ overflow:hidden; }
   }
 }
 
-@media (max-width:979px){
+@media (max-width:767px){
   .pcShopLabel{
     display:none;
   }
